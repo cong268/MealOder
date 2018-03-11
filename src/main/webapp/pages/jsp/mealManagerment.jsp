@@ -15,7 +15,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>MEAL MANAGERMENT</title>
     <link rel="stylesheet" href="<c:url value="/assets/css/mealManagermentStyle.css"></c:url>">
-    <script type="text/javascript" src="<c:url value="/assets/js/lodash.js"></c:url>"></script>
+    <script type="text/javascript" src="<c:url value="/assets/js/lodash.min.js"></c:url>"></script>
     <script type="text/javascript" src="<c:url value="/assets/js/underscore-min.js"></c:url>"></script>
     <script type="text/javascript" src="<c:url value="/assets/js/mealManagerment.js"></c:url>"></script>
 </head>
@@ -24,6 +24,7 @@
         <div class="row text-center" >
             <div class="col-md-12 col-lg-12 col-xs-12 col-md-12 wrap-meal-table">
                 <h3>Meal Managerment</h3>
+                <input type="text" class="form-control" ng-model="tableParams.filter()['StaffName']">
                 <table ng-table="tableParams" class="table table-condensed table-bordered table-striped table-custom">
                     <tr ng-repeat="row in $data">
                         <td data-title="'EmployeeCode'" sortable="'StaffId'">{{row.StaffId}}</td>

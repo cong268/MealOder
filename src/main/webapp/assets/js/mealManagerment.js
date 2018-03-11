@@ -45,7 +45,7 @@ myApp.controller('mealManagermentCtrl', ['$scope', 'NgTableParams', 'ngTableEven
     $scope.arrData = [
         {
             StaffId: '1000000',
-            StaffName : 'Nguyen Van Cong',
+            StaffName : 'Nguyễn Văn Công',
             MealTimeId: 1,
             LocationId: 1,
             MealId: 1,
@@ -53,7 +53,7 @@ myApp.controller('mealManagermentCtrl', ['$scope', 'NgTableParams', 'ngTableEven
         },
         {
             StaffId: '1000001',
-            StaffName : 'Tran Dinh Chien',
+            StaffName : 'Trần Đình Chiến',
             MealTimeId: 2,
             LocationId: 1,
             MealId: 2,
@@ -61,7 +61,7 @@ myApp.controller('mealManagermentCtrl', ['$scope', 'NgTableParams', 'ngTableEven
         },
         {
             StaffId: '1000002',
-            StaffName : 'Chu Trong Khanh',
+            StaffName : 'Chu Trọng Khanh',
             MealTimeId: 1,
             LocationId: 1,
             MealId: 1,
@@ -77,9 +77,9 @@ myApp.controller('mealManagermentCtrl', ['$scope', 'NgTableParams', 'ngTableEven
         page: 1,
         count: 10
     }, {
-        dataset: $scope.arrData
+        dataset: $scope.arrData,
     });
-    ngTableEventsChannel.onAfterDataFiltered(function(tableParams, filteredData){
+    ngTableEventsChannel.onAfterReloadData(function(tableParams, filteredData){
         console.log(filteredData);
         console.log(tableParams);
     });
