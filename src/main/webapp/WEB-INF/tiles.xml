@@ -7,11 +7,10 @@
     </definition>
     <definition name="login" template="/pages/login.jsp">
     </definition>
-    <!--<definition name="map" extends="mainTemplate">-->
-   	 	<!--<put-attribute name="subMenu" value=""/>-->
-   	 	<!--<put-attribute name="titlePage" value="Map"/>-->
-        <!--<put-attribute name="mainContent" value="/pages/jsp/map.jsp"/>-->
-    <!--</definition>-->
+    <definition name="mealManagerment" extends="mainTemplate">
+   	 	<put-attribute name="titlePage" value="MEAL MANAGERMENT"/>
+        <put-attribute name="mainContent" value="/pages/jsp/mealManagerment.jsp"/>
+    </definition>
     <!--<definition name="mysite" extends="mainTemplate">-->
     	<!--<put-attribute name="subMenu" value=""/>-->
     	<!--<put-attribute name="titlePage" value="My Site"/>-->
