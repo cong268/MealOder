@@ -14,11 +14,11 @@ import com.meals.backend.model.User;
 @Controller
 @RequestMapping("userController")
 public class UserController {
-	@Autowired
-	private UserDAO userDAO;
-
-	@RequestMapping(value = "/getAllUser", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-	public List<User> getAllUser() {
-		return userDAO.getAllUser();
-	}
+//	@Autowired
+//	private UserDAO userDAO;
+//
+//	@RequestMapping(value = "/getAllUser", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+//	public List<User> getAllUser() {
+//		return userDAO.getAllUser();
+//	}
 }

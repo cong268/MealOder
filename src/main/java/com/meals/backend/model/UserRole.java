@@ -18,8 +18,8 @@ public class UserRole {
 	private String name;
 	@Column(name = "Description", columnDefinition = "TEXT")
 	private String description;
-	@Column(name = "Disabled", nullable = false )
-	private Boolean disabled;
+	@Column(name = "Disable", nullable = false)
+	private Boolean disable;
 
 	public int getUserRoleID() {
 		return userRoleID;
@@ -45,12 +45,12 @@ public class UserRole {
 		this.description = description;
 	}
 
-	public Boolean getDisabled() {
-		return disabled;
+	public Boolean getDisable() {
+		return disable;
 	}
 
-	public void setDisabled(Boolean disabled) {
-		this.disabled = disabled;
+	public void setDisable(Boolean disable) {
+		this.disable = disable;
 	}
 
 }

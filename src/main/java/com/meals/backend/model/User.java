@@ -18,8 +18,8 @@ public class User {
 	private Integer userRoleId;
 	@Column(name = "StaffId")
 	private Integer staffId;
-	@Column(name = "Disabled")
-	private Boolean disabled;
+	@Column(name = "Disable")
+	private Boolean disable;
 	@Column(name = "UserName", nullable = false)
 	private String userName;
 	@Column(name = "Password", nullable = false)
@@ -49,12 +49,12 @@ public class User {
 		this.staffId = staffId;
 	}
 
-	public Boolean getDisabled() {
-		return disabled;
+	public Boolean getDisable() {
+		return disable;
 	}
 
-	public void setDisabled(Boolean disabled) {
-		this.disabled = disabled;
+	public void setDisable(Boolean disable) {
+		this.disable = disable;
 	}
 
 	public String getUserName() {

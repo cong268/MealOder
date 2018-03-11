@@ -22,22 +22,17 @@ public class UserDAOImpl implements UserDAO {
 		this.sessionFactory = sessionFactory;
 	}
 
-	public List<User> getAllUser() {
+	public User getUser(String userName, String passWord) {
 		Session session = sessionFactory.getCurrentSession();
-		List<User> list = null;
-		Query query = session.createQuery("FROM User");
-		list = query.list();
-	    return list;
-	}
-
-	public User getUserById(Integer userId) {
-		Session session = sessionFactory.getCurrentSession();
-		Query query = session.createQuery("FROM User c WHERE c.userId = :userId");
-		query.setParameter("userId", userId);
-		if(query.list() != null && !query.list().isEmpty()){
-			return (User) query.list().get(0);
+		Query query = session.createQuery("FROM User c WHERE c.userName = :userName AND c.password = :password");
+		query.setParameter("userName", userName);
+		query.setParameter("password", passWord);
+		@SuppressWarnings("unchecked")
+		List<User> list = query.list();
+		if (list != null && !list.isEmpty()) {
+			return list.get(0);
 		}
-	    return null;
+		return null;
 	}
 
 }
