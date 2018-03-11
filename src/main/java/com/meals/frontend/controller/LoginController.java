@@ -23,7 +23,7 @@ public class LoginController {
                                          @RequestParam("password") String password){
         if(username.equals("admin") == true &&
                 password.equals("admin")){
-            ModelAndView model = new ModelAndView("mealManagerment");
+            ModelAndView model = new ModelAndView("mainTemplate");
             return model;
         } else {
             ModelAndView model = new ModelAndView("login");
