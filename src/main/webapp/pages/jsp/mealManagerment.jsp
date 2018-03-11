@@ -15,6 +15,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>MEAL MANAGERMENT</title>
     <link rel="stylesheet" href="<c:url value="/assets/css/mealManagermentStyle.css"></c:url>">
+    <script type="text/javascript" src="<c:url value="/assets/js/lodash.js"></c:url>"></script>
+    <script type="text/javascript" src="<c:url value="/assets/js/underscore-min.js"></c:url>"></script>
     <script type="text/javascript" src="<c:url value="/assets/js/mealManagerment.js"></c:url>"></script>
 </head>
 <body ng-controller="mealManagermentCtrl">
@@ -65,7 +67,11 @@
     </div>
     <script type="text/ng-template" id="ng-table/headers/checkbox.html">
         <label id="select_all" class="control control-checkbox">
-            <input type="checkbox" ng-model="statusMeal">
+            <input type="checkbox" ng-model="statusMeal"
+                   ng-true-value="1"
+                   ng-false-value="0"
+                   ng-change="changeStatus(statusMeal)"
+                   ng-checked="statusMeal == 1">
             <div class="control-indicator"></div>
         </label>
     </script>

@@ -1,4 +1,4 @@
-myApp.controller('mealManagermentCtrl', ['$scope', 'NgTableParams', '$filter', '$timeout', function($scope, NgTableParams, $filter, $timeout){
+myApp.controller('mealManagermentCtrl', ['$scope', 'NgTableParams', 'ngTableEventsChannel', '$timeout', function($scope, NgTableParams, ngTableEventsChannel, $timeout){
     $scope.demoCheckbox = 1;
     $scope.locationArr = [
         {
@@ -68,27 +68,25 @@ myApp.controller('mealManagermentCtrl', ['$scope', 'NgTableParams', '$filter', '
             Status: 0
         }
     ];
+
+
     $scope.tableParams = new NgTableParams({
         sorting: {
             StaffId: "asc"
         },
         page: 1,
-        count: 1
+        count: 10
     }, {
-        total: 0,
-        getData: function ($defer, params) {
-            $scope.data = params.sorting() ? $filter('orderBy')($scope.arrData, params.orderBy()) : $scope.arrData;
-            $scope.data = params.filter() ? $filter('filter')($scope.data, params.filter()) : $scope.data;
-            $scope.data = $scope.data.slice((params.page() - 1) * params.count(), params.page() * params.count());
-            $defer.resolve($scope.data);
-        }
+        dataset: $scope.arrData
     });
-    $scope.statusMeal = false;
-    $scope.$watch(function(){
-        return $scope.statusMeal;
-    }, function (value) {
+    ngTableEventsChannel.onAfterDataFiltered(function(tableParams, filteredData){
+        console.log(filteredData);
+        console.log(tableParams);
+    });
+    $scope.statusMeal = 0;
+    $scope.changeStatus = function (statusMeal) {
         angular.forEach($scope.arrData, function(item){
-            item.Status = value;
+            item.Status = statusMeal;
         });
-    });
+    };
 }]);
