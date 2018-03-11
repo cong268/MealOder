@@ -3,7 +3,6 @@ package com.meals.frontend.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,7 +13,6 @@ import com.meals.backend.model.User;
 
 @Controller
 @RequestMapping("userController")
-@ComponentScan("com.meals.web.service")
 public class UserController {
 	@Autowired
 	private UserDAO userDAO;

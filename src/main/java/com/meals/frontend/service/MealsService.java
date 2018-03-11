@@ -1,4 +1,7 @@
 package com.meals.frontend.service;
 
-public interface UserService {
+import com.meals.frontend.bean.StaffBean;
+
+public interface MealsService {
+	StaffBean getStaffByUserId (Integer userId);
 }
