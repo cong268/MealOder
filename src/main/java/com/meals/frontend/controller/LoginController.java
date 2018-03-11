@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.meals.frontend.bean.UserBean;
@@ -38,9 +39,9 @@ public class LoginController {
 	}
 
 	@RequestMapping(value = "authentication", method = RequestMethod.POST)
-	public ModelAndView doAuthentication(@RequestBody Map<String, String> inputs, HttpServletRequest request) {
-		String username = inputs.get("username");
-		String password = inputs.get("password");
+	public ModelAndView doAuthentication(@RequestParam("username") String username,
+										 @RequestParam("password") String password,
+										 HttpServletRequest request) {
 		UserBean userBean = mealsService.checkUserLogin(username, password);
 		if (userBean != null) {
 			request.getSession().setAttribute("userId", userBean.getUserId());

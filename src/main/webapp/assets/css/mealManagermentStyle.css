@@ -1,3 +1,14 @@
+.wrap-meal-managerment .row{
+    overflow-x: auto;
+    white-space: nowrap;
+}
+.wrap-meal-managerment > .row > .col-* {
+    display: inline-block;
+    float: none;
+}
+.wrap-meal-table{
+    min-width: 700px;
+}
 /*CHECKBOX*/
 .control {
     display: inline-block;

@@ -12,7 +12,9 @@ import com.meals.backend.model.UserRole;
 import com.meals.frontend.bean.StaffBean;
 import com.meals.frontend.bean.UserBean;
 import com.meals.frontend.service.MealsService;
+import org.springframework.stereotype.Service;
 
+@Service
 public class MealsServiceImpl implements MealsService {
 	@Autowired
 	private UserDAO userDAO;
