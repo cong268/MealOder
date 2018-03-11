@@ -68,7 +68,22 @@ myApp.controller('mealManagermentCtrl', ['$scope', 'NgTableParams', 'ngTableEven
             Status: 0
         }
     ];
+    for(var i =3 ; i< 1000; i++){
+        var length = (i.toString()).length,
+            surffixNum = '';
+        for(var j = 0; j <  3 - length; j++){
+            surffixNum += '0';
+        }
 
+        $scope.arrData.push({
+            StaffId: '1000'+surffixNum+i,
+            StaffName : 'Customer '+(new Date()).getTime(),
+            MealTimeId: i%3 == 1 ? 1 : 2,
+            LocationId: i%3 == 1 ? 1 : 3,
+            MealId: i%3 == 1 ? 1 : 2,
+            Status: i%3 == 1 ? 1 : 0
+        })
+    }
 
     $scope.tableParams = new NgTableParams({
         sorting: {
@@ -79,14 +94,33 @@ myApp.controller('mealManagermentCtrl', ['$scope', 'NgTableParams', 'ngTableEven
     }, {
         dataset: $scope.arrData,
     });
+    $scope.dataFiltered = [];
     ngTableEventsChannel.onAfterReloadData(function(tableParams, filteredData){
-        console.log(filteredData);
+        $scope.dataFiltered = tableParams.data || filteredData.data;
         console.log(tableParams);
     });
-    $scope.statusMeal = 0;
+    $scope.statusMeal = false;
     $scope.changeStatus = function (statusMeal) {
-        angular.forEach($scope.arrData, function(item){
-            item.Status = statusMeal;
+        angular.forEach($scope.dataFiltered, function(item){
+            if(statusMeal == true){
+                item.Status = 1;
+            } else if(statusMeal == false){
+                item.Status = 0;
+            }
         });
     };
+    $scope.$watch('dataFiltered', function(){
+        var countStatus = 0, countNumber = 0;
+        angular.forEach($scope.dataFiltered, function(item){
+            if(item.Status == 1){
+                countStatus++;
+            }
+            countNumber++;
+        });
+        if(countNumber == countStatus && countNumber != 0){
+            $scope.statusMeal = true;
+        } else {
+            $scope.statusMeal = false;
+        }
+    })
 }]);

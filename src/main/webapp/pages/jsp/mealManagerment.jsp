@@ -64,15 +64,12 @@
                 </table>
             </div>
         </div>
-        <pre style="margin-top: 20px;">{{arrData | json}}</pre>
+        <%--<pre style="margin-top: 20px;">{{arrData | json}}</pre>--%>
     </div>
     <script type="text/ng-template" id="ng-table/headers/checkbox.html">
         <label id="select_all" class="control control-checkbox">
-            <input type="checkbox" ng-model="statusMeal"
-                   ng-true-value="1"
-                   ng-false-value="0"
-                   ng-change="changeStatus(statusMeal)"
-                   ng-checked="statusMeal == 1">
+            <input type="checkbox" ng-model="statusMeal" ng-checked="statusMeal"
+                   ng-value="statusMeal" ng-change="changeStatus(statusMeal)">
             <div class="control-indicator"></div>
         </label>
     </script>
