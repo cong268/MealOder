@@ -1,5 +1,7 @@
 package com.meals.frontend.controller;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
@@ -14,10 +16,10 @@ import com.meals.frontend.service.MealsService;
 public class StaffController {
 	@Autowired
 	private MealsService mealsService;
-	
+
 	@RequestMapping(value = "/getStaffById", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-	public StaffBean getStaffById() {
-		Integer userId = 1;
+	public StaffBean getStaffById(HttpSession session) {
+		Integer userId = (Integer) session.getAttribute("userId");
 		return mealsService.getStaffByUserId(userId);
 	}
 }

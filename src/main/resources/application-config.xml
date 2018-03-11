@@ -52,12 +52,12 @@
 		</beans:property>
 	</beans:bean>
 	
-	<beans:bean id="userDAO" class="com.meals.backend.daoimpl.UserDAOImpl">
+	<beans:bean id="userDAO" class="com.meals.backend.dao.impl.UserDAOImpl">
 		<beans:property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory" />
 	</beans:bean>
-<!-- 	<beans:bean id="userService" class="com.journaldev.spring.service.UserServiceImpl"> -->
+	<beans:bean id="mealsService" class="com.meals.frontend.service.impl.MealsServiceImpl">
 <!-- 		<beans:property name="userDAO" ref="userDAO"></beans:property> -->
-<!-- 	</beans:bean> -->
+	</beans:bean>
 	<context:component-scan base-package="com.meals" />
 	
 	<tx:annotation-driven transaction-manager="transactionManager"/>
