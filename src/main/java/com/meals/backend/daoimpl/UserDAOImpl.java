@@ -7,12 +7,13 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.meals.backend.dao.UserDAO;
 import com.meals.backend.model.User;
 
 @Repository
-//@Transactional(value = "userDAO")
+@Transactional
 public class UserDAOImpl implements UserDAO {
 	@Autowired
 	private SessionFactory sessionFactory;
@@ -23,12 +24,9 @@ public class UserDAOImpl implements UserDAO {
 
 	public List<User> getAllUser() {
 		Session session = sessionFactory.getCurrentSession();
-		session.beginTransaction();
 		List<User> list = null;
 		Query query = session.createQuery("FROM User");
 		list = query.list();
-//		session.getTransaction().commit();
-//	    session.close();
 	    return list;
 	}
 
