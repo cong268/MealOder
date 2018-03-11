@@ -6,33 +6,27 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
-import org.hibernate.annotations.Type;
-
 @Entity
 @Table(name = "catering")
 public class Catering {
 	@Column(name = "StaffId", nullable = false)
 	private String staffId;
 	@Column(name = "MealId", nullable = false)
-	private String mealId;
+	private Integer mealId;
 	@Column(name = "LocationId")
-	private Boolean locationId;
+	private Integer locationId;
 	@Column(name = "MealTimeId", nullable = false)
-	private String mealTimeId;
+	private Integer mealTimeId;
 	@Column(name = "ShiftId", nullable = false)
-	private String shiftId;
-	@Column(name = "CateringDate", nullable = false)
-	@Type(type = "date")
+	private Integer shiftId;
+	@Column(name = "CateringDate", nullable = false, columnDefinition = "DATE")
 	private Date cateringDate;
 	@Column(name = "Catered", nullable = false)
 	private Boolean catered;
-	@Column(name = "CateringTime", nullable = false)
-	@Type(type = "timestamp")
+	@Column(name = "CateringTime", nullable = false, columnDefinition="TIMESTAMP")
 	private Date cateringTime;
 	@Column(name = "Status", nullable = false)
 	private Boolean status;
-	@Column(name = "UserId")
-	private String userId;
 	@Column(name = "Order", nullable = false)
 	private Boolean order;
 
@@ -44,35 +38,35 @@ public class Catering {
 		this.staffId = staffId;
 	}
 
-	public String getMealId() {
+	public Integer getMealId() {
 		return mealId;
 	}
 
-	public void setMealId(String mealId) {
+	public void setMealId(Integer mealId) {
 		this.mealId = mealId;
 	}
 
-	public Boolean getLocationId() {
+	public Integer getLocationId() {
 		return locationId;
 	}
 
-	public void setLocationId(Boolean locationId) {
+	public void setLocationId(Integer locationId) {
 		this.locationId = locationId;
 	}
 
-	public String getMealTimeId() {
+	public Integer getMealTimeId() {
 		return mealTimeId;
 	}
 
-	public void setMealTimeId(String mealTimeId) {
+	public void setMealTimeId(Integer mealTimeId) {
 		this.mealTimeId = mealTimeId;
 	}
 
-	public String getShiftId() {
+	public Integer getShiftId() {
 		return shiftId;
 	}
 
-	public void setShiftId(String shiftId) {
+	public void setShiftId(Integer shiftId) {
 		this.shiftId = shiftId;
 	}
 
@@ -106,14 +100,6 @@ public class Catering {
 
 	public void setStatus(Boolean status) {
 		this.status = status;
-	}
-
-	public String getUserId() {
-		return userId;
-	}
-
-	public void setUserId(String userId) {
-		this.userId = userId;
 	}
 
 	public Boolean getOrder() {
