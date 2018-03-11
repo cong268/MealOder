@@ -7,45 +7,45 @@
     </definition>
     <definition name="login" template="/pages/login.jsp">
     </definition>
-    <definition name="map" extends="mainTemplate">
-   	 	<put-attribute name="subMenu" value=""/>
-   	 	<put-attribute name="titlePage" value="Map"/>
-        <put-attribute name="mainContent" value="/pages/jsp/map.jsp"/>
-    </definition>
-    <definition name="mysite" extends="mainTemplate">
-    	<put-attribute name="subMenu" value=""/>
-    	<put-attribute name="titlePage" value="My Site"/>
-        <put-attribute name="mainContent" value="/pages/jsp/mysite.jsp"/>
-    </definition>
-    <definition name="menuTemplate" template="/pages/template/mainTemplate.jsp">
-    	<put-attribute name="subMenu" value="/pages/template/menu-template.jsp"/>
-    </definition>
-    <definition name="measuringPoint" extends="menuTemplate">
-    	<put-attribute name="titlePage" value="Measuring Point"/>
-        <put-attribute name="mainContent" value="/pages/jsp/measuringPoint.jsp"/>
-    </definition>
-    <definition name="synoptic" extends="menuTemplate">
-    	<put-attribute name="titlePage" value="Synoptic"/>
-        <put-attribute name="mainContent" value="/pages/jsp/synoptic.jsp"/>
-    </definition>
-    <definition name="manualEntries" extends="menuTemplate">
-    	<put-attribute name="titlePage" value="Manual Entries"/>
-        <put-attribute name="mainContent" value="/pages/jsp/manualEntries.jsp"/>
-    </definition>
-    <definition name="globalSite" extends="menuTemplate">
-    	<put-attribute name="titlePage" value="Global Site View"/>
-        <put-attribute name="mainContent" value="/pages/jsp/globalSite.jsp"/>
-    </definition>
-    <definition name="accessProfiles" extends="menuTemplate">
-    	<put-attribute name="titlePage" value="Access profiles"/>
-        <put-attribute name="mainContent" value="/pages/jsp/accessProfiles.jsp"/>
-    </definition>
-     <definition name="userSettings" extends="menuTemplate">
-    	<put-attribute name="titlePage" value="User settings"/>
-        <put-attribute name="mainContent" value="/pages/jsp/userSettings.jsp"/>
-    </definition>
-    <definition name="myReport" extends="menuTemplate">
-    	<put-attribute name="titlePage" value="My Reports"/>
-        <put-attribute name="mainContent" value="/pages/jsp/analysis.jsp"/>
-    </definition>
+    <!--<definition name="map" extends="mainTemplate">-->
+   	 	<!--<put-attribute name="subMenu" value=""/>-->
+   	 	<!--<put-attribute name="titlePage" value="Map"/>-->
+        <!--<put-attribute name="mainContent" value="/pages/jsp/map.jsp"/>-->
+    <!--</definition>-->
+    <!--<definition name="mysite" extends="mainTemplate">-->
+    	<!--<put-attribute name="subMenu" value=""/>-->
+    	<!--<put-attribute name="titlePage" value="My Site"/>-->
+        <!--<put-attribute name="mainContent" value="/pages/jsp/mysite.jsp"/>-->
+    <!--</definition>-->
+    <!--<definition name="menuTemplate" template="/pages/template/mainTemplate.jsp">-->
+    	<!--<put-attribute name="subMenu" value="/pages/template/menu-template.jsp"/>-->
+    <!--</definition>-->
+    <!--<definition name="measuringPoint" extends="menuTemplate">-->
+    	<!--<put-attribute name="titlePage" value="Measuring Point"/>-->
+        <!--<put-attribute name="mainContent" value="/pages/jsp/measuringPoint.jsp"/>-->
+    <!--</definition>-->
+    <!--<definition name="synoptic" extends="menuTemplate">-->
+    	<!--<put-attribute name="titlePage" value="Synoptic"/>-->
+        <!--<put-attribute name="mainContent" value="/pages/jsp/synoptic.jsp"/>-->
+    <!--</definition>-->
+    <!--<definition name="manualEntries" extends="menuTemplate">-->
+    	<!--<put-attribute name="titlePage" value="Manual Entries"/>-->
+        <!--<put-attribute name="mainContent" value="/pages/jsp/manualEntries.jsp"/>-->
+    <!--</definition>-->
+    <!--<definition name="globalSite" extends="menuTemplate">-->
+    	<!--<put-attribute name="titlePage" value="Global Site View"/>-->
+        <!--<put-attribute name="mainContent" value="/pages/jsp/globalSite.jsp"/>-->
+    <!--</definition>-->
+    <!--<definition name="accessProfiles" extends="menuTemplate">-->
+    	<!--<put-attribute name="titlePage" value="Access profiles"/>-->
+        <!--<put-attribute name="mainContent" value="/pages/jsp/accessProfiles.jsp"/>-->
+    <!--</definition>-->
+     <!--<definition name="userSettings" extends="menuTemplate">-->
+    	<!--<put-attribute name="titlePage" value="User settings"/>-->
+        <!--<put-attribute name="mainContent" value="/pages/jsp/userSettings.jsp"/>-->
+    <!--</definition>-->
+    <!--<definition name="myReport" extends="menuTemplate">-->
+    	<!--<put-attribute name="titlePage" value="My Reports"/>-->
+        <!--<put-attribute name="mainContent" value="/pages/jsp/analysis.jsp"/>-->
+    <!--</definition>-->
 </tiles-definitions>
