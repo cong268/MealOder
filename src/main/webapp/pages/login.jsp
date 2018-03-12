@@ -31,7 +31,7 @@
 				<span class="login-nsrp-form-title p-b-41">
 					NSRP LOGIN ACCESS
 				</span>
-            <form class="login-nsrp-form validate-form p-b-33 p-t-5">
+            <form class="login-nsrp-form validate-form p-b-33 p-t-5" method="POST" action="authentication">
                 <div class="wrap-error-message">
                     <span class="error-message" ng-bind="errorMessage"></span>
                 </div>

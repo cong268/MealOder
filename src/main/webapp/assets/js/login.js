@@ -29,22 +29,6 @@ var myApp = angular.module('loginApplication',[]).controller('loginController', 
                         check = false;
                     }
                 }
-                if(check == true){
-                    var username = $('#nsrp-username').val();
-                    var password = $('#nsrp-password').val();
-                    $http({
-                        method: 'POST',
-                        url: 'authentication',
-                        data: {
-                            'username': username,
-                            'password': password
-                        }
-                    }).then(function successCallback(response) {
-                       
-                    }, function errorCallback(response) {
-
-                    })
-                }
                 return check;
             });
 
