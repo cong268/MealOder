@@ -23,8 +23,6 @@ public class Staff {
 	private String email;
 	@Column(name = "DeptId", nullable = false)
 	private Integer deptId;
-	@Column(name = "UserId", nullable = false)
-	private Integer UserId;
 	@Column(name = "Gender")
 	private String gender;
 	@Column(name = "CardId")
@@ -86,14 +84,6 @@ public class Staff {
 
 	public void setDeptId(Integer deptId) {
 		this.deptId = deptId;
-	}
-
-	public Integer getUserId() {
-		return UserId;
-	}
-
-	public void setUserId(Integer userId) {
-		UserId = userId;
 	}
 
 	public String getGender() {
