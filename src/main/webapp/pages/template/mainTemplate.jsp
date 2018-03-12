@@ -84,7 +84,7 @@
             </div>
         </div>
     </nav>
-    <div class="wrapper-nsrp-content container">
+    <div class="wrapper-nsrp-content">
         <tiles:insertAttribute name="mainContent"/>
     </div>
     <footer class="nsrp-page-footer">
@@ -93,11 +93,5 @@
             <span class="pull-right">Nghi Son Refinery and PETROCHEMICAL LLC</span>
         </div>
     </footer>
-    <script type="text/ng-template" id="ng-table/headers/checkbox.html">
-        <label id="select_all" class="control control-checkbox">
-            <input type="checkbox" ng-model="statusMeal.checked">
-            <div class="control-indicator"></div>
-        </label>
-    </script>
 </body>
 </html>
