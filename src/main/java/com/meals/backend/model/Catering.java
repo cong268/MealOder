@@ -23,12 +23,12 @@ public class Catering {
 	private Date cateringDate;
 	@Column(name = "Catered", nullable = false)
 	private Boolean catered;
-	@Column(name = "CateringTime", nullable = false, columnDefinition="TIMESTAMP")
+	@Column(name = "CateringTime", nullable = false, columnDefinition = "TIMESTAMP")
 	private Date cateringTime;
 	@Column(name = "Status", nullable = false)
 	private Boolean status;
-	@Column(name = "Order", nullable = false)
-	private Boolean order;
+	@Column(name = "Ordered ", nullable = false)
+	private Boolean ordered;
 
 	public String getStaffId() {
 		return staffId;
@@ -102,12 +102,12 @@ public class Catering {
 		this.status = status;
 	}
 
-	public Boolean getOrder() {
-		return order;
+	public Boolean getOrdered() {
+		return ordered;
 	}
 
-	public void setOrder(Boolean order) {
-		this.order = order;
+	public void setOrdered(Boolean ordered) {
+		this.ordered = ordered;
 	}
 
 }

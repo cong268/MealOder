@@ -4,6 +4,7 @@ public class StaffBean {
 	private String staffId;
 	private String staffName;
 	private String jobTitle;
+	private Integer departId;
 	private String department;
 
 	public String getStaffId() {
@@ -36,6 +37,14 @@ public class StaffBean {
 
 	public void setDepartment(String department) {
 		this.department = department;
+	}
+
+	public Integer getDepartId() {
+		return departId;
+	}
+
+	public void setDepartId(Integer departId) {
+		this.departId = departId;
 	}
 
 }

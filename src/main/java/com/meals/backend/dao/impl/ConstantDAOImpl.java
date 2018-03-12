@@ -11,6 +11,10 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.meals.backend.dao.ConstantDAO;
 import com.meals.backend.model.Department;
+import com.meals.backend.model.Location;
+import com.meals.backend.model.Meal;
+import com.meals.backend.model.MealTime;
+import com.meals.backend.model.Shift;
 import com.meals.backend.model.UserRole;
 
 @Repository("constantDAO")
@@ -42,5 +46,35 @@ public class ConstantDAOImpl implements ConstantDAO {
 			return list.get(0);
 		}
 		return null;
+	}
+
+	public List<Department> getAllDepart() {
+		Session session = sessionFactory.getCurrentSession();
+		Query query = session.createQuery("FROM Department");
+		return query.list();
+	}
+
+	public List<Location> getAllLocation() {
+		Session session = sessionFactory.getCurrentSession();
+		Query query = session.createQuery("FROM Location");
+		return query.list();
+	}
+
+	public List<Meal> getAllMeal() {
+		Session session = sessionFactory.getCurrentSession();
+		Query query = session.createQuery("FROM Meal");
+		return query.list();
+	}
+
+	public List<MealTime> getAllMealTime() {
+		Session session = sessionFactory.getCurrentSession();
+		Query query = session.createQuery("FROM MealTime");
+		return query.list();
+	}
+
+	public List<Shift> getAllShift() {
+		Session session = sessionFactory.getCurrentSession();
+		Query query = session.createQuery("FROM Shift");
+		return query.list();
 	}
 }

@@ -1,5 +1,7 @@
 package com.meals.backend.dao.impl;
 
+import java.util.List;
+
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -29,6 +31,14 @@ public class StaffDAOImpl implements StaffDAO {
 			return (Staff) query.list().get(0);
 		}
 		return null;
+	}
+
+	@Override
+	public List<Staff> getStaffByDepart(Integer departId) {
+		Session session = sessionFactory.getCurrentSession();
+		Query query = session.createQuery("FROM Staff c WHERE c.deptId = :deptId");
+		query.setParameter("deptId", departId);
+		return query.list();
 	}
 
 }
