@@ -2,18 +2,20 @@ package com.meals.backend.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "staff")
 public class Staff {
+	@Id
 	@Column(name = "StaffId", nullable = false)
 	private String staffId;
 	@Column(name = "StaffName", nullable = false)
 	private String staffName;
 	@Column(name = "JobTitle")
 	private String jobTitle;
-	@Column(name = "address")
+	@Column(name = "Address")
 	private String address;
 	@Column(name = "PhoneNum")
 	private String phoneNum;
@@ -21,6 +23,8 @@ public class Staff {
 	private String email;
 	@Column(name = "DeptId", nullable = false)
 	private Integer deptId;
+	@Column(name = "UserId", nullable = false)
+	private Integer UserId;
 	@Column(name = "Gender")
 	private String gender;
 	@Column(name = "CardId")
@@ -82,6 +86,14 @@ public class Staff {
 
 	public void setDeptId(Integer deptId) {
 		this.deptId = deptId;
+	}
+
+	public Integer getUserId() {
+		return UserId;
+	}
+
+	public void setUserId(Integer userId) {
+		UserId = userId;
 	}
 
 	public String getGender() {

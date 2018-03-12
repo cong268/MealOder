@@ -14,7 +14,7 @@ public class Department {
 	@Column(name = "DeptId")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int deptId;
-	@Column(name = "DeptName")
+	@Column(name = "DeptName", nullable = false)
 	private String deptName;
 
 	public int getDeptId() {

@@ -2,25 +2,28 @@ package com.meals.backend.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "meal")
 public class Meal {
-	@Column(name = "MealId", nullable = false)
-	private String mealId;
+	@Id
+	@Column(name = "MealId")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private int mealId;
 	@Column(name = "MealName", nullable = false)
 	private String mealName;
-	@Column(name = "MealId", nullable = false)
-	private String locationId;
 	@Column(name = "Description")
 	private String description;
 
-	public String getMealId() {
+	public int getMealId() {
 		return mealId;
 	}
 
-	public void setMealId(String mealId) {
+	public void setMealId(int mealId) {
 		this.mealId = mealId;
 	}
 
@@ -30,14 +33,6 @@ public class Meal {
 
 	public void setMealName(String mealName) {
 		this.mealName = mealName;
-	}
-
-	public String getLocationId() {
-		return locationId;
-	}
-
-	public void setLocationId(String locationId) {
-		this.locationId = locationId;
 	}
 
 	public String getDescription() {

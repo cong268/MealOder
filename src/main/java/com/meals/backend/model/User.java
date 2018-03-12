@@ -1,5 +1,7 @@
 package com.meals.backend.model;
 
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -16,14 +18,18 @@ public class User {
 	private int userId;
 	@Column(name = "UserRoleId", nullable = false)
 	private Integer userRoleId;
-	@Column(name = "StaffId")
+	@Column(name = "StaffId", nullable = false)
 	private Integer staffId;
 	@Column(name = "Disable")
 	private Boolean disable;
+	@Column(name = "LastLogin")
+	private Date lastLogin;
 	@Column(name = "UserName", nullable = false)
 	private String userName;
-	@Column(name = "Password", nullable = false)
+	@Column(name = "Password")
 	private String password;
+	@Column(name = "SelfRegistered")
+	private String selfRegistered;
 
 	public int getUserId() {
 		return userId;
@@ -57,6 +63,14 @@ public class User {
 		this.disable = disable;
 	}
 
+	public Date getLastLogin() {
+		return lastLogin;
+	}
+
+	public void setLastLogin(Date lastLogin) {
+		this.lastLogin = lastLogin;
+	}
+
 	public String getUserName() {
 		return userName;
 	}
@@ -71,6 +85,14 @@ public class User {
 
 	public void setPassword(String password) {
 		this.password = password;
+	}
+
+	public String getSelfRegistered() {
+		return selfRegistered;
+	}
+
+	public void setSelfRegistered(String selfRegistered) {
+		this.selfRegistered = selfRegistered;
 	}
 
 }
