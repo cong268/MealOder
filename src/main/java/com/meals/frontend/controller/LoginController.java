@@ -39,9 +39,9 @@ public class LoginController {
 	}
 
 	@RequestMapping(value = "authentication", method = RequestMethod.POST)
-	public ModelAndView doAuthentication(@RequestParam("username") String username,
-										 @RequestParam("password") String password,
-										 HttpServletRequest request) {
+    public ModelAndView doAuthentication(@RequestBody Map<String, String> inputs, HttpServletRequest request) {
+        String username = inputs.get("username");
+        String password = inputs.get("password");
 		UserBean userBean = mealsService.checkUserLogin(username, password);
 		if (userBean != null) {
 			request.getSession().setAttribute("userId", userBean.getUserId());
