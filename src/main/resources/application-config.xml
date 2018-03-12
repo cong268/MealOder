@@ -41,19 +41,16 @@
 		<beans:property name="annotatedClasses">
 			<beans:list>
 				<beans:value>com.meals.backend.model.User</beans:value>
+				<beans:value>com.meals.backend.model.UserRole</beans:value>
 			</beans:list>
 		</beans:property>
 		<beans:property name="hibernateProperties">
 			<beans:props>
 				<beans:prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect
 				</beans:prop>
-				<beans:prop key="hibernate.show_sql">true</beans:prop>
+				<beans:prop key="hibernate.show_sql">false</beans:prop>
 			</beans:props>
 		</beans:property>
-	</beans:bean>
-	
-	<beans:bean id="userDAO" class="com.meals.backend.dao.impl.UserDAOImpl">
-		<beans:property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory" />
 	</beans:bean>
 	<beans:bean id="mealsService" class="com.meals.frontend.service.impl.MealsServiceImpl">
 <!-- 		<beans:property name="userDAO" ref="userDAO"></beans:property> -->

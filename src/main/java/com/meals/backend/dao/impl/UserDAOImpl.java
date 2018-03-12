@@ -12,7 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.meals.backend.dao.UserDAO;
 import com.meals.backend.model.User;
 
-@Repository
+@Repository("userDAO")
 @Transactional
 public class UserDAOImpl implements UserDAO {
 	@Autowired
