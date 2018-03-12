@@ -1,5 +1,9 @@
 package com.meals.backend.dao;
 
-public interface CateringDAO {
+import java.util.List;
 
+import com.meals.backend.model.Catering;
+
+public interface CateringDAO {
+//	List<Catering> getLstBy
 }
