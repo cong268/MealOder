@@ -1,6 +1,9 @@
 package com.meals.frontend.service.impl;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +12,7 @@ import org.springframework.stereotype.Service;
 import com.meals.backend.dao.ConstantDAO;
 import com.meals.backend.dao.StaffDAO;
 import com.meals.backend.dao.UserDAO;
+import com.meals.backend.model.Catering;
 import com.meals.backend.model.Department;
 import com.meals.backend.model.Location;
 import com.meals.backend.model.Meal;
@@ -88,6 +92,32 @@ public class MealsServiceImpl implements MealsService {
 		return bean;
 	}
 
+	@Override
+	public Boolean saveCatering(String userRole,List<MealsOrderBean> listMealOder, String date) {
+		Date cateringDate = convertStringToDate(date);
+		Date cateringTime = new Date();
+		if(listMealOder != null && !listMealOder.isEmpty()){
+			for (MealsOrderBean obj : listMealOder){
+				Catering dto = new Catering();
+				dto.setStaffId(obj.getStaffId());
+				dto.setMealId(obj.getMealId());
+				dto.setMealTimeId(obj.getMealTimeId());
+				dto.setLocationId(obj.getLocationId());
+				dto.setShiftId(obj.getShiftId());
+				dto.setCateringDate(cateringDate);
+				dto.setCateringTime(cateringTime);
+				if (userRole != null && userRole.equals("Admin")){
+					dto.setCatered(true);
+				} else if (userRole != null && userRole.equals("Manager")){
+					dto.setStatus(true);
+				} else {
+					dto.setOrdered(true);
+				}
+			}
+		}
+		return null;
+	}
+
 	private DataBean getConstanBean() {
 		DataBean bean = new DataBean();
 		List<MealTimeBean> lstMealTime = new ArrayList<>();
@@ -131,5 +161,20 @@ public class MealsServiceImpl implements MealsService {
 		bean.setLstMealType(lstMealType);
 		bean.setLstShift(lstShift);
 		return bean;
+	}
+
+	private Date convertStringToDate(String dateInString) {
+		Date date = null;
+		SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+		try {
+
+			date = formatter.parse(dateInString);
+			System.out.println(date);
+			System.out.println(formatter.format(date));
+
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		return date;
 	}
 }

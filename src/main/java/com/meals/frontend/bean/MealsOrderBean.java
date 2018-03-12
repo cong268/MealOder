@@ -1,7 +1,5 @@
 package com.meals.frontend.bean;
 
-import java.util.Date;
-
 public class MealsOrderBean {
 	private String staffId;
 	private String staffName;
@@ -9,7 +7,8 @@ public class MealsOrderBean {
 	private Integer locationId;
 	private Integer mealId;
 	private Integer deptId;
-	private Date cateringDate;
+	private Integer shiftId;
+	// private Date cateringDate;
 
 	public String getStaffId() {
 		return staffId;
@@ -59,12 +58,20 @@ public class MealsOrderBean {
 		this.deptId = deptId;
 	}
 
-	public Date getCateringDate() {
-		return cateringDate;
+	public Integer getShiftId() {
+		return shiftId;
 	}
 
-	public void setCateringDate(Date cateringDate) {
-		this.cateringDate = cateringDate;
+	public void setShiftId(Integer shiftId) {
+		this.shiftId = shiftId;
 	}
+
+	// public Date getCateringDate() {
+	// return cateringDate;
+	// }
+	//
+	// public void setCateringDate(Date cateringDate) {
+	// this.cateringDate = cateringDate;
+	// }
 
 }
