@@ -54,20 +54,20 @@ public class LoginController {
 				request.getSession().setAttribute("userRole", userRole);
 				if (userRole.equals("Admin")) {
 					// Admin, Quan ly nha bep
-					ModelAndView model = new ModelAndView("redirect:private/mealManagerment");
+					ModelAndView model = new ModelAndView("redirect:mealManagerment");
 					return model;
 				} else if (userRole.equals("Manager")) {
 					// Truong phong
-					ModelAndView model = new ModelAndView("redirect:private/mealManagerment");
+					ModelAndView model = new ModelAndView("redirect:mealManagerment");
 					return model;
 				} else {
 					// Nhan vien
-					ModelAndView model = new ModelAndView("redirect:private/mealManagerment");
+					ModelAndView model = new ModelAndView("redirect:mealManagerment");
 					return model;
 				}
 			} else {
 				// Nhan vien
-				ModelAndView model = new ModelAndView("redirect:private/mealManagerment");
+				ModelAndView model = new ModelAndView("redirect:mealManagerment");
 				return model;
 			}
 		} else {

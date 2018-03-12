@@ -9,6 +9,15 @@
 .wrap-meal-table{
     min-width: 700px;
 }
+.wrap-filter{
+    margin-bottom: 20px;
+}
+.vcenter{
+    line-height: 34px;
+}
+.wrap-header-page{
+    margin-bottom: 50px;
+}
 /*CHECKBOX*/
 .control {
     display: inline-block;

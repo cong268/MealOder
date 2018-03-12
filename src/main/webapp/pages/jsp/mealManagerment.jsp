@@ -23,9 +23,35 @@
     <div class="container wrap-meal-managerment">
         <div class="row text-center" >
             <div class="col-md-12 col-lg-12 col-xs-12 col-md-12 wrap-meal-table">
-                <h3>Meal Managerment</h3>
-                <input type="text" class="form-control" ng-model="tableParams.filter()['StaffName']">
-                <table ng-table="tableParams" class="table table-condensed table-bordered table-striped table-custom">
+                <div class="text-left wrap-header-page">
+                    <h3>Meal Managerment</h3>
+                </div>
+                <div class="row wrap-filter">
+                    <div class="col-md-4 col-lg-4 col-xs-4 col-md-4">
+                        <div class="col-xs-6 vcenter"><span>Code filter</span>
+                        </div>
+                        <div class="col-xs-6">
+                            <input type="text" class="form-control" ng-model="tableParams.filter()['StaffId']">
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-lg-4 col-xs-4 col-md-4">
+                        <div class="col-xs-6 vcenter">
+                            <span>Name filter </span>
+                        </div>
+                        <div class="col-xs-6">
+                            <input type="text" class="form-control" ng-model="tableParams.filter()['StaffName']">
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-lg-4 col-xs-4 col-md-4">
+                        <div class="col-xs-6 vcenter">
+                            <span>Date filter</span>
+                        </div>
+                        <div class="col-xs-6">
+                            <input type="text" class="form-control" ng-model="tableParams.filter()['StaffDate']">
+                        </div>
+                    </div>
+                </div>
+                <table ng-cloak ng-table="tableParams" class="table table-condensed table-bordered table-striped table-custom">
                     <tr ng-repeat="row in $data">
                         <td data-title="'EmployeeCode'" sortable="'StaffId'">{{row.StaffId}}</td>
                         <td data-title="'Fullname'" sortable="'StaffName'">{{row.StaffName}}</td>
