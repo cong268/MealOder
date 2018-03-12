@@ -10,7 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.meals.backend.dao.StaffDAO;
 import com.meals.backend.model.Staff;
 
-@Repository
+@Repository("staffDAO")
 @Transactional
 public class StaffDAOImpl implements StaffDAO {
 	@Autowired

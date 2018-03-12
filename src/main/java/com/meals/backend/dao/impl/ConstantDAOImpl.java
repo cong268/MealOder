@@ -13,7 +13,7 @@ import com.meals.backend.dao.ConstantDAO;
 import com.meals.backend.model.Department;
 import com.meals.backend.model.UserRole;
 
-@Repository
+@Repository("constantDAO")
 @Transactional
 public class ConstantDAOImpl implements ConstantDAO {
 	@Autowired
