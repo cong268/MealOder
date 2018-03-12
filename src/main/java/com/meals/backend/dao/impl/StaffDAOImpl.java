@@ -41,4 +41,11 @@ public class StaffDAOImpl implements StaffDAO {
 		return query.list();
 	}
 
+	@Override
+	public Boolean saveStaff(Staff obj) {
+		Session session = sessionFactory.getCurrentSession();
+		session.saveOrUpdate(obj);
+		return true;
+	}
+
 }

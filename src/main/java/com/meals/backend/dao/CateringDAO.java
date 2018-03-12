@@ -6,4 +6,5 @@ import com.meals.backend.model.Catering;
 
 public interface CateringDAO {
 //	List<Catering> getLstBy
+	Boolean saveOrUpdate(Catering obj);
 }

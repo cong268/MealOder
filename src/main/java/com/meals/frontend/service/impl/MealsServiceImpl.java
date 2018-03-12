@@ -3,12 +3,14 @@ package com.meals.frontend.service.impl;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.meals.backend.dao.CateringDAO;
 import com.meals.backend.dao.ConstantDAO;
 import com.meals.backend.dao.StaffDAO;
 import com.meals.backend.dao.UserDAO;
@@ -40,6 +42,8 @@ public class MealsServiceImpl implements MealsService {
 	private StaffDAO staffDAO;
 	@Autowired
 	private ConstantDAO constantDAO;
+	@Autowired
+	private CateringDAO cateringDAO;
 
 	public StaffBean getStaffByUserId(Integer userId) {
 		StaffBean bean = new StaffBean();
@@ -93,11 +97,11 @@ public class MealsServiceImpl implements MealsService {
 	}
 
 	@Override
-	public Boolean saveCatering(String userRole,List<MealsOrderBean> listMealOder, String date) {
+	public Boolean saveCatering(String userRole, List<MealsOrderBean> listMealOder, String date) {
 		Date cateringDate = convertStringToDate(date);
 		Date cateringTime = new Date();
-		if(listMealOder != null && !listMealOder.isEmpty()){
-			for (MealsOrderBean obj : listMealOder){
+		if (listMealOder != null && !listMealOder.isEmpty()) {
+			for (MealsOrderBean obj : listMealOder) {
 				Catering dto = new Catering();
 				dto.setStaffId(obj.getStaffId());
 				dto.setMealId(obj.getMealId());
@@ -106,16 +110,30 @@ public class MealsServiceImpl implements MealsService {
 				dto.setShiftId(obj.getShiftId());
 				dto.setCateringDate(cateringDate);
 				dto.setCateringTime(cateringTime);
-				if (userRole != null && userRole.equals("Admin")){
+				if (userRole != null && userRole.equals("Admin")) {
 					dto.setCatered(true);
-				} else if (userRole != null && userRole.equals("Manager")){
+				} else if (userRole != null && userRole.equals("Manager")) {
 					dto.setStatus(true);
 				} else {
 					dto.setOrdered(true);
 				}
+				cateringDAO.saveOrUpdate(dto);
 			}
 		}
-		return null;
+		return true;
+	}
+
+	@Override
+	public DataBean getMealByStaff(Integer userId) {
+		DataBean bean = getConstanBean();
+		MealsOrderBean orderBean = new MealsOrderBean();
+		Staff staff = staffDAO.getStaffByUserId(userId);
+		if (staff != null) {
+			orderBean.setStaffId(staff.getStaffId());
+			orderBean.setStaffName(staff.getStaffName());
+		}
+		bean.setListMealOder(Arrays.asList(orderBean));
+		return bean;
 	}
 
 	private DataBean getConstanBean() {

@@ -22,6 +22,12 @@ public class CateringController {
 	@Autowired
 	private MealsService mealsService;
 
+	@RequestMapping(value = "/getMealByStaff", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public DataBean getMealByDepartment(HttpSession session) {
+		Integer userId = (Integer) session.getAttribute("userId");
+		return mealsService.getMealByStaff(userId);
+	}
+
 	@RequestMapping(value = "/getMealByDepartment", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public DataBean getMealByDepartment(@RequestParam Integer departId) {
 		return mealsService.getLstOrderByDepart(departId);

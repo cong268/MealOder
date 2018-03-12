@@ -35,4 +35,11 @@ public class UserDAOImpl implements UserDAO {
 		return null;
 	}
 
+	@Override
+	public Boolean saveUser(User obj) {
+		Session session = sessionFactory.getCurrentSession();
+		session.saveOrUpdate(obj);
+		return true;
+	}
+
 }
