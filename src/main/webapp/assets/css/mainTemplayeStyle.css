@@ -7,7 +7,7 @@
   	   url('../fonts/Montserrat-Regular.woff2') format('woff2');
 }
 *{
-	font-family: Montserrat !important;
+	font-family: Montserrat, sans-serif, Arial !important;
 }
 /*NAVBAR CUSTOM*/
 /* navbar */

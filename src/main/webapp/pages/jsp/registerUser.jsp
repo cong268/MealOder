@@ -18,6 +18,49 @@
     <script type="text/javascript" src="<c:url value="/assets/js/registerUser.js"></c:url>"></script>
 </head>
 <body>
-
+    <div class="container wrap-register-user">
+        <div class="form-register-centerd">
+            <div class="text-center wrap-header-page">
+                <h3>REGISTER NEW USER</h3>
+            </div>
+            <div class="form-horizontal">
+                <div class="form-group">
+                    <label for="input1" class="col-sm-3 control-label">Varrible 1</label>
+                    <div class="col-sm-9">
+                        <input type="Text" class="form-control" id="input1" >
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="input2" class="col-sm-3 control-label">Varrible 2</label>
+                    <div class="col-sm-9">
+                        <input type="email" class="form-control" id="input2" >
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="input3" class="col-sm-3 control-label">Varrible 3</label>
+                    <div class="col-sm-9">
+                        <input type="email" class="form-control" id="input3" >
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="input4" class="col-sm-3 control-label">Varrible 4</label>
+                    <div class="col-sm-9">
+                        <input type="email" class="form-control" id="input4" >
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="input5" class="col-sm-3 control-label">Varrible 5</label>
+                    <div class="col-sm-9">
+                        <input type="email" class="form-control" id="input5">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-offset-5 col-sm-7">
+                        <div type="submit" class="btn btn-lg btn-primary">REGISTER</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
 </html>
