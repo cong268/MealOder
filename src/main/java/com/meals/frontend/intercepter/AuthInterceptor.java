@@ -15,7 +15,7 @@ public class AuthInterceptor extends HandlerInterceptorAdapter{
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
 		String uri = request.getRequestURI();
-		if (!uri.endsWith("login") && !uri.endsWith("authenticate")) {
+		if (!uri.endsWith("login") && !uri.endsWith("authentication")) {
 			Integer userData = (Integer) request.getSession().getAttribute("userId");
 			if (userData == null) {
 				response.sendRedirect(request.getContextPath() + "/login");

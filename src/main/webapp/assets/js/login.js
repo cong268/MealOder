@@ -35,17 +35,12 @@ var myApp = angular.module('loginApplication',[]).controller('loginController', 
                     $http({
                         method: 'POST',
                         url: 'authentication',
-                        responseType: 'json',
-                        headers: {
-                            contentType: "application/json; charset=utf-8",
-                            dataType: 'JSON'
-                        },
                         data: {
                             'username': username,
                             'password': password
                         }
                     }).then(function successCallback(response) {
-
+                       
                     }, function errorCallback(response) {
 
                     })
@@ -81,8 +76,6 @@ var myApp = angular.module('loginApplication',[]).controller('loginController', 
                 var thisAlert = $(input).parent();
                 $(thisAlert).removeClass('alert-validate');
             }
-
-
         })(jQuery);
     })
 }]);

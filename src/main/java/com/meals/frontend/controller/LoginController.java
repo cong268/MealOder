@@ -69,7 +69,7 @@ public class LoginController {
 				return model;
 			}
 		} else {
-			ModelAndView model = new ModelAndView("login");
+			ModelAndView model = new ModelAndView("redirect:login");
 			model.addObject("messsage", "Username or password is invalid!");
 			return model;
 		}
