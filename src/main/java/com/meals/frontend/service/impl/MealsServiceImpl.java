@@ -91,7 +91,7 @@ public class MealsServiceImpl implements MealsService {
 			if (lstStaff != null && !lstStaff.isEmpty()) {
 				for (Staff obj : lstStaff) {
 					Catering catering = cateringDAO.getByStaffId(obj.getStaffId(), dateTime);
-					if (!catering.getOrdered()) {
+					if (catering != null && !catering.getOrdered()) {
 						MealsOrderBean orderBean = new MealsOrderBean();
 						orderBean.setStaffId(obj.getStaffId());
 						orderBean.setStaffName(obj.getStaffName());
