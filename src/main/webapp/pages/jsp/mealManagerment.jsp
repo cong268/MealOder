@@ -21,7 +21,7 @@
     <script type="text/javascript" src="<c:url value="/assets/js/underscore-min.js"></c:url>"></script>
     <script type="text/javascript" src="<c:url value="/assets/js/mealManagerment.js"></c:url>"></script>
 </head>
-<body ng-controller="mealManagermentCtrl">
+<body ng-controller="mealManagermentCtrl" ng-init="initData()">
     <div class="container wrap-meal-managerment">
         <div class="row text-center" ng-cloak>
             <div class="col-md-12 col-lg-12 col-xs-12 col-md-12 wrap-meal-table">
@@ -48,36 +48,43 @@
                 <table ng-cloak ng-table="tableParams" class="table table-condensed table-bordered table-striped table-custom"
                        ng-class="{'nomarginbottom': tableParams.total() == 0}">
                     <tr ng-repeat="row in $data">
-                        <td data-title="'EmployeeCode'" sortable="'StaffId'">{{row.StaffId}}</td>
-                        <td data-title="'Fullname'" sortable="'StaffName'">{{row.StaffName}}</td>
+                        <td data-title="'EmployeeCode'" sortable="'staffId'">{{row.staffId}}</td>
+                        <td data-title="'Fullname'" sortable="'staffName'">{{row.staffName}}</td>
                         <td data-title="'Meal Time'" >
-                            <select ng-model="row.MealTimeId" class="form-control">
-                                <option ng-selected="row.MealTimeId == mealTime.MealTimeId"
-                                        ng-repeat="mealTime in mealTimeArr"
-                                        ng-value="mealTime.MealTimeId">{{mealTime.MealTimeName}}</option>
+                            <select ng-model="row.mealTime" class="form-control">
+                                <option ng-selected="row.mealTime == mealTimeObj.mealTimeId"
+                                        ng-repeat="mealTimeObj in mealTimeArr"
+                                        ng-value="mealTimeObj.mealTimeId">{{mealTimeObj.mealTimeName}}</option>
                             </select>
                         </td>
                         <td data-title="'Location'">
-                            <select ng-model="row.LocationId" class="form-control">
-                                <option ng-selected="row.LocationId == location.LocationId"
-                                        ng-repeat="location in locationArr"
-                                        ng-value="location.LocationId">{{location.LocationName}}</option>
+                            <select ng-model="row.location" class="form-control">
+                                <option ng-selected="row.location == locationObj.locationId"
+                                        ng-repeat="locationObj in locationArr"
+                                        ng-value="locationObj.locationId">{{locationObj.locationName}}</option>
                             </select>
                         </td>
                         <td data-title="'Meal Type'">
-                            <select ng-model="row.MealId" class="form-control">
-                                <option ng-selected="row.MealId == meal.MealId"
-                                        ng-repeat="meal in mealArr"
-                                        ng-value="meal.MealId">{{meal.MealName}}</option>
+                            <select ng-model="row.meal" class="form-control">
+                                <option ng-selected="row.meal == mealObj.mealId"
+                                        ng-repeat="mealObj in mealArr"
+                                        ng-value="mealObj.mealId">{{mealObj.mealName}}</option>
+                            </select>
+                        </td>
+                        <td data-title="'Shift'">
+                            <select ng-model="row.shift" class="form-control">
+                                <option ng-selected="row.shift == shilfObj.shiftId"
+                                        ng-repeat="shilfObj in shilfArr"
+                                        ng-value="shilfObj.shiftId">{{shilfObj.shiftName}}</option>
                             </select>
                         </td>
                         <td width="10" style="text-align: center" data-header="'checkbox.html'">
                             <label class="control control-checkbox">
                                 <input type="checkbox"
-                                       ng-model="row.Status"
+                                       ng-model="row.status"
                                        ng-true-value="1"
                                        ng-false-value="0"
-                                       ng-checked="row.Status == 1">
+                                       ng-checked="row.status == 1">
                                 <div class="control-indicator"></div>
                             </label>
                         </td>
@@ -87,9 +94,7 @@
             </div>
         </div>
         <div class="row m-t-10">
-            <div class="btn btn-primary btn-lg pull-right m-r-15">
-                SUBMIT
-            </div>
+            <div class="btn btn-primary btn-lg pull-right m-r-15" ng-click="submitMealManager()">SUBMIT</div>
             <div class="btn btn-danger btn-lg pull-right m-r-15">
                 CANCEL
             </div>

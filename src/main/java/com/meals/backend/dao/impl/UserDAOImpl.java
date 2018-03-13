@@ -24,8 +24,7 @@ public class UserDAOImpl implements UserDAO {
 
 	public User getUser(String userName, String passWord) {
 		Session session = sessionFactory.getCurrentSession();
-		Query query = session.createQuery("FROM User c WHERE c.userName = :userName AND c.password = :password");
-		query.setParameter("userName", userName);
+2		query.setParameter("userName", userName);
 		query.setParameter("password", passWord);
 		@SuppressWarnings("unchecked")
 		List<User> list = query.list();

@@ -51,7 +51,7 @@ public class CateringController {
 
 	@RequestMapping(value = "/saveCatering", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
 	public Boolean saveCatering(HttpSession session, @RequestBody List<MealsOrderBean> listMealOder,
-			@RequestParam String date) {
+			@RequestParam("date") String date) {
 		String userRole = (String) session.getAttribute(ConstanKey.USER_ROLE);
 		return mealsService.saveCatering(userRole, listMealOder, date);
 	}

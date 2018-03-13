@@ -1,129 +1,97 @@
-myApp.controller('mealManagermentCtrl', ['$scope', 'NgTableParams', 'ngTableEventsChannel', '$timeout', function($scope, NgTableParams, ngTableEventsChannel, $timeout){
+var dataAllPage;
+var dataAllTable;
+myApp.controller('mealManagermentCtrl', ['$scope', 'NgTableParams', 'ngTableEventsChannel', '$http', function($scope, NgTableParams, ngTableEventsChannel, $http){
     $scope.demoCheckbox = 1;
-    $scope.locationArr = [
-        {
-            LocationId: 1,
-            LocationName: 'Hanoi City'
-        },
-        {
-            LocationId: 2,
-            LocationName: 'HCM City'
-        },
-        {
-            LocationId: 3,
-            LocationName: 'NghiSon - Thanhhoa'
-        }
-    ]
-    $scope.mealTimeArr = [
-        {
-            MealTimeId: 1,
-            MealTimeName: 'Breakfast'
-        },
-        {
-            MealTimeId: 2,
-            MealTimeName: 'Lunch'
-        },
-        {
-            MealTimeId: 3,
-            MealTimeName: 'Diner'
-        }
-    ]
-    $scope.mealArr = [
-        {
-            MealId: 1,
-            MealName: 'Vietnam'
-        },
-        {
-            MealId: 2,
-            MealName: 'Japan'
-        },
-        {
-            MealId: 3,
-            MealName: 'Halala'
-        }
-    ]
-    $scope.arrData = [
-        {
-            StaffId: '1000000',
-            StaffName : 'Nguyễn Văn Công',
-            MealTimeId: 1,
-            LocationId: 1,
-            MealId: 1,
-            date: '01/01/2017',
-            Status: 0
-        },
-        {
-            StaffId: '1000001',
-            StaffName : 'Trần Đình Chiến',
-            MealTimeId: 2,
-            LocationId: 1,
-            MealId: 2,
-            date: '01/01/2018',
-            Status: 0
-        },
-        {
-            StaffId: '1000002',
-            StaffName : 'Chu Trọng Khanh',
-            MealTimeId: 1,
-            LocationId: 1,
-            MealId: 1,
-            date: '01/01/2018',
-            Status: 0
-        }
-    ];
-    for(var i =3 ; i< 1000; i++){
-        var length = (i.toString()).length,
-            surffixNum = '';
-        for(var j = 0; j <  3 - length; j++){
-            surffixNum += '0';
-        }
-
-        $scope.arrData.push({
-            StaffId: '1000'+surffixNum+i,
-            StaffName : 'Customer '+(new Date()).getTime(),
-            MealTimeId: i%3 == 1 ? 1 : 2,
-            LocationId: i%3 == 1 ? 1 : 3,
-            MealId: i%3 == 1 ? 1 : 2,
-            date: i%3 == 1 ? '01/01/2016' :'01/01/2015',
-            Status: i%3 == 1 ? 1 : 0
-        })
-    }
     $scope.dataFiltered = [];
     $scope.statusMeal = false;
+    $scope.locationArr = [];
+    $scope.mealTimeArr = [];
+    $scope.mealArr = [];
+    $scope.shilfArr = [];
+    $scope.arrData = [];
 
-    $scope.tableParams = new NgTableParams({
-        page: 1,
-        count: 10
-    }, {
-        dataset: $scope.arrData,
-    });
-
-    ngTableEventsChannel.onAfterReloadData(function(tableParams, filteredData){
-        $scope.dataFiltered = filteredData || tableParams.data;
-
-        var countStatus = 0, countNumber = 0;
-        angular.forEach($scope.dataFiltered, function(item){
-            if(item.Status == 1){
-                countStatus++;
+    $scope.initData = function(){
+        $http({
+            method: 'GET',
+            url: 'cateringController/getMealByDepartment?departId=' + 1,
+            responseType: 'json'
+        }).then(function successCallback(response) {
+            if(response.data){
+                dataAllPage = response.data;
+                dataAllTable = dataAllPage.listMealOder;
+                $scope.locationArr = dataAllPage.lstLocation;
+                $scope.mealTimeArr = dataAllPage.lstMealTime;
+                $scope.mealArr = dataAllPage.lstMealType;
+                $scope.shilfArr = dataAllPage.lstShift;
+                $scope.arrData = angular.copy(dataAllTable);
+                drawTable();
             }
-            countNumber++;
+        }, function errorCallback(response) {
+            $scope.loadingPerformancePatri = false;
         });
-        if(countNumber === countStatus && countNumber !== 0){
-            $scope.statusMeal = true;
-            $('#select_all').prop('checked',true);
-        } else {
-            $scope.statusMeal = false;
-            $('#select_all').prop('checked',false);
-        }
-    });
+    }
+
+    function drawTable(){
+        $scope.tableParams = new NgTableParams({
+            page: 1,
+            count: 10
+        }, {
+            dataset: $scope.arrData,
+        });
+
+        ngTableEventsChannel.onAfterReloadData(function(tableParams, filteredData){
+            $scope.dataFiltered = filteredData || tableParams.data;
+
+            var countStatus = 0, countNumber = 0;
+            angular.forEach($scope.dataFiltered, function(item){
+                if(item.status == 1){
+                    countStatus++;
+                }
+                countNumber++;
+            });
+            if(countNumber === countStatus && countNumber !== 0){
+                $scope.statusMeal = true;
+                $('#select_all').prop('checked',true);
+            } else {
+                $scope.statusMeal = false;
+                $('#select_all').prop('checked',false);
+            }
+        });
+    }
 
     $scope.changeStatus = function (statusMeal) {
         angular.forEach($scope.dataFiltered, function(item){
             if(statusMeal == true){
-                item.Status = 1;
+                item.status = 1;
             } else if(statusMeal == false){
-                item.Status = 0;
+                item.status = 0;
             }
         });
     };
+
+    $scope.submitMealManager = function(){
+        var listMealSave = [];
+        angular.forEach($scope.arrData, function(item){
+            if(item.status == 1){
+                var obj = angular.copy(item);
+                delete obj['status'];
+                listMealSave.push(obj);
+            }
+        })
+        $http({
+            method: 'POST',
+            url: 'cateringController/saveCatering?date=12021995',
+            responseType: 'json',
+            headers: {
+                contentType: "application/json; charset=utf-8",
+                dataType: 'JSON'
+            },
+            data: listMealSave
+        }).then(function successCallback(response) {
+            alert('SUCCESS');
+        }, function errorCallback(response) {
+
+        })
+    }
+
 }]);

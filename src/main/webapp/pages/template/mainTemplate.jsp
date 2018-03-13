@@ -58,19 +58,21 @@
                     </c:if>
                     <c:if test = "${sessionScope.userRole == 'Admin'}">
                     <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Configuration <span class="caret"></span></a>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Admin Configuration <span class="caret"></span></a>
                         <ul class="dropdown-menu">
                             <li><a href="carterAdmin">Cartering action</a></li>
                             <li><a href="showDataAdmin">Cartered action</a></li>
                         </ul>
                     </li>
                     </c:if>
+                    <c:if test = "${sessionScope.userRole == 'Employee'}">
                     <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Contact <span class="caret"></span></a>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">User Access <span class="caret"></span></a>
                         <ul class="dropdown-menu">
-                            <li><a href="#">Contact</a></li>
+                            <li><a href="userOrder">User order meal</a></li>
                         </ul>
                     </li>
+                    </c:if>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     <li class="dropdown dropdown-user-custom">

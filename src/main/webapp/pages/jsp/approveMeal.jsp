@@ -25,29 +25,23 @@
                 <div class="text-left wrap-header-page">
                     <h3>Approve Meal</h3>
                 </div>
-                <div class="row wrap-filter">
-                    <div class="col-md-4 col-lg-4 col-xs-4 col-md-4">
-                        <div class="col-xs-6 vcenter"><span>Code filter</span>
-                        </div>
-                        <div class="col-xs-6">
-                            <input type="text" class="form-control" ng-model="tableParams.filter()['StaffId']">
-                        </div>
+                <div ng-cloak class="row wrap-filter col-md-4 col-lg-4 col-xs-4 col-md-4 pull-left">
+                    <div class="col-sm-4 p-l-0 m-t-10">
+                        <%--<select ng-model="filterType" ng-init="filterType = 'code'" class="form-control">--%>
+                            <%--<option value="code">Code</option>--%>
+                            <%--<option value="name">Name</option>--%>
+                            <%--<option value="date">Date</option>--%>
+                        <%--</select>--%>
+                        Date
                     </div>
-                    <div class="col-md-4 col-lg-4 col-xs-4 col-md-4">
-                        <div class="col-xs-6 vcenter">
-                            <span>Name filter </span>
-                        </div>
-                        <div class="col-xs-6">
-                            <input type="text" class="form-control" ng-model="tableParams.filter()['StaffName']">
-                        </div>
+                    <div class="col-sm-6 p-l-0 m-t-10">
+                        <%--<input type="text" ng-if="filterType == 'code'" id="codeFilter" class="form-control" ng-model="tableParams.filter()['StaffId']">--%>
+                        <%--<input type="text" ng-if="filterType == 'name'" id="nameFilter" class="form-control" ng-model="tableParams.filter()['StaffName']">--%>
+                        <%--<input type="text" ng-if="filterType == 'date'" ng-model="dateFilter" class="form-control">--%>
+                            <input type="text" ng-model="dateFilter" class="form-control">
                     </div>
-                    <div class="col-md-4 col-lg-4 col-xs-4 col-md-4">
-                        <div class="col-xs-6 vcenter">
-                            <span>Date filter</span>
-                        </div>
-                        <div class="col-xs-6">
-                            <input type="text" class="form-control" ng-model="tableParams.filter()['StaffDate']">
-                        </div>
+                    <div class="col-sm-2 p-l-0 m-t-10">
+                        <div class="btn btn-success btn-default">Filter</div>
                     </div>
                 </div>
                 <table ng-cloak ng-table="tableParams" class="table table-condensed table-bordered table-striped table-custom">
