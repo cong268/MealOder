@@ -29,7 +29,7 @@ myApp.controller('mealManagermentCtrl', ['$scope', 'NgTableParams', 'ngTableEven
                 drawTable();
             }
         }, function errorCallback(response) {
-            $scope.loadingPerformancePatri = false;
+            console.log('getMealByDepartment FAIL');
         });
     }
 
@@ -43,22 +43,24 @@ myApp.controller('mealManagermentCtrl', ['$scope', 'NgTableParams', 'ngTableEven
 
         ngTableEventsChannel.onAfterReloadData(function(tableParams, filteredData){
             $scope.dataFiltered = filteredData || tableParams.data;
-
-            var countStatus = 0, countNumber = 0;
-            angular.forEach($scope.dataFiltered, function(item){
-                if(item.status == 1){
-                    countStatus++;
-                }
-                countNumber++;
-            });
-            if(countNumber === countStatus && countNumber !== 0){
-                $scope.statusMeal = true;
-                $('#select_all').prop('checked',true);
-            } else {
-                $scope.statusMeal = false;
-                $('#select_all').prop('checked',false);
-            }
+            $scope.checkStatus();
         });
+    }
+    $scope.checkStatus = function(){
+        var countStatus = 0, countNumber = 0;
+        angular.forEach($scope.dataFiltered, function(item){
+            if(item.status == 1){
+                countStatus++;
+            }
+            countNumber++;
+        });
+        if(countNumber === countStatus && countNumber !== 0){
+            $scope.statusMeal = true;
+            $('#select_all').prop('checked',true);
+        } else {
+            $scope.statusMeal = false;
+            $('#select_all').prop('checked',false);
+        }
     }
 
     $scope.filterAccept = function(){
@@ -80,7 +82,7 @@ myApp.controller('mealManagermentCtrl', ['$scope', 'NgTableParams', 'ngTableEven
                 drawTable();
             }
         }, function errorCallback(response) {
-            $scope.loadingPerformancePatri = false;
+            console.log('getMealByDepartment FAIL');
         });
     }
 

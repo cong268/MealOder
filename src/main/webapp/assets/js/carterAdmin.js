@@ -3,7 +3,6 @@ var dataAllTable;
 myApp.controller('carterAdminCtrl', ['$scope', 'NgTableParams', 'ngTableEventsChannel', '$http', function($scope, NgTableParams, ngTableEventsChannel, $http) {
     $scope.demoCheckbox = 1;
     $scope.dataFiltered = [];
-    $scope.statusMeal = false;
     $scope.locationArr = [];
     $scope.mealTimeArr = [];
     $scope.mealArr = [];
@@ -29,7 +28,7 @@ myApp.controller('carterAdminCtrl', ['$scope', 'NgTableParams', 'ngTableEventsCh
                 drawTable();
             }
         }, function errorCallback(response) {
-            $scope.loadingPerformancePatri = false;
+            console.log('getLstByStatus FAIL');
         });
     }
     $scope.getMealTimeName = function(mealTimeId){
@@ -78,21 +77,6 @@ myApp.controller('carterAdminCtrl', ['$scope', 'NgTableParams', 'ngTableEventsCh
 
         ngTableEventsChannel.onAfterReloadData(function(tableParams, filteredData){
             $scope.dataFiltered = filteredData || tableParams.data;
-
-            var countStatus = 0, countNumber = 0;
-            angular.forEach($scope.dataFiltered, function(item){
-                if(item.status == 1){
-                    countStatus++;
-                }
-                countNumber++;
-            });
-            if(countNumber === countStatus && countNumber !== 0){
-                $scope.statusMeal = true;
-                $('#select_all').prop('checked',true);
-            } else {
-                $scope.statusMeal = false;
-                $('#select_all').prop('checked',false);
-            }
         });
     }
 
@@ -115,21 +99,12 @@ myApp.controller('carterAdminCtrl', ['$scope', 'NgTableParams', 'ngTableEventsCh
                 drawTable();
             }
         }, function errorCallback(response) {
-            $scope.loadingPerformancePatri = false;
+            console.log('getLstByStatus FAIL');
         });
     }
 
-    $scope.changeStatus = function (statusMeal) {
-        angular.forEach($scope.dataFiltered, function(item){
-            if(statusMeal == true){
-                item.status = 1;
-            } else if(statusMeal == false){
-                item.status = 0;
-            }
-        });
-    };
 
-    $scope.submitApprove = function(){
+    $scope.submitCarter = function(){
         var dateInput = angular.element(document.getElementById("date-filter-input")).val();
         var dateStr = moment(dateInput, 'DD/MM/YYYY').format('DDMMYYYY');
         $http({

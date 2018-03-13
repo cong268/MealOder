@@ -1,126 +1,111 @@
-myApp.controller('carteredAdminCtrl', ['$scope', 'NgTableParams', 'ngTableEventsChannel', '$timeout', function($scope, NgTableParams, ngTableEventsChannel, $timeout) {
+myApp.controller('carteredAdminCtrl', ['$scope', 'NgTableParams', 'ngTableEventsChannel', '$http', function($scope, NgTableParams, ngTableEventsChannel, $http) {
     $scope.demoCheckbox = 1;
-    $scope.locationArr = [
-        {
-            LocationId: 1,
-            LocationName: 'Hanoi City'
-        },
-        {
-            LocationId: 2,
-            LocationName: 'HCM City'
-        },
-        {
-            LocationId: 3,
-            LocationName: 'NghiSon - Thanhhoa'
+    $scope.dataFiltered = [];
+    $scope.locationArr = [];
+    $scope.mealTimeArr = [];
+    $scope.mealArr = [];
+    $scope.shilfArr = [];
+    $scope.arrData = [];
+    moment.locale('en');
+    $scope.fromDate = moment(new Date()).format('DD/MM/YYYY');
+    $scope.toDate = moment(new Date()).format('DD/MM/YYYY');
+    $scope.initData = function(){
+        var fromdateStr = moment($scope.fromDate, 'DD/MM/YYYY').format('DDMMYYYY');
+        var toDateStr = moment($scope.toDate, 'DD/MM/YYYY').format('DDMMYYYY');
+        $http({
+            method: 'GET',
+            url: 'cateringController/getLstByDate?fromDate='+fromdateStr+'&toDate=' + toDateStr,
+            responseType: 'json'
+        }).then(function successCallback(response) {
+            if(response.data){
+                var dataAllPage = response.data;
+                var dataAllTable = dataAllPage.listMealOder;
+                $scope.locationArr = dataAllPage.lstLocation;
+                $scope.mealTimeArr = dataAllPage.lstMealTime;
+                $scope.mealArr = dataAllPage.lstMealType;
+                $scope.shilfArr = dataAllPage.lstShift;
+                $scope.arrData = angular.copy(dataAllTable);
+                drawTable();
+            }
+        }, function errorCallback(response) {
+            $scope.loadingPerformancePatri = false;
+        });
+    }
+    $scope.getMealTimeName = function(mealTimeId){
+        var mealTimeName = '';
+        for(var i = 0 ; i< $scope.mealTimeArr.length; i++){
+            if($scope.mealTimeArr[i].mealTimeId == mealTimeId){
+                mealTimeName =  $scope.mealTimeArr[i].mealTimeName;
+            }
         }
-    ]
-    $scope.mealTimeArr = [
-        {
-            MealTimeId: 1,
-            MealTimeName: 'Breakfast'
-        },
-        {
-            MealTimeId: 2,
-            MealTimeName: 'Lunch'
-        },
-        {
-            MealTimeId: 3,
-            MealTimeName: 'Diner'
+        return mealTimeName;
+    }
+    $scope.getLocationName = function(locationId){
+        var locationName = '';
+        for(var i = 0 ; i< $scope.locationArr.length; i++){
+            if($scope.locationArr[i].locationId == locationId){
+                locationName =  $scope.locationArr[i].locationName;
+            }
         }
-    ]
-    $scope.mealArr = [
-        {
-            MealId: 1,
-            MealName: 'Vietnam'
-        },
-        {
-            MealId: 2,
-            MealName: 'Japan'
-        },
-        {
-            MealId: 3,
-            MealName: 'Halala'
+        return locationName;
+    }
+    $scope.getMealName = function(mealId){
+        var mealName = '';
+        for(var i = 0 ; i< $scope.mealArr.length; i++){
+            if($scope.mealArr[i].mealId == mealId){
+                mealName =  $scope.mealArr[i].mealName;
+            }
         }
-    ]
-    $scope.arrData = [
-        {
-            StaffId: '1000000',
-            StaffName : 'Nguyễn Văn Công',
-            MealTimeId: 1,
-            LocationId: 1,
-            MealId: 1,
-            Status: 0
-        },
-        {
-            StaffId: '1000001',
-            StaffName : 'Trần Đình Chiến',
-            MealTimeId: 2,
-            LocationId: 1,
-            MealId: 2,
-            Status: 0
-        },
-        {
-            StaffId: '1000002',
-            StaffName : 'Chu Trọng Khanh',
-            MealTimeId: 1,
-            LocationId: 1,
-            MealId: 1,
-            Status: 0
+        return mealName;
+    }
+    $scope.getShiftName = function(shiftId){
+        var shiftName = '';
+        for(var i = 0 ; i< $scope.shilfArr.length; i++){
+            if($scope.shilfArr[i].shiftId == shiftId){
+                shiftName =  $scope.shilfArr[i].shiftName;
+            }
         }
-    ];
-    for(var i =3 ; i< 1000; i++){
-        var length = (i.toString()).length,
-            surffixNum = '';
-        for(var j = 0; j <  3 - length; j++){
-            surffixNum += '0';
-        }
+        return shiftName;
+    }
+    function drawTable(){
+        $scope.tableParams = new NgTableParams({
+            page: 1,
+            count: 10
+        }, {
+            dataset: $scope.arrData,
+        });
 
-        $scope.arrData.push({
-            StaffId: '1000'+surffixNum+i,
-            StaffName : 'Customer '+(new Date()).getTime(),
-            MealTimeId: i%3 == 1 ? 1 : 2,
-            LocationId: i%3 == 1 ? 1 : 3,
-            MealId: i%3 == 1 ? 1 : 2,
-            Status: i%3 == 1 ? 1 : 0
-        })
+        ngTableEventsChannel.onAfterReloadData(function(tableParams, filteredData){
+            $scope.dataFiltered = filteredData || tableParams.data;
+        });
     }
 
-    $scope.tableParams = new NgTableParams({
-        sorting: {
-            StaffId: "asc"
-        },
-        page: 1,
-        count: 10
-    }, {
-        dataset: $scope.arrData,
-    });
-    $scope.dataFiltered = [];
-    ngTableEventsChannel.onAfterReloadData(function(tableParams, filteredData){
-        $scope.dataFiltered = tableParams.data || filteredData.data;
-        console.log(tableParams);
-    });
-    $scope.statusMeal = false;
-    $scope.changeStatus = function (statusMeal) {
-        angular.forEach($scope.dataFiltered, function(item){
-            if(statusMeal == true){
-                item.Status = 1;
-            } else if(statusMeal == false){
-                item.Status = 0;
+    $scope.filterAccept = function(){
+        var fromDateInput = angular.element(document.getElementById("date-filter-from")).val();
+        var toDateInput = angular.element(document.getElementById("date-filter-to")).val();
+        var fromdateStr = moment(fromDateInput, 'DD/MM/YYYY').format('DDMMYYYY');
+        var toDateStr = moment(toDateInput, 'DD/MM/YYYY').format('DDMMYYYY');
+        $http({
+            method: 'GET',
+            url: 'cateringController/getLstByDate?fromDate='+fromdateStr+'&toDate=' + toDateStr,
+            responseType: 'json'
+        }).then(function successCallback(response) {
+            if(response.data){
+                dataAllPage = response.data;
+                dataAllTable = dataAllPage.listMealOder;
+                $scope.locationArr = dataAllPage.lstLocation;
+                $scope.mealTimeArr = dataAllPage.lstMealTime;
+                $scope.mealArr = dataAllPage.lstMealType;
+                $scope.shilfArr = dataAllPage.lstShift;
+                $scope.arrData = angular.copy(dataAllTable);
+                drawTable();
             }
+        }, function errorCallback(response) {
+            console.log('getLstByStatus FAIL')
         });
-    };
-    $scope.$watch('dataFiltered', function(){
-        var countStatus = 0, countNumber = 0;
-        angular.forEach($scope.dataFiltered, function(item){
-            if(item.Status == 1){
-                countStatus++;
-            }
-            countNumber++;
-        });
-        if(countNumber == countStatus && countNumber != 0){
-            $scope.statusMeal = true;
-        } else {
-            $scope.statusMeal = false;
-        }
-    })
+    }
+
+    $scope.exportData = function(){
+
+    }
 }]);

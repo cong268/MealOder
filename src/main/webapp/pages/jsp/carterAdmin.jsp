@@ -19,47 +19,50 @@
     <script type="text/javascript" src="<c:url value="/assets/js/carterAdmin.js"></c:url>"></script>
 </head>
 <body ng-controller="carterAdminCtrl" ng-init="initData()">
-<div class="container wrap-cartering-managerment">
-    <div class="row text-center" >
-        <div class="col-md-12 col-lg-12 col-xs-12 col-md-12 wrap-meal-table">
-            <div class="text-left wrap-header-page">
-                <h3>Cartering Employees</h3>
+    <div class="container wrap-cartering-managerment">
+        <div class="row text-center" >
+            <div class="col-md-12 col-lg-12 col-xs-12 col-md-12 wrap-meal-table">
+                <div class="text-left wrap-header-page">
+                    <h3>Cartering Employees <span class="badge" ng-cloak ng-bind="tableParams.total()"/></h3>
+                </div>
+                <div ng-cloak class="row wrap-filter col-md-5 col-lg-5 col-xs-5 col-md-5 pull-left">
+                    <div class="col-sm-3 p-l-0 m-t-10 p-t-5">
+                        Date
+                    </div>
+                    <div class="col-sm-5 p-l-0 m-t-10">
+                        <input type="text" ng-model="dateFilter" id="date-filter-input" date-range-picker-single
+                               ng-model="dateFilter" class="form-control">
+                    </div>
+                    <div class="col-sm-4 p-l-0 m-t-10">
+                        <div class="btn btn-success btn-default" ng-click="filterAccept()">Catering Date</div>
+                    </div>
+                </div>
+                <table ng-cloak ng-table="tableParams" class="table table-condensed table-bordered table-striped table-custom"
+                       ng-class="{'nomarginbottom': tableParams.total() == 0}">
+                    <tr ng-repeat="row in $data">
+                        <td data-title="'EmployeeCode'" sortable="'staffId'">{{row.staffId}}</td>
+                        <td data-title="'Fullname'" sortable="'staffName'">{{row.staffName}}</td>
+                        <td data-title="'Meal Time'" >
+                            {{getMealTimeName(row.mealTimeId)}}
+                        </td>
+                        <td data-title="'Location'">
+                            {{getLocationName(row.locationId)}}
+                        </td>
+                        <td data-title="'Meal Type'">
+                            {{getMealName(row.mealId)}}
+                        </td>
+                        <td data-title="'Shift'">
+                            {{getShiftName(row.shiftId)}}
+                        </td>
+                    </tr>
+                </table>
+                <div class="showNoData" ng-if="tableParams.total() == 0" ng-cloak>No data available</div>
             </div>
-            <div ng-cloak class="row wrap-filter col-md-5 col-lg-5 col-xs-5 col-md-5 pull-left">
-                <div class="col-sm-3 p-l-0 m-t-10 p-t-5">
-                    Date
-                </div>
-                <div class="col-sm-5 p-l-0 m-t-10">
-                    <input type="text" ng-model="dateFilter" id="date-filter-input" date-range-picker-single
-                           ng-model="dateFilter" class="form-control">
-                </div>
-                <div class="col-sm-4 p-l-0 m-t-10">
-                    <div class="btn btn-success btn-default" ng-click="filterAccept()">Catering Date</div>
-                </div>
-            </div>
-            <table ng-cloak ng-table="tableParams" class="table table-condensed table-bordered table-striped table-custom"
-                   ng-class="{'nomarginbottom': tableParams.total() == 0}">
-                <tr ng-repeat="row in $data">
-                    <td data-title="'EmployeeCode'" sortable="'staffId'">{{row.staffId}}</td>
-                    <td data-title="'Fullname'" sortable="'staffName'">{{row.staffName}}</td>
-                    <td data-title="'Meal Time'" >
-                        {{getMealTimeName(row.mealTimeId)}}
-                    </td>
-                    <td data-title="'Location'">
-                        {{getLocationName(row.locationId)}}
-                    </td>
-                    <td data-title="'Meal Type'">
-                        {{getMealName(row.mealId)}}
-                    </td>
-                    <td data-title="'Shift'">
-                        {{getShiftName(row.shiftId)}}
-                    </td>
-                </tr>
-            </table>
-            <div class="showNoData" ng-if="tableParams.total() == 0" ng-cloak>No data available</div>
+        </div>
+        <div class="row m-t-10">
+            <div class="btn btn-primary btn-lg pull-right m-r-15" ng-click="submitCarter()">CARTER</div>
         </div>
     </div>
-</div>
 </body>
 </c:if>
 <c:if test = "${sessionScope.userRole != 'Admin'}">

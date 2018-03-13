@@ -60,6 +60,7 @@
                                        ng-model="row.status"
                                        ng-true-value="1"
                                        ng-false-value="0"
+                                       ng-change="checkStatus()"
                                        ng-checked="row.status == 1">
                                 <div class="control-indicator"></div>
                             </label>
