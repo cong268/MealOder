@@ -25,31 +25,31 @@
             </div>
             <div class="form-horizontal">
                 <div class="form-group">
-                    <label for="input1" class="col-sm-3 control-label">Varrible 1</label>
+                    <label for="input1" class="col-sm-3 control-label">Username</label>
                     <div class="col-sm-9">
                         <input type="Text" class="form-control" id="input1" >
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="input2" class="col-sm-3 control-label">Varrible 2</label>
+                    <label for="input2" class="col-sm-3 control-label">Email</label>
                     <div class="col-sm-9">
                         <input type="email" class="form-control" id="input2" >
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="input3" class="col-sm-3 control-label">Varrible 3</label>
+                    <label for="input3" class="col-sm-3 control-label">Staff Id</label>
                     <div class="col-sm-9">
                         <input type="email" class="form-control" id="input3" >
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="input4" class="col-sm-3 control-label">Varrible 4</label>
+                    <label for="input4" class="col-sm-3 control-label">Password</label>
                     <div class="col-sm-9">
                         <input type="email" class="form-control" id="input4" >
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="input5" class="col-sm-3 control-label">Varrible 5</label>
+                    <label for="input5" class="col-sm-3 control-label">Password (Confirm)</label>
                     <div class="col-sm-9">
                         <input type="email" class="form-control" id="input5">
                     </div>

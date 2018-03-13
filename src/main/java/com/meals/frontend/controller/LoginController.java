@@ -51,7 +51,7 @@ public class LoginController {
 				request.getSession().setAttribute(ConstanKey.USER_ROLE, userRole);
 				if (userRole.equals(ConstanKey.ROLE.ROLE_ADMIN)) {
 					// Admin, Quan ly nha bep
-					ModelAndView model = new ModelAndView("redirect:mealManagerment");
+					ModelAndView model = new ModelAndView("redirect:carterAdmin");
 					return model;
 				} else if (userRole.equals(ConstanKey.ROLE.ROLE_MANAGER)) {
 					// Truong phong
@@ -59,12 +59,12 @@ public class LoginController {
 					return model;
 				} else {
 					// Nhan vien
-					ModelAndView model = new ModelAndView("redirect:mealManagerment");
+					ModelAndView model = new ModelAndView("redirect:userOrder");
 					return model;
 				}
 			} else {
 				// Nhan vien
-				ModelAndView model = new ModelAndView("redirect:mealManagerment");
+				ModelAndView model = new ModelAndView("redirect:userOrder");
 				return model;
 			}
 		} else {
