@@ -48,4 +48,15 @@ public class StaffDAOImpl implements StaffDAO {
 		return true;
 	}
 
+	@Override
+	public Staff getByStaff(String staffId) {
+		Session session = sessionFactory.getCurrentSession();
+		Query query = session.createQuery("FROM Staff c WHERE c.staffId = :staffId");
+		query.setParameter("staffId", staffId);
+		if (query.list() != null && !query.list().isEmpty()) {
+			return (Staff) query.list().get(0);
+		}
+		return null;
+	}
+
 }

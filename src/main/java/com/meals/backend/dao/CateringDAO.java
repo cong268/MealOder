@@ -6,7 +6,9 @@ import java.util.List;
 import com.meals.backend.model.Catering;
 
 public interface CateringDAO {
-	List<Catering> getLstByDepartment(List<String> staffIds, Date date);
-	List<Catering> getLstAppro (List<String> staffLst, Date cateringDate);
+	List<Catering> getLstByOder (Integer departId, Date cateringDate);
+	List<Catering> getLstByStatus (Date cateringDate);
+	List<Catering> getLstByDate (Date  fromDate, Date toDate);
+	Catering getByStaffId (String staffId, Date date);
 	Boolean saveOrUpdate(Catering obj);
 }

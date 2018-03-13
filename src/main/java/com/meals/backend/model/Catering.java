@@ -21,6 +21,8 @@ public class Catering {
 	private Integer mealTimeId;
 	@Column(name = "ShiftId", nullable = false)
 	private Integer shiftId;
+	@Column(name = "DepartId", nullable = false)
+	private Integer departId;
 	@Column(name = "CateringDate", nullable = false, columnDefinition = "DATE")
 	private Date cateringDate;
 	@Column(name = "Catered", nullable = false)
@@ -110,6 +112,14 @@ public class Catering {
 
 	public void setOrdered(Boolean ordered) {
 		this.ordered = ordered;
+	}
+
+	public Integer getDepartId() {
+		return departId;
+	}
+
+	public void setDepartId(Integer departId) {
+		this.departId = departId;
 	}
 
 }

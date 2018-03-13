@@ -15,5 +15,6 @@ public class ConstanKey {
 	public interface FORMAT_DATE {
 		public static final String DATE_DATA_FORMAT = "dd/MM/yyyy HH:mm:ss";
 		public static final String DATE_SLASH_FORMAT = "dd/MM/yyyy";
+		public static final String DATE_TIME_FORMAT = "ddMMyyyy";
 	}
 }

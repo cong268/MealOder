@@ -3,13 +3,12 @@ package com.meals.frontend.bean;
 public class MealsOrderBean {
 	private String staffId;
 	private String staffName;
-	private MealTimeBean mealTime;
-	private LocationBean location;
-	private MealBean meal;
-	private DepartmentBean department;
-	private ShiftBean shift;
+	private Integer mealTimeId;
+	private Integer locationId;
+	private Integer mealId;
+	private Integer departmentId;
+	private Integer shiftId;
 
-	// private Date cateringDate;
 	public String getStaffId() {
 		return staffId;
 	}
@@ -26,44 +25,44 @@ public class MealsOrderBean {
 		this.staffName = staffName;
 	}
 
-	public MealTimeBean getMealTime() {
-		return mealTime;
+	public Integer getMealTimeId() {
+		return mealTimeId;
 	}
 
-	public void setMealTime(MealTimeBean mealTime) {
-		this.mealTime = mealTime;
+	public void setMealTimeId(Integer mealTimeId) {
+		this.mealTimeId = mealTimeId;
 	}
 
-	public LocationBean getLocation() {
-		return location;
+	public Integer getLocationId() {
+		return locationId;
 	}
 
-	public void setLocation(LocationBean location) {
-		this.location = location;
+	public void setLocationId(Integer locationId) {
+		this.locationId = locationId;
 	}
 
-	public MealBean getMeal() {
-		return meal;
+	public Integer getMealId() {
+		return mealId;
 	}
 
-	public void setMeal(MealBean meal) {
-		this.meal = meal;
+	public void setMealId(Integer mealId) {
+		this.mealId = mealId;
 	}
 
-	public DepartmentBean getDepartment() {
-		return department;
+	public Integer getDepartmentId() {
+		return departmentId;
 	}
 
-	public void setDepartment(DepartmentBean department) {
-		this.department = department;
+	public void setDepartmentId(Integer departmentId) {
+		this.departmentId = departmentId;
 	}
 
-	public ShiftBean getShift() {
-		return shift;
+	public Integer getShiftId() {
+		return shiftId;
 	}
 
-	public void setShift(ShiftBean shift) {
-		this.shift = shift;
+	public void setShiftId(Integer shiftId) {
+		this.shiftId = shiftId;
 	}
 
 }

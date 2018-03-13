@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -83,16 +84,23 @@ public class MealsServiceImpl implements MealsService {
 		return null;
 	}
 
-	public DataBean getLstOrderByDepart(Integer departId) {
-		DataBean bean = getConstanBean();
+	public DataBean getLstOrderByDepart(Integer userId, String date) {
+		DataBean bean = new DataBean();
+		Date dateTime = FunctionUtils.convertDateByFormatLocal(date, ConstanKey.FORMAT_DATE.DATE_TIME_FORMAT);
 		List<MealsOrderBean> lstOrder = new ArrayList<>();
-		List<Staff> lstStaff = staffDAO.getStaffByDepart(departId);
-		if (lstStaff != null && !lstStaff.isEmpty()) {
-			for (Staff obj : lstStaff) {
-				MealsOrderBean orderBean = new MealsOrderBean();
-				orderBean.setStaffId(obj.getStaffId());
-				orderBean.setStaffName(obj.getStaffName());
-				lstOrder.add(orderBean);
+		Staff staff = staffDAO.getStaffByUserId(userId);
+		if (staff != null) {
+			List<Staff> lstStaff = staffDAO.getStaffByDepart(staff.getDeptId());
+			if (lstStaff != null && !lstStaff.isEmpty()) {
+				for (Staff obj : lstStaff) {
+					Catering catering = cateringDAO.getByStaffId(obj.getStaffId(), dateTime);
+					if (!catering.getOrdered()) {
+						MealsOrderBean orderBean = new MealsOrderBean();
+						orderBean.setStaffId(obj.getStaffId());
+						orderBean.setStaffName(obj.getStaffName());
+						lstOrder.add(orderBean);
+					}
+				}
 			}
 		}
 		bean.setListMealOder(lstOrder);
@@ -101,16 +109,17 @@ public class MealsServiceImpl implements MealsService {
 
 	@Override
 	public Boolean saveCatering(String userRole, List<MealsOrderBean> listMealOder, String date) {
-		Date cateringDate = FunctionUtils.convertDateByFormatLocal(date, ConstanKey.FORMAT_DATE.DATE_SLASH_FORMAT);
+		Date cateringDate = FunctionUtils.convertDateByFormatLocal(date, ConstanKey.FORMAT_DATE.DATE_TIME_FORMAT);
 		Date cateringTime = new Date();
 		if (listMealOder != null && !listMealOder.isEmpty()) {
 			for (MealsOrderBean obj : listMealOder) {
 				Catering dto = new Catering();
 				dto.setStaffId(obj.getStaffId());
-				dto.setMealId(obj.getMeal().getMealId());
-				dto.setMealTimeId(obj.getMealTime().getMealTimeId());
-				dto.setLocationId(obj.getLocation().getLocationId());
-				dto.setShiftId(obj.getShift().getShiftId());
+				dto.setMealId(obj.getMealId());
+				dto.setMealTimeId(obj.getMealTimeId());
+				dto.setLocationId(obj.getLocationId());
+				dto.setShiftId(obj.getShiftId());
+				dto.setDepartId(obj.getDepartmentId());
 				dto.setCateringDate(cateringDate);
 				dto.setCateringTime(cateringTime);
 				if (userRole != null && userRole.equals(ConstanKey.ROLE.ROLE_ADMIN)) {
@@ -128,7 +137,12 @@ public class MealsServiceImpl implements MealsService {
 
 	@Override
 	public DataBean getMealByStaff(Integer userId) {
-		DataBean bean = getConstanBean();
+		DataBean bean = new DataBean();
+		List<MealTimeBean> lstMealTime = getMealTime();
+		List<MealBean> lstMealType = getLstMeal();
+		List<LocationBean> lstLocation = getLocation();
+		List<DepartmentBean> lstDepartMent = getDepartMent();
+		List<ShiftBean> lstShift = getShift();
 		MealsOrderBean orderBean = new MealsOrderBean();
 		Staff staff = staffDAO.getStaffByUserId(userId);
 		if (staff != null) {
@@ -139,48 +153,82 @@ public class MealsServiceImpl implements MealsService {
 		return bean;
 	}
 
-	private DataBean getConstanBean() {
+	@Override
+	public DataBean getLstByOder(Integer userId, String date) {
 		DataBean bean = new DataBean();
-		List<MealTimeBean> lstMealTime = new ArrayList<>();
-		List<MealBean> lstMealType = new ArrayList<>();
-		List<LocationBean> lstLocation = new ArrayList<>();
-		List<DepartmentBean> lstDepartMent = new ArrayList<>();
-		List<ShiftBean> lstShift = new ArrayList<>();
-		List<Department> lstDepart = constantDAO.getAllDepart();
-		if (lstDepart != null && !lstDepart.isEmpty()) {
-			for (Department obj : lstDepart) {
-				lstDepartMent.add(new DepartmentBean(obj.getDeptId(), obj.getDeptName()));
+		List<MealsOrderBean> lstOder = new ArrayList<>();
+		Date dateTime = FunctionUtils.convertDateByFormatLocal(date, ConstanKey.FORMAT_DATE.DATE_TIME_FORMAT);
+		List<MealsOrderBean> lstOrder = new ArrayList<>();
+		Staff staff = staffDAO.getStaffByUserId(userId);
+		if (staff != null) {
+			List<Catering> lst = cateringDAO.getLstByOder(staff.getDeptId(), dateTime);
+			if (lst != null && !lst.isEmpty()) {
+				for (Catering catering : lst) {
+					Staff obj = staffDAO.getByStaff(catering.getStaffId());
+					if (obj != null) {
+						MealsOrderBean oderBean = new MealsOrderBean();
+						oderBean.setStaffId(obj.getStaffId());
+						oderBean.setStaffName(obj.getStaffName());
+
+					}
+				}
 			}
 		}
+		return bean;
+	}
+
+	private List<MealTimeBean> getMealTime() {
+		List<MealTimeBean> lstMealTime = new ArrayList<>();
 		List<MealTime> lstMealTimeDAO = constantDAO.getAllMealTime();
 		if (lstMealTimeDAO != null && !lstMealTimeDAO.isEmpty()) {
 			for (MealTime obj : lstMealTimeDAO) {
 				lstMealTime.add(new MealTimeBean(obj.getMealTimeId(), obj.getMealTimeName()));
 			}
 		}
+		return lstMealTime;
+	}
+
+	private List<MealBean> getLstMeal() {
+		List<MealBean> lstMealType = new ArrayList<>();
 		List<Meal> lstMealDAO = constantDAO.getAllMeal();
 		if (lstMealDAO != null && !lstMealDAO.isEmpty()) {
 			for (Meal obj : lstMealDAO) {
 				lstMealType.add(new MealBean(obj.getMealId(), obj.getMealName()));
 			}
 		}
+		return lstMealType;
+	}
+
+	private List<LocationBean> getLocation() {
+		List<LocationBean> lstLocation = new ArrayList<>();
 		List<Location> lstLocationDAO = constantDAO.getAllLocation();
 		if (lstLocationDAO != null && !lstLocationDAO.isEmpty()) {
 			for (Location obj : lstLocationDAO) {
 				lstLocation.add(new LocationBean(obj.getLocationId(), obj.getLocationName()));
 			}
 		}
+		return lstLocation;
+	}
+
+	private List<DepartmentBean> getDepartMent() {
+		List<DepartmentBean> lstDepartMent = new ArrayList<>();
+		List<Department> lstDepart = constantDAO.getAllDepart();
+		if (lstDepart != null && !lstDepart.isEmpty()) {
+			for (Department obj : lstDepart) {
+				lstDepartMent.add(new DepartmentBean(obj.getDeptId(), obj.getDeptName()));
+			}
+		}
+		return lstDepartMent;
+	}
+
+	private List<ShiftBean> getShift() {
+		List<ShiftBean> lstShift = new ArrayList<>();
 		List<Shift> lstShiftDAO = constantDAO.getAllShift();
 		if (lstShiftDAO != null && !lstShiftDAO.isEmpty()) {
 			for (Shift obj : lstShiftDAO) {
 				lstShift.add(new ShiftBean(obj.getShiftId(), obj.getShiftName()));
 			}
 		}
-		bean.setLstDepartMent(lstDepartMent);
-		bean.setLstLocation(lstLocation);
-		bean.setLstMealTime(lstMealTime);
-		bean.setLstMealType(lstMealType);
-		bean.setLstShift(lstShift);
-		return bean;
+		return lstShift;
 	}
 }

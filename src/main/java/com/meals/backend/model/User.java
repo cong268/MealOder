@@ -26,7 +26,7 @@ public class User {
 	private Date lastLogin;
 	@Column(name = "UserName", nullable = false)
 	private String userName;
-	@Column(name = "Password")
+	@Column(name = "Password" , nullable = false)
 	private String password;
 	@Column(name = "SelfRegistered")
 	private String selfRegistered;

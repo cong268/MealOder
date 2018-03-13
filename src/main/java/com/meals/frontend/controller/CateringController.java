@@ -12,8 +12,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.meals.backend.model.Staff;
 import com.meals.frontend.bean.DataBean;
 import com.meals.frontend.bean.MealsOrderBean;
+import com.meals.frontend.bean.StaffBean;
 import com.meals.frontend.service.MealsService;
 import com.meals.frontend.until.ConstanKey;
 
@@ -30,14 +32,22 @@ public class CateringController {
 	}
 
 	@RequestMapping(value = "/getMealByDepartment", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-	public DataBean getMealByDepartment(@RequestParam Integer departId) {
-		return mealsService.getLstOrderByDepart(departId);
+	public DataBean getMealByDepartment(HttpSession session,@RequestParam String date) {
+		Integer userId = (Integer) session.getAttribute(ConstanKey.USER_ID);
+		if (userId != null){
+			return mealsService.getLstOrderByDepart(userId, date);
+		}
+		return null;
 	}
 	
-//	@RequestMapping(value = "/getMealAppro", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-//	public DataBean getMealAppro(@RequestParam Integer userId) {
-////		return mealsService.getLstOrderByDepart(userId);
-//	}
+	@RequestMapping(value = "/getLstByOder", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public DataBean getLstByOder(HttpSession session,@RequestParam String date) {
+		Integer userId = (Integer) session.getAttribute(ConstanKey.USER_ID);
+		if (userId != null){
+			return mealsService.getLstByOder(userId, date);
+		}
+		return null;
+	}
 
 	@RequestMapping(value = "/saveCatering", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
 	public Boolean saveCatering(HttpSession session, @RequestBody List<MealsOrderBean> listMealOder,
