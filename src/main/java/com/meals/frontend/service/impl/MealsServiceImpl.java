@@ -83,6 +83,11 @@ public class MealsServiceImpl implements MealsService {
 
 	public DataBean getLstOrderByDepart(Integer userId, String date) {
 		DataBean bean = new DataBean();
+		List<MealTimeBean> lstMealTime = getMealTime();
+		List<MealBean> lstMealType = getLstMeal();
+		List<LocationBean> lstLocation = getLocation();
+		List<DepartmentBean> lstDepartMent = getDepartMent();
+		List<ShiftBean> lstShift = getShift();
 		Date dateTime = FunctionUtils.convertDateByFormatLocal(date, ConstanKey.FORMAT_DATE.DATE_TIME_FORMAT);
 		List<MealsOrderBean> lstOrder = new ArrayList<>();
 		Staff staff = staffDAO.getStaffByUserId(userId);
@@ -100,6 +105,11 @@ public class MealsServiceImpl implements MealsService {
 				}
 			}
 		}
+		bean.setLstDepartMent(lstDepartMent);
+		bean.setLstLocation(lstLocation);
+		bean.setLstMealTime(lstMealTime);
+		bean.setLstMealType(lstMealType);
+		bean.setLstShift(lstShift);
 		bean.setListMealOder(lstOrder);
 		return bean;
 	}
