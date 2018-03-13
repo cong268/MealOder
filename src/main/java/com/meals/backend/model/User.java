@@ -19,7 +19,7 @@ public class User {
 	@Column(name = "UserRoleId", nullable = false)
 	private Integer userRoleId;
 	@Column(name = "StaffId", nullable = false)
-	private Integer staffId;
+	private String staffId;
 	@Column(name = "Disable")
 	private Boolean disable;
 	@Column(name = "LastLogin")
@@ -47,11 +47,11 @@ public class User {
 		this.userRoleId = userRoleId;
 	}
 
-	public Integer getStaffId() {
+	public String getStaffId() {
 		return staffId;
 	}
 
-	public void setStaffId(Integer staffId) {
+	public void setStaffId(String staffId) {
 		this.staffId = staffId;
 	}
 

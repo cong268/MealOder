@@ -3,7 +3,7 @@ package com.meals.frontend.bean;
 public class UserBean {
 	private Integer userId;
 	private String userRole;
-	private Integer staffId;
+	private String staffId;
 	private Boolean disable;
 	private String userName;
 	private String password;
@@ -24,11 +24,11 @@ public class UserBean {
 		this.userRole = userRole;
 	}
 
-	public Integer getStaffId() {
+	public String getStaffId() {
 		return staffId;
 	}
 
-	public void setStaffId(Integer staffId) {
+	public void setStaffId(String staffId) {
 		this.staffId = staffId;
 	}
 
