@@ -51,29 +51,29 @@
                         <td data-title="'EmployeeCode'" sortable="'staffId'">{{row.staffId}}</td>
                         <td data-title="'Fullname'" sortable="'staffName'">{{row.staffName}}</td>
                         <td data-title="'Meal Time'" >
-                            <select ng-model="row.mealTime" class="form-control">
-                                <option ng-selected="row.mealTime == mealTimeObj.mealTimeId"
+                            <select ng-model="row.mealTimeId" class="form-control">
+                                <option ng-selected="row.mealTimeId == mealTimeObj.mealTimeId"
                                         ng-repeat="mealTimeObj in mealTimeArr"
                                         ng-value="mealTimeObj.mealTimeId">{{mealTimeObj.mealTimeName}}</option>
                             </select>
                         </td>
                         <td data-title="'Location'">
-                            <select ng-model="row.location" class="form-control">
-                                <option ng-selected="row.location == locationObj.locationId"
+                            <select ng-model="row.locationId" class="form-control">
+                                <option ng-selected="row.locationId == locationObj.locationId"
                                         ng-repeat="locationObj in locationArr"
                                         ng-value="locationObj.locationId">{{locationObj.locationName}}</option>
                             </select>
                         </td>
                         <td data-title="'Meal Type'">
-                            <select ng-model="row.meal" class="form-control">
-                                <option ng-selected="row.meal == mealObj.mealId"
+                            <select ng-model="row.mealId" class="form-control">
+                                <option ng-selected="row.mealId == mealObj.mealId"
                                         ng-repeat="mealObj in mealArr"
                                         ng-value="mealObj.mealId">{{mealObj.mealName}}</option>
                             </select>
                         </td>
                         <td data-title="'Shift'">
-                            <select ng-model="row.shift" class="form-control">
-                                <option ng-selected="row.shift == shilfObj.shiftId"
+                            <select ng-model="row.shiftId" class="form-control">
+                                <option ng-selected="row.shiftId == shilfObj.shiftId"
                                         ng-repeat="shilfObj in shilfArr"
                                         ng-value="shilfObj.shiftId">{{shilfObj.shiftName}}</option>
                             </select>

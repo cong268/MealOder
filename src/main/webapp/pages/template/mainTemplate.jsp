@@ -21,6 +21,7 @@
     <script type="text/javascript" src="<c:url value="/assets/js/jquery-1.11.3.min.js"></c:url>"></script>
     <script type="text/javascript" src="<c:url value="/assets/js/angular.min.js"></c:url>"></script>
     <script type="text/javascript" src="<c:url value="/assets/js/angular-click-outside.js"></c:url>"></script>
+    <script type="text/javascript" src="<c:url value="/assets/js/moment-with-locales.js"></c:url>"></script>
     <script type="text/javascript" src="<c:url value="/assets/lib/bootstrap/bootstrap.min.js"></c:url>"></script>
     <script type="text/javascript" src="<c:url value="/assets/lib/ng-table/ng-table.min.js"></c:url>"></script>
     <script type="text/javascript" src="<c:url value="/assets/js/app.js"></c:url>"></script>

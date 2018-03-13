@@ -9,11 +9,11 @@ myApp.controller('mealManagermentCtrl', ['$scope', 'NgTableParams', 'ngTableEven
     $scope.mealArr = [];
     $scope.shilfArr = [];
     $scope.arrData = [];
-
+    moment.locale('fr');
     $scope.initData = function(){
         $http({
             method: 'GET',
-            url: 'cateringController/getMealByDepartment?departId=' + 1,
+            url: 'cateringController/getMealByDepartment?date=' + moment(new Date()).format('DDMMYYYY'),
             responseType: 'json'
         }).then(function successCallback(response) {
             if(response.data){
@@ -80,7 +80,7 @@ myApp.controller('mealManagermentCtrl', ['$scope', 'NgTableParams', 'ngTableEven
         })
         $http({
             method: 'POST',
-            url: 'cateringController/saveCatering?date=12021995',
+            url: 'cateringController/saveCatering',
             responseType: 'json',
             headers: {
                 contentType: "application/json; charset=utf-8",
