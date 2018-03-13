@@ -30,7 +30,7 @@ public class CateringController {
 	}
 
 	@RequestMapping(value = "/getMealByDepartment", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-	public DataBean getMealByDepartment(HttpSession session, @RequestParam String date) {
+	public DataBean getMealByDepartment(HttpSession session, @RequestParam( value = "date") String date) {
 		Integer userId = (Integer) session.getAttribute(ConstanKey.USER_ID);
 		if (userId != null) {
 			return mealsService.getLstOrderByDepart(userId, date);
@@ -39,7 +39,7 @@ public class CateringController {
 	}
 
 	@RequestMapping(value = "/getLstByOder", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-	public DataBean getLstByOder(HttpSession session, @RequestParam String date) {
+	public DataBean getLstByOder(HttpSession session, @RequestParam( value = "date") String date) {
 		Integer userId = (Integer) session.getAttribute(ConstanKey.USER_ID);
 		if (userId != null) {
 			return mealsService.getLstByOder(userId, date);
@@ -48,12 +48,12 @@ public class CateringController {
 	}
 
 	@RequestMapping(value = "/getLstByStatus", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-	public DataBean getLstByStatus(@RequestParam String date) {
+	public DataBean getLstByStatus(@RequestParam( value = "date") String date) {
 		return mealsService.getLstByStatus(date);
 	}
 	
 	@RequestMapping(value = "/getLstByDate", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-	public DataBean getLstByDate(@RequestParam String fromDate, @RequestParam String toDate) {
+	public DataBean getLstByDate(@RequestParam( value = "fromDate") String fromDate, @RequestParam( value = "toDate") String toDate) {
 		return mealsService.getLstByDate(fromDate,toDate);
 	}
 
