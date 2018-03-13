@@ -18,56 +18,45 @@
     <link rel="stylesheet" href="<c:url value="/assets/css/carterAdminStyle.css"></c:url>">
     <script type="text/javascript" src="<c:url value="/assets/js/carterAdmin.js"></c:url>"></script>
 </head>
-<body ng-controller="carterAdminCtrl">
+<body ng-controller="carterAdminCtrl" ng-init="initData()">
 <div class="container wrap-cartering-managerment">
     <div class="row text-center" >
         <div class="col-md-12 col-lg-12 col-xs-12 col-md-12 wrap-meal-table">
             <div class="text-left wrap-header-page">
                 <h3>Cartering Employees</h3>
             </div>
-            <div class="row wrap-filter">
-                <div class="col-md-4 col-lg-4 col-xs-4 col-md-4">
-                    <div class="col-xs-6 vcenter"><span>Code filter</span>
-                    </div>
-                    <div class="col-xs-6">
-                        <input type="text" class="form-control" ng-model="tableParams.filter()['StaffId']">
-                    </div>
+            <div ng-cloak class="row wrap-filter col-md-5 col-lg-5 col-xs-5 col-md-5 pull-left">
+                <div class="col-sm-3 p-l-0 m-t-10 p-t-5">
+                    Date
                 </div>
-                <div class="col-md-4 col-lg-4 col-xs-4 col-md-4">
-                    <div class="col-xs-6 vcenter">
-                        <span>Name filter </span>
-                    </div>
-                    <div class="col-xs-6">
-                        <input type="text" class="form-control" ng-model="tableParams.filter()['StaffName']">
-                    </div>
+                <div class="col-sm-5 p-l-0 m-t-10">
+                    <input type="text" ng-model="dateFilter" id="date-filter-input" date-range-picker-single
+                           ng-model="dateFilter" class="form-control">
                 </div>
-                <div class="col-md-4 col-lg-4 col-xs-4 col-md-4">
-                    <div class="col-xs-6 vcenter">
-                        <span>Date filter</span>
-                    </div>
-                    <div class="col-xs-6">
-                        <input type="text" class="form-control" ng-model="tableParams.filter()['StaffDate']">
-                    </div>
+                <div class="col-sm-4 p-l-0 m-t-10">
+                    <div class="btn btn-success btn-default" ng-click="filterAccept()">Catering Date</div>
                 </div>
             </div>
-            <table ng-cloak ng-table="tableParams" class="table table-condensed table-bordered table-striped table-custom">
+            <table ng-cloak ng-table="tableParams" class="table table-condensed table-bordered table-striped table-custom"
+                   ng-class="{'nomarginbottom': tableParams.total() == 0}">
                 <tr ng-repeat="row in $data">
-                    <td data-title="'EmployeeCode'" sortable="'StaffId'">{{row.StaffId}}</td>
-                    <td data-title="'Fullname'" sortable="'StaffName'">{{row.StaffName}}</td>
+                    <td data-title="'EmployeeCode'" sortable="'staffId'">{{row.staffId}}</td>
+                    <td data-title="'Fullname'" sortable="'staffName'">{{row.staffName}}</td>
                     <td data-title="'Meal Time'" >
-                            <span ng-bind="row.MealTimeId">
-                            </span>
+                        {{getMealTimeName(row.mealTimeId)}}
                     </td>
                     <td data-title="'Location'">
-                            <span ng-bind="row.LocationId">
-                            </span>
+                        {{getLocationName(row.locationId)}}
                     </td>
                     <td data-title="'Meal Type'">
-                            <span ng-bind="row.MealId">
-                            </span>
+                        {{getMealName(row.mealId)}}
+                    </td>
+                    <td data-title="'Shift'">
+                        {{getShiftName(row.shiftId)}}
                     </td>
                 </tr>
             </table>
+            <div class="showNoData" ng-if="tableParams.total() == 0" ng-cloak>No data available</div>
         </div>
     </div>
 </div>

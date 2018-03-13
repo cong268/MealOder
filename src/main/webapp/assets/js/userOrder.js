@@ -1,5 +1,5 @@
 myApp.controller('userOrderCtrl', ['$scope',  '$http', function($scope, $http){
-    moment.locale('fr');
+    moment.locale('en');
     $scope.locationArr = [];
     $scope.mealTimeArr = [];
     $scope.mealArr = [];

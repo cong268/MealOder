@@ -9,7 +9,7 @@ myApp.controller('mealManagermentCtrl', ['$scope', 'NgTableParams', 'ngTableEven
     $scope.mealArr = [];
     $scope.shilfArr = [];
     $scope.arrData = [];
-    moment.locale('fr');
+    moment.locale('en');
     $scope.dateFilter = moment(new Date()).format('DD/MM/YYYY');
     $scope.initData = function(){
         var dateStr = moment($scope.dateFilter, 'DD/MM/YYYY').format('DDMMYYYY')

@@ -11,13 +11,39 @@ myApp.directive('dateRangePickerSingle', function() {
             setTimeout(function(){
                 element.daterangepicker({
                         singleDatePicker: true,
-                        showDropdowns: true
+                        showDropdowns: true,
+                        locale: {
+                            format: 'DD/MM/YYYY'
+                        },
                     },
                     function(start, end, label) {
                         $(this).val(moment(end).format('DD/MM/YYYY'));
                         ngModel.$setViewValue(moment(end).format('DD/MM/YYYY'));
                         ngModel.$render();
                     });
+            }, 500);
+        }
+    };
+});
+myApp.directive('dateRangePickerSingleMin', function() {
+    return{
+        restrict: 'A',
+        require:'ngModel',
+        link: function(scope, element, attribute, ngModel) {
+            setTimeout(function(){
+                element.daterangepicker({
+                    singleDatePicker: true,
+                    showDropdowns: true,
+                    locale: {
+                        format: 'DD/MM/YYYY'
+                    },
+                    minDate: moment().format('DD/MM/YYYY')
+                },
+                function(start, end, label) {
+                    $(this).val(moment(end).format('DD/MM/YYYY'));
+                    ngModel.$setViewValue(moment(end).format('DD/MM/YYYY'));
+                    ngModel.$render();
+                });
             }, 500);
         }
     };

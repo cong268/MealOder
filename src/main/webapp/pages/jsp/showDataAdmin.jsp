@@ -15,8 +15,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Cartering</title>
-    <link rel="stylesheet" href="<c:url value="/assets/css/carteredAdminStyle.css"></c:url>">
-    <script type="text/javascript" src="<c:url value="/assets/js/carteredAdmin.js"></c:url>"></script>
+    <link rel="stylesheet" href="<c:url value="/assets/css/showAdminStyle.css"></c:url>">
+    <script type="text/javascript" src="<c:url value="/assets/js/showAdmin.js"></c:url>"></script>
 </head>
 <body ng-controller="carteredAdminCtrl">
 <div class="container wrap-cartered-managerment">

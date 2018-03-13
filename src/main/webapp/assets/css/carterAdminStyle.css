@@ -13,8 +13,21 @@
     min-width: 700px;
 }
 .wrap-filter{
-    margin-bottom: 20px;
+    margin: 0 !important;
+    margin-bottom: 20px !important;
+    padding-left: 0!important;
+    padding-right: 0;
+    overflow: hidden !important;
 }
 .vcenter{
     line-height: 34px;
+}
+.nomarginbottom{
+    margin-bottom: 0 !important;
+}
+.showNoData{
+    height: 40px;
+    line-height: 40px;
+    width: 100%;
+    background: #e7e7e7;
 }
