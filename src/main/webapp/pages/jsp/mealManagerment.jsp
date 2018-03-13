@@ -47,7 +47,7 @@
                             <span>Date filter</span>
                         </div>
                         <div class="col-xs-6">
-                            <input type="text" class="form-control" ng-model="tableParams.filter()['StaffDate']">
+                            <input type="text" class="form-control" ng-model="tableParams.filter()['date']">
                         </div>
                     </div>
                 </div>

@@ -18,12 +18,12 @@ var myApp = angular.module('loginApplication',[]).controller('loginController', 
                 })
             })
             $scope.$watch('nsrpUsername', function(){
-                if($scope.nsrpUsername != ''){
+                if($scope.nsrpUsername != '' && $scope.nsrpUsername){
                     $('#nsrp-username').addClass('has-val');
                 }
             });
             $scope.$watch('nsrpPassword', function(){
-                if($scope.nsrpPassword != ''){
+                if($scope.nsrpPassword != '' && $scope.nsrpPassword){
                     $('#nsrp-password').addClass('has-val');
                 }
             })

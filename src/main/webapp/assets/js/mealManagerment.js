@@ -49,6 +49,7 @@ myApp.controller('mealManagermentCtrl', ['$scope', 'NgTableParams', 'ngTableEven
             MealTimeId: 1,
             LocationId: 1,
             MealId: 1,
+            date: '01/01/2017',
             Status: 0
         },
         {
@@ -57,6 +58,7 @@ myApp.controller('mealManagermentCtrl', ['$scope', 'NgTableParams', 'ngTableEven
             MealTimeId: 2,
             LocationId: 1,
             MealId: 2,
+            date: '01/01/2018',
             Status: 0
         },
         {
@@ -65,6 +67,7 @@ myApp.controller('mealManagermentCtrl', ['$scope', 'NgTableParams', 'ngTableEven
             MealTimeId: 1,
             LocationId: 1,
             MealId: 1,
+            date: '01/01/2018',
             Status: 0
         }
     ];
@@ -81,6 +84,7 @@ myApp.controller('mealManagermentCtrl', ['$scope', 'NgTableParams', 'ngTableEven
             MealTimeId: i%3 == 1 ? 1 : 2,
             LocationId: i%3 == 1 ? 1 : 3,
             MealId: i%3 == 1 ? 1 : 2,
+            date: i%3 == 1 ? '01/01/2016' :'01/01/2015',
             Status: i%3 == 1 ? 1 : 0
         })
     }
