@@ -30,15 +30,15 @@
                 </div>
                 <div ng-cloak class="row wrap-filter col-md-4 col-lg-4 col-xs-4 col-md-4 pull-left">
                     <div class="col-sm-4 p-l-0 m-t-10">
-                        <select ng-model="filterType" ng-init="filterType = 'code'" class="form-control">
+                        <select ng-model="filterType" ng-init="filterType = 'date'" class="form-control">
                             <option value="code">Code</option>
                             <option value="name">Name</option>
                             <option value="date">Date</option>
                         </select>
                     </div>
                     <div class="col-sm-6 p-l-0 m-t-10">
-                        <input type="text" ng-if="filterType == 'code'" id="codeFilter" class="form-control" ng-model="tableParams.filter()['StaffId']">
-                        <input type="text" ng-if="filterType == 'name'" id="nameFilter" class="form-control" ng-model="tableParams.filter()['StaffName']">
+                        <input type="text" ng-if="filterType == 'code'" id="codeFilter" class="form-control" ng-model="tableParams.filter()['staffId']">
+                        <input type="text" ng-if="filterType == 'name'" id="nameFilter" class="form-control" ng-model="tableParams.filter()['staffName']">
                         <input type="text" ng-if="filterType == 'date'" ng-model="dateFilter" class="form-control">
                     </div>
                     <div class="col-sm-2 p-l-0 m-t-10" ng-if="filterType == 'date'">
