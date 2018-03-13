@@ -95,6 +95,8 @@ myApp.controller('mealManagermentCtrl', ['$scope', 'NgTableParams', 'ngTableEven
     };
 
     $scope.submitMealManager = function(){
+        var dateInput = angular.element(document.getElementById("date-filter-input")).val();
+        var dateStr = moment(dateInput, 'DD/MM/YYYY').format('DDMMYYYY');
         var listMealSave = [];
         angular.forEach($scope.arrData, function(item){
             if(item.status == 1){
@@ -105,7 +107,7 @@ myApp.controller('mealManagermentCtrl', ['$scope', 'NgTableParams', 'ngTableEven
         })
         $http({
             method: 'POST',
-            url: 'cateringController/saveCatering',
+            url: 'cateringController/saveCatering?date=' + dateStr,
             responseType: 'json',
             headers: {
                 contentType: "application/json; charset=utf-8",
@@ -115,7 +117,7 @@ myApp.controller('mealManagermentCtrl', ['$scope', 'NgTableParams', 'ngTableEven
         }).then(function successCallback(response) {
             alert('SUCCESS');
         }, function errorCallback(response) {
-
+            alert('FAIL');
         })
     }
 

@@ -29,22 +29,22 @@
                 <div class="text-left wrap-header-page">
                     <h3>Meal Managerment <span class="badge" ng-cloak ng-bind="tableParams.total()"></span></h3>
                 </div>
-                <div ng-cloak class="row wrap-filter col-md-4 col-lg-4 col-xs-4 col-md-4 pull-left">
-                    <div class="col-sm-4 p-l-0 m-t-10">
+                <div ng-cloak class="row wrap-filter col-md-5 col-lg-5 col-xs-5 col-md-5 pull-left">
+                    <div class="col-sm-3 p-l-0 m-t-10">
                         <select ng-model="filterType" ng-init="filterType = 'date'" class="form-control">
                             <option value="code">Code</option>
                             <option value="name">Name</option>
                             <option value="date">Date</option>
                         </select>
                     </div>
-                    <div class="col-sm-6 p-l-0 m-t-10">
+                    <div class="col-sm-5 p-l-0 m-t-10">
                         <input type="text" ng-if="filterType == 'code'" id="codeFilter" class="form-control" ng-model="tableParams.filter()['staffId']">
                         <input type="text" ng-if="filterType == 'name'" id="nameFilter" class="form-control" ng-model="tableParams.filter()['staffName']">
-                        <input type="text" ng-if="filterType == 'date'" id="date-filter-input" date-range-picker-single date-data="dateFilter"
+                        <input type="text" ng-if="filterType == 'date'" id="date-filter-input" date-range-picker-single
                                ng-model="dateFilter" class="form-control">
                     </div>
-                    <div class="col-sm-2 p-l-0 m-t-10" ng-if="filterType == 'date'">
-                        <div class="btn btn-success btn-default" ng-click="filterAccept()">Filter</div>
+                    <div class="col-sm-4 p-l-0 m-t-10" ng-if="filterType == 'date'">
+                        <div class="btn btn-success btn-default" ng-click="filterAccept()">Catering Date</div>
                     </div>
                 </div>
                 <table ng-cloak ng-table="tableParams" class="table table-condensed table-bordered table-striped table-custom"

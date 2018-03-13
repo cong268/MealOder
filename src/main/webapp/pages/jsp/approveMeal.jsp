@@ -18,53 +18,71 @@
     <link rel="stylesheet" href="<c:url value="/assets/css/approveMealStyle.css"></c:url>">
     <script type="text/javascript" src="<c:url value="/assets/js/approveMeal.js"></c:url>"></script>
 </head>
-<body ng-controller="approveMealCtrl">
+<body ng-controller="approveMealCtrl" ng-init="initData()">
     <div class="container wrap-aprove-managerment">
         <div class="row text-center" >
             <div class="col-md-12 col-lg-12 col-xs-12 col-md-12 wrap-meal-table">
                 <div class="text-left wrap-header-page">
-                    <h3>Approve Meal</h3>
+                    <h3>Approve Meal <span class="badge" ng-cloak ng-bind="tableParams.total()"</h3>
                 </div>
-                <div ng-cloak class="row wrap-filter col-md-4 col-lg-4 col-xs-4 col-md-4 pull-left">
-                    <div class="col-sm-4 p-l-0 m-t-10">
-                        <%--<select ng-model="filterType" ng-init="filterType = 'code'" class="form-control">--%>
-                            <%--<option value="code">Code</option>--%>
-                            <%--<option value="name">Name</option>--%>
-                            <%--<option value="date">Date</option>--%>
-                        <%--</select>--%>
+                <div ng-cloak class="row wrap-filter col-md-5 col-lg-5 col-xs-5 col-md-5 pull-left">
+                    <div class="col-sm-3 p-l-0 m-t-10 p-t-5">
                         Date
                     </div>
-                    <div class="col-sm-6 p-l-0 m-t-10">
-                        <%--<input type="text" ng-if="filterType == 'code'" id="codeFilter" class="form-control" ng-model="tableParams.filter()['StaffId']">--%>
-                        <%--<input type="text" ng-if="filterType == 'name'" id="nameFilter" class="form-control" ng-model="tableParams.filter()['StaffName']">--%>
-                        <%--<input type="text" ng-if="filterType == 'date'" ng-model="dateFilter" class="form-control">--%>
-                            <input type="text" ng-model="dateFilter" class="form-control">
+                    <div class="col-sm-5 p-l-0 m-t-10">
+                            <input type="text" ng-model="dateFilter" id="date-filter-input" date-range-picker-single
+                                   ng-model="dateFilter" class="form-control">
                     </div>
-                    <div class="col-sm-2 p-l-0 m-t-10">
-                        <div class="btn btn-success btn-default">Filter</div>
+                    <div class="col-sm-4 p-l-0 m-t-10">
+                        <div class="btn btn-success btn-default" ng-click="filterAccept()">Catering Date</div>
                     </div>
                 </div>
-                <table ng-cloak ng-table="tableParams" class="table table-condensed table-bordered table-striped table-custom">
+                <table ng-cloak ng-table="tableParams" class="table table-condensed table-bordered table-striped table-custom"
+                       ng-class="{'nomarginbottom': tableParams.total() == 0}">
                     <tr ng-repeat="row in $data">
-                        <td data-title="'EmployeeCode'" sortable="'StaffId'">{{row.StaffId}}</td>
-                        <td data-title="'Fullname'" sortable="'StaffName'">{{row.StaffName}}</td>
+                        <td data-title="'EmployeeCode'" sortable="'staffId'">{{row.staffId}}</td>
+                        <td data-title="'Fullname'" sortable="'staffName'">{{row.staffName}}</td>
                         <td data-title="'Meal Time'" >
-                            <span ng-bind="row.MealTimeId">
-                            </span>
+                            {{getMealTimeName(row.mealTimeId)}}
                         </td>
                         <td data-title="'Location'">
-                            <span ng-bind="row.LocationId">
-                            </span>
+                            {{getLocationName(row.locationId)}}
                         </td>
                         <td data-title="'Meal Type'">
-                            <span ng-bind="row.MealId">
-                            </span>
+                            {{getMealName(row.mealId)}}
+                        </td>
+                        <td data-title="'Shift'">
+                            {{getShiftName(row.shiftId)}}
+                        </td>
+                        <td width="10" style="text-align: center" data-header="'checkbox.html'">
+                            <label class="control control-checkbox">
+                                <input type="checkbox"
+                                       ng-model="row.status"
+                                       ng-true-value="1"
+                                       ng-false-value="0"
+                                       ng-checked="row.status == 1">
+                                <div class="control-indicator"></div>
+                            </label>
                         </td>
                     </tr>
                 </table>
+                <div class="showNoData" ng-if="tableParams.total() == 0" ng-cloak>No data available</div>
             </div>
         </div>
+        <div class="row m-t-10">
+            <div class="btn btn-primary btn-lg pull-right m-r-15" ng-click="submitApprove()">APPROVE</div>
+        </div>
     </div>
+    <script type="text/ng-template" id="checkbox.html">
+        <label  class="control control-checkbox">
+            <input type="checkbox" ng-model="statusMeal" ng-true-value="true"
+                   ng-false-value="false"
+                   id="select_all"
+                   ng-checked="statusMeal === true"
+                   ng-model-options="{getterSetter: true}" ng-click="changeStatus(statusMeal)">
+            <div class="control-indicator"></div>
+        </label>
+    </script>
 </body>
 </c:if>
 <c:if test = "${sessionScope.userRole != 'Manager'}">
