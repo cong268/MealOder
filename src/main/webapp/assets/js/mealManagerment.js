@@ -84,22 +84,35 @@ myApp.controller('mealManagermentCtrl', ['$scope', 'NgTableParams', 'ngTableEven
             Status: i%3 == 1 ? 1 : 0
         })
     }
+    $scope.dataFiltered = [];
+    $scope.statusMeal = false;
 
     $scope.tableParams = new NgTableParams({
-        sorting: {
-            StaffId: "asc"
-        },
         page: 1,
         count: 10
     }, {
         dataset: $scope.arrData,
     });
-    $scope.dataFiltered = [];
+
     ngTableEventsChannel.onAfterReloadData(function(tableParams, filteredData){
-        $scope.dataFiltered = tableParams.data || filteredData.data;
-        console.log(tableParams);
+        $scope.dataFiltered = filteredData || tableParams.data;
+
+        var countStatus = 0, countNumber = 0;
+        angular.forEach($scope.dataFiltered, function(item){
+            if(item.Status == 1){
+                countStatus++;
+            }
+            countNumber++;
+        });
+        if(countNumber === countStatus && countNumber !== 0){
+            $scope.statusMeal = true;
+            $('#select_all').prop('checked',true);
+        } else {
+            $scope.statusMeal = false;
+            $('#select_all').prop('checked',false);
+        }
     });
-    $scope.statusMeal = false;
+
     $scope.changeStatus = function (statusMeal) {
         angular.forEach($scope.dataFiltered, function(item){
             if(statusMeal == true){
@@ -109,18 +122,4 @@ myApp.controller('mealManagermentCtrl', ['$scope', 'NgTableParams', 'ngTableEven
             }
         });
     };
-    $scope.$watch('dataFiltered', function(){
-        var countStatus = 0, countNumber = 0;
-        angular.forEach($scope.dataFiltered, function(item){
-            if(item.Status == 1){
-                countStatus++;
-            }
-            countNumber++;
-        });
-        if(countNumber == countStatus && countNumber != 0){
-            $scope.statusMeal = true;
-        } else {
-            $scope.statusMeal = false;
-        }
-    })
 }]);

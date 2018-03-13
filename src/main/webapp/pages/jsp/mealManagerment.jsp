@@ -51,7 +51,8 @@
                         </div>
                     </div>
                 </div>
-                <table ng-cloak ng-table="tableParams" class="table table-condensed table-bordered table-striped table-custom">
+                <table ng-cloak ng-table="tableParams" class="table table-condensed table-bordered table-striped table-custom"
+                       ng-class="{'nomarginbottom': tableParams.total() == 0}">
                     <tr ng-repeat="row in $data">
                         <td data-title="'EmployeeCode'" sortable="'StaffId'">{{row.StaffId}}</td>
                         <td data-title="'Fullname'" sortable="'StaffName'">{{row.StaffName}}</td>
@@ -76,7 +77,7 @@
                                         ng-value="meal.MealId">{{meal.MealName}}</option>
                             </select>
                         </td>
-                        <td width="10" style="text-align: center" header="'ng-table/headers/checkbox.html'">
+                        <td width="10" style="text-align: center" data-header="'checkbox.html'">
                             <label class="control control-checkbox">
                                 <input type="checkbox"
                                        ng-model="row.Status"
@@ -88,14 +89,18 @@
                         </td>
                     </tr>
                 </table>
+                <div class="showNoData" ng-if="tableParams.total() == 0" ng-cloak>No data available</div>
             </div>
         </div>
         <%--<pre style="margin-top: 20px;">{{arrData | json}}</pre>--%>
     </div>
-    <script type="text/ng-template" id="ng-table/headers/checkbox.html">
-        <label id="select_all" class="control control-checkbox">
-            <input type="checkbox" ng-model="statusMeal" ng-checked="statusMeal"
-                   ng-value="statusMeal" ng-change="changeStatus(statusMeal)">
+    <script type="text/ng-template" id="checkbox.html">
+        <label  class="control control-checkbox">
+            <input type="checkbox" ng-model="statusMeal" ng-true-value="true"
+                   ng-false-value="false"
+                   id="select_all"
+                   ng-checked="statusMeal === true"
+                   ng-model-options="{getterSetter: true}" ng-click="changeStatus(statusMeal)">
             <div class="control-indicator"></div>
         </label>
     </script>

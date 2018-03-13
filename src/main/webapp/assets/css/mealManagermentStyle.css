@@ -18,6 +18,15 @@
 .wrap-header-page{
     margin-bottom: 50px;
 }
+.nomarginbottom{
+    margin-bottom: 0 !important;
+}
+.showNoData{
+    height: 40px;
+    line-height: 40px;
+    width: 100%;
+    background: #e7e7e7;
+}
 /*CHECKBOX*/
 .control {
     display: inline-block;
