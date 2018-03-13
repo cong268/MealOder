@@ -145,3 +145,21 @@
     margin-bottom: 0;
   }
 }
+/* Let's get this party started */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 2px rgba(0,0,0,0.3);
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: rgba(217,217,217,0.8);
+    -webkit-box-shadow: inset 0 0 2px rgba(0,0,0,0.5);
+}
+::-webkit-scrollbar-thumb:window-inactive {
+    background: rgba(217,217,217,0.8);
+}

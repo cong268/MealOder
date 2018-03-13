@@ -17,6 +17,7 @@
     <link rel="stylesheet" href="<c:url value="/assets/lib/bootstrap/bootstrap.min.css"></c:url>">
     <link rel="stylesheet" href="<c:url value="/assets/lib/ng-table/ng-table.min.css"></c:url>">
     <link rel="stylesheet" href="<c:url value="/assets/css/mainTemplayeStyle.css"></c:url>">
+    <link rel="stylesheet" type="text/css" href="<c:url value="/assets/lib/css/util-css.css"></c:url>">
     <script type="text/javascript" src="<c:url value="/assets/js/jquery-1.11.3.min.js"></c:url>"></script>
     <script type="text/javascript" src="<c:url value="/assets/js/angular.min.js"></c:url>"></script>
     <script type="text/javascript" src="<c:url value="/assets/js/angular-click-outside.js"></c:url>"></script>

@@ -27,4 +27,8 @@
         <put-attribute name="titlePage" value="Cartered"/>
         <put-attribute name="mainContent" value="/pages/jsp/showDataAdmin.jsp"/>
     </definition>
+    <definition name="userOrder" extends="mainTemplate">
+        <put-attribute name="titlePage" value="Meal Order"/>
+        <put-attribute name="mainContent" value="/pages/jsp/userOrder.jsp"/>
+    </definition>
 </tiles-definitions>

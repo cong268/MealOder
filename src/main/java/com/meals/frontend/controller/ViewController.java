@@ -20,6 +20,13 @@ public class ViewController {
         return model;
     }
 
+    @RequestMapping("userOrder")
+    public ModelAndView userOrder(){
+        ModelAndView model = new ModelAndView("userOrder");
+        return model;
+    }
+
+
     @RequestMapping("carterAdmin")
     public ModelAndView carteredAdmin(){
         ModelAndView model = new ModelAndView("carterAdmin");
