@@ -39,6 +39,7 @@
             </div>
             <div class="collapse navbar-collapse" id="nsrp-navber-collapse">
                 <ul class="nav navbar-nav">
+                    <c:if test = "${sessionScope.userRole == 'Manager'}">
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Meal Managerment <span class="caret"></span></a>
                         <ul class="dropdown-menu">
@@ -46,12 +47,16 @@
                             <li><a href="approveMeal">Approve Meal</a></li>
                         </ul>
                     </li>
+                    </c:if>
+                    <c:if test = "${sessionScope.userRole == 'Admin'}">
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Personal Managerment <span class="caret"></span></a>
                         <ul class="dropdown-menu">
                             <li><a href="registerUser">Register User</a></li>
                         </ul>
                     </li>
+                    </c:if>
+                    <c:if test = "${sessionScope.userRole == 'Admin'}">
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Configuration <span class="caret"></span></a>
                         <ul class="dropdown-menu">
@@ -59,6 +64,7 @@
                             <li><a href="showDataAdmin">Cartered action</a></li>
                         </ul>
                     </li>
+                    </c:if>
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Contact <span class="caret"></span></a>
                         <ul class="dropdown-menu">

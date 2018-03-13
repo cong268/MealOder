@@ -45,6 +45,7 @@ public class LoginController {
 			request.getSession().setAttribute(ConstanKey.USER_ID, userBean.getUserId());
 			request.getSession().setAttribute(ConstanKey.USER_NAME, userBean.getUserName());
 			request.getSession().setAttribute(ConstanKey.STAFF_ID, userBean.getStaffId());
+			request.getSession().setAttribute(ConstanKey.USER_ROLE, userBean.getUserRole());
 			String userRole = userBean.getUserRole();
 			if (userRole != null) {
 				request.getSession().setAttribute(ConstanKey.USER_ROLE, userRole);
