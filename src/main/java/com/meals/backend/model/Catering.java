@@ -1,5 +1,6 @@
 package com.meals.backend.model;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -9,7 +10,11 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "catering")
-public class Catering {
+public class Catering implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	@Id
 	@Column(name = "StaffId", nullable = false)
 	private String staffId;
@@ -17,12 +22,14 @@ public class Catering {
 	private Integer mealId;
 	@Column(name = "LocationId")
 	private Integer locationId;
+	@Id
 	@Column(name = "MealTimeId", nullable = false)
-	private Integer mealTimeId;
+	private int mealTimeId;
 	@Column(name = "ShiftId", nullable = false)
 	private Integer shiftId;
 	@Column(name = "DepartId", nullable = false)
 	private Integer departId;
+	@Id
 	@Column(name = "CateringDate", nullable = false, columnDefinition = "DATE")
 	private Date cateringDate;
 	@Column(name = "Catered", nullable = false)

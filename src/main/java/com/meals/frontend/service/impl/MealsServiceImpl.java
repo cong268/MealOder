@@ -135,20 +135,29 @@ public class MealsServiceImpl implements MealsService {
 		Date cateringTime = new Date();
 		if (listMealOder != null && !listMealOder.isEmpty()) {
 			for (MealsOrderBean obj : listMealOder) {
-				Catering dto = new Catering();
-				dto.setStaffId(obj.getStaffId());
-				dto.setMealId(obj.getMealId());
-				dto.setMealTimeId(obj.getMealTimeId());
-				dto.setLocationId(obj.getLocationId());
-				dto.setShiftId(obj.getShiftId());
-				dto.setDepartId(obj.getDepartmentId());
-				dto.setCateringDate(cateringDate);
-				dto.setCateringTime(cateringTime);
+				Catering dto = cateringDAO.getByStaffId(obj.getStaffId(), cateringDate);
+				if (dto == null){
+					dto = new Catering();
+					dto.setStaffId(obj.getStaffId());
+					dto.setDepartId(obj.getDepartmentId());
+					dto.setMealId(obj.getMealId());
+					dto.setMealTimeId(obj.getMealTimeId());
+					dto.setLocationId(obj.getLocationId());
+					dto.setShiftId(obj.getShiftId());
+					dto.setCateringDate(cateringDate);
+					dto.setCateringTime(cateringTime);
+				}
 				if (userRole != null && userRole.equals(ConstanKey.ROLE.ROLE_ADMIN)) {
 					dto.setCatered(true);
-				} else if (userRole != null && userRole.equals(ConstanKey.ROLE.ROLE_MANAGER)) {
 					dto.setStatus(true);
+					dto.setOrdered(true);
+				} else if (userRole != null && userRole.equals(ConstanKey.ROLE.ROLE_MANAGER)) {
+					dto.setCatered(false);
+					dto.setStatus(true);
+					dto.setOrdered(true);
 				} else {
+					dto.setCatered(false);
+					dto.setStatus(false);
 					dto.setOrdered(true);
 				}
 				cateringDAO.saveOrUpdate(dto);
