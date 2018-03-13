@@ -26,27 +26,66 @@
             </div>
             <div class="form-horizontal">
                 <div class="form-group">
-                    <label for="input1" class="col-sm-4 control-label">Varrible 1</label>
+                    <span class="col-sm-4 control-label">Staff Id</span>
                     <div class="col-sm-8">
-                        <input type="Text" class="form-control" id="input1" >
+                        <span class="form-control" ng-bind="arrData[0].staffId"></span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <span class="col-sm-4 control-label">Staff Name</span>
+                    <div class="col-sm-8">
+                        <span class="form-control" ng-bind="arrData[0].staffName"></span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <span class="col-sm-4 control-label">Department</span>
+                    <div class="col-sm-8">
+                        <span class="form-control">{{getDepartmentName(arrData[0].departmentId)}}</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <span class="col-sm-4 control-label">Meal type</span>
+                    <div class="col-sm-8">
+                        <select ng-model="arrData[0].mealId" class="form-control">
+                            <option ng-selected="arrData[0].mealId == mealObj.mealId"
+                                    ng-repeat="mealObj in mealArr"
+                                    ng-value="mealObj.mealId">{{mealObj.mealName}}</option>
+                        </select>
                     </div>
                 </div>
                 <div class="form-group">
                     <span class="col-sm-4 control-label">Meal time</span>
                     <div class="col-sm-8">
-                        <select ng-model="userOrder.MealTimeId" class="form-control">
-                            <option ng-selected="row.MealTimeId == mealTime.MealTimeId"
-                                    ng-repeat="mealTime in mealTimeArr"
-                                    ng-value="mealTime.MealTimeId">{{mealTime.MealTimeName}}</option>
+                        <select ng-model="arrData[0].mealTimeId" class="form-control">
+                            <option ng-selected="arrData[0].mealTimeId == mealTimeObj.mealTimeId"
+                                    ng-repeat="mealTimeObj in mealTimeArr"
+                                    ng-value="mealTimeObj.mealTimeId">{{mealTimeObj.mealTimeName}}</option>
                         </select>
                     </div>
                 </div>
-                <%--<div class="form-group">--%>
-                    <%--<label for="input1" class="col-sm-4 control-label">Varrible 1</label>--%>
-                    <%--<div class="col-sm-8">--%>
-                        <%--<input type="Text" class="form-control" id="input1" >--%>
-                    <%--</div>--%>
-                <%--</div>--%>
+                <div class="form-group">
+                    <span class="col-sm-4 control-label">Shift</span>
+                    <div class="col-sm-8">
+                        <select ng-model="arrData[0].shiftId" class="form-control">
+                            <option ng-selected="arrData[0].shiftId == shilfObj.shiftId"
+                                    ng-repeat="shilfObj in shilfArr"
+                                    ng-value="shilfObj.shiftId">{{shilfObj.shiftName}}</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <span class="col-sm-4 control-label">Location</span>
+                    <div class="col-sm-8">
+                        <select ng-model="arrData[0].locationId" class="form-control">
+                            <option ng-selected="arrData[0].locationId == locationObj.locationId"
+                                    ng-repeat="locationObj in locationArr"
+                                    ng-value="locationObj.locationId">{{locationObj.locationName}}</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="row text-right p-r-15">
+                <div class="btn btn-success btn-lg" ng-click="orderingCallback()">ORDER</div>
             </div>
         </div>
     </div>
