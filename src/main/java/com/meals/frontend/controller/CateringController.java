@@ -12,10 +12,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.meals.backend.model.Staff;
 import com.meals.frontend.bean.DataBean;
 import com.meals.frontend.bean.MealsOrderBean;
-import com.meals.frontend.bean.StaffBean;
 import com.meals.frontend.service.MealsService;
 import com.meals.frontend.until.ConstanKey;
 
@@ -32,21 +30,31 @@ public class CateringController {
 	}
 
 	@RequestMapping(value = "/getMealByDepartment", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-	public DataBean getMealByDepartment(HttpSession session,@RequestParam String date) {
+	public DataBean getMealByDepartment(HttpSession session, @RequestParam String date) {
 		Integer userId = (Integer) session.getAttribute(ConstanKey.USER_ID);
-		if (userId != null){
+		if (userId != null) {
 			return mealsService.getLstOrderByDepart(userId, date);
 		}
 		return null;
 	}
-	
+
 	@RequestMapping(value = "/getLstByOder", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-	public DataBean getLstByOder(HttpSession session,@RequestParam String date) {
+	public DataBean getLstByOder(HttpSession session, @RequestParam String date) {
 		Integer userId = (Integer) session.getAttribute(ConstanKey.USER_ID);
-		if (userId != null){
+		if (userId != null) {
 			return mealsService.getLstByOder(userId, date);
 		}
 		return null;
+	}
+
+	@RequestMapping(value = "/getLstByStatus", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public DataBean getLstByStatus(@RequestParam String date) {
+		return mealsService.getLstByStatus(date);
+	}
+	
+	@RequestMapping(value = "/getLstByDate", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public DataBean getLstByDate(@RequestParam String fromDate, @RequestParam String toDate) {
+		return mealsService.getLstByDate(fromDate,toDate);
 	}
 
 	@RequestMapping(value = "/saveCatering", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)

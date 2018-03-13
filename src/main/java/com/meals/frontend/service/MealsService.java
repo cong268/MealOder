@@ -13,5 +13,7 @@ public interface MealsService {
 	DataBean getMealByStaff(Integer userId);
 	DataBean getLstOrderByDepart(Integer departId, String date);
 	DataBean getLstByOder(Integer userId, String date);
+	DataBean getLstByStatus (String date);
+	DataBean getLstByDate (String fromDate,String toDate);
 	Boolean saveCatering(String userRole, List<MealsOrderBean> listMealOder, String date);
 }
