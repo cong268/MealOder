@@ -30,11 +30,14 @@
                         Date
                     </div>
                     <div class="col-sm-5 p-l-0 m-t-10">
+                        <div class="input-group">
                             <input type="text" ng-model="dateFilter" id="date-filter-input" date-range-picker-single
                                    ng-model="dateFilter" class="form-control">
+                            <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span>
+                        </div>
                     </div>
                     <div class="col-sm-4 p-l-0 m-t-10">
-                        <div class="btn btn-success btn-default" ng-click="filterAccept()">Catering Date</div>
+                        <div class="btn btn-success btn-default" ng-click="filterAccept()">Catering Date<span class="glyphicon glyphicon-search p-l-10"></span></div>
                     </div>
                 </div>
                 <table ng-cloak ng-table="tableParams" class="table table-condensed table-bordered table-striped table-custom"

@@ -36,15 +36,21 @@
                 <div class="col-sm-3 p-l-0 m-t-10">
                     <input type="text" ng-if="filterType == 'code'" id="codeFilter" class="form-control" ng-model="tableParams.filter()['staffId']">
                     <input type="text" ng-if="filterType == 'name'" id="nameFilter" class="form-control" ng-model="tableParams.filter()['staffName']">
-                    <input type="text" ng-if="filterType == 'date'" id="date-filter-from" date-range-picker-single
-                           ng-model="fromDate" class="form-control">
+                    <div class="input-group" ng-if="filterType == 'date'">
+                        <input type="text" ng-if="filterType == 'date'" id="date-filter-from" date-range-picker-single
+                               ng-model="fromDate" class="form-control">
+                        <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span>
+                    </div>
                 </div>
                 <div class="col-sm-3 p-l-0 m-t-10" ng-if="filterType == 'date'">
-                    <input type="text" id="date-filter-to" date-range-picker-single
-                           ng-model="toDate" class="form-control">
+                    <div class="input-group" ng-if="filterType == 'date'">
+                        <input type="text" id="date-filter-to" date-range-picker-single
+                               ng-model="toDate" class="form-control">
+                        <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span>
+                    </div>
                 </div>
                 <div class="col-sm-3 p-l-0 m-t-10" ng-if="filterType == 'date'">
-                    <div class="btn btn-success btn-default" ng-click="filterAccept()">Catering Date</div>
+                    <div class="btn btn-success btn-default" ng-click="filterAccept()">Catering Date<span class="glyphicon glyphicon-search p-l-10"></span></div>
                 </div>
             </div>
             <table ng-cloak ng-table="tableParams" class="table table-condensed table-bordered table-striped table-custom"
@@ -70,7 +76,7 @@
         </div>
     </div>
     <div class="row m-t-10">
-        <div class="btn btn-success btn-lg pull-right m-r-15" ng-click="exportData()">EXPORT DATA</div>
+        <div class="btn btn-success btn-lg pull-right m-r-15" ng-click="exportData()">EXPORT DATA<span class="glyphicon glyphicon-download-alt p-l-10"></span></div>
     </div>
 </div>
 </body>

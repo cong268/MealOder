@@ -40,11 +40,14 @@
                     <div class="col-sm-5 p-l-0 m-t-10">
                         <input type="text" ng-if="filterType == 'code'" id="codeFilter" class="form-control" ng-model="tableParams.filter()['staffId']">
                         <input type="text" ng-if="filterType == 'name'" id="nameFilter" class="form-control" ng-model="tableParams.filter()['staffName']">
-                        <input type="text" ng-if="filterType == 'date'" id="date-filter-input" date-range-picker-single
-                               ng-model="dateFilter" class="form-control">
+                        <div class="input-group" ng-if="filterType == 'date'">
+                            <input type="text" ng-if="filterType == 'date'" id="date-filter-input" date-range-picker-single
+                                   ng-model="dateFilter" class="form-control">
+                            <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span>
+                        </div>
                     </div>
                     <div class="col-sm-4 p-l-0 m-t-10" ng-if="filterType == 'date'">
-                        <div class="btn btn-success btn-default" ng-click="filterAccept()">Catering Date</div>
+                        <div class="btn btn-success btn-default" ng-click="filterAccept()">Catering Date<span class="glyphicon glyphicon-search p-l-10"></span></div>
                     </div>
                 </div>
                 <table ng-cloak ng-table="tableParams" class="table table-condensed table-bordered table-striped table-custom"

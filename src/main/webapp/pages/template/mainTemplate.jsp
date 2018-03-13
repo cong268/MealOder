@@ -84,7 +84,7 @@
                         <ul class="dropdown-menu">
                             <li><a href="#">Username: ${sessionScope.userName}</a></li>
                             <li role="separator" class="divider"></li>
-                            <li><a href="logout">Logout</a></li>
+                            <li><a href="logout">Logout<span class="glyphicon glyphicon-log-out p-l-10"></span></a></li>
                         </ul>
                     </li>
                 </ul>
