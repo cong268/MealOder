@@ -292,8 +292,9 @@ public class MealsServiceImpl implements MealsService {
 		List<MealsOrderBean> lstOder = new ArrayList<>();
 		Date fromTime = FunctionUtils.convertDateByFormatLocal(fromDate, ConstanKey.FORMAT_DATE.DATE_TIME_FORMAT);
 		Date toTime = FunctionUtils.convertDateByFormatLocal(toDate, ConstanKey.FORMAT_DATE.DATE_TIME_FORMAT);
+		Date tomorrow = new Date(toTime.getTime() + (1000 * 60 * 60 * 24));
 		if(fromTime != null && toTime != null){
-			List<Catering> lst = cateringDAO.getLstByDate(fromTime, toTime);
+			List<Catering> lst = cateringDAO.getLstByDate(fromTime, tomorrow);
 			if (lst != null && !lst.isEmpty()) {
 				for (Catering catering : lst) {
 					Staff obj = staffDAO.getByStaff(catering.getStaffId());
@@ -318,6 +319,41 @@ public class MealsServiceImpl implements MealsService {
 		bean.setLstMealType(lstMealType);
 		bean.setLstShift(lstShift);
 		return bean;
+	}
+	
+	@Override
+	public Boolean saveStaff(StaffBean bean) {
+		if (bean != null){
+			Staff staff = new Staff();
+			staff.setStaffId(bean.getStaffId());
+			staff.setStaffName(bean.getStaffName());
+			staff.setAddress(bean.getAddress());
+			staff.setCardId(bean.getCardId());
+			staff.setDeptId(bean.getDepartId());
+			staff.setDisable(false);
+			staff.setEmail(bean.getEmail());
+			staff.setGender(bean.getGender());
+			staff.setJobTitle(bean.getJobTitle());
+			staff.setPhoneNum(bean.getPhoneNum());
+			return staffDAO.saveStaff(staff);
+		}
+		return null;
+	}
+	
+	@Override
+	public Boolean saveUser(UserBean bean) {
+		if (bean != null) {
+			User user = new User();
+			user.setStaffId(bean.getStaffId());
+			user.setDisable(false);
+			user.setPassword(bean.getPassword());
+			user.setStaffId(bean.getStaffId());
+			user.setUserId(bean.getUserId());
+			user.setUserName(bean.getUserRole());
+			user.setUserRoleId(bean.getUserRoleId());
+			return userDAO.saveUser(user);
+		}
+		return null;
 	}
 	
 	private List<MealTimeBean> getMealTime() {
@@ -374,4 +410,5 @@ public class MealsServiceImpl implements MealsService {
 		}
 		return lstShift;
 	}
+
 }

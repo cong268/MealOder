@@ -7,6 +7,7 @@ public class UserBean {
 	private Boolean disable;
 	private String userName;
 	private String password;
+	private Integer userRoleId;
 
 	public Integer getUserId() {
 		return userId;
@@ -54,6 +55,14 @@ public class UserBean {
 
 	public void setPassword(String password) {
 		this.password = password;
+	}
+
+	public Integer getUserRoleId() {
+		return userRoleId;
+	}
+
+	public void setUserRoleId(Integer userRoleId) {
+		this.userRoleId = userRoleId;
 	}
 
 }
