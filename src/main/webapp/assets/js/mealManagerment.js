@@ -62,7 +62,8 @@ myApp.controller('mealManagermentCtrl', ['$scope', 'NgTableParams', 'ngTableEven
     }
 
     $scope.filterAccept = function(){
-        var dateStr = moment($scope.dateFilter, 'DD/MM/YYYY').format('DDMMYYYY')
+        var dateInput = angular.element(document.getElementById("date-filter-input")).val();
+        var dateStr = moment(dateInput, 'DD/MM/YYYY').format('DDMMYYYY')
         $http({
             method: 'GET',
             url: 'cateringController/getMealByDepartment?date=' + dateStr,

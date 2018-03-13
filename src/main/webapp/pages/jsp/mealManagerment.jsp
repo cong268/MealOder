@@ -40,7 +40,7 @@
                     <div class="col-sm-6 p-l-0 m-t-10">
                         <input type="text" ng-if="filterType == 'code'" id="codeFilter" class="form-control" ng-model="tableParams.filter()['staffId']">
                         <input type="text" ng-if="filterType == 'name'" id="nameFilter" class="form-control" ng-model="tableParams.filter()['staffName']">
-                        <input type="text" ng-if="filterType == 'date'" date-range-picker-single
+                        <input type="text" ng-if="filterType == 'date'" id="date-filter-input" date-range-picker-single date-data="dateFilter"
                                ng-model="dateFilter" class="form-control">
                     </div>
                     <div class="col-sm-2 p-l-0 m-t-10" ng-if="filterType == 'date'">
