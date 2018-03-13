@@ -27,6 +27,7 @@ import com.meals.frontend.bean.LocationBean;
 import com.meals.frontend.bean.MealBean;
 import com.meals.frontend.bean.MealTimeBean;
 import com.meals.frontend.bean.MealsOrderBean;
+import com.meals.frontend.bean.RoleBean;
 import com.meals.frontend.bean.ShiftBean;
 import com.meals.frontend.bean.StaffBean;
 import com.meals.frontend.bean.UserBean;
@@ -409,6 +410,21 @@ public class MealsServiceImpl implements MealsService {
 			}
 		}
 		return lstShift;
+	}
+
+	@Override
+	public List<RoleBean> getAllRole() {
+		List<RoleBean> lstAll = new ArrayList<>();
+		List<UserRole> lst = constantDAO.getAllRole();
+		if (lst != null){
+			for (UserRole obj : lst){
+				RoleBean bean = new RoleBean();
+				bean.setUserRoleID(obj.getUserRoleID());
+				bean.setName(obj.getName());
+				lstAll.add(bean);
+			}
+		}
+		return lstAll;
 	}
 
 }

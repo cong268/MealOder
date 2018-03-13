@@ -77,4 +77,11 @@ public class ConstantDAOImpl implements ConstantDAO {
 		Query query = session.createQuery("FROM Shift");
 		return query.list();
 	}
+
+	@Override
+	public List<UserRole> getAllRole() {
+		Session session = sessionFactory.getCurrentSession();
+		Query query = session.createQuery("FROM UserRole");
+		return query.list();
+	}
 }

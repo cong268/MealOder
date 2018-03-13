@@ -1,5 +1,7 @@
 package com.meals.frontend.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.meals.frontend.bean.RoleBean;
 import com.meals.frontend.bean.StaffBean;
 import com.meals.frontend.bean.UserBean;
 import com.meals.frontend.service.MealsService;
@@ -34,5 +37,10 @@ public class StaffController {
 	@RequestMapping(value = "/saveUser", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
 	public Boolean saveUser(@RequestBody UserBean bean) {
 		return mealsService.saveUser(bean);
+	}
+	
+	@RequestMapping(value = "/getAllRole", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public List<RoleBean> getALlRole() {
+		return mealsService.getAllRole();
 	}
 }

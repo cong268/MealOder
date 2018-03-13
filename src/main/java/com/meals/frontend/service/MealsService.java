@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.meals.frontend.bean.DataBean;
 import com.meals.frontend.bean.MealsOrderBean;
+import com.meals.frontend.bean.RoleBean;
 import com.meals.frontend.bean.StaffBean;
 import com.meals.frontend.bean.UserBean;
 
@@ -18,4 +19,5 @@ public interface MealsService {
 	Boolean saveCatering(String userRole, List<MealsOrderBean> listMealOder, String date);
 	Boolean saveStaff (StaffBean bean);
 	Boolean saveUser (UserBean bean);
+	List<RoleBean> getAllRole();
 }
