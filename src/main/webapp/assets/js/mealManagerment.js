@@ -10,10 +10,12 @@ myApp.controller('mealManagermentCtrl', ['$scope', 'NgTableParams', 'ngTableEven
     $scope.shilfArr = [];
     $scope.arrData = [];
     moment.locale('fr');
+    $scope.dateFilter = moment(new Date()).format('DD/MM/YYYY');
     $scope.initData = function(){
+        var dateStr = moment($scope.dateFilter, 'DD/MM/YYYY').format('DDMMYYYY')
         $http({
             method: 'GET',
-            url: 'cateringController/getMealByDepartment?date=' + moment(new Date()).format('DDMMYYYY'),
+            url: 'cateringController/getMealByDepartment?date=' + dateStr,
             responseType: 'json'
         }).then(function successCallback(response) {
             if(response.data){
@@ -56,6 +58,28 @@ myApp.controller('mealManagermentCtrl', ['$scope', 'NgTableParams', 'ngTableEven
                 $scope.statusMeal = false;
                 $('#select_all').prop('checked',false);
             }
+        });
+    }
+
+    $scope.filterAccept = function(){
+        var dateStr = moment($scope.dateFilter, 'DD/MM/YYYY').format('DDMMYYYY')
+        $http({
+            method: 'GET',
+            url: 'cateringController/getMealByDepartment?date=' + dateStr,
+            responseType: 'json'
+        }).then(function successCallback(response) {
+            if(response.data){
+                dataAllPage = response.data;
+                dataAllTable = dataAllPage.listMealOder;
+                $scope.locationArr = dataAllPage.lstLocation;
+                $scope.mealTimeArr = dataAllPage.lstMealTime;
+                $scope.mealArr = dataAllPage.lstMealType;
+                $scope.shilfArr = dataAllPage.lstShift;
+                $scope.arrData = angular.copy(dataAllTable);
+                drawTable();
+            }
+        }, function errorCallback(response) {
+            $scope.loadingPerformancePatri = false;
         });
     }
 

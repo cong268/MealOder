@@ -39,10 +39,11 @@
                     <div class="col-sm-6 p-l-0 m-t-10">
                         <input type="text" ng-if="filterType == 'code'" id="codeFilter" class="form-control" ng-model="tableParams.filter()['staffId']">
                         <input type="text" ng-if="filterType == 'name'" id="nameFilter" class="form-control" ng-model="tableParams.filter()['staffName']">
-                        <input type="text" ng-if="filterType == 'date'" ng-model="dateFilter" class="form-control">
+                        <input type="text" ng-if="filterType == 'date'" date-range-picker-single
+                               ng-model="dateFilter" class="form-control">
                     </div>
                     <div class="col-sm-2 p-l-0 m-t-10" ng-if="filterType == 'date'">
-                        <div class="btn btn-success btn-default">Filter</div>
+                        <div class="btn btn-success btn-default" ng-click="filterAccept()">Filter</div>
                     </div>
                 </div>
                 <table ng-cloak ng-table="tableParams" class="table table-condensed table-bordered table-striped table-custom"
@@ -95,9 +96,6 @@
         </div>
         <div class="row m-t-10">
             <div class="btn btn-primary btn-lg pull-right m-r-15" ng-click="submitMealManager()">SUBMIT</div>
-            <div class="btn btn-danger btn-lg pull-right m-r-15">
-                CANCEL
-            </div>
         </div>
     </div>
     <script type="text/ng-template" id="checkbox.html">
