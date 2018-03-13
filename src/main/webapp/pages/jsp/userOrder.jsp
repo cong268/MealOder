@@ -38,6 +38,15 @@
                     </div>
                 </div>
                 <div class="form-group">
+                    <span class="col-sm-4 control-label">Catering Date</span>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control"
+                               ng-model="dateOrder"
+                               id="date-order-input"
+                               date-range-picker-single-min/>
+                    </div>
+                </div>
+                <div class="form-group">
                     <span class="col-sm-4 control-label">Department</span>
                     <div class="col-sm-8">
                         <span class="form-control">{{getDepartmentName(arrData[0].departmentId)}}</span>
@@ -94,7 +103,7 @@
 <c:if test = "${sessionScope.userRole != 'Employee'}">
     <div class="container">
         <h1>ACCESS DENIED <span class="badge p-t-8 p-b-8 p-l-8 p-r-8">404</span></h1>
-        <h3>PLEASE CONTACT TO ADMIN TO MORE INFORMATION !</h3>
+        <h3>You not have permission to access this page !</h3>
     </div>
 </c:if>
 </html>

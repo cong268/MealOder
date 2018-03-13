@@ -1,11 +1,12 @@
 myApp.controller('userOrderCtrl', ['$scope',  '$http', function($scope, $http){
-
+    moment.locale('fr');
     $scope.locationArr = [];
     $scope.mealTimeArr = [];
     $scope.mealArr = [];
     $scope.shilfArr = [];
     $scope.arrData = [];
     $scope.lstDepartMent = [];
+    $scope.dateOrder = moment(new Date()).format('DD/MM/YYYY');
     $scope.initData = function(){
         $http({
             method: 'GET',
@@ -23,7 +24,6 @@ myApp.controller('userOrderCtrl', ['$scope',  '$http', function($scope, $http){
                 $scope.arrData = angular.copy(dataAllTable);
             }
         }, function errorCallback(response) {
-            $scope.loadingPerformancePatri = false;
         });
     }
     $scope.getDepartmentName = function(departmentId){
@@ -36,10 +36,11 @@ myApp.controller('userOrderCtrl', ['$scope',  '$http', function($scope, $http){
        return deptNameFind;
     }
     $scope.orderingCallback = function(){
-        console.log($scope.arrData);
+        var dateInput = angular.element(document.getElementById("date-order-input")).val();
+        var dateStr = moment(dateInput, 'DD/MM/YYYY').format('DDMMYYYY');
         $http({
             method: 'POST',
-            url: 'cateringController/saveCatering?date=' +moment(new Date()).format('DDMMYYYY'),
+            url: 'cateringController/saveCatering?date=' + dateStr,
             responseType: 'json',
             headers: {
                 contentType: "application/json; charset=utf-8",

@@ -114,7 +114,7 @@
 <c:if test = "${sessionScope.userRole != 'Manager'}">
     <div class="container">
         <h1>ACCESS DENIED <span class="badge p-t-8 p-b-8 p-l-8 p-r-8">404</span></h1>
-        <h3>PLEASE CONTACT TO ADMIN TO MORE INFORMATION !</h3>
+        <h3>You not have permission to access this page !</h3>
     </div>
 </c:if>
 </html>
