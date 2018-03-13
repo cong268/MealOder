@@ -17,6 +17,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>MEAL MANAGERMENT</title>
     <link rel="stylesheet" href="<c:url value="/assets/css/mealManagermentStyle.css"></c:url>">
+    <link rel="stylesheet" href="<c:url value="/assets/css/mainTemplayeStyle.css"></c:url>">
     <script type="text/javascript" src="<c:url value="/assets/js/lodash.min.js"></c:url>"></script>
     <script type="text/javascript" src="<c:url value="/assets/js/underscore-min.js"></c:url>"></script>
     <script type="text/javascript" src="<c:url value="/assets/js/mealManagerment.js"></c:url>"></script>

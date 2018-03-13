@@ -6,7 +6,7 @@
   	   url('../fonts/Montserrat-Regular.woff') format('woff'), 
   	   url('../fonts/Montserrat-Regular.woff2') format('woff2');
 }
-*{
+body{
 	font-family: Montserrat, sans-serif, Arial !important;
 }
 /*NAVBAR CUSTOM*/
@@ -80,7 +80,7 @@
     }
 }
 /*END NAVBAR*/
-.dropdown-menu{
+#nsrp-navber-collapse .dropdown-menu{
 	min-width: 100%;
 }
 .dropdown-user-custom .img-user-nsrp{
