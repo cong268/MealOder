@@ -3,13 +3,13 @@ package com.meals.frontend.bean;
 public class MealsOrderBean {
 	private String staffId;
 	private String staffName;
-	private Integer mealTimeId;
-	private Integer locationId;
-	private Integer mealId;
-	private Integer deptId;
-	private Integer shiftId;
-	// private Date cateringDate;
+	private MealTimeBean mealTime;
+	private LocationBean location;
+	private MealBean meal;
+	private DepartmentBean department;
+	private ShiftBean shift;
 
+	// private Date cateringDate;
 	public String getStaffId() {
 		return staffId;
 	}
@@ -26,52 +26,44 @@ public class MealsOrderBean {
 		this.staffName = staffName;
 	}
 
-	public Integer getMealTimeId() {
-		return mealTimeId;
+	public MealTimeBean getMealTime() {
+		return mealTime;
 	}
 
-	public void setMealTimeId(Integer mealTimeId) {
-		this.mealTimeId = mealTimeId;
+	public void setMealTime(MealTimeBean mealTime) {
+		this.mealTime = mealTime;
 	}
 
-	public Integer getLocationId() {
-		return locationId;
+	public LocationBean getLocation() {
+		return location;
 	}
 
-	public void setLocationId(Integer locationId) {
-		this.locationId = locationId;
+	public void setLocation(LocationBean location) {
+		this.location = location;
 	}
 
-	public Integer getMealId() {
-		return mealId;
+	public MealBean getMeal() {
+		return meal;
 	}
 
-	public void setMealId(Integer mealId) {
-		this.mealId = mealId;
+	public void setMeal(MealBean meal) {
+		this.meal = meal;
 	}
 
-	public Integer getDeptId() {
-		return deptId;
+	public DepartmentBean getDepartment() {
+		return department;
 	}
 
-	public void setDeptId(Integer deptId) {
-		this.deptId = deptId;
+	public void setDepartment(DepartmentBean department) {
+		this.department = department;
 	}
 
-	public Integer getShiftId() {
-		return shiftId;
+	public ShiftBean getShift() {
+		return shift;
 	}
 
-	public void setShiftId(Integer shiftId) {
-		this.shiftId = shiftId;
+	public void setShift(ShiftBean shift) {
+		this.shift = shift;
 	}
-
-	// public Date getCateringDate() {
-	// return cateringDate;
-	// }
-	//
-	// public void setCateringDate(Date cateringDate) {
-	// this.cateringDate = cateringDate;
-	// }
 
 }

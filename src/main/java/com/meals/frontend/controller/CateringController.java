@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.meals.frontend.bean.DataBean;
 import com.meals.frontend.bean.MealsOrderBean;
 import com.meals.frontend.service.MealsService;
+import com.meals.frontend.until.ConstanKey;
 
 @RestController
 @RequestMapping("cateringController")
@@ -24,7 +25,7 @@ public class CateringController {
 
 	@RequestMapping(value = "/getMealByStaff", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public DataBean getMealByDepartment(HttpSession session) {
-		Integer userId = (Integer) session.getAttribute("userId");
+		Integer userId = (Integer) session.getAttribute(ConstanKey.USER_ID);
 		return mealsService.getMealByStaff(userId);
 	}
 
@@ -36,7 +37,7 @@ public class CateringController {
 	@RequestMapping(value = "/saveCatering", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
 	public Boolean saveCatering(HttpSession session, @RequestBody List<MealsOrderBean> listMealOder,
 			@RequestParam String date) {
-		String userRole = (String) session.getAttribute("userRole");
+		String userRole = (String) session.getAttribute(ConstanKey.USER_ROLE);
 		return mealsService.saveCatering(userRole, listMealOder, date);
 	}
 

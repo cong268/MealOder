@@ -1,14 +1,9 @@
 package com.meals.frontend.controller;
 
-import java.util.Map;
-
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -16,6 +11,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.meals.frontend.bean.UserBean;
 import com.meals.frontend.service.MealsService;
+import com.meals.frontend.until.ConstanKey;
 
 @Controller
 @RequestMapping("/")
@@ -25,8 +21,8 @@ public class LoginController {
 
 	@RequestMapping(value = "login", method = RequestMethod.GET)
 	public ModelAndView showLoginPage(HttpServletRequest request) {
-		request.getSession().removeAttribute("userId");
-		request.getSession().removeAttribute("userName");
+		request.getSession().removeAttribute(ConstanKey.USER_ID);
+		request.getSession().removeAttribute(ConstanKey.USER_NAME);
 		ModelAndView model = new ModelAndView("login");
 		model.addObject("messsage", "");
 		return model;
@@ -34,8 +30,8 @@ public class LoginController {
 
 	@RequestMapping(value = "/logout", method = RequestMethod.GET)
 	protected ModelAndView logoutSession(HttpServletRequest request) {
-		request.getSession().removeAttribute("userId");
-		request.getSession().removeAttribute("userName");
+		request.getSession().removeAttribute(ConstanKey.USER_ID);
+		request.getSession().removeAttribute(ConstanKey.USER_NAME);
 		ModelAndView model = new ModelAndView("login");
 		return model;
 	}
@@ -46,18 +42,17 @@ public class LoginController {
 								 	HttpServletRequest request) {
 		UserBean userBean = mealsService.checkUserLogin(username, password);
 		if (userBean != null) {
-			request.getSession().setAttribute("userId", userBean.getUserId());
-			request.getSession().setAttribute("userName", userBean.getUserName());
-			request.getSession().setAttribute("staffId", userBean.getStaffId());
-            request.getSession().setAttribute("userRole", userBean.getUserRole());
+			request.getSession().setAttribute(ConstanKey.USER_ID, userBean.getUserId());
+			request.getSession().setAttribute(ConstanKey.USER_NAME, userBean.getUserName());
+			request.getSession().setAttribute(ConstanKey.STAFF_ID, userBean.getStaffId());
 			String userRole = userBean.getUserRole();
 			if (userRole != null) {
-				request.getSession().setAttribute("userRole", userRole);
-				if (userRole.equals("Admin")) {
+				request.getSession().setAttribute(ConstanKey.USER_ROLE, userRole);
+				if (userRole.equals(ConstanKey.ROLE.ROLE_ADMIN)) {
 					// Admin, Quan ly nha bep
 					ModelAndView model = new ModelAndView("redirect:mealManagerment");
 					return model;
-				} else if (userRole.equals("Manager")) {
+				} else if (userRole.equals(ConstanKey.ROLE.ROLE_MANAGER)) {
 					// Truong phong
 					ModelAndView model = new ModelAndView("redirect:mealManagerment");
 					return model;

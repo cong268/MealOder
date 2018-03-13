@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.meals.frontend.bean.StaffBean;
 import com.meals.frontend.service.MealsService;
+import com.meals.frontend.until.ConstanKey;
 
 @RestController
 @RequestMapping("staffController")
@@ -19,7 +20,7 @@ public class StaffController {
 
 	@RequestMapping(value = "/getStaffById", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public StaffBean getStaffById(HttpSession session) {
-		Integer userId = (Integer) session.getAttribute("userId");
+		Integer userId = (Integer) session.getAttribute(ConstanKey.USER_ID);
 		return mealsService.getStaffByUserId(userId);
 	}
 }

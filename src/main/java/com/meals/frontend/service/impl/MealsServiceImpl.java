@@ -33,6 +33,8 @@ import com.meals.frontend.bean.ShiftBean;
 import com.meals.frontend.bean.StaffBean;
 import com.meals.frontend.bean.UserBean;
 import com.meals.frontend.service.MealsService;
+import com.meals.frontend.until.ConstanKey;
+import com.meals.frontend.until.FunctionUtils;
 
 @Service
 public class MealsServiceImpl implements MealsService {
@@ -99,21 +101,21 @@ public class MealsServiceImpl implements MealsService {
 
 	@Override
 	public Boolean saveCatering(String userRole, List<MealsOrderBean> listMealOder, String date) {
-		Date cateringDate = convertStringToDate(date);
+		Date cateringDate = FunctionUtils.convertDateByFormatLocal(date, ConstanKey.FORMAT_DATE.DATE_SLASH_FORMAT);
 		Date cateringTime = new Date();
 		if (listMealOder != null && !listMealOder.isEmpty()) {
 			for (MealsOrderBean obj : listMealOder) {
 				Catering dto = new Catering();
 				dto.setStaffId(obj.getStaffId());
-				dto.setMealId(obj.getMealId());
-				dto.setMealTimeId(obj.getMealTimeId());
-				dto.setLocationId(obj.getLocationId());
-				dto.setShiftId(obj.getShiftId());
+				dto.setMealId(obj.getMeal().getMealId());
+				dto.setMealTimeId(obj.getMealTime().getMealTimeId());
+				dto.setLocationId(obj.getLocation().getLocationId());
+				dto.setShiftId(obj.getShift().getShiftId());
 				dto.setCateringDate(cateringDate);
 				dto.setCateringTime(cateringTime);
-				if (userRole != null && userRole.equals("Admin")) {
+				if (userRole != null && userRole.equals(ConstanKey.ROLE.ROLE_ADMIN)) {
 					dto.setCatered(true);
-				} else if (userRole != null && userRole.equals("Manager")) {
+				} else if (userRole != null && userRole.equals(ConstanKey.ROLE.ROLE_MANAGER)) {
 					dto.setStatus(true);
 				} else {
 					dto.setOrdered(true);
@@ -180,20 +182,5 @@ public class MealsServiceImpl implements MealsService {
 		bean.setLstMealType(lstMealType);
 		bean.setLstShift(lstShift);
 		return bean;
-	}
-
-	private Date convertStringToDate(String dateInString) {
-		Date date = null;
-		SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
-		try {
-
-			date = formatter.parse(dateInString);
-			System.out.println(date);
-			System.out.println(formatter.format(date));
-
-		} catch (ParseException e) {
-			e.printStackTrace();
-		}
-		return date;
 	}
 }
