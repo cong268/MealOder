@@ -1,0 +1,20 @@
+.wrap-cartering-managerment .row{
+    overflow-x: auto;
+    white-space: nowrap;
+}
+.wrap-cartering-managerment > .row > .col-* {
+    display: inline-block;
+    float: none;
+}
+.wrap-header-page{
+    margin-bottom: 50px;
+}
+.wrap-meal-table{
+    min-width: 700px;
+}
+.wrap-filter{
+    margin-bottom: 20px;
+}
+.vcenter{
+    line-height: 34px;
+}

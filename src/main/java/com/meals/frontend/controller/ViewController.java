@@ -20,6 +20,18 @@ public class ViewController {
         return model;
     }
 
+    @RequestMapping("carterAdmin")
+    public ModelAndView carteredAdmin(){
+        ModelAndView model = new ModelAndView("carterAdmin");
+        return model;
+    }
+
+    @RequestMapping("showDataAdmin")
+    public ModelAndView showDataAdmin(){
+        ModelAndView model = new ModelAndView("showDataAdmin");
+        return model;
+    }
+
     @RequestMapping("registerUser")
     public ModelAndView registerUser(){
         ModelAndView model = new ModelAndView("registerUser");

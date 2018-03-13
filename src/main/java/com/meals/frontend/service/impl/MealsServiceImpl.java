@@ -76,8 +76,9 @@ public class MealsServiceImpl implements MealsService {
 					bean.setUserRole(role.getName());
 				}
 			}
+			return bean;
 		}
-		return bean;
+		return null;
 	}
 
 	public DataBean getLstOrderByDepart(Integer departId) {

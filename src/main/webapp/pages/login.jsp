@@ -36,11 +36,11 @@
                     <span class="error-message" ng-bind="errorMessage"></span>
                 </div>
                 <div class="wrap-input-nsrp validate-input" data-validate="Enter username">
-                    <input class="input-nsrp" ng-click="clickHideMessage()" id="nsrp-username" type="text" name="username" placeholder="User name">
+                    <input class="input-nsrp" ng-click="clickHideMessage()" ng-model="nsrpUsername" id="nsrp-username" type="text" name="username" placeholder="User name">
                     <span class="focus-input-nsrp" data-placeholder="&#xe82a;"></span>
                 </div>
                 <div class="wrap-input-nsrp validate-input" data-validate="Enter password">
-                    <input class="input-nsrp" ng-click="clickHideMessage()" id="nsrp-password" type="password" name="password" placeholder="Password">
+                    <input class="input-nsrp" ng-click="clickHideMessage()" ng-model="nsrpPassword" id="nsrp-password" type="password" name="password" placeholder="Password">
                     <span class="focus-input-nsrp" data-placeholder="&#xe80f;"></span>
                 </div>
                 <div class="container-login-nsrp-form-btn m-t-32">

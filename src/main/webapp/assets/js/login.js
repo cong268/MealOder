@@ -17,6 +17,16 @@ var myApp = angular.module('loginApplication',[]).controller('loginController', 
                     }
                 })
             })
+            $scope.$watch('nsrpUsername', function(){
+                if($scope.nsrpUsername != ''){
+                    $('#nsrp-username').addClass('has-val');
+                }
+            });
+            $scope.$watch('nsrpPassword', function(){
+                if($scope.nsrpPassword != ''){
+                    $('#nsrp-password').addClass('has-val');
+                }
+            })
 
 
             /* Validate */
