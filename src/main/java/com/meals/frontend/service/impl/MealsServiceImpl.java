@@ -140,13 +140,13 @@ public class MealsServiceImpl implements MealsService {
 					dto = new Catering();
 					dto.setStaffId(obj.getStaffId());
 					dto.setDepartId(obj.getDepartmentId());
-					dto.setMealId(obj.getMealId());
-					dto.setMealTimeId(obj.getMealTimeId());
-					dto.setLocationId(obj.getLocationId());
-					dto.setShiftId(obj.getShiftId());
-					dto.setCateringDate(cateringDate);
-					dto.setCateringTime(cateringTime);
 				}
+				dto.setMealId(obj.getMealId());
+				dto.setMealTimeId(obj.getMealTimeId());
+				dto.setLocationId(obj.getLocationId());
+				dto.setShiftId(obj.getShiftId());
+				dto.setCateringDate(cateringDate);
+				dto.setCateringTime(cateringTime);
 				if (userRole != null && userRole.equals(ConstanKey.ROLE.ROLE_ADMIN)) {
 					dto.setCatered(true);
 					dto.setStatus(true);
