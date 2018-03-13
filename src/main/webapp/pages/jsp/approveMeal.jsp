@@ -23,7 +23,7 @@
         <div class="row text-center" >
             <div class="col-md-12 col-lg-12 col-xs-12 col-md-12 wrap-meal-table">
                 <div class="text-left wrap-header-page">
-                    <h3>Approve Meal <span class="badge" ng-cloak ng-bind="tableParams.total()"</h3>
+                    <h3>Approve Meal <span class="badge" ng-cloak ng-bind="tableParams.total()"/></h3>
                 </div>
                 <div ng-cloak class="row wrap-filter col-md-5 col-lg-5 col-xs-5 col-md-5 pull-left">
                     <div class="col-sm-3 p-l-0 m-t-10 p-t-5">
