@@ -33,6 +33,11 @@ public class CateringController {
 	public DataBean getMealByDepartment(@RequestParam Integer departId) {
 		return mealsService.getLstOrderByDepart(departId);
 	}
+	
+//	@RequestMapping(value = "/getMealAppro", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+//	public DataBean getMealAppro(@RequestParam Integer userId) {
+////		return mealsService.getLstOrderByDepart(userId);
+//	}
 
 	@RequestMapping(value = "/saveCatering", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
 	public Boolean saveCatering(HttpSession session, @RequestBody List<MealsOrderBean> listMealOder,
