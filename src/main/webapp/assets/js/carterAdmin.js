@@ -101,7 +101,7 @@ myApp.controller('carterAdminCtrl', ['$scope', 'NgTableParams', 'ngTableEventsCh
         var dateStr = moment(dateInput, 'DD/MM/YYYY').format('DDMMYYYY')
         $http({
             method: 'GET',
-            url: 'cateringController/getLstByOder?date=' + dateStr,
+            url: 'cateringController/getLstByStatus?date=' + dateStr,
             responseType: 'json'
         }).then(function successCallback(response) {
             if(response.data){
