@@ -100,6 +100,21 @@ public class MealsServiceImpl implements MealsService {
 						MealsOrderBean orderBean = new MealsOrderBean();
 						orderBean.setStaffId(obj.getStaffId());
 						orderBean.setStaffName(obj.getStaffName());
+						if (lstDepartMent != null && !lstDepartMent.isEmpty()) {
+							orderBean.setDepartmentId(lstDepartMent.get(0).getDeptId());
+						}
+						if (lstMealTime != null && !lstMealTime.isEmpty()) {
+							orderBean.setMealTimeId(lstMealTime.get(0).getMealTimeId());
+						}
+						if (lstMealType != null && !lstMealType.isEmpty()) {
+							orderBean.setMealId(lstMealType.get(0).getMealId());
+						}
+						if (lstLocation != null && !lstLocation.isEmpty()) {
+							orderBean.setLocationId(lstLocation.get(0).getLocationId());
+						}
+						if (lstShift != null && !lstShift.isEmpty()) {
+							orderBean.setShiftId(lstShift.get(0).getShiftId());
+						}
 						lstOrder.add(orderBean);
 					}
 				}

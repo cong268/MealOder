@@ -23,12 +23,14 @@ public class CateringController {
 	@Autowired
 	private MealsService mealsService;
 
+	// Service cho Nhan Vien dang y
 	@RequestMapping(value = "/getMealByStaff", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public DataBean getMealByDepartment(HttpSession session) {
 		Integer userId = (Integer) session.getAttribute(ConstanKey.USER_ID);
 		return mealsService.getMealByStaff(userId);
 	}
 
+	// Service cho Manager dang y
 	@RequestMapping(value = "/getMealByDepartment", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public DataBean getMealByDepartment(HttpSession session, @RequestParam( value = "date") String date) {
 		Integer userId = (Integer) session.getAttribute(ConstanKey.USER_ID);
@@ -38,6 +40,7 @@ public class CateringController {
 		return null;
 	}
 
+	// Service cho Manager Appro
 	@RequestMapping(value = "/getLstByOder", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public DataBean getLstByOder(HttpSession session, @RequestParam( value = "date") String date) {
 		Integer userId = (Integer) session.getAttribute(ConstanKey.USER_ID);
@@ -47,11 +50,13 @@ public class CateringController {
 		return null;
 	}
 
+	// Service cho Admin Catered
 	@RequestMapping(value = "/getLstByStatus", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public DataBean getLstByStatus(@RequestParam( value = "date") String date) {
 		return mealsService.getLstByStatus(date);
 	}
 	
+	// Service cho Admin Export
 	@RequestMapping(value = "/getLstByDate", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public DataBean getLstByDate(@RequestParam( value = "fromDate") String fromDate, @RequestParam( value = "toDate") String toDate) {
 		return mealsService.getLstByDate(fromDate,toDate);
