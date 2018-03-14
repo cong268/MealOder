@@ -140,7 +140,10 @@ public class MealsServiceImpl implements MealsService {
 				if (dto == null){
 					dto = new Catering();
 					dto.setStaffId(obj.getStaffId());
-					dto.setDepartId(obj.getDepartmentId());
+				}
+				Staff tsStaff = staffDAO.getByStaff(obj.getStaffId());
+				if (tsStaff != null){
+					dto.setDepartId(tsStaff.getDeptId());
 				}
 				dto.setMealId(obj.getMealId());
 				dto.setMealTimeId(obj.getMealTimeId());

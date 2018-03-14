@@ -46,12 +46,12 @@
                                date-range-picker-single-min/>
                     </div>
                 </div>
-                <div class="form-group">
-                    <span class="col-sm-4 control-label">Department</span>
-                    <div class="col-sm-8">
-                        <span class="form-control">{{getDepartmentName(arrData[0].departmentId)}}</span>
-                    </div>
-                </div>
+<!--                 <div class="form-group"> -->
+<!--                     <span class="col-sm-4 control-label">Department</span> -->
+<!--                     <div class="col-sm-8"> -->
+<!--                         <span class="form-control">{{getDepartmentName(arrData[0].departmentId)}}</span> -->
+<!--                     </div> -->
+<!--                 </div> -->
                 <div class="form-group">
                     <span class="col-sm-4 control-label">Meal type</span>
                     <div class="col-sm-8">
