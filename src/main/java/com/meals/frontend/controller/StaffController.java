@@ -35,7 +35,18 @@ public class StaffController {
 	}
 	
 	@RequestMapping(value = "/saveUser", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
-	public Boolean saveUser(@RequestBody UserBean bean) {
+	public Boolean saveUser(HttpSession session,@RequestBody UserBean bean) {
+		String userRole = (String) session.getAttribute(ConstanKey.USER_ROLE);
+		List<RoleBean> lst = mealsService.getAllRole();
+		if (userRole.equals(ConstanKey.ROLE.ROLE_MANAGER)){
+			if (lst != null && !lst.isEmpty()){
+				for (RoleBean obj : lst){
+					if (obj.getName().equals(ConstanKey.ROLE.ROLE_EMPLOYEE)){
+						bean.setUserRoleId(obj.getUserRoleID());
+					}
+				}
+			}
+		}
 		return mealsService.saveUser(bean);
 	}
 	

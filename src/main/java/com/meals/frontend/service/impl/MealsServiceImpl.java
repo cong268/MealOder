@@ -349,8 +349,10 @@ public class MealsServiceImpl implements MealsService {
 			user.setDisable(false);
 			user.setPassword(bean.getPassword());
 			user.setStaffId(bean.getStaffId());
-			user.setUserId(bean.getUserId());
-			user.setUserName(bean.getUserRole());
+			if (bean.getUserId() != null){
+				user.setUserId(bean.getUserId());
+			}
+			user.setUserName(bean.getUserName());
 			user.setUserRoleId(bean.getUserRoleId());
 			return userDAO.saveUser(user);
 		}
