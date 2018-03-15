@@ -27,7 +27,7 @@
         <div class="row text-center" ng-cloak>
             <div class="col-md-12 col-lg-12 col-xs-12 col-md-12">
                 <div class="text-left wrap-header-page">
-                    <h3>Meal Managerment <span class="badge" ng-cloak ng-bind="tableParams.total()"></span></h3>
+                    <h3>Meal Management <span class="badge" ng-cloak ng-bind="tableParams.total()"></span></h3>
                 </div>
                 <div ng-cloak class="row wrap-filter col-md-6 col-lg-6 col-xs-12 col-md-6 pull-left">
                     <div class="col-sm-3 p-l-0 m-t-10">
@@ -59,33 +59,17 @@
                     <tr ng-repeat="row in $data">
                         <td data-title="'EmployeeCode'" sortable="'staffId'">{{row.staffId}}</td>
                         <td data-title="'Fullname'" sortable="'staffName'">{{row.staffName}}</td>
-                        <td data-title="'Meal Time'" >
-                            <select ng-model="row.mealTimeId" class="form-control">
-                                <option ng-selected="row.mealTimeId == mealTimeObj.mealTimeId"
-                                        ng-repeat="mealTimeObj in mealTimeArr"
-                                        ng-value="mealTimeObj.mealTimeId">{{mealTimeObj.mealTimeName}}</option>
-                            </select>
+                        <td data-title="'Meal Time'" class="text-center">
+                            {{getMealTimeName(row.mealTimeId)}}
                         </td>
-                        <td data-title="'Location'">
-                            <select ng-model="row.locationId" class="form-control">
-                                <option ng-selected="row.locationId == locationObj.locationId"
-                                        ng-repeat="locationObj in locationArr"
-                                        ng-value="locationObj.locationId">{{locationObj.locationName}}</option>
-                            </select>
+                        <td data-title="'Location'" class="text-center">
+                            {{getLocationName(row.locationId)}}
                         </td>
-                        <td data-title="'Meal Type'">
-                            <select ng-model="row.mealId" class="form-control">
-                                <option ng-selected="row.mealId == mealObj.mealId"
-                                        ng-repeat="mealObj in mealArr"
-                                        ng-value="mealObj.mealId">{{mealObj.mealName}}</option>
-                            </select>
+                        <td data-title="'Meal Type'" class="text-center">
+                            {{getMealName(row.mealId)}}
                         </td>
-                        <td data-title="'Shift'">
-                            <select ng-model="row.shiftId" class="form-control">
-                                <option ng-selected="row.shiftId == shilfObj.shiftId"
-                                        ng-repeat="shilfObj in shilfArr"
-                                        ng-value="shilfObj.shiftId">{{shilfObj.shiftName}}</option>
-                            </select>
+                        <td data-title="'Shift'" class="text-center">
+                            {{getShiftName(row.shiftId)}}
                         </td>
                         <td width="100" style="text-align: center" data-header="'addMealManager.html'">
                             <div class="btn btn-default btn-custom" data-toggle="modal" data-target="#editModal" ng-click="editMeal(row)">
@@ -100,14 +84,9 @@
                 <div class="showNoData" ng-if="tableParams.total() == 0" ng-cloak>No data available</div>
             </div>
         </div>
-        <div class="row text-center" ng-cloak>
-            <div class="col-md-12 col-lg-12 col-xs-12 col-md-12 wrap-meal-table">
-
-            </div>
+        <div class="row m-t-10">
+            <div class="btn btn-primary btn-lg pull-right m-r-15" ng-click="submitMealManager()">SUBMIT</div>
         </div>
-        <%--<div class="row m-t-10">--%>
-            <%--<div class="btn btn-primary btn-lg pull-right m-r-15" ng-click="submitMealManager()">SUBMIT</div>--%>
-        <%--</div>--%>
     </div>
     <div class="wrap-popup-edit">
         <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalTitle" aria-hidden="true">

@@ -57,7 +57,7 @@
                         <span class="col-sm-4 m-t-5 m-b-5">Meal time</span>
                         <div class="input-group col-sm-8 col-xs-12">
                             <select ng-model="mealTimeIdFilter" class="form-control">
-                                <option value="{{mealTime.mealTimeId}}" ng-repeat="mealTime in mealTimeArr">{{mealTime.mealTimeName}}</option>
+                                <option value="{{mealTime.mealTimeId}}" ng-repeat="mealTime in mealTimeArrClone">{{mealTime.mealTimeName}}</option>
                             </select>
                         </div>
                     </div>
@@ -67,7 +67,7 @@
                         <span class="col-sm-4 m-t-5 m-b-5">Meal type</span>
                         <div class="input-group col-sm-8 col-xs-12">
                             <select ng-model="mealIdFilter" class="form-control">
-                                <option value="{{meal.mealId}}" ng-repeat="meal in mealArr">{{meal.mealName}}</option>
+                                <option value="{{meal.mealId}}" ng-repeat="meal in mealArrClone">{{meal.mealName}}</option>
                             </select>
                         </div>
                     </div>
@@ -77,7 +77,7 @@
                         <span class="col-sm-4 m-t-5 m-b-5">Location</span>
                         <div class="input-group col-sm-8 col-xs-12">
                             <select ng-model="locationIdFilter" class="form-control">
-                                <option value="{{location.locationId}}" ng-repeat="location in locationArr">{{location.locationName}}</option>
+                                <option value="{{location.locationId}}" ng-repeat="location in locationArrClone">{{location.locationName}}</option>
                             </select>
                         </div>
                     </div>
@@ -87,7 +87,7 @@
                         <span class="col-sm-6 m-t-5 m-b-5">Department</span>
                         <div class="input-group col-sm-6 col-xs-12">
                             <select ng-model="departmentIdFilter" class="form-control">
-                                <option value="{{department.deptId}}" ng-repeat="department in departmentArr">{{department.deptName}}</option>
+                                <option value="{{department.deptId}}" ng-repeat="department in departmentArrClone">{{department.deptName}}</option>
                             </select>
                         </div>
                     </div>
@@ -95,6 +95,9 @@
             </div>
             <div ng-cloak class="row m-b-10 col-md-12 col-lg-12 col-xs-12 col-md-12 text-left">
                 <span class="vcenter">Row count: </span><span class="text-danger vcenter fs-18" ng-cloak ng-bind="tableParams.total()"/>
+                <div class="col-sm-3 p-l-0 m-t-10">
+                    <div class="btn btn-success btn-default" ng-click="filterAccept()">Catering Date<span class="glyphicon glyphicon-search p-l-10"></span></div>
+                </div>
             </div>
         </div>
     </div>
@@ -105,16 +108,16 @@
                 <tr ng-repeat="row in $data">
                     <td data-title="'EmployeeCode'" sortable="'staffId'">{{row.staffId}}</td>
                     <td data-title="'Fullname'" sortable="'staffName'">{{row.staffName}}</td>
-                    <td data-title="'Meal Time'" >
+                    <td data-title="'Meal Time'" class="text-center">
                         {{getMealTimeName(row.mealTimeId)}}
                     </td>
-                    <td data-title="'Location'">
+                    <td data-title="'Location'" class="text-center">
                         {{getLocationName(row.locationId)}}
                     </td>
-                    <td data-title="'Meal Type'">
+                    <td data-title="'Meal Type'" class="text-center">
                         {{getMealName(row.mealId)}}
                     </td>
-                    <td data-title="'Shift'">
+                    <td data-title="'Shift'" class="text-center">
                         {{getShiftName(row.shiftId)}}
                     </td>
                 </tr>
@@ -125,7 +128,7 @@
     <div class=" row text-center m-l-0 m-r-0  m-t-10" ng-if="tableParams.total() > 0">
         <div class="col-md-12  wrap-info highlight text-left">
             <div ng-repeat="department in departmentArr" ng-if="department.count > 0">
-                <span>Department <span ng-bind="department.deptName"></span> : <span ng-bind="department.count"></span></span>
+                <span>Department <span ng-bind="department.deptName"></span><span class="p-l-10 p-r-10 fs-16">:</span><span ng-bind="department.count"></span></span>
             </div>
         </div>
     </div>

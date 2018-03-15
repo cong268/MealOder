@@ -6,6 +6,13 @@ myApp.controller('carteredAdminCtrl', ['$scope', 'NgTableParams', 'ngTableEvents
     $scope.mealArr = [];
     $scope.shilfArr = [];
     $scope.arrData = [];
+    $scope.departmentArr = [];
+    /*CLONED*/
+    $scope.locationArrClone = [];
+    $scope.mealTimeArrClone = [];
+    $scope.mealArrClone = [];
+    $scope.shilfArrClone = [];
+    $scope.departmentArrClone = [];
     $scope.mealTimeIdFilter='',
     $scope.mealIdFilter='',
     $scope.locationIdFilter='',
@@ -32,6 +39,7 @@ myApp.controller('carteredAdminCtrl', ['$scope', 'NgTableParams', 'ngTableEvents
                 $scope.departmentArr = dataAllPage.lstDepartMent;
                 $scope.arrData = angular.copy(dataAllTable);
                 drawTable();
+                applyCloneArr();
             }
         }, function errorCallback(response) {
             $scope.loadingPerformancePatri = false;
@@ -91,6 +99,33 @@ myApp.controller('carteredAdminCtrl', ['$scope', 'NgTableParams', 'ngTableEvents
             $scope.dataFiltered = filteredData;
         });
     }
+    function applyCloneArr(){
+        $scope.locationArrClone = angular.copy($scope.locationArr);
+        $scope.mealTimeArrClone = angular.copy($scope.mealTimeArr);
+        $scope.mealArrClone = angular.copy($scope.mealArr);
+        $scope.shilfArrClone = angular.copy($scope.shilfArr);
+        $scope.departmentArrClone = angular.copy($scope.departmentArr);
+        $scope.locationArrClone.unshift({
+            locationId : '',
+            locationName: '--------------'
+        })
+        $scope.mealTimeArrClone.unshift({
+            mealTimeId : '',
+            mealTimeName: '--------------'
+        })
+        $scope.mealArrClone.unshift({
+            mealId : '',
+            mealName: '--------------'
+        })
+        $scope.shilfArrClone.unshift({
+            shilfId : '',
+            shilfName: '--------------'
+        })
+        $scope.departmentArrClone.unshift({
+            deptId : '',
+            deptName: '--------------'
+        })
+    }
     $scope.$watch('dataFiltered', function(){
         if($scope.dataFiltered){
             angular.forEach($scope.departmentArr, function(dept){
@@ -130,7 +165,9 @@ myApp.controller('carteredAdminCtrl', ['$scope', 'NgTableParams', 'ngTableEvents
                 $scope.mealTimeArr = dataAllPage.lstMealTime;
                 $scope.mealArr = dataAllPage.lstMealType;
                 $scope.shilfArr = dataAllPage.lstShift;
+                $scope.departmentArr = dataAllPage.lstDepartMent;
                 $scope.arrData = angular.copy(dataAllTable);
+                applyCloneArr();
                 drawTable();
             }
         }, function errorCallback(response) {
