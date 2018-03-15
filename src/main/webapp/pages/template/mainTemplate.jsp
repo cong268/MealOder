@@ -44,9 +44,9 @@
                 <ul class="nav navbar-nav">
                     <c:if test = "${sessionScope.userRole == 'Manager'}">
                     <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Meal Managerment <span class="caret"></span></a>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Meal Management <span class="caret"></span></a>
                         <ul class="dropdown-menu">
-                            <li><a href="mealManagerment">Manegerment</a></li>
+                            <li><a href="mealManagerment">Management</a></li>
                             <li><a href="approveMeal">Approve Meal</a></li>
                         </ul>
                     </li>
@@ -62,7 +62,7 @@
                     </c:if>
                     <c:if test = "${sessionScope.userRole == 'Admin' || sessionScope.userRole == 'Manager'}">
                     <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Personal Managerment <span class="caret"></span></a>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Personal Management <span class="caret"></span></a>
                         <ul class="dropdown-menu">
                             <li><a href="registerUser">Register User</a></li>
                         </ul>
@@ -72,7 +72,7 @@
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">User Access <span class="caret"></span></a>
                         <ul class="dropdown-menu">
-                            <li><a href="userOrder">User order meal</a></li>
+                            <li><a href="userOrder">Order meal</a></li>
                         </ul>
                     </li>
                     </c:if>

@@ -96,6 +96,17 @@ myApp.controller('mealManagermentCtrl', ['$scope', 'NgTableParams', 'ngTableEven
         });
     };
 
+    $scope.deleteMeal = function(row){
+        console.log(row);
+    }
+    $scope.saveEditMeal = function(){
+
+    }
+    $scope.editMeal = function(row){
+        $scope.selectedItem = row;
+        $scope.selectedItemClone = angular.copy($scope.selectedItem);
+    }
+
     $scope.submitMealManager = function(){
         var dateInput = angular.element(document.getElementById("date-filter-input")).val();
         var dateStr = moment(dateInput, 'DD/MM/YYYY').format('DDMMYYYY');
