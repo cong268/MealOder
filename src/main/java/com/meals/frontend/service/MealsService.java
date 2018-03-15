@@ -3,6 +3,7 @@ package com.meals.frontend.service;
 import java.util.List;
 
 import com.meals.frontend.bean.DataBean;
+import com.meals.frontend.bean.DataExportBean;
 import com.meals.frontend.bean.MealsOrderBean;
 import com.meals.frontend.bean.RoleBean;
 import com.meals.frontend.bean.StaffBean;
@@ -20,4 +21,5 @@ public interface MealsService {
 	Boolean saveStaff (StaffBean bean);
 	Boolean saveUser (UserBean bean);
 	List<RoleBean> getAllRole();
+	DataExportBean getDataExport (String fromDate, String toDate);
 }

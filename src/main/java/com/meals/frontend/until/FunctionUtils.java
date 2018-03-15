@@ -17,4 +17,12 @@ public class FunctionUtils {
 			return null;
 		}
 	}
+
+	public static String convertDateStringByFormatLocal(Date date, String format) {
+		if (date == null || format == null) {
+			return null;
+		}
+		SimpleDateFormat sdf = new SimpleDateFormat(format);
+		return sdf.format(date);
+	}
 }

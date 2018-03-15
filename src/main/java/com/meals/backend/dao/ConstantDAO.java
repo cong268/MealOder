@@ -18,4 +18,5 @@ public interface ConstantDAO {
 	List<MealTime> getAllMealTime();
 	List<Shift> getAllShift();
 	List<UserRole> getAllRole();
+	Location getLocationById (Integer id);
 }

@@ -84,4 +84,15 @@ public class ConstantDAOImpl implements ConstantDAO {
 		Query query = session.createQuery("FROM UserRole");
 		return query.list();
 	}
+
+	@Override
+	public Location getLocationById(Integer id) {
+		Session session = sessionFactory.getCurrentSession();
+		Query query = session.createQuery("FROM Location c WHERE c.locationId = :locationId");
+		query.setParameter("locationId", id);
+		if (query.list() != null && !query.list().isEmpty()) {
+			return (Location) query.list().get(0);
+		}
+		return null;
+	}
 }

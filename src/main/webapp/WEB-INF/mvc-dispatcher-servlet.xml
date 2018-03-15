@@ -36,14 +36,11 @@
         <property name="defaultLocale" value="en" />
     </bean>
     
-<!--     <bean id="kuritaService" class="com.ifisolution.kurita.service.impl.KuritaServiceImpl"> -->
-<!--     </bean> -->
-
      <bean id="viewResolver" class="org.springframework.web.servlet.view.tiles3.TilesViewResolver"/>
-     <!--<bean id="viewResolver1" class="org.springframework.web.servlet.view.ResourceBundleViewResolver">-->
-         <!--<property name="order" value="1"/>-->
-         <!--<property name="basename" value="views"/>-->
-     <!--</bean>-->
+     <bean id="viewResolver1" class="org.springframework.web.servlet.view.ResourceBundleViewResolver">
+         <property name="order" value="1"/>
+         <property name="basename" value="views"/>
+     </bean>
      
      <!--<bean id="viewResolver2"-->
          <!--class="org.springframework.web.servlet.view.InternalResourceViewResolver">-->
