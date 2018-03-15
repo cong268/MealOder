@@ -43,7 +43,7 @@
                         <div class="input-group" ng-if="filterType == 'date'">
                             <input type="text" ng-if="filterType == 'date'" id="date-filter-input" date-range-picker-single
                                    ng-model="dateFilter" class="form-control">
-                            <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span>
+                            <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
                         </div>
                     </div>
                     <div class="col-sm-4 p-l-0 m-t-10" ng-if="filterType == 'date'">

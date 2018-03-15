@@ -33,7 +33,7 @@
                         <div class="input-group">
                             <input type="text" ng-model="dateFilter" id="date-filter-input" date-range-picker-single
                                    ng-model="dateFilter" class="form-control">
-                            <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span>
+                            <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
                         </div>
                     </div>
                     <div class="col-sm-4 p-l-0 m-t-10">

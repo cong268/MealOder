@@ -21,38 +21,82 @@
 <body ng-controller="carteredAdminCtrl" ng-init="initData()">
 <div class="container wrap-cartered-managerment">
     <div class="row text-center" >
-        <div class="col-md-12 col-lg-12 col-xs-12 col-md-12 wrap-meal-table">
+        <div class="col-md-12 col-lg-12 col-xs-12 col-md-12">
             <div class="text-left wrap-header-page">
-                <h3>Cartered Employees <span class="badge" ng-cloak ng-bind="tableParams.total()"/></h3>
+                <h3>Cartered Employees <span class="badge" ng-cloak ng-bind="arrData.length"/></h3>
             </div>
-            <div ng-cloak class="row wrap-filter col-md-7 col-lg-7 col-xs-7 col-md-7 pull-left">
-                <div class="col-sm-2 p-l-0 m-t-10">
-                    <select ng-model="filterType" ng-init="filterType = 'date'" class="form-control">
-                        <option value="code">Code</option>
-                        <option value="name">Name</option>
-                        <option value="date">Date</option>
-                    </select>
-                </div>
-                <div class="col-sm-3 p-l-0 m-t-10">
-                    <input type="text" ng-if="filterType == 'code'" id="codeFilter" class="form-control" ng-model="tableParams.filter()['staffId']">
-                    <input type="text" ng-if="filterType == 'name'" id="nameFilter" class="form-control" ng-model="tableParams.filter()['staffName']">
-                    <div class="input-group" ng-if="filterType == 'date'">
-                        <input type="text" ng-if="filterType == 'date'" id="date-filter-from" date-range-picker-single
-                               ng-model="fromDate" class="form-control">
-                        <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span>
+            <div ng-cloak class="row wrap-filter col-md-12 col-lg-12 col-xs-12 col-md-12">
+                <div class="col-sm-offset-2 col-sm-4 form-horizontal">
+                    <div class="form-group">
+                        <span class="col-sm-4 m-t-5 m-b-5">From date</span>
+                        <div class="input-group col-sm-8">
+                            <input type="text" id="date-filter-from" date-range-picker-single
+                                   ng-model="fromDate" class="form-control">
+                            <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                        </div>
                     </div>
                 </div>
-                <div class="col-sm-3 p-l-0 m-t-10" ng-if="filterType == 'date'">
-                    <div class="input-group" ng-if="filterType == 'date'">
-                        <input type="text" id="date-filter-to" date-range-picker-single
-                               ng-model="toDate" class="form-control">
-                        <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span>
+                <div class="col-sm-4 form-horizontal">
+                    <div class="form-group">
+                        <span class="col-sm-4 m-t-5 m-b-5">To date</span>
+                        <div class="input-group col-sm-8">
+                            <input type="text" id="date-filter-to" date-range-picker-single
+                                   ng-model="toDate" class="form-control">
+                            <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                        </div>
                     </div>
                 </div>
-                <div class="col-sm-3 p-l-0 m-t-10" ng-if="filterType == 'date'">
-                    <div class="btn btn-success btn-default" ng-click="filterAccept()">Catering Date<span class="glyphicon glyphicon-search p-l-10"></span></div>
+                <%--<div class="col-sm-3 p-l-0 m-t-10">--%>
+                    <%--<div class="btn btn-success btn-default" ng-click="filterAccept()">Catering Date<span class="glyphicon glyphicon-search p-l-10"></span></div>--%>
+                <%--</div>--%>
+            </div>
+            <div ng-cloak class="row wrap-filter col-md-12 col-lg-12 col-xs-12 col-md-12">
+                <div class="col-sm-3 form-horizontal">
+                    <div class="form-group">
+                        <span class="col-sm-4 m-t-5 m-b-5">Meal time</span>
+                        <div class="input-group col-sm-8">
+                            <select ng-model="tableParams.filter()['mealTimeId']" class="form-control">
+                                <option value="{{mealTime.mealTimeId}}" ng-repeat="mealTime in mealTimeArr">{{mealTime.mealTimeName}}</option>
+
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-3 form-horizontal">
+                    <div class="form-group">
+                        <span class="col-sm-4 m-t-5 m-b-5">Meal type</span>
+                        <div class="input-group col-sm-8">
+                            <select ng-model="tableParams.filter()['mealId']" class="form-control">
+                                <option value="{{meal.mealId}}" ng-repeat="meal in mealArr">{{meal.mealName}}</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-3 form-horizontal">
+                    <div class="form-group">
+                        <span class="col-sm-4 m-t-5 m-b-5">Location</span>
+                        <div class="input-group col-sm-8">
+                            <select ng-model="tableParams.filter()['locationId']" class="form-control">
+                                <option value="{{location.locationId}}" ng-repeat="location in locationArr">{{location.locationName}}</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-3 form-horizontal">
+                    <div class="form-group">
+                        <span class="col-sm-4 m-t-5 m-b-5">Department</span>
+                        <div class="input-group col-sm-8">
+                            <select ng-model="tableParams.filter()['departmentId']" class="form-control">
+                                <option value="{{department.departmentId}}" ng-repeat="department in locationArr">{{department.departmentName}}</option>
+                            </select>
+                        </div>
+                    </div>
                 </div>
             </div>
+        </div>
+    </div>
+    <div class="row text-center" >
+        <div class="col-md-12 col-lg-12 col-xs-12 col-md-12 wrap-meal-table">
             <table ng-cloak ng-table="tableParams" class="table table-condensed table-bordered table-striped table-custom"
                    ng-class="{'nomarginbottom': tableParams.total() == 0}">
                 <tr ng-repeat="row in $data">
