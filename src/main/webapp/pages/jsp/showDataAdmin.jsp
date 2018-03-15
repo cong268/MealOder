@@ -17,6 +17,7 @@
     <title>Cartering</title>
     <link rel="stylesheet" href="<c:url value="/assets/css/showAdminStyle.css"></c:url>">
     <script type="text/javascript" src="<c:url value="/assets/js/showAdmin.js"></c:url>"></script>
+    <script type="text/javascript"> var _contextPath = "${pageContext.request.contextPath}"; </script>
 </head>
 <body ng-controller="carteredAdminCtrl" ng-init="initData()">
 <div class="container wrap-cartered-managerment">

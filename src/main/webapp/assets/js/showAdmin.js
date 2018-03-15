@@ -139,6 +139,8 @@ myApp.controller('carteredAdminCtrl', ['$scope', 'NgTableParams', 'ngTableEvents
     }
 
     $scope.exportData = function(){
-
+    	var fromdateStr = moment($scope.fromDate, 'DD/MM/YYYY').format('DDMMYYYY');
+        var toDateStr = moment($scope.toDate, 'DD/MM/YYYY').format('DDMMYYYY');
+    	window.location = _contextPath + '/exportData/exportCatering?fromDate=' + fromdateStr + '&toDate=' + toDateStr;
     }
 }]);
