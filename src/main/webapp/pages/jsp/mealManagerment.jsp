@@ -27,7 +27,7 @@
         <div class="row text-center" ng-cloak>
             <div class="col-md-12 col-lg-12 col-xs-12 col-md-12">
                 <div class="text-left wrap-header-page">
-                    <h3>Meal Management <span class="badge" ng-cloak ng-bind="tableParams.total()"></span></h3>
+                    <h3>Meal Management <span class="badge" ng-cloak ng-bind="arrDataOrder.total()"></span></h3>
                 </div>
                 <div ng-cloak class="row wrap-filter col-md-6 col-lg-6 col-xs-12 col-md-6 pull-left">
                     <div class="col-sm-3 p-l-0 m-t-10">
@@ -38,8 +38,8 @@
                         </select>
                     </div>
                     <div class="col-sm-5 p-l-0 m-t-10">
-                        <input type="text" ng-if="filterType == 'code'" id="codeFilter" class="form-control" ng-model="tableParams.filter()['staffId']">
-                        <input type="text" ng-if="filterType == 'name'" id="nameFilter" class="form-control" ng-model="tableParams.filter()['staffName']">
+                        <input type="text" ng-if="filterType == 'code'" id="codeFilter" class="form-control" ng-model="tableParamsOrder.filter()['staffId']">
+                        <input type="text" ng-if="filterType == 'name'" id="nameFilter" class="form-control" ng-model="tableParamsOrder.filter()['staffName']">
                         <div class="input-group" ng-if="filterType == 'date'">
                             <input type="text" ng-if="filterType == 'date'" id="date-filter-input" date-range-picker-single
                                    ng-model="dateFilter" class="form-control">
@@ -54,8 +54,8 @@
         </div>
         <div class="row text-center" ng-cloak>
             <div class="col-md-12 col-lg-12 col-xs-12 col-md-12 wrap-meal-table">
-                <table ng-cloak ng-table="tableParams" class="table table-condensed table-bordered table-striped table-custom"
-                       ng-class="{'nomarginbottom': tableParams.total() == 0}">
+                <table ng-cloak ng-table="tableParamsOrder" class="table table-condensed table-bordered table-striped table-custom"
+                       ng-class="{'nomarginbottom': tableParamsOrder.total() == 0}">
                     <tr ng-repeat="row in $data">
                         <td data-title="'EmployeeCode'" sortable="'staffId'">{{row.staffId}}</td>
                         <td data-title="'Fullname'" sortable="'staffName'">{{row.staffName}}</td>
@@ -75,13 +75,13 @@
                             <div class="btn btn-default btn-custom" data-toggle="modal" data-target="#editModal" ng-click="editMeal(row)">
                                 <span class="glyphicon glyphicon-pencil"></span>
                             </div>
-                            <div class="btn btn-danger btn-custom" ng-click="deleteMeal(row)">
+                            <div class="btn btn-danger btn-custom" data-toggle="modal" data-target="#deleteModal" ng-click="showDeleteMealOrder(row)">
                                 <span class="glyphicon glyphicon-trash"></span>
                             </div>
                         </td>
                     </tr>
                 </table>
-                <div class="showNoData" ng-if="tableParams.total() == 0" ng-cloak>No data available</div>
+                <div class="showNoData" ng-if="tableParamsOrder.total() == 0" ng-cloak>No data available</div>
             </div>
         </div>
         <div class="row m-t-10">
@@ -142,7 +142,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary" ng-click="saveEditMeal()">Save changes</button>
+                        <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="saveEditMeal()">Save changes</button>
                     </div>
                 </div>
             </div>
@@ -213,7 +213,28 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary" ng-click="saveEditMeal()">Save changes</button>
+                        <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="saveAddMeal()">Save changes</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="wrap-accept-delete">
+        <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModal" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-sm" role="document">
+                <div class="modal-content ">
+                    <div class="modal-header">
+                        <h3 class="modal-title float-l" id="deleteModalLongTitle">Confirm delete</h3>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        Are you sure to delete this field ?
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                        <button type="button" class="btn btn-success" ng-click="deleteMeal()" data-dismiss="modal">Accept</button>
                     </div>
                 </div>
             </div>
