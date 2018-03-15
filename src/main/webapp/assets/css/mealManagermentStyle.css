@@ -52,6 +52,20 @@
     width: 100%;
     background: #e7e7e7;
 }
+.wrap-popup-visitor input.ng-invalid{
+    border: 1px solid red;
+    box-shadow: 0 0 1px red;
+}
+.wrap-popup-visitor select.ng-invalid{
+    border: 1px solid red;
+    box-shadow: 0 0 1px red;
+}
+@media screen and (max-width: 992px) {
+    .btn-add-vis{
+        float: none !important;
+        margin-right: 30px !important;
+    }
+}
 /*CHECKBOX*/
 .control {
     display: inline-block;

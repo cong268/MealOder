@@ -43,7 +43,8 @@
                         <input type="text" class="form-control"
                                ng-model="dateOrder"
                                id="date-order-input"
-                               date-range-picker-single-min/>
+                               call-change="changeDateDouble(fromDate, toDate)"
+                               date-range-picker-double-min/>
                     </div>
                 </div>
 <!--                 <div class="form-group"> -->
@@ -94,7 +95,7 @@
                 </div>
             </div>
             <div class="row text-right p-r-15">
-                <div class="btn btn-success btn-lg" ng-click="orderingCallback()">ORDER</div>
+                <div tooltip title="Order Now" class="btn btn-success btn-lg" ng-click="orderingCallback()">ORDER</div>
             </div>
         </div>
     </div>

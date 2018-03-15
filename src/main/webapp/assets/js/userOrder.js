@@ -7,6 +7,8 @@ myApp.controller('userOrderCtrl', ['$scope',  '$http', function($scope, $http){
     $scope.arrData = [];
     $scope.lstDepartMent = [];
     $scope.dateOrder = moment(new Date()).format('DD/MM/YYYY');
+    $scope.fromDateStr = moment(new Date()).format('DD/MM/YYYY');
+    $scope.toDateStr = moment(new Date()).format('DD/MM/YYYY');
     $scope.initData = function(){
         $http({
             method: 'GET',
@@ -35,12 +37,16 @@ myApp.controller('userOrderCtrl', ['$scope',  '$http', function($scope, $http){
         }
        return deptNameFind;
     }
+    $scope.changeDateDouble = function(fromDate, toDate){
+        $scope.fromDateStr = fromDate;
+        $scope.toDateStr = toDate;
+    }
     $scope.orderingCallback = function(){
         var dateInput = angular.element(document.getElementById("date-order-input")).val();
         var dateStr = moment(dateInput, 'DD/MM/YYYY').format('DDMMYYYY');
         $http({
             method: 'POST',
-            url: 'cateringController/saveCatering?date=' + dateStr,
+            url: 'cateringController/saveCatering?fromDate=' + $scope.fromDateStr +'&toDate='+$scope.toDateStr,
             responseType: 'json',
             headers: {
                 contentType: "application/json; charset=utf-8",
@@ -48,9 +54,9 @@ myApp.controller('userOrderCtrl', ['$scope',  '$http', function($scope, $http){
             },
             data: $scope.arrData
         }).then(function successCallback(response) {
-            alert('SUCCESS');
+            showSuccessAlert();
         }, function errorCallback(response) {
-            alert('FAIL');
+            showErrorAlert();
         })
     }
 }]);

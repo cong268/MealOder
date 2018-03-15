@@ -4,6 +4,7 @@ myApp.controller('mealManagermentCtrl', ['$scope', 'NgTableParams', 'ngTableEven
     $scope.demoCheckbox = 1;
     $scope.dataFiltered = [];
     $scope.statusMeal = false;
+    $scope.visitorObject = undefined;
     $scope.locationArr = [];
     $scope.mealTimeArr = [];
     $scope.mealArr = [];
@@ -221,6 +222,14 @@ myApp.controller('mealManagermentCtrl', ['$scope', 'NgTableParams', 'ngTableEven
     $scope.editMeal = function(row){
         $scope.selectedItem = row;
         $scope.selectedItemClone = angular.copy($scope.selectedItem);
+    }
+    $scope.clearVisitorObject = function(){
+        $scope.visitorObject = null;
+    }
+    $scope.addVisitorObject = function(){
+        var objToPush = angular.copy($scope.visitorObject);
+        $scope.arrDataOrder.push(objToPush);
+        drawTableOrder();
     }
 
     $scope.submitMealManager = function(){

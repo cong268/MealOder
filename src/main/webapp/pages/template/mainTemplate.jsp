@@ -17,10 +17,13 @@
     <link rel="stylesheet" href="<c:url value="/assets/lib/bootstrap/bootstrap.min.css"></c:url>">
     <link rel="stylesheet" href="<c:url value="/assets/lib/ng-table/ng-table.min.css"></c:url>">
     <link rel="stylesheet" href="<c:url value="/assets/css/mainTemplayeStyle.css"></c:url>">
+    <link rel="stylesheet" href="<c:url value="/assets/css/tooltipster.bundle.min.css"></c:url>">
+    <link rel="stylesheet" href="<c:url value="/assets/css/tooltipster-borderless-cuzt.min.css"></c:url>">
     <link rel="stylesheet" href="<c:url value="/assets/lib/css/daterangepicker.css"></c:url>">
     <link rel="stylesheet" type="text/css" href="<c:url value="/assets/lib/css/util-css.css"></c:url>">
     <script type="text/javascript" src="<c:url value="/assets/js/jquery-1.11.3.min.js"></c:url>"></script>
     <script type="text/javascript" src="<c:url value="/assets/js/angular.min.js"></c:url>"></script>
+    <script type="text/javascript" src="<c:url value="/assets/js/tooltipster.bundle.min.js"></c:url>"></script>
     <script type="text/javascript" src="<c:url value="/assets/js/angular-click-outside.js"></c:url>"></script>
     <script type="text/javascript" src="<c:url value="/assets/js/moment-with-locales.js"></c:url>"></script>
     <script type="text/javascript" src="<c:url value="/assets/lib/bootstrap/bootstrap.min.js"></c:url>"></script>
@@ -93,6 +96,16 @@
     </nav>
     <div class="wrapper-nsrp-content">
         <tiles:insertAttribute name="mainContent"/>
+    </div>
+    <div class="popup-successful text-center">
+        <div class="p-t-30 p-b -30 p-l-20 p-r-20">
+            SUCCESS
+        </div>
+    </div>
+    <div class="popup-Error text-center">
+        <div class="p-t-30 p-b -30 p-l-20 p-r-20">
+            ERROR
+        </div>
     </div>
     <footer class="nsrp-page-footer">
         <div class="container">
