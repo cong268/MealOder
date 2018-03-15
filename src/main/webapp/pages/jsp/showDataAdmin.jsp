@@ -30,7 +30,7 @@
                     <div class="form-group">
                         <span class="col-sm-4 m-t-5 m-b-5">From date</span>
                         <div class="input-group col-sm-8">
-                            <input type="text" id="date-filter-from" date-range-picker-single
+                            <input type="text" id="date-filter-from" date-range-picker-single ng-change="dateChange()"
                                    ng-model="fromDate" class="form-control">
                             <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
                         </div>
@@ -40,7 +40,7 @@
                     <div class="form-group">
                         <span class="col-sm-4 m-t-5 m-b-5">To date</span>
                         <div class="input-group col-sm-8">
-                            <input type="text" id="date-filter-to" date-range-picker-single
+                            <input type="text" id="date-filter-to" date-range-picker-single ng-change="dateChange()"
                                    ng-model="toDate" class="form-control">
                             <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
                         </div>
@@ -54,10 +54,9 @@
                 <div class="col-sm-3 form-horizontal">
                     <div class="form-group">
                         <span class="col-sm-4 m-t-5 m-b-5">Meal time</span>
-                        <div class="input-group col-sm-8">
-                            <select ng-model="tableParams.filter()['mealTimeId']" class="form-control">
+                        <div class="input-group col-sm-8 col-xs-12">
+                            <select ng-model="mealTimeIdFilter" class="form-control">
                                 <option value="{{mealTime.mealTimeId}}" ng-repeat="mealTime in mealTimeArr">{{mealTime.mealTimeName}}</option>
-
                             </select>
                         </div>
                     </div>
@@ -65,8 +64,8 @@
                 <div class="col-sm-3 form-horizontal">
                     <div class="form-group">
                         <span class="col-sm-4 m-t-5 m-b-5">Meal type</span>
-                        <div class="input-group col-sm-8">
-                            <select ng-model="tableParams.filter()['mealId']" class="form-control">
+                        <div class="input-group col-sm-8 col-xs-12">
+                            <select ng-model="mealIdFilter" class="form-control">
                                 <option value="{{meal.mealId}}" ng-repeat="meal in mealArr">{{meal.mealName}}</option>
                             </select>
                         </div>
@@ -75,8 +74,8 @@
                 <div class="col-sm-3 form-horizontal">
                     <div class="form-group">
                         <span class="col-sm-4 m-t-5 m-b-5">Location</span>
-                        <div class="input-group col-sm-8">
-                            <select ng-model="tableParams.filter()['locationId']" class="form-control">
+                        <div class="input-group col-sm-8 col-xs-12">
+                            <select ng-model="locationIdFilter" class="form-control">
                                 <option value="{{location.locationId}}" ng-repeat="location in locationArr">{{location.locationName}}</option>
                             </select>
                         </div>
@@ -84,14 +83,17 @@
                 </div>
                 <div class="col-sm-3 form-horizontal">
                     <div class="form-group">
-                        <span class="col-sm-4 m-t-5 m-b-5">Department</span>
-                        <div class="input-group col-sm-8">
-                            <select ng-model="tableParams.filter()['departmentId']" class="form-control">
-                                <option value="{{department.departmentId}}" ng-repeat="department in locationArr">{{department.departmentName}}</option>
+                        <span class="col-sm-6 m-t-5 m-b-5">Department</span>
+                        <div class="input-group col-sm-6 col-xs-12">
+                            <select ng-model="departmentIdFilter" class="form-control">
+                                <option value="{{department.deptId}}" ng-repeat="department in departmentArr">{{department.deptName}}</option>
                             </select>
                         </div>
                     </div>
                 </div>
+            </div>
+            <div ng-cloak class="row m-b-10 col-md-12 col-lg-12 col-xs-12 col-md-12 text-left">
+                <span class="vcenter">Row count: </span><span class="text-danger vcenter fs-18" ng-cloak ng-bind="tableParams.total()"/>
             </div>
         </div>
     </div>
@@ -117,6 +119,13 @@
                 </tr>
             </table>
             <div class="showNoData" ng-if="tableParams.total() == 0" ng-cloak>No data available</div>
+        </div>
+    </div>
+    <div class=" row text-center m-l-0 m-r-0  m-t-10" ng-if="tableParams.total() > 0">
+        <div class="col-md-12  wrap-info highlight text-left">
+            <div ng-repeat="department in departmentArr" ng-if="department.count > 0">
+                <span>Department <span ng-bind="department.deptName"></span> : <span ng-bind="department.count"></span></span>
+            </div>
         </div>
     </div>
     <div class="row m-t-10">

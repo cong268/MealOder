@@ -6,6 +6,11 @@ myApp.controller('carteredAdminCtrl', ['$scope', 'NgTableParams', 'ngTableEvents
     $scope.mealArr = [];
     $scope.shilfArr = [];
     $scope.arrData = [];
+    $scope.mealTimeIdFilter='',
+    $scope.mealIdFilter='',
+    $scope.locationIdFilter='',
+    $scope.departmentIdFilter='',
+
     moment.locale('en');
     $scope.fromDate = moment(new Date()).format('DD/MM/YYYY');
     $scope.toDate = moment(new Date()).format('DD/MM/YYYY');
@@ -24,6 +29,7 @@ myApp.controller('carteredAdminCtrl', ['$scope', 'NgTableParams', 'ngTableEvents
                 $scope.mealTimeArr = dataAllPage.lstMealTime;
                 $scope.mealArr = dataAllPage.lstMealType;
                 $scope.shilfArr = dataAllPage.lstShift;
+                $scope.departmentArr = dataAllPage.lstDepartMent;
                 $scope.arrData = angular.copy(dataAllTable);
                 drawTable();
             }
@@ -70,21 +76,48 @@ myApp.controller('carteredAdminCtrl', ['$scope', 'NgTableParams', 'ngTableEvents
     function drawTable(){
         $scope.tableParams = new NgTableParams({
             page: 1,
-            count: 10
+            count: 10,
+            filter: {
+                'mealTimeId': $scope.mealTimeIdFilter,
+                'mealId': $scope.mealIdFilter,
+                'locationId': $scope.locationIdFilter,
+                'departmentId':$scope.departmentIdFilter
+            }
         }, {
+            counts: [5, 10, 50, 100],
             dataset: $scope.arrData,
         });
-
         ngTableEventsChannel.onAfterReloadData(function(tableParams, filteredData){
-            $scope.dataFiltered = filteredData || tableParams.data;
+            $scope.dataFiltered = filteredData;
         });
     }
-
-    $scope.filterAccept = function(){
-        var fromDateInput = angular.element(document.getElementById("date-filter-from")).val();
-        var toDateInput = angular.element(document.getElementById("date-filter-to")).val();
-        var fromdateStr = moment(fromDateInput, 'DD/MM/YYYY').format('DDMMYYYY');
-        var toDateStr = moment(toDateInput, 'DD/MM/YYYY').format('DDMMYYYY');
+    $scope.$watch('dataFiltered', function(){
+        if($scope.dataFiltered){
+            angular.forEach($scope.departmentArr, function(dept){
+                dept['count'] = 0;
+                angular.forEach($scope.dataFiltered, function (data) {
+                    if(data.departmentId == dept.deptId){
+                        dept['count']++;
+                    }
+                })
+            })
+        }
+    })
+    $scope.$watchGroup(['mealTimeIdFilter','mealIdFilter','locationIdFilter','departmentIdFilter'], function(){
+        if($scope.tableParams){
+            $scope.tableParams.filter(
+                {
+                    'mealTimeId': $scope.mealTimeIdFilter,
+                    'mealId': $scope.mealIdFilter,
+                    'locationId': $scope.locationIdFilter,
+                    'departmentId':$scope.departmentIdFilter
+                }
+            );
+        }
+    })
+    $scope.dateChange = function(){
+        var fromdateStr = moment($scope.fromDate, 'DD/MM/YYYY').format('DDMMYYYY');
+        var toDateStr = moment($scope.toDate, 'DD/MM/YYYY').format('DDMMYYYY');
         $http({
             method: 'GET',
             url: 'cateringController/getLstByDate?fromDate='+fromdateStr+'&toDate=' + toDateStr,
