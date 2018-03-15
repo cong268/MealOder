@@ -68,5 +68,12 @@ public class CateringController {
 		String userRole = (String) session.getAttribute(ConstanKey.USER_ROLE);
 		return mealsService.saveCatering(userRole, listMealOder, date);
 	}
+	
+	@RequestMapping(value = "/saveCateringEmployee", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+	public Boolean saveCateringEmployee(@RequestBody List<MealsOrderBean> listMealOder,
+			@RequestParam("fromDate") String fromDate, @RequestParam("toDate") String toDate) {
+//		String userRole = (String) session.getAttribute(ConstanKey.USER_ROLE);
+		return mealsService.saveCateringEmployee(listMealOder,fromDate,toDate);
+	}
 
 }

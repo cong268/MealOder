@@ -84,7 +84,7 @@ public class ExcelReportView extends AbstractExcelView {
 						cell = aRow.createCell(6);
 						cell.setCellValue("");
 					}
-					num += lst.size();
+					num = num + lst.size() + 1;
 				}
 			}
 		}

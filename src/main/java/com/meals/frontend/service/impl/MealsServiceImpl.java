@@ -2,6 +2,7 @@ package com.meals.frontend.service.impl;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -314,6 +315,7 @@ public class MealsServiceImpl implements MealsService {
 						oderBean.setMealId(catering.getMealId());
 						oderBean.setLocationId(catering.getLocationId());
 						oderBean.setShiftId(catering.getShiftId());
+						oderBean.setDateMeal(FunctionUtils.convertDateStringByFormatLocal(catering.getCateringDate(), ConstanKey.FORMAT_DATE.DATE_SLASH_FORMAT));
 						lstOder.add(oderBean);
 					}
 				}
@@ -488,4 +490,38 @@ public class MealsServiceImpl implements MealsService {
 		return lstShift;
 	}
 
+	@Override
+	public Boolean saveCateringEmployee(List<MealsOrderBean> listMealOder, String fromDate, String toDate) {
+		Date fromTime = FunctionUtils.convertDateByFormatLocal(fromDate, ConstanKey.FORMAT_DATE.DATE_TIME_FORMAT);
+		Date toTime = FunctionUtils.convertDateByFormatLocal(toDate, ConstanKey.FORMAT_DATE.DATE_TIME_FORMAT);
+		Calendar cal = Calendar.getInstance();
+		if (listMealOder != null && !listMealOder.isEmpty()) {
+			while (fromTime.compareTo(toTime) >= 0) {
+				for (MealsOrderBean obj : listMealOder) {
+					Catering dto = cateringDAO.getByStaffId(obj.getStaffId(), fromTime);
+					if (dto == null) {
+						dto = new Catering();
+						dto.setStaffId(obj.getStaffId());
+					}
+					Staff tsStaff = staffDAO.getByStaff(obj.getStaffId());
+					if (tsStaff != null) {
+						dto.setDepartId(tsStaff.getDeptId());
+					}
+					dto.setMealId(obj.getMealId());
+					dto.setMealTimeId(obj.getMealTimeId());
+					dto.setLocationId(obj.getLocationId());
+					dto.setShiftId(obj.getShiftId());
+					dto.setCateringDate(fromTime);
+					dto.setCatered(false);
+					dto.setStatus(false);
+					dto.setOrdered(true);
+					cateringDAO.saveOrUpdate(dto);
+				}
+				cal.setTime(fromTime);
+				cal.add(Calendar.DATE, 1);
+				fromTime = cal.getTime();
+			}
+		}
+		return true;
+	}
 }

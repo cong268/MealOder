@@ -22,4 +22,5 @@ public interface MealsService {
 	Boolean saveUser (UserBean bean);
 	List<RoleBean> getAllRole();
 	DataExportBean getDataExport (String fromDate, String toDate);
+	Boolean saveCateringEmployee (List<MealsOrderBean> listMealOder, String fromDate, String toDate);
 }

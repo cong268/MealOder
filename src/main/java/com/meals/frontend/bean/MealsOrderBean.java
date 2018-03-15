@@ -8,6 +8,7 @@ public class MealsOrderBean {
 	private Integer mealId;
 	private Integer departmentId;
 	private Integer shiftId;
+	private String dateMeal;
 
 	public String getStaffId() {
 		return staffId;
@@ -63,6 +64,14 @@ public class MealsOrderBean {
 
 	public void setShiftId(Integer shiftId) {
 		this.shiftId = shiftId;
+	}
+
+	public String getDateMeal() {
+		return dateMeal;
+	}
+
+	public void setDateMeal(String dateMeal) {
+		this.dateMeal = dateMeal;
 	}
 
 }
