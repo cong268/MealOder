@@ -109,7 +109,7 @@ myApp.controller('carterAdminCtrl', ['$scope', 'NgTableParams', 'ngTableEventsCh
         var dateStr = moment(dateInput, 'DD/MM/YYYY').format('DDMMYYYY');
         $http({
             method: 'POST',
-            url: 'cateringController/saveCatering?date='+dateStr,
+            url: 'cateringController/saveCateringByAdmin?date='+dateStr,
             responseType: 'json',
             headers: {
                 contentType: "application/json; charset=utf-8",

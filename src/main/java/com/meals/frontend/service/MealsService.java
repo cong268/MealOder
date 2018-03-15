@@ -17,10 +17,11 @@ public interface MealsService {
 	DataBean getLstByOder(Integer userId, String date);
 	DataBean getLstByStatus (String date);
 	DataBean getLstByDate (String fromDate,String toDate);
-	Boolean saveCatering(String userRole, List<MealsOrderBean> listMealOder, String date);
 	Boolean saveStaff (StaffBean bean);
 	Boolean saveUser (UserBean bean);
 	List<RoleBean> getAllRole();
 	DataExportBean getDataExport (String fromDate, String toDate);
 	Boolean saveCateringEmployee (List<MealsOrderBean> listMealOder, String fromDate, String toDate);
+	Boolean saveCateringByManager(Integer departId,List<MealsOrderBean> listMealOder, String date);
+	Boolean saveCateringByAdmin(List<MealsOrderBean> listMealOder, String date);
 }

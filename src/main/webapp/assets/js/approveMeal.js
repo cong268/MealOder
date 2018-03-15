@@ -144,7 +144,7 @@ myApp.controller('approveMealCtrl', ['$scope', 'NgTableParams', 'ngTableEventsCh
         })
         $http({
             method: 'POST',
-            url: 'cateringController/saveCatering?date='+dateStr,
+            url: 'cateringController/saveCateringByManager?date='+dateStr,
             responseType: 'json',
             headers: {
                 contentType: "application/json; charset=utf-8",
