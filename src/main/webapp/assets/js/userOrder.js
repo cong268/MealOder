@@ -46,7 +46,7 @@ myApp.controller('userOrderCtrl', ['$scope',  '$http', function($scope, $http){
         var dateStr = moment(dateInput, 'DD/MM/YYYY').format('DDMMYYYY');
         $http({
             method: 'POST',
-            url: 'cateringController/saveCatering?fromDate=' + $scope.fromDateStr +'&toDate='+$scope.toDateStr,
+            url: 'cateringController/saveCateringEmployee?fromDate=' + $scope.fromDateStr +'&toDate='+$scope.toDateStr,
             responseType: 'json',
             headers: {
                 contentType: "application/json; charset=utf-8",

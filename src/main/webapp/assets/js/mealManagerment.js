@@ -237,13 +237,13 @@ myApp.controller('mealManagermentCtrl', ['$scope', 'NgTableParams', 'ngTableEven
         var dateStr = moment(dateInput, 'DD/MM/YYYY').format('DDMMYYYY');
         $http({
             method: 'POST',
-            url: 'cateringController/saveCatering?date=' + dateStr,
+            url: 'cateringController/saveCateringByManager?date=' + dateStr,
             responseType: 'json',
             headers: {
                 contentType: "application/json; charset=utf-8",
                 dataType: 'JSON'
             },
-            data: listMealSave
+            data: $scope.arrDataOrder
         }).then(function successCallback(response) {
             alert('SUCCESS');
         }, function errorCallback(response) {

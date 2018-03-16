@@ -188,10 +188,12 @@ public class MealsServiceImpl implements MealsService {
 			if (lst != null && !lst.isEmpty()) {
 				for (Catering catering : lst) {
 					MealsOrderBean oderBean = new MealsOrderBean();
+					oderBean.setStaffId(catering.getStaffId());
 					Staff obj = staffDAO.getByStaff(catering.getStaffId());
 					if (obj != null) {
-						oderBean.setStaffId(obj.getStaffId());
 						oderBean.setStaffName(obj.getStaffName());
+					} else {
+						oderBean.setStaffName("Visitor");
 					}
 					oderBean.setDepartmentId(catering.getDepartId());
 					oderBean.setMealTimeId(catering.getMealTimeId());
@@ -228,9 +230,11 @@ public class MealsServiceImpl implements MealsService {
 					MealsOrderBean oderBean = new MealsOrderBean();
 					Staff obj = staffDAO.getByStaff(catering.getStaffId());
 					if (obj != null) {
-						oderBean.setStaffId(obj.getStaffId());
 						oderBean.setStaffName(obj.getStaffName());
+					} else {
+						oderBean.setStaffName("Visitor");
 					}
+					oderBean.setStaffId(catering.getStaffId());
 					oderBean.setDepartmentId(catering.getDepartId());
 					oderBean.setMealTimeId(catering.getMealTimeId());
 					oderBean.setMealId(catering.getMealId());
@@ -266,10 +270,12 @@ public class MealsServiceImpl implements MealsService {
 			if (lst != null && !lst.isEmpty()) {
 				for (Catering catering : lst) {
 					MealsOrderBean oderBean = new MealsOrderBean();
+					oderBean.setStaffId(catering.getStaffId());
 					Staff obj = staffDAO.getByStaff(catering.getStaffId());
 					if (obj != null) {
-						oderBean.setStaffId(obj.getStaffId());
 						oderBean.setStaffName(obj.getStaffName());
+					} else {
+						oderBean.setStaffName("Visitor");
 					}
 					oderBean.setDepartmentId(catering.getDepartId());
 					oderBean.setMealTimeId(catering.getMealTimeId());
@@ -356,31 +362,33 @@ public class MealsServiceImpl implements MealsService {
 			List<Catering> lst = cateringDAO.getLstByDate(fromTime, tomorrow);
 			if (lst != null && !lst.isEmpty()) {
 				for (Catering catering : lst) {
+					MealsOrderBean oderBean = new MealsOrderBean();
 					Staff obj = staffDAO.getByStaff(catering.getStaffId());
 					if (obj != null) {
-						List<MealsOrderBean> list = mapDataByDepart.get(obj.getDeptId());
-						if (list == null) {
-							list = new ArrayList<>();
-						}
-						if (!mapDepartMent.containsKey(catering.getDepartId())) {
-							Department department = constantDAO.getDepartment(catering.getDepartId());
-							mapDepartMent.put(department.getDeptId(), department.getDeptName());
-						}
-						if (!mapLocation.containsKey(catering.getLocationId())) {
-							Location location = constantDAO.getLocationById(catering.getLocationId());
-							mapLocation.put(location.getLocationId(), location.getLocationName());
-						}
-						MealsOrderBean oderBean = new MealsOrderBean();
-						oderBean.setStaffId(obj.getStaffId());
 						oderBean.setStaffName(obj.getStaffName());
-						oderBean.setDepartmentId(catering.getDepartId());
-						oderBean.setMealTimeId(catering.getMealTimeId());
-						oderBean.setMealId(catering.getMealId());
-						oderBean.setLocationId(catering.getLocationId());
-						oderBean.setShiftId(catering.getShiftId());
-						list.add(oderBean);
-						mapDataByDepart.put(catering.getDepartId(), list);
+					} else {
+						oderBean.setStaffName("Visitor");
 					}
+					List<MealsOrderBean> list = mapDataByDepart.get(catering.getDepartId());
+					if (list == null) {
+						list = new ArrayList<>();
+					}
+					if (!mapDepartMent.containsKey(catering.getDepartId())) {
+						Department department = constantDAO.getDepartment(catering.getDepartId());
+						mapDepartMent.put(department.getDeptId(), department.getDeptName());
+					}
+					if (!mapLocation.containsKey(catering.getLocationId())) {
+						Location location = constantDAO.getLocationById(catering.getLocationId());
+						mapLocation.put(location.getLocationId(), location.getLocationName());
+					}
+					oderBean.setStaffId(catering.getStaffId());
+					oderBean.setDepartmentId(catering.getDepartId());
+					oderBean.setMealTimeId(catering.getMealTimeId());
+					oderBean.setMealId(catering.getMealId());
+					oderBean.setLocationId(catering.getLocationId());
+					oderBean.setShiftId(catering.getShiftId());
+					list.add(oderBean);
+					mapDataByDepart.put(catering.getDepartId(), list);
 				}
 			}
 			String startDate = FunctionUtils.convertDateStringByFormatLocal(fromTime,
