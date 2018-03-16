@@ -120,6 +120,12 @@
                     <td data-title="'Shift'" class="text-center">
                         {{getShiftName(row.shiftId)}}
                     </td>
+                    <td data-title="'Department'" class="text-center">
+                        {{getDepartmentName(row.departmentId)}}
+                    </td>
+                    <td data-title="'Date'" class="text-center">
+                        {{row.dateMeal | date}}
+                    </td>
                 </tr>
             </table>
             <div class="showNoData" ng-if="tableParams.total() == 0" ng-cloak>No data available</div>

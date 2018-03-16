@@ -72,6 +72,15 @@ myApp.controller('carteredAdminCtrl', ['$scope', 'NgTableParams', 'ngTableEvents
         }
         return mealName;
     }
+    $scope.getDepartmentName = function(departmentId){
+        var deptNameFind = '';
+        for(var i = 0 ; i< $scope.departmentArr.length; i++){
+            if($scope.departmentArr[i].deptId == departmentId){
+                deptNameFind =  $scope.departmentArr[i].deptName;
+            }
+        }
+        return deptNameFind;
+    }
     $scope.getShiftName = function(shiftId){
         var shiftName = '';
         for(var i = 0 ; i< $scope.shilfArr.length; i++){
