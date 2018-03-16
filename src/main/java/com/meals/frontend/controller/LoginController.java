@@ -57,6 +57,9 @@ public class LoginController {
 					// Truong phong
 					ModelAndView model = new ModelAndView("redirect:mealManagerment");
 					return model;
+				} else if (userRole.equals(ConstanKey.ROLE.ROLE_CHEF)){
+					ModelAndView model = new ModelAndView("redirect:showDataAdmin");
+					return model;
 				} else {
 					// Nhan vien
 					ModelAndView model = new ModelAndView("redirect:userOrder");

@@ -9,7 +9,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles" %>
 <html>
-<c:if test = "${sessionScope.userRole == 'Admin'}">
+<c:if test = "${sessionScope.userRole == 'Admin' || sessionScope.userRole == 'Chef'}">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -138,7 +138,7 @@
 </div>
 </body>
 </c:if>
-<c:if test = "${sessionScope.userRole != 'Admin'}">
+<c:if test = "${sessionScope.userRole != 'Admin' && sessionScope.userRole != 'Chef'}">
     <div class="container">
         <h1>ACCESS DENIED <span class="badge p-t-8 p-b-8 p-l-8 p-r-8">404</span></h1>
         <h3>You not have permission to access this page !</h3>

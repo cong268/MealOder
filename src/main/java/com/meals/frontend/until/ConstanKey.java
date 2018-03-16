@@ -10,6 +10,7 @@ public class ConstanKey {
 		public static final String ROLE_ADMIN = "Admin";
 		public static final String ROLE_MANAGER = "Manager";
 		public static final String ROLE_EMPLOYEE = "Employee";
+		public static final String ROLE_CHEF = "Chef";
 	}
 	
 	public interface FORMAT_DATE {
