@@ -250,6 +250,7 @@ myApp.controller('mealManagermentCtrl', ['$scope', 'NgTableParams', 'ngTableEven
             data: dataObj
         }).then(function successCallback(response) {
             showSuccessAlert();
+            $scope.initData();
         }, function errorCallback(response) {
             showErrorAlert();
         })

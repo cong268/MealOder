@@ -152,9 +152,10 @@ myApp.controller('approveMealCtrl', ['$scope', 'NgTableParams', 'ngTableEventsCh
             },
             data: listMealSave
         }).then(function successCallback(response) {
-            alert('SUCCESS');
+            showSuccessAlert();
+            $scope.initData();
         }, function errorCallback(response) {
-            alert('FAIL');
+            showErrorAlert();
         })
     }
 }]);

@@ -27,9 +27,10 @@ myApp.controller('registerUserCtrl', ['$scope', '$http' , function($scope, $http
                 },
                 data: $scope.userObj
             }).then(function successCallback(response) {
-                alert('SUCCESS');
+                showSuccessAlert();
+                $scope.userObj = undefined;
             }, function errorCallback(response) {
-                alert('FAIL');
+                showErrorAlert();
             })
         }
     }

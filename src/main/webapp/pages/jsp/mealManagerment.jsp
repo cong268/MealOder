@@ -270,7 +270,14 @@
                                         ng-value="mealObj.mealId">{{mealObj.mealName}}</option>
                             </select>
                         </div>
-
+                        <div class="form-group">
+                            <label for="visitor-shift-popup" class="col-form-label">Meal type:</label>
+                            <select id="visitor-shift-popup" ng-model="visitorObject.shiftId" class="form-control">
+                                <option ng-selected="visitorObject.shiftId == shilfObj.shiftId"
+                                        ng-repeat="shilfObj in shilfArr"
+                                        ng-value="shilfObj.shiftId">{{shilfObj.shiftName}}</option>
+                            </select>
+                        </div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>

@@ -8,6 +8,7 @@ myApp.controller('carterAdminCtrl', ['$scope', 'NgTableParams', 'ngTableEventsCh
     $scope.mealArr = [];
     $scope.shilfArr = [];
     $scope.arrData = [];
+    $scope.departmentArr = [];
     moment.locale('en');
     $scope.dateFilter = moment(new Date()).format('DD/MM/YYYY');
     $scope.initData = function(){
@@ -24,6 +25,7 @@ myApp.controller('carterAdminCtrl', ['$scope', 'NgTableParams', 'ngTableEventsCh
                 $scope.mealTimeArr = dataAllPage.lstMealTime;
                 $scope.mealArr = dataAllPage.lstMealType;
                 $scope.shilfArr = dataAllPage.lstShift;
+                $scope.departmentArr = dataAllPage.lstDepartMent;
                 $scope.arrData = angular.copy(dataAllTable);
                 drawTable();
             }
@@ -67,6 +69,15 @@ myApp.controller('carterAdminCtrl', ['$scope', 'NgTableParams', 'ngTableEventsCh
         }
         return shiftName;
     }
+    $scope.getDepartmentName = function(departmentId){
+        var deptNameFind = '';
+        for(var i = 0 ; i< $scope.departmentArr.length; i++){
+            if($scope.departmentArr[i].deptId == departmentId){
+                deptNameFind =  $scope.departmentArr[i].deptName;
+            }
+        }
+        return deptNameFind;
+    }
     function drawTable(){
         $scope.tableParams = new NgTableParams({
             page: 1,
@@ -95,6 +106,7 @@ myApp.controller('carterAdminCtrl', ['$scope', 'NgTableParams', 'ngTableEventsCh
                 $scope.mealTimeArr = dataAllPage.lstMealTime;
                 $scope.mealArr = dataAllPage.lstMealType;
                 $scope.shilfArr = dataAllPage.lstShift;
+                $scope.departmentArr = dataAllPage.lstDepartMent;
                 $scope.arrData = angular.copy(dataAllTable);
                 drawTable();
             }
@@ -117,9 +129,10 @@ myApp.controller('carterAdminCtrl', ['$scope', 'NgTableParams', 'ngTableEventsCh
             },
             data: $scope.arrData
         }).then(function successCallback(response) {
-            alert('SUCCESS');
+            showSuccessAlert();
+            $scope.initData();
         }, function errorCallback(response) {
-            alert('FAIL');
+            showErrorAlert();
         })
     }
 }]);

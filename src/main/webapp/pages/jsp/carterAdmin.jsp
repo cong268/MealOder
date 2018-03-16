@@ -45,17 +45,20 @@
                     <tr ng-repeat="row in $data">
                         <td data-title="'EmployeeCode'" sortable="'staffId'">{{row.staffId}}</td>
                         <td data-title="'Fullname'" sortable="'staffName'">{{row.staffName}}</td>
-                        <td data-title="'Meal Time'" >
+                        <td data-title="'Meal Time'" class="text-center">
                             {{getMealTimeName(row.mealTimeId)}}
                         </td>
-                        <td data-title="'Location'">
+                        <td data-title="'Location'" class="text-center">
                             {{getLocationName(row.locationId)}}
                         </td>
-                        <td data-title="'Meal Type'">
+                        <td data-title="'Meal Type'" class="text-center">
                             {{getMealName(row.mealId)}}
                         </td>
-                        <td data-title="'Shift'">
+                        <td data-title="'Shift'" class="text-center">
                             {{getShiftName(row.shiftId)}}
+                        </td>
+                        <td data-title="'Department'" class="text-center">
+                            {{getDepartmentName(row.departmentId)}}
                         </td>
                     </tr>
                 </table>
