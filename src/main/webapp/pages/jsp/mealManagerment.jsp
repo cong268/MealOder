@@ -271,8 +271,8 @@
                             </select>
                         </div>
                         <div class="form-group">
-                            <label for="visitor-shift-popup" class="col-form-label">Meal type:</label>
-                            <select id="visitor-shift-popup" ng-model="visitorObject.shiftId" class="form-control">
+                            <label for="visitor-shift-popup" class="col-form-label">Shift:</label>
+                            <select id="visitor-shift-popup" ng-model="visitorObject.shiftId" class="form-control" required>
                                 <option ng-selected="visitorObject.shiftId == shilfObj.shiftId"
                                         ng-repeat="shilfObj in shilfArr"
                                         ng-value="shilfObj.shiftId">{{shilfObj.shiftName}}</option>
