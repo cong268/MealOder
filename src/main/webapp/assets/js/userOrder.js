@@ -44,8 +44,8 @@ myApp.controller('userOrderCtrl', ['$scope',  '$http', function($scope, $http){
     $scope.orderingCallback = function(){
 //        var dateInput = angular.element(document.getElementById("date-order-input")).val();
 //        var dateStr = moment(dateInput, 'DD/MM/YYYY').format('DDMMYYYY');
-    	var fromdateStr = moment($scope.fromDate, 'DD/MM/YYYY').format('DDMMYYYY');
-        var toDateStr = moment($scope.toDate, 'DD/MM/YYYY').format('DDMMYYYY');
+    	var fromdateStr = moment($scope.fromDateStr, 'DD/MM/YYYY').format('DDMMYYYY');
+        var toDateStr = moment($scope.toDateStr, 'DD/MM/YYYY').format('DDMMYYYY');
         $http({
             method: 'POST',
             url: 'cateringController/saveCateringEmployee?fromDate=' + fromdateStr +'&toDate='+toDateStr,
