@@ -464,31 +464,33 @@ public class MealsServiceImpl implements MealsService {
 		Date fromTime = FunctionUtils.convertDateByFormatLocal(fromDate, ConstanKey.FORMAT_DATE.DATE_TIME_FORMAT);
 		Date toTime = FunctionUtils.convertDateByFormatLocal(toDate, ConstanKey.FORMAT_DATE.DATE_TIME_FORMAT);
 		Calendar cal = Calendar.getInstance();
-		if (listMealOder != null && !listMealOder.isEmpty()) {
-			while (fromTime.compareTo(toTime) >= 0) {
-				for (MealsOrderBean obj : listMealOder) {
-					Catering dto = cateringDAO.getByStaffId(obj.getStaffId(), fromTime);
-					if (dto == null) {
-						dto = new Catering();
-						dto.setStaffId(obj.getStaffId());
+		if(fromTime != null && toTime != null){
+			if (listMealOder != null && !listMealOder.isEmpty()) {
+				while (fromTime.compareTo(toTime) >= 0) {
+					for (MealsOrderBean obj : listMealOder) {
+						Catering dto = cateringDAO.getByStaffId(obj.getStaffId(), fromTime);
+						if (dto == null) {
+							dto = new Catering();
+							dto.setStaffId(obj.getStaffId());
+						}
+						Staff tsStaff = staffDAO.getByStaff(obj.getStaffId());
+						if (tsStaff != null) {
+							dto.setDepartId(tsStaff.getDeptId());
+						}
+						dto.setMealId(obj.getMealId());
+						dto.setMealTimeId(obj.getMealTimeId());
+						dto.setLocationId(obj.getLocationId());
+						dto.setShiftId(obj.getShiftId());
+						dto.setCateringDate(fromTime);
+						dto.setCatered(false);
+						dto.setStatus(false);
+						dto.setOrdered(true);
+						cateringDAO.saveOrUpdate(dto);
 					}
-					Staff tsStaff = staffDAO.getByStaff(obj.getStaffId());
-					if (tsStaff != null) {
-						dto.setDepartId(tsStaff.getDeptId());
-					}
-					dto.setMealId(obj.getMealId());
-					dto.setMealTimeId(obj.getMealTimeId());
-					dto.setLocationId(obj.getLocationId());
-					dto.setShiftId(obj.getShiftId());
-					dto.setCateringDate(fromTime);
-					dto.setCatered(false);
-					dto.setStatus(false);
-					dto.setOrdered(true);
-					cateringDAO.saveOrUpdate(dto);
+					cal.setTime(fromTime);
+					cal.add(Calendar.DATE, 1);
+					fromTime = cal.getTime();
 				}
-				cal.setTime(fromTime);
-				cal.add(Calendar.DATE, 1);
-				fromTime = cal.getTime();
 			}
 		}
 		return true;

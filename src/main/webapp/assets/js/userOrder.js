@@ -42,11 +42,13 @@ myApp.controller('userOrderCtrl', ['$scope',  '$http', function($scope, $http){
         $scope.toDateStr = toDate;
     }
     $scope.orderingCallback = function(){
-        var dateInput = angular.element(document.getElementById("date-order-input")).val();
-        var dateStr = moment(dateInput, 'DD/MM/YYYY').format('DDMMYYYY');
+//        var dateInput = angular.element(document.getElementById("date-order-input")).val();
+//        var dateStr = moment(dateInput, 'DD/MM/YYYY').format('DDMMYYYY');
+    	var fromdateStr = moment($scope.fromDate, 'DD/MM/YYYY').format('DDMMYYYY');
+        var toDateStr = moment($scope.toDate, 'DD/MM/YYYY').format('DDMMYYYY');
         $http({
             method: 'POST',
-            url: 'cateringController/saveCateringEmployee?fromDate=' + $scope.fromDateStr +'&toDate='+$scope.toDateStr,
+            url: 'cateringController/saveCateringEmployee?fromDate=' + fromdateStr +'&toDate='+toDateStr,
             responseType: 'json',
             headers: {
                 contentType: "application/json; charset=utf-8",
