@@ -503,6 +503,20 @@ public class MealsServiceImpl implements MealsService {
 		Date cateringDate = FunctionUtils.convertDateByFormatLocal(date, ConstanKey.FORMAT_DATE.DATE_TIME_FORMAT);
 		Date cateringTime = new Date();
 		if (listMealOder != null && !listMealOder.isEmpty()) {
+//			List<Catering> lst = cateringDAO.getLstByOder(departId, cateringDate);
+//			if (lst != null && !lst.isEmpty()){
+//				for (Catering obj : lst){
+//					Boolean iExits = false;
+//					for (MealsOrderBean oder : listMealOder) {
+//						if (!oder.getStaffId().equals(obj.getStaffId())){
+//							iExits = true;
+//						} else {
+//							iExits = false;
+//							break;
+//						}
+//					}
+//				}
+//			}
 			for (MealsOrderBean obj : listMealOder) {
 				Catering dto = new Catering();
 				dto.setStaffId(obj.getStaffId());
