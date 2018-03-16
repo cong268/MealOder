@@ -464,9 +464,10 @@ public class MealsServiceImpl implements MealsService {
 		Date fromTime = FunctionUtils.convertDateByFormatLocal(fromDate, ConstanKey.FORMAT_DATE.DATE_TIME_FORMAT);
 		Date toTime = FunctionUtils.convertDateByFormatLocal(toDate, ConstanKey.FORMAT_DATE.DATE_TIME_FORMAT);
 		Calendar cal = Calendar.getInstance();
+		Date cateringTime = cal.getTime();
 		if(fromTime != null && toTime != null){
 			if (listMealOder != null && !listMealOder.isEmpty()) {
-				while (fromTime.compareTo(toTime) >= 0) {
+				while (fromTime.compareTo(toTime) <= 0) {
 					for (MealsOrderBean obj : listMealOder) {
 						Catering dto = cateringDAO.getByStaffId(obj.getStaffId(), fromTime);
 						if (dto == null) {
@@ -482,6 +483,7 @@ public class MealsServiceImpl implements MealsService {
 						dto.setLocationId(obj.getLocationId());
 						dto.setShiftId(obj.getShiftId());
 						dto.setCateringDate(fromTime);
+						dto.setCateringTime(cateringTime);
 						dto.setCatered(false);
 						dto.setStatus(false);
 						dto.setOrdered(true);
