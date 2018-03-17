@@ -6,11 +6,16 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.poi.hssf.usermodel.HSSFFont;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.CellStyle;
+import org.apache.poi.ss.usermodel.HorizontalAlignment;
 import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.VerticalAlignment;
 import org.apache.poi.ss.util.CellRangeAddress;
+import org.apache.poi.ss.util.CellUtil;
 import org.springframework.web.servlet.view.document.AbstractExcelView;
 
 import com.meals.frontend.bean.DataExportBean;
@@ -24,12 +29,30 @@ public class ExcelReportView extends AbstractExcelView {
 		response.setHeader("Content-Disposition", "attachment; filename=\"DataReport.xls\"");
 		DataExportBean dataBean = (DataExportBean) model.get("dataExport");
 		HSSFSheet sheet = workbook.createSheet();
+		sheet.setColumnWidth(0, 7*256);
+		sheet.setColumnWidth(1, 14*256);
+		sheet.setColumnWidth(2, 17*256);
+		sheet.setColumnWidth(3, 14*256);
+		sheet.setColumnWidth(4, 28*256);
+		sheet.setColumnWidth(5, 18*256);
+		sheet.setColumnWidth(6, 14*256);
+		CellStyle style = null;
+		HSSFFont font = null;
+
 		Row rowTitle = sheet.createRow(1);
 		rowTitle.setHeight((short) (rowTitle.getHeight() * 2));
+		style = workbook.createCellStyle();
+		font = workbook.createFont();
+		style.setAlignment(HorizontalAlignment.CENTER);
+		style.setVerticalAlignment(VerticalAlignment.CENTER);
+		font.setBold(true);
+		font.setFontHeightInPoints((short) 12);
+		style.setFont(font);
 		Cell cellTitle = rowTitle.createCell(0);
 		cellTitle.setCellValue("Báo Cáo Tình hình ăn của nhân viên");
+		cellTitle.setCellStyle(style);
 		sheet.addMergedRegion(new CellRangeAddress(1, 1, 0, 6));
-		
+
 		Row rowTime = sheet.createRow(3);
 		Cell cellTime = rowTime.createCell(2);
 		cellTime.setCellValue("Từ ngày: " + dataBean.getFromDate());
@@ -51,7 +74,7 @@ public class ExcelReportView extends AbstractExcelView {
 		cellHeader.setCellValue("Meal type (1: Lunch/2: dinner/3: supper,breakfast)");
 		cellHeader = rowHeader.createCell(6);
 		cellHeader.setCellValue("Remark");
-		
+
 		Map<Integer, String> mapDepartment = dataBean.getMapDepartMent();
 		Map<Integer, String> mapLocation = dataBean.getMapLocation();
 		Map<Integer, List<MealsOrderBean>> mapLstByDepart = dataBean.getMapDataByDepart();
@@ -65,12 +88,12 @@ public class ExcelReportView extends AbstractExcelView {
 				cellDepart.setCellValue("Phòng : " + mapDepartment.get(departId));
 				List<MealsOrderBean> lst = mapLstByDepart.get(departId);
 				if (lst != null) {
-					for (int i = 0; i <lst.size(); i++) {
+					for (int i = 0; i < lst.size(); i++) {
 						int k = num + i + 1;
 						MealsOrderBean bean = lst.get(i);
 						Row aRow = sheet.createRow(k);
 						Cell cell = aRow.createCell(0);
-						cell.setCellValue(i+1);
+						cell.setCellValue(i + 1);
 						cell = aRow.createCell(1);
 						cell.setCellValue(bean.getStaffId());
 						cell = aRow.createCell(2);
