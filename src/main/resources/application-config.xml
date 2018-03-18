@@ -33,14 +33,12 @@
 		<beans:property name="annotatedClasses">
 			<beans:list>
 				<beans:value>com.meals.backend.model.User</beans:value>
-				<beans:value>com.meals.backend.model.UserRole</beans:value>
+				<beans:value>com.meals.backend.model.Userrole</beans:value>
 				<beans:value>com.meals.backend.model.Catering</beans:value>
 				<beans:value>com.meals.backend.model.Department</beans:value>
 				<beans:value>com.meals.backend.model.Location</beans:value>
-				<beans:value>com.meals.backend.model.Meal</beans:value>
-				<beans:value>com.meals.backend.model.MealTime</beans:value>
-				<beans:value>com.meals.backend.model.Shift</beans:value>
 				<beans:value>com.meals.backend.model.Staff</beans:value>
+				<beans:value>com.meals.backend.model.Allcode</beans:value>
 			</beans:list>
 		</beans:property>
 		<beans:property name="hibernateProperties">

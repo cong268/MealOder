@@ -94,6 +94,7 @@ public class ExcelReportView extends AbstractExcelView {
 						Row aRow = sheet.createRow(k);
 						Cell cell = aRow.createCell(0);
 						cell.setCellValue(i + 1);
+						CellUtil.setAlignment(cell, HorizontalAlignment.LEFT);
 						cell = aRow.createCell(1);
 						cell.setCellValue(bean.getStaffId());
 						cell = aRow.createCell(2);

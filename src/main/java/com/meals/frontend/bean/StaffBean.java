@@ -1,7 +1,5 @@
 package com.meals.frontend.bean;
 
-import javax.persistence.Column;
-
 public class StaffBean {
 	private String staffId;
 	private String staffName;

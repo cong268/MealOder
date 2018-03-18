@@ -34,7 +34,7 @@ public class CateringDAOImpl implements CateringDAO {
 	public List<Catering> getLstByOder(Integer departId, Date date) {
 		Session session = sessionFactory.getCurrentSession();
 		Query query = session.createQuery(
-				"FROM Catering c WHERE c.departId = :departId AND c.cateringDate = :cateringDate AND c.ordered = 1 AND c.status = 0 AND c.catered = 0");
+				"FROM Catering c WHERE c.departId = :departId AND c.cateringPK.cateringDate = :cateringDate AND c.ordered = 1 AND c.status = 0 AND c.catered = 0");
 		query.setParameter("departId", departId);
 		query.setParameter("cateringDate", date);
 		return query.list();
@@ -44,7 +44,7 @@ public class CateringDAOImpl implements CateringDAO {
 	public List<Catering> getLstByStatus(Date cateringDate) {
 		Session session = sessionFactory.getCurrentSession();
 		Query query = session.createQuery(
-				"FROM Catering c WHERE c.cateringDate = :cateringDate AND c.ordered = 1 AND c.status = 1 AND c.catered = 0");
+				"FROM Catering c WHERE c.cateringPK.cateringDate = :cateringDate AND c.ordered = 1 AND c.status = 1 AND c.catered = 0");
 		query.setParameter("cateringDate", cateringDate);
 		return query.list();
 	}
@@ -53,7 +53,7 @@ public class CateringDAOImpl implements CateringDAO {
 	public List<Catering> getLstByDate(Date fromDate, Date toDate) {
 		Session session = sessionFactory.getCurrentSession();
 		Query query = session.createQuery(
-				"FROM Catering c WHERE c.cateringDate >= :fromDate AND c.cateringDate < :toDate AND c.catered = 1");
+				"FROM Catering c WHERE c.cateringPK.cateringDate >= :fromDate AND c.cateringPK.cateringDate < :toDate AND c.catered = 1");
 		query.setParameter("fromDate", fromDate);
 		query.setParameter("toDate", toDate);
 		return query.list();
@@ -63,7 +63,7 @@ public class CateringDAOImpl implements CateringDAO {
 	public Catering getByStaffId(String staffId, Date date) {
 		Session session = sessionFactory.getCurrentSession();
 		Query query = session
-				.createQuery("FROM Catering c WHERE c.staffId = :staffId AND c.cateringDate = :cateringDate");
+				.createQuery("FROM Catering c WHERE c.cateringPK.staffId = :staffId AND c.cateringPK.cateringDate = :cateringDate");
 		query.setParameter("staffId", staffId);
 		query.setParameter("cateringDate", date);
 		if (query.list() != null && !query.list().isEmpty()) {

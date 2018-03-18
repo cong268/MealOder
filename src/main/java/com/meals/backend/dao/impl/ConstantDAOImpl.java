@@ -10,12 +10,10 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.meals.backend.dao.ConstantDAO;
+import com.meals.backend.model.Allcode;
 import com.meals.backend.model.Department;
 import com.meals.backend.model.Location;
-import com.meals.backend.model.Meal;
-import com.meals.backend.model.MealTime;
-import com.meals.backend.model.Shift;
-import com.meals.backend.model.UserRole;
+import com.meals.backend.model.Userrole;
 
 @Repository("constantDAO")
 @Transactional
@@ -37,18 +35,18 @@ public class ConstantDAOImpl implements ConstantDAO {
 		return null;
 	}
 
-	public UserRole getRoleById(Integer id) {
+	public Userrole getRoleById(Integer id) {
 		Session session = sessionFactory.getCurrentSession();
-		Query query = session.createQuery("FROM UserRole c WHERE c.userRoleID = :userRoleID");
+		Query query = session.createQuery("FROM Userrole c WHERE c.userRoleID = :userRoleID");
 		query.setParameter("userRoleID", id);
-		List<UserRole> list = query.list();
+		List<Userrole> list = query.list();
 		if (list != null && !list.isEmpty()) {
 			return list.get(0);
 		}
 		return null;
 	}
 
-	public List<Department> getAllDepart() {
+	public List<Department> getAllDepartment() {
 		Session session = sessionFactory.getCurrentSession();
 		Query query = session.createQuery("FROM Department");
 		return query.list();
@@ -60,28 +58,10 @@ public class ConstantDAOImpl implements ConstantDAO {
 		return query.list();
 	}
 
-	public List<Meal> getAllMeal() {
-		Session session = sessionFactory.getCurrentSession();
-		Query query = session.createQuery("FROM Meal");
-		return query.list();
-	}
-
-	public List<MealTime> getAllMealTime() {
-		Session session = sessionFactory.getCurrentSession();
-		Query query = session.createQuery("FROM MealTime");
-		return query.list();
-	}
-
-	public List<Shift> getAllShift() {
-		Session session = sessionFactory.getCurrentSession();
-		Query query = session.createQuery("FROM Shift");
-		return query.list();
-	}
-
 	@Override
-	public List<UserRole> getAllRole() {
+	public List<Userrole> getAllRole() {
 		Session session = sessionFactory.getCurrentSession();
-		Query query = session.createQuery("FROM UserRole");
+		Query query = session.createQuery("FROM Userrole");
 		return query.list();
 	}
 
@@ -94,5 +74,13 @@ public class ConstantDAOImpl implements ConstantDAO {
 			return (Location) query.list().get(0);
 		}
 		return null;
+	}
+
+	@Override
+	public List<Allcode> getLstByCode(String codeName) {
+		Session session = sessionFactory.getCurrentSession();
+		Query query = session.createQuery("FROM Allcode a WHERE a.codeName = :codeName");
+		query.setParameter("codeName", codeName);
+		return query.list();
 	}
 }

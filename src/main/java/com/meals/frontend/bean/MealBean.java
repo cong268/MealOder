@@ -1,38 +1,41 @@
 package com.meals.frontend.bean;
 
 public class MealBean {
-	private Integer mealId;
-	private String mealName;
-	private String description;
+	private Integer id;
+	private String codeName;
+	private String codeVal;
+	private Integer codeId;
 
-	public MealBean(Integer mealId, String mealName) {
-		super();
-		this.mealId = mealId;
-		this.mealName = mealName;
+	public Integer getId() {
+		return id;
 	}
 
-	public Integer getMealId() {
-		return mealId;
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
-	public void setMealId(Integer mealId) {
-		this.mealId = mealId;
+	public String getCodeName() {
+		return codeName;
 	}
 
-	public String getMealName() {
-		return mealName;
+	public void setCodeName(String codeName) {
+		this.codeName = codeName;
 	}
 
-	public void setMealName(String mealName) {
-		this.mealName = mealName;
+	public String getCodeVal() {
+		return codeVal;
 	}
 
-	public String getDescription() {
-		return description;
+	public void setCodeVal(String codeVal) {
+		this.codeVal = codeVal;
 	}
 
-	public void setDescription(String description) {
-		this.description = description;
+	public Integer getCodeId() {
+		return codeId;
+	}
+
+	public void setCodeId(Integer codeId) {
+		this.codeId = codeId;
 	}
 
 }

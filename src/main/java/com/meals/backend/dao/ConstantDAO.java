@@ -2,21 +2,17 @@ package com.meals.backend.dao;
 
 import java.util.List;
 
+import com.meals.backend.model.Allcode;
 import com.meals.backend.model.Department;
 import com.meals.backend.model.Location;
-import com.meals.backend.model.Meal;
-import com.meals.backend.model.MealTime;
-import com.meals.backend.model.Shift;
-import com.meals.backend.model.UserRole;
+import com.meals.backend.model.Userrole;
 
 public interface ConstantDAO {
 	Department getDepartment (Integer id);
-	UserRole getRoleById (Integer id);
-	List<Department> getAllDepart();
-	List<Location> getAllLocation();
-	List<Meal> getAllMeal();
-	List<MealTime> getAllMealTime();
-	List<Shift> getAllShift();
-	List<UserRole> getAllRole();
+	Userrole getRoleById (Integer id);
 	Location getLocationById (Integer id);
+	List<Department> getAllDepartment();
+	List<Location> getAllLocation();
+	List<Userrole> getAllRole();
+	List<Allcode> getLstByCode (String codeName);
 }

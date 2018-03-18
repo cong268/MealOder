@@ -1,7 +1,5 @@
 package com.meals.frontend.bean;
 
-import javax.persistence.Column;
-
 public class RoleBean {
 	private int userRoleID;
 	private String name;
