@@ -49,52 +49,52 @@
                 <ul class="nav navbar-nav">
                     <c:if test = "${sessionScope.userRole == 'Manager'}">
                     <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Meal Management <span class="caret"></span></a>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><spring:message code="label.meal_management"/> <span class="caret"></span></a>
                         <ul class="dropdown-menu">
-                            <li><a href="mealManagerment">Management</a></li>
+                            <li><a href="mealManagerment"><spring:message code="label.management"/></a></li>
 <!--                             <li><a href="approveMeal">Approve Meal</a></li> -->
                         </ul>
                     </li>
                     </c:if>
                     <c:if test = "${sessionScope.userRole == 'Admin' || sessionScope.userRole == 'Chef'}">
                     <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Admin Configuration <span class="caret"></span></a>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><spring:message code="label.admin_configuration"/> <span class="caret"></span></a>
                         <ul class="dropdown-menu">
                         <c:if test = "${sessionScope.userRole == 'Admin'}">
-                        	<li><a href="carterAdmin">Cartering action</a></li>
-                            <li><a href="showDataAdmin">View Data</a></li>
+                        	<li><a href="carterAdmin"><spring:message code="label.cartering_action"/></a></li>
+                            <li><a href="showDataAdmin"><spring:message code="label.report_info"/></a></li>
                         </c:if>
                         <c:if test = "${sessionScope.userRole == 'Chef'}">
-                        	<li><a href="showDataAdmin">View Data</a></li>
+                        	<li><a href="showDataAdmin"><spring:message code="label.report_info"/></a></li>
                         </c:if>
                         </ul>
                     </li>
                     </c:if>
                     <c:if test = "${sessionScope.userRole == 'Admin' || sessionScope.userRole == 'Manager'}">
                     <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Personal Management <span class="caret"></span></a>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><spring:message code="label.person_manager"/> <span class="caret"></span></a>
                         <ul class="dropdown-menu">
-                            <li><a href="registerUser">Register User</a></li>
+                            <li><a href="registerUser"><spring:message code="label.register_user"/></a></li>
                         </ul>
                     </li>
                     </c:if>
                     <c:if test = "${sessionScope.userRole == 'Employee'}">
                     <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">User Access <span class="caret"></span></a>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><spring:message code="label.user_access"/> <span class="caret"></span></a>
                         <ul class="dropdown-menu">
-                            <li><a href="userOrder">Order meal</a></li>
+                            <li><a href="userOrder"><spring:message code="label.order_meal"/></a></li>
                         </ul>
                     </li>
                     </c:if>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     <li class="dropdown dropdown-user-custom">
-                        <span data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" class="dropdown-toggle user-text-control">User control</span>
+                        <span data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" class="dropdown-toggle user-text-control"><spring:message code="label.user_control"/></span>
                         <img src="<c:url value="/assets/img/default-user-image.png"></c:url>" class="dropdown-toggle img-user-nsrp" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                         <ul class="dropdown-menu">
                             <li><a href="#">Username: ${sessionScope.userName}</a></li>
                             <li role="separator" class="divider"></li>
-                            <li><a href="logout">Logout<span class="glyphicon glyphicon-log-out p-l-10"></span></a></li>
+                            <li><a href="logout"><spring:message code="label.logout"/><span class="glyphicon glyphicon-log-out p-l-10"></span></a></li>
                         </ul>
                     </li>
                 </ul>
@@ -106,12 +106,12 @@
     </div>
     <div class="popup-successful text-center">
         <div class="p-t-30 p-b -30 p-l-20 p-r-20">
-            SUCCESS
+            <spring:message code="label.success_upper"/>
         </div>
     </div>
     <div class="popup-Error text-center">
         <div class="p-t-30 p-b -30 p-l-20 p-r-20">
-            ERROR
+            <spring:message code="label.error_upper"/>
         </div>
     </div>
     <footer class="nsrp-page-footer">

@@ -6,6 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles" %>
 <html>
@@ -14,7 +15,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Order Meal</title>
+    <title><spring:message code="page.user_order"/></title>
     <link rel="stylesheet" href="<c:url value="/assets/css/userOrderStyle.css"></c:url>">
     <script type="text/javascript" src="<c:url value="/assets/js/userOrder.js"></c:url>"></script>
 </head>
@@ -22,23 +23,23 @@
     <div class="container wrap-user-order">
         <div class="form-user-order-centerd">
             <div class="text-center wrap-header-page">
-                <h3>Order meal</h3>
+                <h3><spring:message code="label.order_meal"/></h3>
             </div>
             <div class="form-horizontal">
                 <div class="form-group">
-                    <span class="col-sm-4 control-label">Staff Id</span>
+                    <span class="col-sm-4 control-label"><spring:message code="label.staff_id"/></span>
                     <div class="col-sm-8">
                         <span class="form-control" ng-bind="arrData[0].staffId"></span>
                     </div>
                 </div>
                 <div class="form-group">
-                    <span class="col-sm-4 control-label">Staff Name</span>
+                    <span class="col-sm-4 control-label"><spring:message code="label.staff_name"/></span>
                     <div class="col-sm-8">
                         <span class="form-control" ng-bind="arrData[0].staffName"></span>
                     </div>
                 </div>
                 <div class="form-group">
-                    <span class="col-sm-4 control-label">Catering Date</span>
+                    <span class="col-sm-4 control-label"><spring:message code="label.cartering_date"/></span>
                     <div class="col-sm-8">
                         <input type="text" class="form-control"
                                ng-model="dateOrder"
@@ -54,7 +55,7 @@
 <!--                     </div> -->
 <!--                 </div> -->
                 <div class="form-group">
-                    <span class="col-sm-4 control-label">Meal type</span>
+                    <span class="col-sm-4 control-label"><spring:message code="label.meal_type"/></span>
                     <div class="col-sm-8">
                         <select ng-model="arrData[0].mealId" class="form-control">
                             <option ng-selected="arrData[0].mealId == mealObj.mealId"
@@ -64,7 +65,7 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <span class="col-sm-4 control-label">Meal time</span>
+                    <span class="col-sm-4 control-label"><spring:message code="label.meal_time"/></span>
                     <div class="col-sm-8">
                         <select ng-model="arrData[0].mealTimeId" class="form-control">
                             <option ng-selected="arrData[0].mealTimeId == mealTimeObj.mealTimeId"
@@ -74,7 +75,7 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <span class="col-sm-4 control-label">Shift</span>
+                    <span class="col-sm-4 control-label"><spring:message code="label.shift"/></span>
                     <div class="col-sm-8">
                         <select ng-model="arrData[0].shiftId" class="form-control">
                             <option ng-selected="arrData[0].shiftId == shilfObj.shiftId"
@@ -84,7 +85,7 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <span class="col-sm-4 control-label">Location</span>
+                    <span class="col-sm-4 control-label"><spring:message code="label.location"/></span>
                     <div class="col-sm-8">
                         <select ng-model="arrData[0].locationId" class="form-control">
                             <option ng-selected="arrData[0].locationId == locationObj.locationId"
@@ -95,7 +96,7 @@
                 </div>
             </div>
             <div class="row text-right p-r-15">
-                <div tooltip title="Order Now" class="btn btn-success btn-lg" ng-click="orderingCallback()">ORDER</div>
+                <div tooltip title="Order Now" class="btn btn-success btn-lg" ng-click="orderingCallback()"><spring:message code="label.order_upper"/></div>
             </div>
         </div>
     </div>

@@ -13,9 +13,11 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>LOGIN NSRP</title>
+    <title><spring:message  code="label.login_header" /></title>
     <link rel="icon" type="image/png" href="img/icons/favicon.ico"/>
     <link rel="stylesheet" type="text/css" href="<c:url value="/assets/lib/bootstrap/bootstrap.min.css"></c:url>">
+    <link rel="stylesheet" href="<c:url value="/assets/css/tooltipster.bundle.min.css"></c:url>">
+    <link rel="stylesheet" href="<c:url value="/assets/css/tooltipster-borderless-cuzt.min.css"></c:url>">
     <link rel="stylesheet" type="text/css" href="<c:url value="/assets/lib/font-awesome-4.7.0/css/font-awesome.min.css"></c:url>">
     <link rel="stylesheet" type="text/css" href="<c:url value="/assets/lib/Linearicons-Free-v1.0.0/icon-font.min.css"></c:url>">
     <link rel="stylesheet" type="text/css" href="<c:url value="/assets/lib/css/util-css.css"></c:url>">
@@ -23,6 +25,7 @@
     <link rel="stylesheet" type="text/css" href="<c:url value="/assets/css/loginStyle.css"></c:url>">
     <script type="text/javascript" src="<c:url value="/assets/js/jquery-1.11.3.min.js"></c:url>"></script>
     <script type="text/javascript" src="<c:url value="/assets/js/angular.min.js"></c:url>"></script>
+    <script type="text/javascript" src="<c:url value="/assets/js/tooltipster.bundle.min.js"></c:url>"></script>
     <script type="text/javascript" src="<c:url value="/assets/lib/bootstrap/bootstrap.min.js"></c:url>"></script>
 </head>
 <body ng-app="loginApplication">
@@ -58,11 +61,11 @@
             <div class="langue-support-wrap">
                 <span><spring:message  code="label.language" /> : </span>
                  <a href="?lang=vi">
-                    <div class="flag-custom flag flag-icon-background flag-icon-vn" title="vn" id="vn"></div>
+                    <div class="flag-custom flag flag-icon-background flag-icon-vn" tooltip title="<spring:message  code="label.lang_vi_long" />"></div>
                 </a>
                 <span class="m-t-2">|</span>
                 <a href="?lang=en">
-                    <div class="flag-custom flag flag-icon-background flag-icon-gb" title="gb" id="gb"></div>
+                    <div class="flag-custom flag flag-icon-background flag-icon-gb" tooltip title="<spring:message  code="label.lang_en_long" />"></div>
                 </a>
             </div>
         </div>

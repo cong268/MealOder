@@ -73,3 +73,34 @@ var myApp = angular.module('loginApplication',[]).controller('loginController', 
         })(jQuery);
     })
 }]);
+myApp.directive('tooltip', function () {
+    return {
+        restrict: 'A',
+        link: function ($scope, element, attrs) {
+            $scope.hidenTooltip = function () {
+                $(element).tooltipster('hide');
+            }
+            element.ready(function () {
+                $(element).tooltipster({
+                    animation: attrs.animation,
+                    theme: 'tooltipster-borderless-cuzt'
+                });
+                $scope.$watch(
+                    function () {
+                        return attrs.title;
+                    },
+                    function (newValue, oldValue) {
+                        if ($(element).length&&newValue) {
+                            $(element).tooltipster(
+                                'content', newValue
+                            );
+                        } else {
+                            $(element).tooltipster('destroy');
+                        }
+                    }
+                );
+            });
+
+        }
+    };
+});

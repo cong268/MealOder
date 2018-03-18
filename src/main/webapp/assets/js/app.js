@@ -13,7 +13,8 @@ myApp.directive('dateRangePickerSingle', function() {
                         singleDatePicker: true,
                         showDropdowns: true,
                         locale: {
-                            format: 'DD/MM/YYYY'
+                            format: 'DD/MM/YYYY',
+                            firstDay: 1
                         },
                     },
                     function(start, end, label) {
@@ -35,7 +36,8 @@ myApp.directive('dateRangePickerSingleMin', function() {
                     singleDatePicker: true,
                     showDropdowns: true,
                     locale: {
-                        format: 'DD/MM/YYYY'
+                        format: 'DD/MM/YYYY',
+                        firstDay: 1
                     },
                     minDate: moment().format('DD/MM/YYYY')
                 },
