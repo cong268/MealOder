@@ -21,6 +21,7 @@ body, html {
 	font-family: Montserrat, sans-serif;
 }
 
+
 a {
 	font-family: Montserrat;
 	font-size: 14px;
@@ -123,10 +124,26 @@ button:hover {
   width: 390px;
   border-radius: 10px;
   overflow: hidden;
-
+  position: relative;
   background: transparent;
 }
 
+.langue-support-wrap{
+  display: inline-block;
+  position: absolute;
+  bottom: 55px;
+  right: 10px;
+}
+.langue-support-wrap a,.langue-support-wrap span{
+  display: block;
+  line-height: 20px;
+  float: left;
+}
+.flag-custom{
+  width: 23px;
+  height: 17px;
+  margin: 2px 3px;
+}
 
 /* Form */
 

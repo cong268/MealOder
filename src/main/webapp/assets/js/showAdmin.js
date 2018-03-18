@@ -104,7 +104,7 @@ myApp.controller('carteredAdminCtrl', ['$scope', 'NgTableParams', 'ngTableEvents
             counts: [5, 10, 50, 100],
             dataset: $scope.arrData,
         });
-        ngTableEventsChannel.onAfterReloadData(function(tableParams, filteredData){
+        ngTableEventsChannel.onAfterDataFiltered(function(eventListener, tableParams, filteredData ){
             $scope.dataFiltered = filteredData;
         });
     }

@@ -97,7 +97,7 @@ myApp.controller('mealManagermentCtrl', ['$scope', 'NgTableParams', 'ngTableEven
         }, {
             dataset: $scope.arrDataOrder,
         });
-        ngTableEventsChannel.onAfterReloadData(function(tableParams, filteredData){
+        ngTableEventsChannel.onAfterDataFiltered(function(eventListener, tableParams, filteredData ){
             $scope.dataFilteredOrder = filteredData || tableParams.data;
         });
     }

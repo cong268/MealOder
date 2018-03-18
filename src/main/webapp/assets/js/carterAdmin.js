@@ -86,7 +86,7 @@ myApp.controller('carterAdminCtrl', ['$scope', 'NgTableParams', 'ngTableEventsCh
             dataset: $scope.arrData,
         });
 
-        ngTableEventsChannel.onAfterReloadData(function(tableParams, filteredData){
+        ngTableEventsChannel.onAfterDataFiltered(function(eventListener, tableParams, filteredData ){
             $scope.dataFiltered = filteredData || tableParams.data;
         });
     }

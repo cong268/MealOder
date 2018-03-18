@@ -76,7 +76,11 @@ myApp.controller('approveMealCtrl', ['$scope', 'NgTableParams', 'ngTableEventsCh
             dataset: $scope.arrData,
         });
 
-        ngTableEventsChannel.onAfterReloadData(function(tableParams, filteredData){
+        // ngTableEventsChannel.onAfterReloadData(function(tableParams, filteredData){
+        //     $scope.dataFiltered = filteredData || tableParams.data;
+        //     $scope.checkStatus();
+        // });
+        ngTableEventsChannel.onAfterDataFiltered(function(eventListener, tableParams, filteredData ){
             $scope.dataFiltered = filteredData || tableParams.data;
             $scope.checkStatus();
         });

@@ -6,6 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
@@ -18,6 +19,7 @@
     <link rel="stylesheet" type="text/css" href="<c:url value="/assets/lib/font-awesome-4.7.0/css/font-awesome.min.css"></c:url>">
     <link rel="stylesheet" type="text/css" href="<c:url value="/assets/lib/Linearicons-Free-v1.0.0/icon-font.min.css"></c:url>">
     <link rel="stylesheet" type="text/css" href="<c:url value="/assets/lib/css/util-css.css"></c:url>">
+    <link rel="stylesheet" type="text/css" href="<c:url value="/assets/css/flag-icon.min.css"></c:url>">
     <link rel="stylesheet" type="text/css" href="<c:url value="/assets/css/loginStyle.css"></c:url>">
     <script type="text/javascript" src="<c:url value="/assets/js/jquery-1.11.3.min.js"></c:url>"></script>
     <script type="text/javascript" src="<c:url value="/assets/js/angular.min.js"></c:url>"></script>
@@ -28,27 +30,41 @@
     <div class="container-login-nsrp" ng-controller="loginController">
         <input type="hidden" id="errorMess" value="${messsage}">
         <div class="wrap-login-nsrp p-t-30 p-b-50">
-				<span class="login-nsrp-form-title p-b-41">
-					NSRP LOGIN ACCESS
-				</span>
-            <form class="login-nsrp-form validate-form p-b-33 p-t-5" method="POST" action="authentication">
+            <span class="login-nsrp-form-title p-b-41">
+                <spring:message  code="label.login_header" />
+            </span>
+            <form class="login-nsrp-form validate-form p-b-45 p-t-5" method="POST" action="authentication">
                 <div class="wrap-error-message">
                     <span class="error-message" ng-bind="errorMessage"></span>
                 </div>
                 <div class="wrap-input-nsrp validate-input" data-validate="Enter username">
-                    <input class="input-nsrp" ng-click="clickHideMessage()" ng-model="nsrpUsername" id="nsrp-username" type="text" name="username" placeholder="User name">
+                    <input class="input-nsrp" ng-click="clickHideMessage()" ng-model="nsrpUsername"
+                           id="nsrp-username" type="text" name="username"
+                           placeholder="<spring:message  code="label.user_name" />">
                     <span class="focus-input-nsrp" data-placeholder="&#xe82a;"></span>
                 </div>
                 <div class="wrap-input-nsrp validate-input" data-validate="Enter password">
-                    <input class="input-nsrp" ng-click="clickHideMessage()" ng-model="nsrpPassword" id="nsrp-password" type="password" name="password" placeholder="Password">
+                    <input class="input-nsrp" ng-click="clickHideMessage()" ng-model="nsrpPassword"
+                           id="nsrp-password" type="password" name="password"
+                           placeholder="<spring:message  code="label.password" />">
                     <span class="focus-input-nsrp" data-placeholder="&#xe80f;"></span>
                 </div>
                 <div class="container-login-nsrp-form-btn m-t-32">
                     <button class="login-nsrp-form-btn">
-                        Login
+                        <spring:message  code="label.login" />
                     </button>
                 </div>
             </form>
+            <div class="langue-support-wrap">
+                <span><spring:message  code="label.language" /> : </span>
+                 <a href="?lang=vi">
+                    <div class="flag-custom flag flag-icon-background flag-icon-vn" title="vn" id="vn"></div>
+                </a>
+                <span class="m-t-2">|</span>
+                <a href="?lang=en">
+                    <div class="flag-custom flag flag-icon-background flag-icon-gb" title="gb" id="gb"></div>
+                </a>
+            </div>
         </div>
     </div>
 </div>

@@ -61,7 +61,8 @@ myApp.directive('dateRangePickerDoubleMin', function() {
                     singleDatePicker: false,
                     showDropdowns: true,
                     locale: {
-                        format: 'DD/MM/YYYY'
+                        format: 'DD/MM/YYYY',
+                        firstDay: 1
                     },
                     minDate: moment().format('DD/MM/YYYY')
                 },

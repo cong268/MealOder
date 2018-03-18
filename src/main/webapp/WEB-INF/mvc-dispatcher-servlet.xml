@@ -1,57 +1,47 @@
-<beans xmlns="http://www.springframework.org/schema/beans"
-    xmlns:context="http://www.springframework.org/schema/context"
-    xmlns:mvc="http://www.springframework.org/schema/mvc"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://www.springframework.org/schema/beans
-    http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
-    http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd
-    http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.2.xsd">
-<!--     <mvc:annotation-driven ignore-default-model-on-redirect="true" /> -->
-    <!--<context:annotation-config/>-->
+<beans:beans xmlns="http://www.springframework.org/schema/mvc"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:beans="http://www.springframework.org/schema/beans"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
     <context:component-scan base-package="com.meals.frontend" />
     <mvc:default-servlet-handler />
     <mvc:annotation-driven />
     <mvc:resources mapping="/assets/**" location="/assets/" />
     <mvc:view-controller path="/" view-name="login"/>
-<!--     <bean id="messageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource"> -->
-<!--         <property name="basename" value="classpath:messages" /> -->
-<!--         <property name="defaultEncoding" value="UTF-8" /> -->
-<!--     </bean> -->
+    <beans:bean id="messageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+        <beans:property name="basename" value="/WEB-INF/message" />
+        <beans:property name="defaultEncoding" value="UTF-8" />
+    </beans:bean>
 
     <mvc:interceptors>
-        <bean id="localeChangeInterceptor" class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor">
-            <property name="paramName" value="lang" />
-        </bean>
+        <beans:bean id="localeChangeInterceptor" class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor">
+            <beans:property name="paramName" value="lang" />
+        </beans:bean>
     </mvc:interceptors>
 
     <mvc:interceptors>
         <mvc:interceptor>
             <mvc:mapping path="/**"/>
             <mvc:exclude-mapping path="/assets/**"/>
-            <bean class="com.meals.frontend.intercepter.AuthInterceptor" />
+            <beans:bean class="com.meals.frontend.intercepter.AuthInterceptor" />
         </mvc:interceptor>
     </mvc:interceptors>
 
-    <bean id="localeResolver" class="org.springframework.web.servlet.i18n.SessionLocaleResolver">
-        <property name="defaultLocale" value="en" />
-    </bean>
-    
-     <bean id="viewResolver" class="org.springframework.web.servlet.view.tiles3.TilesViewResolver"/>
-     <bean id="viewResolver1" class="org.springframework.web.servlet.view.ResourceBundleViewResolver">
-         <property name="order" value="1"/>
-         <property name="basename" value="views"/>
-     </bean>
-     
-     <!--<bean id="viewResolver2"-->
-         <!--class="org.springframework.web.servlet.view.InternalResourceViewResolver">-->
-         <!--<property name="order" value="2"/>-->
-         <!--<property name="prefix" value="/pages/jsp/" />-->
-         <!--<property name="suffix" value=".jsp" />-->
-     <!--</bean>-->
-    <bean id="tilesConfigurer" class="org.springframework.web.servlet.view.tiles3.TilesConfigurer">
-        <property name="definitions">
-            <value>/WEB-INF/tiles.xml</value>
-        </property>
-    </bean>
+    <beans:bean id="localeResolver" class="org.springframework.web.servlet.i18n.SessionLocaleResolver">
+        <beans:property name="defaultLocale" value="en" />
+    </beans:bean>
+     <beans:bean id="viewResolver" class="org.springframework.web.servlet.view.tiles3.TilesViewResolver"/>
+     <beans:bean id="viewResolver1" class="org.springframework.web.servlet.view.ResourceBundleViewResolver">
+         <beans:property name="order" value="1"/>
+         <beans:property name="basename" value="views"/>
+     </beans:bean>
+    <beans:bean id="tilesConfigurer" class="org.springframework.web.servlet.view.tiles3.TilesConfigurer">
+        <beans:property name="definitions">
+            <beans:value>/WEB-INF/tiles.xml</beans:value>
+        </beans:property>
+    </beans:bean>
 
-</beans>
+</beans:beans>
