@@ -15,6 +15,7 @@ import com.meals.backend.dao.CateringDAO;
 import com.meals.backend.dao.ConstantDAO;
 import com.meals.backend.dao.StaffDAO;
 import com.meals.backend.dao.UserDAO;
+import com.meals.backend.model.Allcode;
 import com.meals.backend.model.Catering;
 import com.meals.backend.model.CateringPK;
 import com.meals.backend.model.Department;
@@ -26,6 +27,7 @@ import com.meals.frontend.bean.DataBean;
 import com.meals.frontend.bean.DataExportBean;
 import com.meals.frontend.bean.DepartmentBean;
 import com.meals.frontend.bean.LocationBean;
+import com.meals.frontend.bean.MealBean;
 import com.meals.frontend.bean.MealsOrderBean;
 import com.meals.frontend.bean.RoleBean;
 import com.meals.frontend.bean.StaffBean;
@@ -81,6 +83,8 @@ public class MealsServiceImpl implements MealsService {
 		DataBean bean = new DataBean();
 		List<LocationBean> lstLocation = getLocation();
 		List<DepartmentBean> lstDepartMent = getDepartMent();
+		List<MealBean> lstMealTime = getLstByCodeName(ConstanKey.ALL_CODE.MEAL_TIME);
+		List<MealBean> lstMealType = getLstByCodeName(ConstanKey.ALL_CODE.MEAL_TYPE);
 		Date dateTime = FunctionUtils.convertDateByFormatLocal(date, ConstanKey.FORMAT_DATE.DATE_TIME_FORMAT);
 		List<MealsOrderBean> lstOrder = new ArrayList<>();
 		Staff staff = staffDAO.getStaffByUserId(userId);
@@ -104,6 +108,8 @@ public class MealsServiceImpl implements MealsService {
 				}
 			}
 		}
+		bean.setLstMealTime(lstMealTime);
+		bean.setLstMealType(lstMealType);
 		bean.setLstDepartMent(lstDepartMent);
 		bean.setLstLocation(lstLocation);
 		bean.setListMealOder(lstOrder);
@@ -115,6 +121,8 @@ public class MealsServiceImpl implements MealsService {
 		DataBean bean = new DataBean();
 		List<LocationBean> lstLocation = getLocation();
 		List<DepartmentBean> lstDepartMent = getDepartMent();
+		List<MealBean> lstMealTime = getLstByCodeName(ConstanKey.ALL_CODE.MEAL_TIME);
+		List<MealBean> lstMealType = getLstByCodeName(ConstanKey.ALL_CODE.MEAL_TYPE);
 		MealsOrderBean orderBean = new MealsOrderBean();
 		Staff staff = staffDAO.getStaffByUserId(userId);
 		if (staff != null) {
@@ -129,6 +137,8 @@ public class MealsServiceImpl implements MealsService {
 		}
 		bean.setLstDepartMent(lstDepartMent);
 		bean.setLstLocation(lstLocation);
+		bean.setLstMealTime(lstMealTime);
+		bean.setLstMealType(lstMealType);
 		bean.setListMealOder(Arrays.asList(orderBean));
 		return bean;
 	}
@@ -138,6 +148,8 @@ public class MealsServiceImpl implements MealsService {
 		DataBean bean = new DataBean();
 		List<LocationBean> lstLocation = getLocation();
 		List<DepartmentBean> lstDepartMent = getDepartMent();
+		List<MealBean> lstMealTime = getLstByCodeName(ConstanKey.ALL_CODE.MEAL_TIME);
+		List<MealBean> lstMealType = getLstByCodeName(ConstanKey.ALL_CODE.MEAL_TYPE);
 		List<MealsOrderBean> lstOder = new ArrayList<>();
 		Date dateTime = FunctionUtils.convertDateByFormatLocal(date, ConstanKey.FORMAT_DATE.DATE_TIME_FORMAT);
 		Staff staff = staffDAO.getStaffByUserId(userId);
@@ -159,6 +171,8 @@ public class MealsServiceImpl implements MealsService {
 				}
 			}
 		}
+		bean.setLstMealTime(lstMealTime);
+		bean.setLstMealType(lstMealType);
 		bean.setListMealOder(lstOder);
 		bean.setLstDepartMent(lstDepartMent);
 		bean.setLstLocation(lstLocation);
@@ -170,6 +184,8 @@ public class MealsServiceImpl implements MealsService {
 		DataBean bean = new DataBean();
 		List<LocationBean> lstLocation = getLocation();
 		List<DepartmentBean> lstDepartMent = getDepartMent();
+		List<MealBean> lstMealTime = getLstByCodeName(ConstanKey.ALL_CODE.MEAL_TIME);
+		List<MealBean> lstMealType = getLstByCodeName(ConstanKey.ALL_CODE.MEAL_TYPE);
 		List<MealsOrderBean> lstOder = new ArrayList<>();
 		Date dateTime = FunctionUtils.convertDateByFormatLocal(date, ConstanKey.FORMAT_DATE.DATE_TIME_FORMAT);
 		if (dateTime != null) {
@@ -190,6 +206,8 @@ public class MealsServiceImpl implements MealsService {
 				}
 			}
 		}
+		bean.setLstMealTime(lstMealTime);
+		bean.setLstMealType(lstMealType);
 		bean.setListMealOder(lstOder);
 		bean.setLstDepartMent(lstDepartMent);
 		bean.setLstLocation(lstLocation);
@@ -201,6 +219,8 @@ public class MealsServiceImpl implements MealsService {
 		DataBean bean = new DataBean();
 		List<LocationBean> lstLocation = getLocation();
 		List<DepartmentBean> lstDepartMent = getDepartMent();
+		List<MealBean> lstMealTime = getLstByCodeName(ConstanKey.ALL_CODE.MEAL_TIME);
+		List<MealBean> lstMealType = getLstByCodeName(ConstanKey.ALL_CODE.MEAL_TYPE);
 		List<MealsOrderBean> lstOder = new ArrayList<>();
 		Date fromTime = FunctionUtils.convertDateByFormatLocal(fromDate, ConstanKey.FORMAT_DATE.DATE_TIME_FORMAT);
 		Date toTime = FunctionUtils.convertDateByFormatLocal(toDate, ConstanKey.FORMAT_DATE.DATE_TIME_FORMAT);
@@ -225,6 +245,8 @@ public class MealsServiceImpl implements MealsService {
 				}
 			}
 		}
+		bean.setLstMealTime(lstMealTime);
+		bean.setLstMealType(lstMealType);
 		bean.setListMealOder(lstOder);
 		bean.setLstDepartMent(lstDepartMent);
 		bean.setLstLocation(lstLocation);
@@ -335,28 +357,6 @@ public class MealsServiceImpl implements MealsService {
 		return bean;
 	}
 
-	private List<LocationBean> getLocation() {
-		List<LocationBean> lstLocation = new ArrayList<>();
-		List<Location> lstLocationDAO = constantDAO.getAllLocation();
-		if (lstLocationDAO != null && !lstLocationDAO.isEmpty()) {
-			for (Location obj : lstLocationDAO) {
-				lstLocation.add(new LocationBean(obj.getLocationId(), obj.getLocationName()));
-			}
-		}
-		return lstLocation;
-	}
-
-	private List<DepartmentBean> getDepartMent() {
-		List<DepartmentBean> lstDepartMent = new ArrayList<>();
-		List<Department> lstDepart = constantDAO.getAllDepartment();
-		if (lstDepart != null && !lstDepart.isEmpty()) {
-			for (Department obj : lstDepart) {
-				lstDepartMent.add(new DepartmentBean(obj.getDeptId(), obj.getDeptName()));
-			}
-		}
-		return lstDepartMent;
-	}
-
 	@Override
 	public Boolean saveCateringEmployee(List<MealsOrderBean> listMealOder, String fromDate, String toDate) {
 		Date fromTime = FunctionUtils.convertDateByFormatLocal(fromDate, ConstanKey.FORMAT_DATE.DATE_TIME_FORMAT);
@@ -428,4 +428,43 @@ public class MealsServiceImpl implements MealsService {
 		}
 		return true;
 	}
+	
+	private List<LocationBean> getLocation() {
+		List<LocationBean> lstLocation = new ArrayList<>();
+		List<Location> lstLocationDAO = constantDAO.getAllLocation();
+		if (lstLocationDAO != null && !lstLocationDAO.isEmpty()) {
+			for (Location obj : lstLocationDAO) {
+				lstLocation.add(new LocationBean(obj.getLocationId(), obj.getLocationName()));
+			}
+		}
+		return lstLocation;
+	}
+
+	private List<DepartmentBean> getDepartMent() {
+		List<DepartmentBean> lstDepartMent = new ArrayList<>();
+		List<Department> lstDepart = constantDAO.getAllDepartment();
+		if (lstDepart != null && !lstDepart.isEmpty()) {
+			for (Department obj : lstDepart) {
+				lstDepartMent.add(new DepartmentBean(obj.getDeptId(), obj.getDeptName()));
+			}
+		}
+		return lstDepartMent;
+	}
+	
+	private List<MealBean> getLstByCodeName (String codeName){
+		List<MealBean> lst = new ArrayList<>();
+		List<Allcode> codeLst = constantDAO.getLstByCode(codeName);
+		if(codeLst != null && !codeLst.isEmpty()){
+			for (Allcode obj : codeLst){
+				MealBean bean = new MealBean();
+				bean.setId(obj.getIdx());
+				bean.setCodeId(obj.getCodeIDX());
+				bean.setCodeName(obj.getCodeName());
+				bean.setCodeVal(obj.getCodeVal());
+				lst.add(bean);
+			}
+		}
+		return lst;
+	}
+	
 }

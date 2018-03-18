@@ -1,5 +1,7 @@
 package com.meals.frontend.report;
 
+import java.io.FileInputStream;
+import java.io.InputStream;
 import java.util.List;
 import java.util.Map;
 
@@ -11,11 +13,16 @@ import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellStyle;
+import org.apache.poi.ss.usermodel.ClientAnchor;
+import org.apache.poi.ss.usermodel.CreationHelper;
+import org.apache.poi.ss.usermodel.Drawing;
 import org.apache.poi.ss.usermodel.HorizontalAlignment;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.VerticalAlignment;
+import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.ss.util.CellRangeAddress;
 import org.apache.poi.ss.util.CellUtil;
+import org.apache.poi.util.IOUtils;
 import org.springframework.web.servlet.view.document.AbstractExcelView;
 
 import com.meals.frontend.bean.DataExportBean;
@@ -39,6 +46,25 @@ public class ExcelReportView extends AbstractExcelView {
 		CellStyle style = null;
 		HSSFFont font = null;
 
+		InputStream inputStream = new FileInputStream("C:/Users/CONG/Desktop/add.png");
+
+		byte[] imageBytes = IOUtils.toByteArray(inputStream);
+
+		int pictureureIdx = workbook.addPicture(imageBytes, Workbook.PICTURE_TYPE_PNG);
+
+		inputStream.close();
+
+		CreationHelper helper = workbook.getCreationHelper();
+
+		Drawing drawing = sheet.createDrawingPatriarch();
+
+		ClientAnchor anchor = helper.createClientAnchor();
+
+		anchor.setCol1(1);
+		anchor.setRow1(2);
+
+		drawing.createPicture(anchor, pictureureIdx);
+		
 		Row rowTitle = sheet.createRow(1);
 		rowTitle.setHeight((short) (rowTitle.getHeight() * 2));
 		style = workbook.createCellStyle();

@@ -18,4 +18,9 @@ public class ConstanKey {
 		public static final String DATE_SLASH_FORMAT = "dd/MM/yyyy";
 		public static final String DATE_TIME_FORMAT = "ddMMyyyy";
 	}
+	
+	public interface ALL_CODE {
+		public static final String MEAL_TYPE = "MealType";
+		public static final String MEAL_TIME = "MealTime";
+	}
 }
