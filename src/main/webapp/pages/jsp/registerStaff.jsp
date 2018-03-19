@@ -14,11 +14,11 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Register User</title>
+    <title>Register Staff</title>
     <link rel="stylesheet" href="<c:url value="/assets/css/registerStaffStyle.css"></c:url>">
     <script type="text/javascript" src="<c:url value="/assets/js/registerStaff.js"></c:url>"></script>
 </head>
-<body ng-controller="registerUserCtrl" ng-init="initData()">
+<body ng-controller="registerStaffCtrl" ng-init="initData()">
 <div class="container wrap-register-user">
     <div class="form-register-centerd">
         <div class="text-center wrap-header-page">
@@ -26,39 +26,61 @@
         </div>
         <div class="form-horizontal form-register-staff" ng-form="formRegisterStaff">
             <div class="form-group">
-                <label for="input-username" class="col-sm-4 control-label">Username</label>
+                <label for="input-id" class="col-sm-4 control-label">Staff Id</label>
                 <div class="col-sm-8">
-                    <input type="text" autocomplete="off" ng-model="staffObj.userName" ng-minlength="6" class="form-control" id="input-username" required>
-                </div>
-            </div>
-            <c:if test = "${sessionScope.userRole == 'Admin'}">
-                <div class="form-group" ng-cloak>
-                    <label for="input-role" class="col-sm-4 control-label">Role</label>
-                    <div class="col-sm-8">
-                        <select id="input-role" ng-cloak ng-model="staffObj.userRoleId" class="form-control" required>
-                            <option ng-selected="nsrpRoleId == role.userRoleID"
-                                    ng-repeat="role in arrRole"
-                                    ng-value="role.userRoleID">{{role.name}}</option>
-                        </select>
-                    </div>
-                </div>
-            </c:if>
-            <div class="form-group">
-                <label for="input-staff" class="col-sm-4 control-label">Staff Id</label>
-                <div class="col-sm-8">
-                    <input type="text" autocomplete="off" ng-model="staffObj.staffId" ng-minlength="6" class="form-control" id="input-staff" required>
+                    <input type="text" autocomplete="off" ng-model="staffObj.staffId" ng-minlength="6" class="form-control" id="input-id" required>
                 </div>
             </div>
             <div class="form-group">
-                <label for="input-pass" class="col-sm-4 control-label">Password</label>
+                <label for="input-username" class="col-sm-4 control-label">Staff Name</label>
                 <div class="col-sm-8">
-                    <input type="password" autocomplete="off" ng-model="staffObj.password" ng-minlength="6" class="form-control" id="input-pass" required>
+                    <input type="text" autocomplete="off" ng-model="staffObj.staffName" ng-minlength="6" class="form-control" id="input-username" required>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="input-gender" class="col-sm-4 control-label">Gender</label>
+                <div class="col-sm-8">
+                    <select id="input-gender" ng-cloak ng-model="staffObj.gender" class="form-control col-sm-6" required>
+                        <option value="male">Male</option>
+                        <option value="female">Female</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="input-job" class="col-sm-4 control-label">Job Title</label>
+                <div class="col-sm-8">
+                    <input type="text" autocomplete="off" ng-model="staffObj.jobTitle" ng-minlength="6" class="form-control" id="input-job" required>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="input-address" class="col-sm-4 control-label">Address</label>
+                <div class="col-sm-8">
+                    <input type="text" autocomplete="off" ng-model="staffObj.address" ng-minlength="6" class="form-control" id="input-address" required>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="input-phoneNum" class="col-sm-4 control-label">Phone</label>
+                <div class="col-sm-8">
+                    <input type="text" autocomplete="off" ng-model="staffObj.phoneNum" ng-minlength="6" class="form-control" id="input-phoneNum" required>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="input-email" class="col-sm-4 control-label">Email</label>
+                <div class="col-sm-8">
+                    <input type="email" autocomplete="off" ng-model="staffObj.email" ng-minlength="6" class="form-control" id="input-email" required>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="input-cardid" class="col-sm-4 control-label">Card Id</label>
+                <div class="col-sm-8">
+                    <input type="text" autocomplete="off" ng-model="staffObj.cardId" ng-minlength="6" class="form-control" id="input-cardid" required>
                 </div>
             </div>
             <div class="form-group">
                 <div class="col-sm-offset-5 col-sm-7">
                     <div ng-if="formRegisterStaff.$invalid" class="btn btn-lg btn-warning">REGISTER</div>
-                    <div ng-if="formRegisterStaff.$valid" ng-click="submitRegister(formRegisterStaff.$valid)" class="btn btn-lg btn-success">REGISTER</div>
+                    <div ng-if="formRegisterStaff.$valid" ng-click="submitRegisterStaff(formRegisterStaff.$valid)" class="btn btn-lg btn-success">REGISTER</div>
                 </div>
             </div>
         </div>

@@ -1,0 +1,16 @@
+.form-register-centerd{
+    max-width: 600px;
+    width: 100%;
+    margin: 0 auto;
+}
+.wrap-header-page{
+    margin-bottom: 50px;
+}
+.form-register-staff input.ng-invalid{
+    border: 1px solid red;
+    box-shadow: 0 0 1px red;
+}
+.form-register-staff select.ng-invalid{
+    border: 1px solid red;
+    box-shadow: 0 0 1px red;
+}
