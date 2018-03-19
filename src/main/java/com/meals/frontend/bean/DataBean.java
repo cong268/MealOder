@@ -3,25 +3,25 @@ package com.meals.frontend.bean;
 import java.util.List;
 
 public class DataBean {
-	private List<MealBean> lstMealTime;
-	private List<MealBean> lstMealType;
+	private List<MealTimeBean> lstMealTime;
+	private List<MealTypeBean> lstMealType;
 	private List<LocationBean> lstLocation;
 	private List<DepartmentBean> lstDepartMent;
 	private List<MealsOrderBean> listMealOder;
 
-	public List<MealBean> getLstMealTime() {
+	public List<MealTimeBean> getLstMealTime() {
 		return lstMealTime;
 	}
 
-	public void setLstMealTime(List<MealBean> lstMealTime) {
+	public void setLstMealTime(List<MealTimeBean> lstMealTime) {
 		this.lstMealTime = lstMealTime;
 	}
 
-	public List<MealBean> getLstMealType() {
+	public List<MealTypeBean> getLstMealType() {
 		return lstMealType;
 	}
 
-	public void setLstMealType(List<MealBean> lstMealType) {
+	public void setLstMealType(List<MealTypeBean> lstMealType) {
 		this.lstMealType = lstMealType;
 	}
 

@@ -10,9 +10,10 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.meals.backend.dao.ConstantDAO;
-import com.meals.backend.model.Allcode;
 import com.meals.backend.model.Department;
 import com.meals.backend.model.Location;
+import com.meals.backend.model.Meal;
+import com.meals.backend.model.Mealtime;
 import com.meals.backend.model.Userrole;
 
 @Repository("constantDAO")
@@ -77,10 +78,16 @@ public class ConstantDAOImpl implements ConstantDAO {
 	}
 
 	@Override
-	public List<Allcode> getLstByCodeVal(String codeVal) {
+	public List<Meal> getAllMeal() {
 		Session session = sessionFactory.getCurrentSession();
-		Query query = session.createQuery("FROM Allcode a WHERE a.codeVal = :codeVal");
-		query.setParameter("codeVal", codeVal);
+		Query query = session.createQuery("FROM Meal");
+		return query.list();
+	}
+
+	@Override
+	public List<Mealtime> getAllMealTime() {
+		Session session = sessionFactory.getCurrentSession();
+		Query query = session.createQuery("FROM Mealtime");
 		return query.list();
 	}
 }

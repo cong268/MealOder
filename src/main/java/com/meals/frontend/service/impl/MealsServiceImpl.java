@@ -15,11 +15,12 @@ import com.meals.backend.dao.CateringDAO;
 import com.meals.backend.dao.ConstantDAO;
 import com.meals.backend.dao.StaffDAO;
 import com.meals.backend.dao.UserDAO;
-import com.meals.backend.model.Allcode;
 import com.meals.backend.model.Catering;
 import com.meals.backend.model.CateringPK;
 import com.meals.backend.model.Department;
 import com.meals.backend.model.Location;
+import com.meals.backend.model.Meal;
+import com.meals.backend.model.Mealtime;
 import com.meals.backend.model.Staff;
 import com.meals.backend.model.User;
 import com.meals.backend.model.Userrole;
@@ -27,7 +28,8 @@ import com.meals.frontend.bean.DataBean;
 import com.meals.frontend.bean.DataExportBean;
 import com.meals.frontend.bean.DepartmentBean;
 import com.meals.frontend.bean.LocationBean;
-import com.meals.frontend.bean.MealBean;
+import com.meals.frontend.bean.MealTimeBean;
+import com.meals.frontend.bean.MealTypeBean;
 import com.meals.frontend.bean.MealsOrderBean;
 import com.meals.frontend.bean.RoleBean;
 import com.meals.frontend.bean.StaffBean;
@@ -83,8 +85,8 @@ public class MealsServiceImpl implements MealsService {
 		DataBean bean = new DataBean();
 		List<LocationBean> lstLocation = getLocation();
 		List<DepartmentBean> lstDepartMent = getDepartMent();
-		List<MealBean> lstMealTime = getLstByCodeName(ConstanKey.ALL_CODE.MEAL_TIME);
-		List<MealBean> lstMealType = getLstByCodeName(ConstanKey.ALL_CODE.MEAL_TYPE);
+		List<MealTimeBean> lstMealTime = getAllMealTime();
+		List<MealTypeBean> lstMealType = getAllMealType();
 		Date dateTime = FunctionUtils.convertDateByFormatLocal(date, ConstanKey.FORMAT_DATE.DATE_TIME_FORMAT);
 		List<MealsOrderBean> lstOrder = new ArrayList<>();
 		Staff staff = staffDAO.getStaffByUserId(userId);
@@ -121,8 +123,8 @@ public class MealsServiceImpl implements MealsService {
 		DataBean bean = new DataBean();
 		List<LocationBean> lstLocation = getLocation();
 		List<DepartmentBean> lstDepartMent = getDepartMent();
-		List<MealBean> lstMealTime = getLstByCodeName(ConstanKey.ALL_CODE.MEAL_TIME);
-		List<MealBean> lstMealType = getLstByCodeName(ConstanKey.ALL_CODE.MEAL_TYPE);
+		List<MealTimeBean> lstMealTime = getAllMealTime();
+		List<MealTypeBean> lstMealType = getAllMealType();
 		MealsOrderBean orderBean = new MealsOrderBean();
 		Staff staff = staffDAO.getStaffByUserId(userId);
 		if (staff != null) {
@@ -148,8 +150,8 @@ public class MealsServiceImpl implements MealsService {
 		DataBean bean = new DataBean();
 		List<LocationBean> lstLocation = getLocation();
 		List<DepartmentBean> lstDepartMent = getDepartMent();
-		List<MealBean> lstMealTime = getLstByCodeName(ConstanKey.ALL_CODE.MEAL_TIME);
-		List<MealBean> lstMealType = getLstByCodeName(ConstanKey.ALL_CODE.MEAL_TYPE);
+		List<MealTimeBean> lstMealTime = getAllMealTime();
+		List<MealTypeBean> lstMealType = getAllMealType();
 		List<MealsOrderBean> lstOder = new ArrayList<>();
 		Date dateTime = FunctionUtils.convertDateByFormatLocal(date, ConstanKey.FORMAT_DATE.DATE_TIME_FORMAT);
 		Staff staff = staffDAO.getStaffByUserId(userId);
@@ -184,8 +186,8 @@ public class MealsServiceImpl implements MealsService {
 		DataBean bean = new DataBean();
 		List<LocationBean> lstLocation = getLocation();
 		List<DepartmentBean> lstDepartMent = getDepartMent();
-		List<MealBean> lstMealTime = getLstByCodeName(ConstanKey.ALL_CODE.MEAL_TIME);
-		List<MealBean> lstMealType = getLstByCodeName(ConstanKey.ALL_CODE.MEAL_TYPE);
+		List<MealTimeBean> lstMealTime = getAllMealTime();
+		List<MealTypeBean> lstMealType = getAllMealType();
 		List<MealsOrderBean> lstOder = new ArrayList<>();
 		Date dateTime = FunctionUtils.convertDateByFormatLocal(date, ConstanKey.FORMAT_DATE.DATE_TIME_FORMAT);
 		if (dateTime != null) {
@@ -219,8 +221,8 @@ public class MealsServiceImpl implements MealsService {
 		DataBean bean = new DataBean();
 		List<LocationBean> lstLocation = getLocation();
 		List<DepartmentBean> lstDepartMent = getDepartMent();
-		List<MealBean> lstMealTime = getLstByCodeName(ConstanKey.ALL_CODE.MEAL_TIME);
-		List<MealBean> lstMealType = getLstByCodeName(ConstanKey.ALL_CODE.MEAL_TYPE);
+		List<MealTimeBean> lstMealTime = getAllMealTime();
+		List<MealTypeBean> lstMealType = getAllMealType();
 		List<MealsOrderBean> lstOder = new ArrayList<>();
 		Date fromTime = FunctionUtils.convertDateByFormatLocal(fromDate, ConstanKey.FORMAT_DATE.DATE_TIME_FORMAT);
 		Date toTime = FunctionUtils.convertDateByFormatLocal(toDate, ConstanKey.FORMAT_DATE.DATE_TIME_FORMAT);
@@ -239,8 +241,8 @@ public class MealsServiceImpl implements MealsService {
 					}
 					oderBean.setDepartmentId(catering.getDeptId());
 					oderBean.setLocationId(catering.getLocationId());
-					oderBean.setDateMeal(FunctionUtils.convertDateStringByFormatLocal(catering.getCateringPK().getCateringDate(),
-							ConstanKey.FORMAT_DATE.DATE_SLASH_FORMAT));
+					oderBean.setDateMeal(FunctionUtils.convertDateStringByFormatLocal(
+							catering.getCateringPK().getCateringDate(), ConstanKey.FORMAT_DATE.DATE_SLASH_FORMAT));
 					lstOder.add(oderBean);
 				}
 			}
@@ -428,7 +430,7 @@ public class MealsServiceImpl implements MealsService {
 		}
 		return true;
 	}
-	
+
 	private List<LocationBean> getLocation() {
 		List<LocationBean> lstLocation = new ArrayList<>();
 		List<Location> lstLocationDAO = constantDAO.getAllLocation();
@@ -450,21 +452,26 @@ public class MealsServiceImpl implements MealsService {
 		}
 		return lstDepartMent;
 	}
-	
-	private List<MealBean> getLstByCodeName (String codeVal){
-		List<MealBean> lst = new ArrayList<>();
-		List<Allcode> codeLst = constantDAO.getLstByCodeVal(codeVal);
-		if(codeLst != null && !codeLst.isEmpty()){
-			for (Allcode obj : codeLst){
-				MealBean bean = new MealBean();
-				bean.setId(obj.getIdx());
-				bean.setCodeId(obj.getCodeIDX());
-				bean.setCodeName(obj.getCodeName());
-				bean.setCodeVal(obj.getCodeVal());
-				lst.add(bean);
+
+	private List<MealTimeBean> getAllMealTime() {
+		List<MealTimeBean> list = new ArrayList<>();
+		List<Mealtime> lst = constantDAO.getAllMealTime();
+		if (lst != null && !lst.isEmpty()) {
+			for (Mealtime obj : lst) {
+				list.add(new MealTimeBean(obj.getMealTimeId(), obj.getMealTimeName(), obj.getDescription()));
 			}
 		}
-		return lst;
+		return list;
 	}
-	
+
+	private List<MealTypeBean> getAllMealType() {
+		List<MealTypeBean> list = new ArrayList<>();
+		List<Meal> lst = constantDAO.getAllMeal();
+		if (lst != null && !lst.isEmpty()) {
+			for (Meal obj : lst) {
+				list.add(new MealTypeBean(obj.getMealId(), obj.getMealName(), obj.getDescription()));
+			}
+		}
+		return list;
+	}
 }
