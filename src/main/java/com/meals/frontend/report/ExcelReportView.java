@@ -1,18 +1,18 @@
 package com.meals.frontend.report;
 
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.poi.hssf.usermodel.HSSFCellStyle;
 import org.apache.poi.hssf.usermodel.HSSFFont;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
-import org.apache.poi.ss.usermodel.BorderStyle;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellStyle;
-import org.apache.poi.ss.usermodel.FillPatternType;
 import org.apache.poi.ss.usermodel.HorizontalAlignment;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.VerticalAlignment;
@@ -20,6 +20,13 @@ import org.apache.poi.ss.util.CellRangeAddress;
 import org.springframework.web.servlet.view.document.AbstractExcelView;
 
 import com.meals.frontend.bean.DataExportBean;
+import com.meals.frontend.bean.DepartmentBean;
+import com.meals.frontend.bean.LocationBean;
+import com.meals.frontend.bean.MealTimeBean;
+import com.meals.frontend.bean.MealTypeBean;
+import com.meals.frontend.bean.MealsOrderBean;
+import com.meals.frontend.until.ConstanKey;
+import com.meals.frontend.until.FunctionUtils;
 
 public class ExcelReportView extends AbstractExcelView {
 
@@ -44,7 +51,6 @@ public class ExcelReportView extends AbstractExcelView {
 		sheet.addMergedRegion(new CellRangeAddress(5, 5, 0, 2));
 		sheet.addMergedRegion(new CellRangeAddress(5, 5, 3, 4));
 		sheet.addMergedRegion(new CellRangeAddress(5, 5, 6, 7));
-		sheet.addMergedRegion(new CellRangeAddress(7, 7, 0, 7));
 		
 		CellStyle styleTitle = workbook.createCellStyle();
 		HSSFFont font = workbook.createFont();
@@ -111,13 +117,13 @@ public class ExcelReportView extends AbstractExcelView {
 		cellInfo.setCellValue("From date:");
 		cellInfo.setCellStyle(styleHeader);
 		cellInfo = rowInfo.createCell(3);
-		cellInfo.setCellValue("17/3/2017");
+		cellInfo.setCellValue(dataBean.getFromDate());
 		cellInfo.setCellStyle(styleContentHead);
 		cellInfo = rowInfo.createCell(5);
 		cellInfo.setCellValue("To date:");
 		cellInfo.setCellStyle(styleHeader);
 		cellInfo = rowInfo.createCell(6);
-		cellInfo.setCellValue("18/3/2017");
+		cellInfo.setCellValue(dataBean.getToDate());
 		cellInfo.setCellStyle(styleContentHead);
 		
 		rowInfo = sheet.createRow(7);
@@ -132,6 +138,94 @@ public class ExcelReportView extends AbstractExcelView {
 		font.setFontHeightInPoints((short) 10);
 		style.setFont(font);
 		cellInfo.setCellStyle(style);
+		sheet.addMergedRegion(new CellRangeAddress(6, 7, 0, 7));
+		
+		rowInfo = sheet.createRow(8);
+		rowInfo.setHeight((short) (rowInfo.getHeight() * 2));
+		cellInfo = rowInfo.createCell(0);
+		cellInfo.setCellValue("STT");
+		cellInfo.setCellStyle(styleHeadTable);
+		cellInfo = rowInfo.createCell(1);
+		cellInfo.setCellValue("Date");
+		cellInfo.setCellStyle(styleHeadTable);
+		cellInfo = rowInfo.createCell(2);
+		cellInfo.setCellValue("Team/Section/Division");
+		cellInfo.setCellStyle(styleHeadTable);
+		sheet.addMergedRegion(new CellRangeAddress(8, 8, 2, 3));
+		cellInfo = rowInfo.createCell(4);
+		cellInfo.setCellValue("Food type");
+		cellInfo.setCellStyle(styleHeadTable);
+		cellInfo = rowInfo.createCell(5);
+		cellInfo.setCellValue("Time");
+		cellInfo.setCellStyle(styleHeadTable);
+		cellInfo = rowInfo.createCell(6);
+		cellInfo.setCellValue("Serving location");
+		cellInfo.setCellStyle(styleHeadTable);
+		cellInfo = rowInfo.createCell(7);
+		cellInfo.setCellValue("Quantity");
+		cellInfo.setCellStyle(styleHeadTable);
+		Map<Date, List<MealsOrderBean>> mapData = dataBean.getMapDataByDate();
+		List<MealTimeBean> lstMealTime = dataBean.getLstMealTime();
+		List<MealTypeBean> lstMealType = dataBean.getLstMealType();
+		List<LocationBean> lstLocation = dataBean.getLstLocation();
+		List<DepartmentBean> lstDepartMent = dataBean.getLstDepartMent();
+		if(mapData != null && !mapData.isEmpty()){
+			int num =0;
+			int total = 0;
+			for (Date date : mapData.keySet()){
+				String dateStr = FunctionUtils.convertDateStringByFormatLocal(date, ConstanKey.FORMAT_DATE.DATE_SLASH_FORMAT);
+				List<MealsOrderBean> lstData = mapData.get(date);
+				if (lstData != null && !lstData.isEmpty()) {
+					for (DepartmentBean department : lstDepartMent) {
+						for (MealTypeBean typeBean : lstMealType){
+							for (MealTimeBean timeBean : lstMealTime){
+								for (LocationBean locationBean : lstLocation){
+									int quantity = 0;
+									for (MealsOrderBean bean : lstData){
+										if (bean.getDepartmentId().equals(department.getDeptId())
+												&& bean.getMealId().equals(typeBean.getMealId())
+												&& bean.getMealTimeId().equals(timeBean.getMealTimeId())
+												&& bean.getLocationId().equals(locationBean.getLocationId())){
+											quantity ++;
+										}
+									}
+									if (quantity != 0){
+										rowInfo = sheet.createRow(9 + num);
+										rowInfo.setHeight((short) (rowInfo.getHeight() * 2));
+										cellInfo = rowInfo.createCell(0);
+										cellInfo.setCellValue(num);
+										cellInfo.setCellStyle(styleBodyTable);
+										cellInfo = rowInfo.createCell(1);
+										cellInfo.setCellValue(dateStr);
+										cellInfo.setCellStyle(styleBodyTable);
+										cellInfo = rowInfo.createCell(2);
+										cellInfo.setCellValue(department.getDeptName());
+										cellInfo.setCellStyle(styleBodyTable);
+										sheet.addMergedRegion(new CellRangeAddress(8, 8, 2, 3));
+										cellInfo = rowInfo.createCell(4);
+										cellInfo.setCellValue(typeBean.getMealName());
+										cellInfo.setCellStyle(styleBodyTable);
+										cellInfo = rowInfo.createCell(5);
+										cellInfo.setCellValue(timeBean.getMealTimeName());
+										cellInfo.setCellStyle(styleBodyTable);
+										cellInfo = rowInfo.createCell(6);
+										cellInfo.setCellValue(locationBean.getLocationName());
+										cellInfo.setCellStyle(styleBodyTable);
+										cellInfo = rowInfo.createCell(7);
+										cellInfo.setCellValue(quantity);
+										cellInfo.setCellStyle(styleBodyTable);
+										num++;
+									}
+									total += quantity;
+								}
+							}
+						}
+					}
+
+				}
+			}
+			
+		}
 	}
 	
 }

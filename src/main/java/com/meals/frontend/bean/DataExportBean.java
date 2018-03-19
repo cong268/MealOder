@@ -8,8 +8,10 @@ public class DataExportBean {
 	private String fromDate;
 	private String toDate;
 	private Map<Date, List<MealsOrderBean>> mapDataByDate;
-	private Map<Integer, String> mapDepartMent;
-	private Map<Integer, String> mapLocation;
+	private List<MealTimeBean> lstMealTime;
+	private List<MealTypeBean> lstMealType;
+	private List<LocationBean> lstLocation;
+	private List<DepartmentBean> lstDepartMent;
 
 	public String getFromDate() {
 		return fromDate;
@@ -35,20 +37,36 @@ public class DataExportBean {
 		this.mapDataByDate = mapDataByDate;
 	}
 
-	public Map<Integer, String> getMapDepartMent() {
-		return mapDepartMent;
+	public List<MealTimeBean> getLstMealTime() {
+		return lstMealTime;
 	}
 
-	public void setMapDepartMent(Map<Integer, String> mapDepartMent) {
-		this.mapDepartMent = mapDepartMent;
+	public void setLstMealTime(List<MealTimeBean> lstMealTime) {
+		this.lstMealTime = lstMealTime;
 	}
 
-	public Map<Integer, String> getMapLocation() {
-		return mapLocation;
+	public List<MealTypeBean> getLstMealType() {
+		return lstMealType;
 	}
 
-	public void setMapLocation(Map<Integer, String> mapLocation) {
-		this.mapLocation = mapLocation;
+	public void setLstMealType(List<MealTypeBean> lstMealType) {
+		this.lstMealType = lstMealType;
+	}
+
+	public List<LocationBean> getLstLocation() {
+		return lstLocation;
+	}
+
+	public void setLstLocation(List<LocationBean> lstLocation) {
+		this.lstLocation = lstLocation;
+	}
+
+	public List<DepartmentBean> getLstDepartMent() {
+		return lstDepartMent;
+	}
+
+	public void setLstDepartMent(List<DepartmentBean> lstDepartMent) {
+		this.lstDepartMent = lstDepartMent;
 	}
 
 }
