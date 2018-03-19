@@ -451,9 +451,9 @@ public class MealsServiceImpl implements MealsService {
 		return lstDepartMent;
 	}
 	
-	private List<MealBean> getLstByCodeName (String codeName){
+	private List<MealBean> getLstByCodeName (String codeVal){
 		List<MealBean> lst = new ArrayList<>();
-		List<Allcode> codeLst = constantDAO.getLstByCode(codeName);
+		List<Allcode> codeLst = constantDAO.getLstByCodeVal(codeVal);
 		if(codeLst != null && !codeLst.isEmpty()){
 			for (Allcode obj : codeLst){
 				MealBean bean = new MealBean();

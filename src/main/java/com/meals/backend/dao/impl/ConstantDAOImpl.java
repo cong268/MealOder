@@ -77,10 +77,10 @@ public class ConstantDAOImpl implements ConstantDAO {
 	}
 
 	@Override
-	public List<Allcode> getLstByCode(String codeName) {
+	public List<Allcode> getLstByCodeVal(String codeVal) {
 		Session session = sessionFactory.getCurrentSession();
-		Query query = session.createQuery("FROM Allcode a WHERE a.codeName = :codeName");
-		query.setParameter("codeName", codeName);
+		Query query = session.createQuery("FROM Allcode a WHERE a.codeVal = :codeVal");
+		query.setParameter("codeVal", codeVal);
 		return query.list();
 	}
 }

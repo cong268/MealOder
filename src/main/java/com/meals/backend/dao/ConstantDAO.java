@@ -14,5 +14,5 @@ public interface ConstantDAO {
 	List<Department> getAllDepartment();
 	List<Location> getAllLocation();
 	List<Userrole> getAllRole();
-	List<Allcode> getLstByCode (String codeName);
+	List<Allcode> getLstByCodeVal (String codeVal);
 }

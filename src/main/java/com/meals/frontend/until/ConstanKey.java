@@ -20,7 +20,7 @@ public class ConstanKey {
 	}
 	
 	public interface ALL_CODE {
-		public static final String MEAL_TYPE = "MealType";
-		public static final String MEAL_TIME = "MealTime";
+		public static final String MEAL_TIME = "01";
+		public static final String MEAL_TYPE = "02";
 	}
 }
