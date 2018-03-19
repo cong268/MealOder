@@ -16,7 +16,6 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
@@ -28,20 +27,24 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Catering.findAll", query = "SELECT c FROM Catering c"),
-    @NamedQuery(name = "Catering.findByStaffId", query = "SELECT c FROM Catering c WHERE c.cateringPK.staffId = :staffId"),
-    @NamedQuery(name = "Catering.findByMealTimeCode", query = "SELECT c FROM Catering c WHERE c.cateringPK.mealTimeCode = :mealTimeCode"),
     @NamedQuery(name = "Catering.findByCateringDate", query = "SELECT c FROM Catering c WHERE c.cateringPK.cateringDate = :cateringDate"),
+    @NamedQuery(name = "Catering.findByMealTimeId", query = "SELECT c FROM Catering c WHERE c.cateringPK.mealTimeId = :mealTimeId"),
+    @NamedQuery(name = "Catering.findByStaffId", query = "SELECT c FROM Catering c WHERE c.cateringPK.staffId = :staffId"),
+    @NamedQuery(name = "Catering.findByCatered", query = "SELECT c FROM Catering c WHERE c.catered = :catered"),
     @NamedQuery(name = "Catering.findByCateringTime", query = "SELECT c FROM Catering c WHERE c.cateringTime = :cateringTime"),
     @NamedQuery(name = "Catering.findByDeptId", query = "SELECT c FROM Catering c WHERE c.deptId = :deptId"),
     @NamedQuery(name = "Catering.findByLocationId", query = "SELECT c FROM Catering c WHERE c.locationId = :locationId"),
-    @NamedQuery(name = "Catering.findByMealTypeCode", query = "SELECT c FROM Catering c WHERE c.mealTypeCode = :mealTypeCode"),
+    @NamedQuery(name = "Catering.findByMealId", query = "SELECT c FROM Catering c WHERE c.mealId = :mealId"),
     @NamedQuery(name = "Catering.findByOrdered", query = "SELECT c FROM Catering c WHERE c.ordered = :ordered"),
-    @NamedQuery(name = "Catering.findByStatus", query = "SELECT c FROM Catering c WHERE c.status = :status"),
-    @NamedQuery(name = "Catering.findByCatered", query = "SELECT c FROM Catering c WHERE c.catered = :catered")})
+    @NamedQuery(name = "Catering.findByStatus", query = "SELECT c FROM Catering c WHERE c.status = :status")})
 public class Catering implements Serializable {
     private static final long serialVersionUID = 1L;
     @EmbeddedId
     protected CateringPK cateringPK;
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "Catered")
+    private boolean catered;
     @Basic(optional = false)
     @NotNull
     @Column(name = "CateringTime")
@@ -57,9 +60,8 @@ public class Catering implements Serializable {
     private int locationId;
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 60)
-    @Column(name = "MealTypeCode")
-    private String mealTypeCode;
+    @Column(name = "MealId")
+    private int mealId;
     @Basic(optional = false)
     @NotNull
     @Column(name = "Ordered")
@@ -68,10 +70,6 @@ public class Catering implements Serializable {
     @NotNull
     @Column(name = "Status")
     private boolean status;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "Catered")
-    private boolean catered;
 
     public Catering() {
     }
@@ -80,19 +78,19 @@ public class Catering implements Serializable {
         this.cateringPK = cateringPK;
     }
 
-    public Catering(CateringPK cateringPK, Date cateringTime, int deptId, int locationId, String mealTypeCode, boolean ordered, boolean status, boolean catered) {
+    public Catering(CateringPK cateringPK, boolean catered, Date cateringTime, int deptId, int locationId, int mealId, boolean ordered, boolean status) {
         this.cateringPK = cateringPK;
+        this.catered = catered;
         this.cateringTime = cateringTime;
         this.deptId = deptId;
         this.locationId = locationId;
-        this.mealTypeCode = mealTypeCode;
+        this.mealId = mealId;
         this.ordered = ordered;
         this.status = status;
-        this.catered = catered;
     }
 
-    public Catering(String staffId, String mealTimeCode, Date cateringDate) {
-        this.cateringPK = new CateringPK(staffId, mealTimeCode, cateringDate);
+    public Catering(Date cateringDate, int mealTimeId, String staffId) {
+        this.cateringPK = new CateringPK(cateringDate, mealTimeId, staffId);
     }
 
     public CateringPK getCateringPK() {
@@ -101,6 +99,14 @@ public class Catering implements Serializable {
 
     public void setCateringPK(CateringPK cateringPK) {
         this.cateringPK = cateringPK;
+    }
+
+    public boolean getCatered() {
+        return catered;
+    }
+
+    public void setCatered(boolean catered) {
+        this.catered = catered;
     }
 
     public Date getCateringTime() {
@@ -127,12 +133,12 @@ public class Catering implements Serializable {
         this.locationId = locationId;
     }
 
-    public String getMealTypeCode() {
-        return mealTypeCode;
+    public int getMealId() {
+        return mealId;
     }
 
-    public void setMealTypeCode(String mealTypeCode) {
-        this.mealTypeCode = mealTypeCode;
+    public void setMealId(int mealId) {
+        this.mealId = mealId;
     }
 
     public boolean getOrdered() {
@@ -149,14 +155,6 @@ public class Catering implements Serializable {
 
     public void setStatus(boolean status) {
         this.status = status;
-    }
-
-    public boolean getCatered() {
-        return catered;
-    }
-
-    public void setCatered(boolean catered) {
-        this.catered = catered;
     }
 
     @Override

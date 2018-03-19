@@ -22,43 +22,26 @@ import javax.validation.constraints.Size;
 public class CateringPK implements Serializable {
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 255)
-    @Column(name = "StaffId")
-    private String staffId;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 60)
-    @Column(name = "MealTimeCode")
-    private String mealTimeCode;
-    @Basic(optional = false)
-    @NotNull
     @Column(name = "CateringDate")
     @Temporal(TemporalType.DATE)
     private Date cateringDate;
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "MealTimeId")
+    private int mealTimeId;
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 255)
+    @Column(name = "StaffId")
+    private String staffId;
 
     public CateringPK() {
     }
 
-    public CateringPK(String staffId, String mealTimeCode, Date cateringDate) {
-        this.staffId = staffId;
-        this.mealTimeCode = mealTimeCode;
+    public CateringPK(Date cateringDate, int mealTimeId, String staffId) {
         this.cateringDate = cateringDate;
-    }
-
-    public String getStaffId() {
-        return staffId;
-    }
-
-    public void setStaffId(String staffId) {
+        this.mealTimeId = mealTimeId;
         this.staffId = staffId;
-    }
-
-    public String getMealTimeCode() {
-        return mealTimeCode;
-    }
-
-    public void setMealTimeCode(String mealTimeCode) {
-        this.mealTimeCode = mealTimeCode;
     }
 
     public Date getCateringDate() {
@@ -69,12 +52,28 @@ public class CateringPK implements Serializable {
         this.cateringDate = cateringDate;
     }
 
+    public int getMealTimeId() {
+        return mealTimeId;
+    }
+
+    public void setMealTimeId(int mealTimeId) {
+        this.mealTimeId = mealTimeId;
+    }
+
+    public String getStaffId() {
+        return staffId;
+    }
+
+    public void setStaffId(String staffId) {
+        this.staffId = staffId;
+    }
+
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (staffId != null ? staffId.hashCode() : 0);
-        hash += (mealTimeCode != null ? mealTimeCode.hashCode() : 0);
         hash += (cateringDate != null ? cateringDate.hashCode() : 0);
+        hash += (int) mealTimeId;
+        hash += (staffId != null ? staffId.hashCode() : 0);
         return hash;
     }
 
@@ -85,13 +84,13 @@ public class CateringPK implements Serializable {
             return false;
         }
         CateringPK other = (CateringPK) object;
-        if ((this.staffId == null && other.staffId != null) || (this.staffId != null && !this.staffId.equals(other.staffId))) {
-            return false;
-        }
-        if ((this.mealTimeCode == null && other.mealTimeCode != null) || (this.mealTimeCode != null && !this.mealTimeCode.equals(other.mealTimeCode))) {
-            return false;
-        }
         if ((this.cateringDate == null && other.cateringDate != null) || (this.cateringDate != null && !this.cateringDate.equals(other.cateringDate))) {
+            return false;
+        }
+        if (this.mealTimeId != other.mealTimeId) {
+            return false;
+        }
+        if ((this.staffId == null && other.staffId != null) || (this.staffId != null && !this.staffId.equals(other.staffId))) {
             return false;
         }
         return true;
@@ -99,7 +98,7 @@ public class CateringPK implements Serializable {
 
     @Override
     public String toString() {
-        return "com.meals.backend.model.CateringPK[ staffId=" + staffId + ", mealTimeCode=" + mealTimeCode + ", cateringDate=" + cateringDate + " ]";
+        return "com.meals.backend.model.CateringPK[ cateringDate=" + cateringDate + ", mealTimeId=" + mealTimeId + ", staffId=" + staffId + " ]";
     }
     
 }

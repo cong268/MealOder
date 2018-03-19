@@ -1,12 +1,13 @@
 package com.meals.frontend.bean;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
 public class DataExportBean {
 	private String fromDate;
 	private String toDate;
-	private Map<Integer, List<MealsOrderBean>> mapDataByDepart;
+	private Map<Date, List<MealsOrderBean>> mapDataByDate;
 	private Map<Integer, String> mapDepartMent;
 	private Map<Integer, String> mapLocation;
 
@@ -26,12 +27,12 @@ public class DataExportBean {
 		this.toDate = toDate;
 	}
 
-	public Map<Integer, List<MealsOrderBean>> getMapDataByDepart() {
-		return mapDataByDepart;
+	public Map<Date, List<MealsOrderBean>> getMapDataByDate() {
+		return mapDataByDate;
 	}
 
-	public void setMapDataByDepart(Map<Integer, List<MealsOrderBean>> mapDataByDepart) {
-		this.mapDataByDepart = mapDataByDepart;
+	public void setMapDataByDate(Map<Date, List<MealsOrderBean>> mapDataByDate) {
+		this.mapDataByDate = mapDataByDate;
 	}
 
 	public Map<Integer, String> getMapDepartMent() {

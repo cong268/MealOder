@@ -7,7 +7,6 @@ public class MealsOrderBean {
 	private Integer locationId;
 	private Integer mealId;
 	private Integer departmentId;
-	private Integer shiftId;
 	private String dateMeal;
 
 	public String getStaffId() {
@@ -56,14 +55,6 @@ public class MealsOrderBean {
 
 	public void setDepartmentId(Integer departmentId) {
 		this.departmentId = departmentId;
-	}
-
-	public Integer getShiftId() {
-		return shiftId;
-	}
-
-	public void setShiftId(Integer shiftId) {
-		this.shiftId = shiftId;
 	}
 
 	public String getDateMeal() {
