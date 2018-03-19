@@ -25,26 +25,34 @@
             <div class="text-center wrap-header-page">
                 <h3><spring:message code="label.order_meal"/></h3>
             </div>
-            <div class="form-horizontal">
+            <div class="form-horizontal form-user-order" ng-form="userOrderForm">
                 <div class="form-group">
                     <span class="col-sm-4 control-label"><spring:message code="label.staff_id"/></span>
                     <div class="col-sm-8">
-                        <span class="form-control" ng-bind="arrData[0].staffId"></span>
+                        <span class="form-control disabled" ng-bind="arrData[0].staffId"></span>
                     </div>
                 </div>
                 <div class="form-group">
                     <span class="col-sm-4 control-label"><spring:message code="label.staff_name"/></span>
                     <div class="col-sm-8">
-                        <span class="form-control" ng-bind="arrData[0].staffName"></span>
+                        <span class="form-control disabled" ng-bind="arrData[0].staffName"></span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <span class="col-sm-4 control-label"><spring:message code="label.department"/></span>
+                    <div class="col-sm-8">
+                        <span class="form-control disabled" ng-bind="getDepartmentName(arrData[0].departmentId)"></span>
                     </div>
                 </div>
                 <div class="form-group">
                     <span class="col-sm-4 control-label"><spring:message code="label.cartering_date"/></span>
                     <div class="col-sm-8">
-                        <input type="text" class="form-control"
+                        <input type="text" class="form-control" required
                                ng-model="dateOrder"
                                id="date-order-input"
                                call-change="changeDateDouble(fromDate, toDate)"
+                               apply-text="'<spring:message code="label.apply_date"/>'"
+                               cancel-text="'<spring:message code="label.cancel_date"/>'"
                                date-range-picker-double-min/>
                     </div>
                 </div>
@@ -57,7 +65,7 @@
                 <div class="form-group">
                     <span class="col-sm-4 control-label"><spring:message code="label.meal_type"/></span>
                     <div class="col-sm-8">
-                        <select ng-model="arrData[0].mealId" class="form-control">
+                        <select ng-model="arrData[0].mealId" class="form-control" required>
                             <option ng-selected="arrData[0].mealId == mealObj.mealId"
                                     ng-repeat="mealObj in mealArr"
                                     ng-value="mealObj.mealId">{{mealObj.mealName}}</option>
@@ -67,27 +75,27 @@
                 <div class="form-group">
                     <span class="col-sm-4 control-label"><spring:message code="label.meal_time"/></span>
                     <div class="col-sm-8">
-                        <select ng-model="arrData[0].mealTimeId" class="form-control">
+                        <select ng-model="arrData[0].mealTimeId" class="form-control" required>
                             <option ng-selected="arrData[0].mealTimeId == mealTimeObj.mealTimeId"
                                     ng-repeat="mealTimeObj in mealTimeArr"
                                     ng-value="mealTimeObj.mealTimeId">{{mealTimeObj.mealTimeName}}</option>
                         </select>
                     </div>
                 </div>
-                <div class="form-group">
-                    <span class="col-sm-4 control-label"><spring:message code="label.shift"/></span>
-                    <div class="col-sm-8">
-                        <select ng-model="arrData[0].shiftId" class="form-control">
-                            <option ng-selected="arrData[0].shiftId == shilfObj.shiftId"
-                                    ng-repeat="shilfObj in shilfArr"
-                                    ng-value="shilfObj.shiftId">{{shilfObj.shiftName}}</option>
-                        </select>
-                    </div>
-                </div>
+                <%--<div class="form-group">--%>
+                    <%--<span class="col-sm-4 control-label"><spring:message code="label.shift"/></span>--%>
+                    <%--<div class="col-sm-8">--%>
+                        <%--<select ng-model="arrData[0].shiftId" class="form-control">--%>
+                            <%--<option ng-selected="arrData[0].shiftId == shilfObj.shiftId"--%>
+                                    <%--ng-repeat="shilfObj in shilfArr"--%>
+                                    <%--ng-value="shilfObj.shiftId">{{shilfObj.shiftName}}</option>--%>
+                        <%--</select>--%>
+                    <%--</div>--%>
+                <%--</div>--%>
                 <div class="form-group">
                     <span class="col-sm-4 control-label"><spring:message code="label.location"/></span>
                     <div class="col-sm-8">
-                        <select ng-model="arrData[0].locationId" class="form-control">
+                        <select ng-model="arrData[0].locationId" class="form-control" required>
                             <option ng-selected="arrData[0].locationId == locationObj.locationId"
                                     ng-repeat="locationObj in locationArr"
                                     ng-value="locationObj.locationId">{{locationObj.locationName}}</option>
@@ -96,7 +104,7 @@
                 </div>
             </div>
             <div class="row text-right p-r-15">
-                <div tooltip title="Order Now" class="btn btn-success btn-lg" ng-click="orderingCallback()"><spring:message code="label.order_upper"/></div>
+                <div tooltip title="<spring:message code="label.order_now"/>" class="btn btn-success btn-lg" ng-click="orderingCallback()"><spring:message code="label.order_upper"/></div>
             </div>
         </div>
     </div>

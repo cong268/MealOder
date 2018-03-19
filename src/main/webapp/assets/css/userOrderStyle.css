@@ -9,3 +9,18 @@
 .wrap-header-page{
     margin-bottom: 50px;
 }
+.daterangepicker_input,
+.calendar.right {
+    display: none !important;
+}
+.disabled{
+    background: rgb(217,217,217);
+}
+.form-user-order input.ng-invalid{
+    border: 1px solid red;
+    box-shadow: 0 0 1px red;
+}
+.form-user-order select.ng-invalid{
+    border: 1px solid red;
+    box-shadow: 0 0 1px red;
+}

@@ -1,8 +1,4 @@
 var myApp = angular.module('loginApplication',[]).controller('loginController', ['$scope', '$http' , function($scope, $http){
-    $scope.errorMessage = angular.element(document.getElementById("errorMess")).val();
-    $scope.clickHideMessage = function(){
-        $scope.errorMessage = null;
-    }
     angular.element(document).ready(function(){
         (function ($) {
             "use strict";
@@ -69,6 +65,7 @@ var myApp = angular.module('loginApplication',[]).controller('loginController', 
             function hideValidate(input) {
                 var thisAlert = $(input).parent();
                 $(thisAlert).removeClass('alert-validate');
+                $('.wrap-error-message').hide();
             }
         })(jQuery);
     })

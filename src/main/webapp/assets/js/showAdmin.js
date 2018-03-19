@@ -116,19 +116,19 @@ myApp.controller('carteredAdminCtrl', ['$scope', 'NgTableParams', 'ngTableEvents
         $scope.departmentArrClone = angular.copy($scope.departmentArr);
         $scope.locationArrClone.unshift({
             locationId : '',
-            locationName: '--------------'
+            locationName: 'ALL'
         })
         $scope.mealTimeArrClone.unshift({
             mealTimeId : '',
-            mealTimeName: '--------------'
+            mealTimeName: 'ALL'
         })
         $scope.mealArrClone.unshift({
             mealId : '',
-            mealName: '--------------'
+            mealName: 'ALL'
         })
         $scope.shilfArrClone.unshift({
             shilfId : '',
-            shilfName: '--------------'
+            shilfName: 'ALL'
         })
         $scope.departmentArrClone.unshift({
             deptId : '',

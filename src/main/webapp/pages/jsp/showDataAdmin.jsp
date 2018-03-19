@@ -117,9 +117,9 @@
                     <td data-title="'Meal Type'" class="text-center">
                         {{getMealName(row.mealId)}}
                     </td>
-                    <td data-title="'Shift'" class="text-center">
-                        {{getShiftName(row.shiftId)}}
-                    </td>
+                    <%--<td data-title="'Shift'" class="text-center">--%>
+                        <%--{{getShiftName(row.shiftId)}}--%>
+                    <%--</td>--%>
                     <td data-title="'Department'" class="text-center">
                         {{getDepartmentName(row.departmentId)}}
                     </td>

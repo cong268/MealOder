@@ -75,6 +75,7 @@
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><spring:message code="label.person_manager"/> <span class="caret"></span></a>
                         <ul class="dropdown-menu">
                             <li><a href="registerUser"><spring:message code="label.register_user"/></a></li>
+                            <li><a href="registerStaff"><spring:message code="label.register_staff"/></a></li>
                         </ul>
                     </li>
                     </c:if>

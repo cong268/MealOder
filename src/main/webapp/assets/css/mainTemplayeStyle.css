@@ -199,11 +199,19 @@ body{
     color: white;
     display: none;
 }
-.daterangepicker .weekend{
+.daterangepicker tr .weekend{
     background-color: rgba(255,10,10,0.3);
     border: 1px solid #fff;
 }
-.daterangepicker .weekend.off{
+.daterangepicker tr .weekend:last-child{
+    background-color: rgba(255,10,10,0.5);
+    border: 1px solid #fff;
+}
+.daterangepicker tr .weekend.off{
     background-color: rgba(255, 142, 113, 0.3);
+    border: 1px solid #fff;
+}
+.daterangepicker tr .weekend.off:last-child{
+    background-color: rgba(255, 142, 113, 0.5);
     border: 1px solid #fff;
 }

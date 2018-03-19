@@ -31,15 +31,18 @@
 <body ng-app="loginApplication">
 <div class="limiter">
     <div class="container-login-nsrp" ng-controller="loginController">
-        <input type="hidden" id="errorMess" value="${messsage}">
         <div class="wrap-login-nsrp p-t-30 p-b-50">
             <span class="login-nsrp-form-title p-b-41">
                 <spring:message  code="label.login_header" />
             </span>
             <form class="login-nsrp-form validate-form p-b-45 p-t-5" method="POST" action="authentication">
-                <div class="wrap-error-message">
-                    <span class="error-message" ng-bind="errorMessage"></span>
-                </div>
+                <c:if test="${message eq 'error'}">
+                    <div class="wrap-error-message">
+                        <span class="error-message">
+                            <spring:message  code="label.login_error" />
+                        </span>
+                    </div>
+                </c:if>
                 <div class="wrap-input-nsrp validate-input" data-validate="Enter username">
                     <input class="input-nsrp" ng-click="clickHideMessage()" ng-model="nsrpUsername"
                            id="nsrp-username" type="text" name="username"

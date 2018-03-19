@@ -44,4 +44,10 @@ public class ViewController {
         ModelAndView model = new ModelAndView("registerUser");
         return model;
     }
+
+    @RequestMapping("registerStaff")
+    public ModelAndView registerStaff(){
+        ModelAndView model = new ModelAndView("registerStaff");
+        return model;
+    }
 }

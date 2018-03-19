@@ -55,7 +55,9 @@ myApp.directive('dateRangePickerDoubleMin', function() {
         restrict: 'A',
         require:'ngModel',
         scope: {
-            callChange: '&'
+            callChange: '&',
+            applyText: '=',
+            cancelText: '='
         },
         link: function($scope, element, attribute, ngModel) {
             setTimeout(function(){
@@ -66,6 +68,7 @@ myApp.directive('dateRangePickerDoubleMin', function() {
                         format: 'DD/MM/YYYY',
                         firstDay: 1
                     },
+                    linkedCalendars:false,
                     minDate: moment().format('DD/MM/YYYY')
                 },
                 function(start, end, label) {
@@ -77,6 +80,12 @@ myApp.directive('dateRangePickerDoubleMin', function() {
                     ngModel.$setViewValue(moment(start).format('DD/MM/YYYY')+' - '+moment(end).format('DD/MM/YYYY'));
                     ngModel.$render();
                 });
+                if($scope.applyText){
+                    $('.daterangepicker .range_inputs .applyBtn').text($scope.applyText);
+                }
+                if($scope.cancelText){
+                    $('.daterangepicker .range_inputs .cancelBtn').text($scope.cancelText);
+                }
             }, 500);
         }
     };

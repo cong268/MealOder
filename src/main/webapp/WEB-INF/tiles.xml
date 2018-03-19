@@ -15,6 +15,10 @@
         <put-attribute name="titlePage" value="page.register_user"/>
         <put-attribute name="mainContent" value="/pages/jsp/registerUser.jsp"/>
     </definition>
+    <definition name="registerStaff" extends="mainTemplate">
+        <put-attribute name="titlePage" value="page.register_staff"/>
+        <put-attribute name="mainContent" value="/pages/jsp/registerStaff.jsp"/>
+    </definition>
     <definition name="approveMeal" extends="mainTemplate">
         <put-attribute name="titlePage" value="page.approve_meal"/>
         <put-attribute name="mainContent" value="/pages/jsp/approveMeal.jsp"/>

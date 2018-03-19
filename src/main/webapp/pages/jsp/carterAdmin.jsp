@@ -21,11 +21,11 @@
 <body ng-controller="carterAdminCtrl" ng-init="initData()">
     <div class="container wrap-cartering-managerment">
         <div class="row text-center" >
-            <div class="col-md-12 col-lg-12 col-xs-12 col-md-12 wrap-meal-table">
+            <div class="col-md-12 col-lg-12 col-xs-12 col-md-12">
                 <div class="text-left wrap-header-page">
                     <h3>Cartering Employees <span class="badge" ng-cloak ng-bind="tableParams.total()"/></h3>
                 </div>
-                <div ng-cloak class="row wrap-filter col-md-5 col-lg-5 col-xs-5 col-md-5 pull-left">
+                <div ng-cloak class="row wrap-filter col-md-5 col-lg-5 col-xs-12 col-md-12 pull-left">
                     <div class="col-sm-3 p-l-0 m-t-10 p-t-5">
                         Date
                     </div>
@@ -40,6 +40,10 @@
                         <div class="btn btn-success btn-default" ng-click="filterAccept()">Catering Date<span class="glyphicon glyphicon-search p-l-10"></span></div>
                     </div>
                 </div>
+            </div>
+        </div>
+        <div class="row text-center" >
+            <div class="col-md-12 col-lg-12 col-xs-12 col-md-12 wrap-meal-table">
                 <table ng-cloak ng-table="tableParams" class="table table-condensed table-bordered table-striped table-custom"
                        ng-class="{'nomarginbottom': tableParams.total() == 0}">
                     <tr ng-repeat="row in $data">

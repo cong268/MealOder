@@ -23,8 +23,8 @@ public class LoginController {
 	public ModelAndView showLoginPage(HttpServletRequest request) {
 		request.getSession().removeAttribute(ConstanKey.USER_ID);
 		request.getSession().removeAttribute(ConstanKey.USER_NAME);
+		request.getSession().removeAttribute(ConstanKey.USER_ROLE);
 		ModelAndView model = new ModelAndView("login");
-		model.addObject("messsage", "");
 		return model;
 	}
 
@@ -32,10 +32,19 @@ public class LoginController {
 	protected ModelAndView logoutSession(HttpServletRequest request) {
 		request.getSession().removeAttribute(ConstanKey.USER_ID);
 		request.getSession().removeAttribute(ConstanKey.USER_NAME);
+		request.getSession().removeAttribute(ConstanKey.USER_ROLE);
 		ModelAndView model = new ModelAndView("login");
 		return model;
 	}
-
+	@RequestMapping(value = "authentication", method = RequestMethod.GET)
+	public ModelAndView showAuthenPage(HttpServletRequest request) {
+		request.getSession().removeAttribute(ConstanKey.USER_ID);
+		request.getSession().removeAttribute(ConstanKey.USER_NAME);
+		request.getSession().removeAttribute(ConstanKey.USER_ROLE);
+		ModelAndView model = new ModelAndView("login");
+		model.addObject("message", "error");
+		return model;
+	}
 	@RequestMapping(value = "authentication", method = RequestMethod.POST)
     public ModelAndView doAuthentication(@RequestParam("username") String username,
 								   @RequestParam("password") String password,
@@ -72,7 +81,7 @@ public class LoginController {
 			}
 		} else {
 			ModelAndView model = new ModelAndView("login");
-			model.addObject("messsage", "Username or password is invalid!");
+			model.addObject("message", "error");
 			return model;
 		}
 	}
