@@ -112,8 +112,8 @@ public class ExcelReportView extends AbstractExcelView {
 		// Create an anchor that is attached to the worksheet
 		ClientAnchor anchor = helper.createClientAnchor();
 		// set top-left corner for the image
-		anchor.setCol1(1);
-		anchor.setRow1(1);
+		anchor.setCol1(0);
+		anchor.setRow1(0);
 		// Creates a picture
 		Picture pict = drawing.createPicture(anchor, pictureIdx);
 		// Reset the image to the original size
@@ -202,9 +202,9 @@ public class ExcelReportView extends AbstractExcelView {
 		List<MealTypeBean> lstMealType = dataBean.getLstMealType();
 		List<LocationBean> lstLocation = dataBean.getLstLocation();
 		List<DepartmentBean> lstDepartMent = dataBean.getLstDepartMent();
+		int total = 0;
+		int num =0;
 		if(mapData != null && !mapData.isEmpty()){
-			int num =0;
-			int total = 0;
 			for (Date date : mapData.keySet()){
 				String dateStr = FunctionUtils.convertDateStringByFormatLocal(date, ConstanKey.FORMAT_DATE.DATE_SLASH_FORMAT);
 				List<MealsOrderBean> lstData = mapData.get(date);
@@ -234,7 +234,7 @@ public class ExcelReportView extends AbstractExcelView {
 										cellInfo = rowInfo.createCell(2);
 										cellInfo.setCellValue(department.getDeptName());
 										cellInfo.setCellStyle(styleBodyTable);
-										sheet.addMergedRegion(new CellRangeAddress(8, 8, 2, 3));
+										sheet.addMergedRegion(new CellRangeAddress(9 + num,9 + num, 2, 3));
 										cellInfo = rowInfo.createCell(4);
 										cellInfo.setCellValue(typeBean.getMealName());
 										cellInfo.setCellStyle(styleBodyTable);
@@ -259,6 +259,17 @@ public class ExcelReportView extends AbstractExcelView {
 			}
 			
 		}
+		Row rowTotal = sheet.createRow(9 + num);
+		rowTotal.setHeight((short) (rowInfo.getHeight() * 2));
+		cellInfo = rowTotal.createCell(0);
+		cellInfo = rowTotal.createCell(1);
+		cellInfo = rowTotal.createCell(2);
+		sheet.addMergedRegion(new CellRangeAddress(9 + num,9 + num, 2, 3));
+		cellInfo = rowTotal.createCell(4);
+		cellInfo = rowTotal.createCell(5);
+		cellInfo = rowTotal.createCell(6);
+		cellInfo.setCellValue("TOTAL:");
+		cellInfo = rowTotal.createCell(7);
 	}
 	
 }
