@@ -1,5 +1,6 @@
 package com.meals.frontend.service.impl;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
@@ -423,6 +424,7 @@ public class MealsServiceImpl implements MealsService {
 				pk.setStaffId(obj.getStaffId());
 				pk.setCateringDate(cateringDate);
 				pk.setMealTimeId(obj.getMealTimeId());
+				dto.setId(pk);
 				dto.setDeptId(departId);
 				dto.setLocationId(obj.getLocationId());
 				dto.setCateringTime(cateringTime);
@@ -474,7 +476,7 @@ public class MealsServiceImpl implements MealsService {
 					bean.setMealType(mapMealType.get(row[2]));
 					bean.setMealTime(mapMealTime.get(row[3]));
 					bean.setLocation(mapLocation.get(row[4]));
-					bean.setQuantity((Integer) row[5]);
+					bean.setQuantity((Long) row[5]);
 					result.add(bean);
 				}
 			}

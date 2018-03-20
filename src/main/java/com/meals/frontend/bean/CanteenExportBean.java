@@ -6,7 +6,7 @@ public class CanteenExportBean {
 	private String mealType;
 	private String mealTime;
 	private String location;
-	private Integer quantity;
+	private Long quantity;
 
 	public String getDate() {
 		return date;
@@ -48,11 +48,11 @@ public class CanteenExportBean {
 		this.location = location;
 	}
 
-	public Integer getQuantity() {
+	public Long getQuantity() {
 		return quantity;
 	}
 
-	public void setQuantity(Integer quantity) {
+	public void setQuantity(Long quantity) {
 		this.quantity = quantity;
 	}
 
