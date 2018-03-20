@@ -73,9 +73,9 @@
                         <td data-title="'Meal Type'" class="text-center">
                             {{getMealName(row.mealId)}}
                         </td>
-                        <td data-title="'Shift'" class="text-center">
-                            {{getShiftName(row.shiftId)}}
-                        </td>
+                        <%--<td data-title="'Shift'" class="text-center">--%>
+                            <%--{{getShiftName(row.shiftId)}}--%>
+                        <%--</td>--%>
                         <td width="100" style="text-align: center" data-header="'addMealManager.html'">
                             <div class="btn btn-default btn-custom" tooltip title="Edit" data-toggle="modal" data-target="#editModal" ng-click="editMeal(row)">
                                 <span class="glyphicon glyphicon-pencil"></span>
@@ -137,14 +137,14 @@
                                         ng-value="mealObj.mealId">{{mealObj.mealName}}</option>
                             </select>
                         </div>
-                        <div class="form-group">
-                            <label for="shift-popup" class="col-form-label">Shift:</label>
-                            <select id="shift-popup" ng-model="selectedItemClone.shiftId" class="form-control">
-                                <option ng-selected="selectedItemClone.shiftId == shilfObj.shiftId"
-                                        ng-repeat="shilfObj in shilfArr"
-                                        ng-value="shilfObj.shiftId">{{shilfObj.shiftName}}</option>
-                            </select>
-                        </div>
+                        <%--<div class="form-group">--%>
+                            <%--<label for="shift-popup" class="col-form-label">Shift:</label>--%>
+                            <%--<select id="shift-popup" ng-model="selectedItemClone.shiftId" class="form-control">--%>
+                                <%--<option ng-selected="selectedItemClone.shiftId == shilfObj.shiftId"--%>
+                                        <%--ng-repeat="shilfObj in shilfArr"--%>
+                                        <%--ng-value="shilfObj.shiftId">{{shilfObj.shiftName}}</option>--%>
+                            <%--</select>--%>
+                        <%--</div>--%>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
@@ -194,13 +194,13 @@
                                                         ng-value="mealObj.mealId">{{mealObj.mealName}}</option>
                                             </select>
                                         </td>
-                                        <td data-title="'Shift'">
-                                            <select ng-model="row.shiftId" class="form-control">
-                                                <option ng-selected="row.shiftId == shilfObj.shiftId"
-                                                        ng-repeat="shilfObj in shilfArr"
-                                                        ng-value="shilfObj.shiftId">{{shilfObj.shiftName}}</option>
-                                            </select>
-                                        </td>
+                                        <%--<td data-title="'Shift'">--%>
+                                            <%--<select ng-model="row.shiftId" class="form-control">--%>
+                                                <%--<option ng-selected="row.shiftId == shilfObj.shiftId"--%>
+                                                        <%--ng-repeat="shilfObj in shilfArr"--%>
+                                                        <%--ng-value="shilfObj.shiftId">{{shilfObj.shiftName}}</option>--%>
+                                            <%--</select>--%>
+                                        <%--</td>--%>
                                         <td width="10" style="text-align: center" data-header="'checkbox.html'">
                                             <label class="control control-checkbox">
                                                 <input type="checkbox"
@@ -270,14 +270,14 @@
                                         ng-value="mealObj.mealId">{{mealObj.mealName}}</option>
                             </select>
                         </div>
-                        <div class="form-group">
-                            <label for="visitor-shift-popup" class="col-form-label">Shift:</label>
-                            <select id="visitor-shift-popup" ng-model="visitorObject.shiftId" class="form-control" required>
-                                <option ng-selected="visitorObject.shiftId == shilfObj.shiftId"
-                                        ng-repeat="shilfObj in shilfArr"
-                                        ng-value="shilfObj.shiftId">{{shilfObj.shiftName}}</option>
-                            </select>
-                        </div>
+                        <%--<div class="form-group">--%>
+                            <%--<label for="visitor-shift-popup" class="col-form-label">Shift:</label>--%>
+                            <%--<select id="visitor-shift-popup" ng-model="visitorObject.shiftId" class="form-control" required>--%>
+                                <%--<option ng-selected="visitorObject.shiftId == shilfObj.shiftId"--%>
+                                        <%--ng-repeat="shilfObj in shilfArr"--%>
+                                        <%--ng-value="shilfObj.shiftId">{{shilfObj.shiftName}}</option>--%>
+                            <%--</select>--%>
+                        <%--</div>--%>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>

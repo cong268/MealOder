@@ -25,7 +25,7 @@ public class StaffDAOImpl implements StaffDAO {
 	public Staff getStaffByUserId(Integer userId) {
 		Session session = sessionFactory.getCurrentSession();
 		Query query = session
-				.createQuery("FROM Staff c WHERE c.staffId = (SELECT u.staffId FROM User u WHERE u.userId = :userId)");
+				.createQuery("FROM Staff c WHERE c.staffId = (SELECT u.staffId FROM Users u WHERE u.userId = :userId)");
 		query.setParameter("userId", userId);
 		if (query.list() != null && !query.list().isEmpty()) {
 			return (Staff) query.list().get(0);
