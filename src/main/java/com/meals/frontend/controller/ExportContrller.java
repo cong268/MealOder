@@ -2,7 +2,7 @@ package com.meals.frontend.controller;
 
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -21,7 +21,7 @@ public class ExportContrller {
 	MealsService mealsService;
 
 	@RequestMapping(value = "/exportCatering", method = RequestMethod.GET)
-	public ModelAndView exportCatering(@RequestParam(value = "fromDate") String fromDate,
+	public ModelAndView exportCatering(HttpSession session,@RequestParam(value = "fromDate") String fromDate,
 			@RequestParam(value = "toDate") String toDate) {
 		ModelAndView model = new ModelAndView("excelView");
 		List<CanteenExportBean> lst = mealsService.getLstAndCount(fromDate, toDate);
