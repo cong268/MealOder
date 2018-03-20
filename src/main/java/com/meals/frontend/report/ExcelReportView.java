@@ -1,5 +1,7 @@
 package com.meals.frontend.report;
 
+import java.io.FileInputStream;
+import java.io.InputStream;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -13,10 +15,16 @@ import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellStyle;
+import org.apache.poi.ss.usermodel.ClientAnchor;
+import org.apache.poi.ss.usermodel.CreationHelper;
+import org.apache.poi.ss.usermodel.Drawing;
 import org.apache.poi.ss.usermodel.HorizontalAlignment;
+import org.apache.poi.ss.usermodel.Picture;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.VerticalAlignment;
+import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.ss.util.CellRangeAddress;
+import org.apache.poi.util.IOUtils;
 import org.springframework.web.servlet.view.document.AbstractExcelView;
 
 import com.meals.frontend.bean.DataExportBean;
@@ -44,13 +52,6 @@ public class ExcelReportView extends AbstractExcelView {
 		sheet.setColumnWidth(5, 15*256);
 		sheet.setColumnWidth(6, 15*256);
 		sheet.setColumnWidth(7, 15*256);
-		
-		sheet.addMergedRegion(new CellRangeAddress(2, 2, 0, 7));
-		sheet.addMergedRegion(new CellRangeAddress(4, 4, 0, 2));
-		sheet.addMergedRegion(new CellRangeAddress(4, 4, 3, 7));
-		sheet.addMergedRegion(new CellRangeAddress(5, 5, 0, 2));
-		sheet.addMergedRegion(new CellRangeAddress(5, 5, 3, 4));
-		sheet.addMergedRegion(new CellRangeAddress(5, 5, 6, 7));
 		
 		CellStyle styleTitle = workbook.createCellStyle();
 		HSSFFont font = workbook.createFont();
@@ -96,11 +97,38 @@ public class ExcelReportView extends AbstractExcelView {
 		font.setFontHeightInPoints((short) 10);
 		styleBodyTable.setFont(font);
 		
+		// FileInputStream obtains input bytes from the image file
+		InputStream inputStream = new FileInputStream("C:/Users/nvcong/Desktop/nsrp.png");
+		// Get the contents of an InputStream as a byte[].
+		byte[] bytes = IOUtils.toByteArray(inputStream);
+		// Adds a picture to the workbook
+		int pictureIdx = workbook.addPicture(bytes, Workbook.PICTURE_TYPE_PNG);
+		// close the input stream
+		inputStream.close();
+		// Returns an object that handles instantiating concrete classes
+		CreationHelper helper = workbook.getCreationHelper();
+		// Creates the top-level drawing patriarch.
+		Drawing drawing = sheet.createDrawingPatriarch();
+		// Create an anchor that is attached to the worksheet
+		ClientAnchor anchor = helper.createClientAnchor();
+		// set top-left corner for the image
+		anchor.setCol1(1);
+		anchor.setRow1(1);
+		// Creates a picture
+		Picture pict = drawing.createPicture(anchor, pictureIdx);
+		// Reset the image to the original size
+		pict.resize();
+		
+		Row rowImg = sheet.createRow(0);
+		rowImg.setHeight((short) (rowImg.getHeight() * 4));
+		sheet.addMergedRegion(new CellRangeAddress(0, 0, 0, 7));
+		
 		Row rowTitle = sheet.createRow(2);
 		rowTitle.setHeight((short) (rowTitle.getHeight() * 2));
 		Cell cellTitle = rowTitle.createCell(0);
 		cellTitle.setCellValue("CANTEEN REPORT");
 		cellTitle.setCellStyle(styleTitle);
+		sheet.addMergedRegion(new CellRangeAddress(2, 2, 0, 7));
 		
 		Row rowInfo = sheet.createRow(4);
 		rowInfo.setHeight((short) (rowInfo.getHeight() * 2));
@@ -110,6 +138,8 @@ public class ExcelReportView extends AbstractExcelView {
 		cellInfo = rowInfo.createCell(3);
 		cellInfo.setCellValue("Canteen");
 		cellInfo.setCellStyle(styleContentHead);
+		sheet.addMergedRegion(new CellRangeAddress(4, 4, 0, 2));
+		sheet.addMergedRegion(new CellRangeAddress(4, 4, 3, 7));
 		
 		rowInfo = sheet.createRow(5);
 		rowInfo.setHeight((short) (rowInfo.getHeight() * 2));
@@ -125,6 +155,9 @@ public class ExcelReportView extends AbstractExcelView {
 		cellInfo = rowInfo.createCell(6);
 		cellInfo.setCellValue(dataBean.getToDate());
 		cellInfo.setCellStyle(styleContentHead);
+		sheet.addMergedRegion(new CellRangeAddress(5, 5, 0, 2));
+		sheet.addMergedRegion(new CellRangeAddress(5, 5, 3, 4));
+		sheet.addMergedRegion(new CellRangeAddress(5, 5, 6, 7));
 		
 		rowInfo = sheet.createRow(7);
 		rowInfo.setHeight((short) (rowInfo.getHeight() * 2));
