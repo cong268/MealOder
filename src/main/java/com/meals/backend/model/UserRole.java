@@ -15,8 +15,8 @@ import javax.persistence.TemporalType;
  */
 @Entity
 @Table(name="UserRole"
-    ,schema="dbo"
-    ,catalog="nsrp"
+//    ,schema="dbo"
+//    ,catalog="nsrp"
 )
 public class UserRole  implements java.io.Serializable {
 

@@ -12,8 +12,8 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name="Location"
-    ,schema="dbo"
-    ,catalog="nsrp"
+//    ,schema="dbo"
+//    ,catalog="nsrp"
 )
 public class Location  implements java.io.Serializable {
 

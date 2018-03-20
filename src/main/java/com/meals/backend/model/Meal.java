@@ -12,8 +12,8 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name="Meal"
-    ,schema="dbo"
-    ,catalog="nsrp"
+//    ,schema="dbo"
+//    ,catalog="nsrp"
 )
 public class Meal  implements java.io.Serializable {
 

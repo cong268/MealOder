@@ -12,8 +12,8 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name="Department"
-    ,schema="dbo"
-    ,catalog="nsrp"
+//    ,schema="dbo"
+//    ,catalog="nsrp"
 )
 public class Department  implements java.io.Serializable {
 
