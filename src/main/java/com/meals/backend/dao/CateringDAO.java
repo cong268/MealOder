@@ -11,4 +11,5 @@ public interface CateringDAO {
 	List<Catering> getLstByDate (Date  fromDate, Date toDate);
 	Catering getByStaffId (String staffId, Date date);
 	Boolean saveOrUpdate(Catering obj);
+	List<Object[]> getLstAndCount(Date fromDate, Date toDate);
 }

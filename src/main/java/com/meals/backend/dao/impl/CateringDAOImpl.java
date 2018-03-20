@@ -34,8 +34,8 @@ public class CateringDAOImpl implements CateringDAO {
 	public List<Catering> getLstByOder(Integer departId, Date date) {
 		Session session = sessionFactory.getCurrentSession();
 		Query query = session.createQuery(
-				"FROM Catering c WHERE c.departId = :departId AND c.id.cateringDate = :cateringDate AND c.ordered = 1 AND c.status = 0 AND c.catered = 0");
-		query.setParameter("departId", departId);
+				"FROM Catering c WHERE c.deptId = :deptId AND c.id.cateringDate = :cateringDate AND c.ordered = 1 AND c.status = 0 AND c.catered = 0");
+		query.setParameter("deptId", departId);
 		query.setParameter("cateringDate", date);
 		return query.list();
 	}
@@ -53,7 +53,7 @@ public class CateringDAOImpl implements CateringDAO {
 	public List<Catering> getLstByDate(Date fromDate, Date toDate) {
 		Session session = sessionFactory.getCurrentSession();
 		Query query = session.createQuery(
-				"FROM Catering c WHERE c.id.cateringDate >= :fromDate AND c.cateringPK.cateringDate < :toDate AND c.catered = 1");
+				"FROM Catering c WHERE c.id.cateringDate >= :fromDate AND c.id.cateringDate < :toDate AND c.catered = 1");
 		query.setParameter("fromDate", fromDate);
 		query.setParameter("toDate", toDate);
 		return query.list();
@@ -62,13 +62,26 @@ public class CateringDAOImpl implements CateringDAO {
 	@Override
 	public Catering getByStaffId(String staffId, Date date) {
 		Session session = sessionFactory.getCurrentSession();
-		Query query = session
-				.createQuery("FROM Catering c WHERE c.id.staffId = :staffId AND c.cateringPK.cateringDate = :cateringDate");
+		Query query = session.createQuery(
+				"FROM Catering c WHERE c.id.staffId = :staffId AND c.id.cateringDate = :cateringDate");
 		query.setParameter("staffId", staffId);
 		query.setParameter("cateringDate", date);
 		if (query.list() != null && !query.list().isEmpty()) {
 			return (Catering) query.list().get(0);
 		}
 		return null;
+	}
+
+	@Override
+	public List<Object[]> getLstAndCount(Date fromDate, Date toDate) {
+		Session session = sessionFactory.getCurrentSession();
+		Query query = session.createQuery(
+				"SELECT c.id.cateringDate, c.deptId, c.mealId, c.id.mealTimeId, c.locationId, COUNT(*) "
+						+ "FROM Catering c WHERE c.id.cateringDate >= :fromDate AND c.id.cateringDate < :toDate "
+						+ "AND c.catered = 1 GROUP BY c.id.cateringDate, c.deptId, c.mealId, c.id.mealTimeId, c.locationId "
+						+ "ORDER BY c.id.cateringDate ASC");
+		query.setParameter("fromDate", fromDate);
+		query.setParameter("toDate", toDate);
+		return query.list();
 	}
 }
