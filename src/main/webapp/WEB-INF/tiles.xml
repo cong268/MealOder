@@ -11,6 +11,10 @@
    	 	<put-attribute name="titlePage" value="page.meal_management"/>
         <put-attribute name="mainContent" value="/pages/jsp/mealManagerment.jsp"/>
     </definition>
+    <definition name="showDataManager" extends="mainTemplate">
+        <put-attribute name="titlePage" value="page.show_manager"/>
+        <put-attribute name="mainContent" value="/pages/jsp/showDataManager.jsp"/>
+    </definition>
     <definition name="registerUser" extends="mainTemplate">
         <put-attribute name="titlePage" value="page.register_user"/>
         <put-attribute name="mainContent" value="/pages/jsp/registerUser.jsp"/>
@@ -19,10 +23,10 @@
         <put-attribute name="titlePage" value="page.register_staff"/>
         <put-attribute name="mainContent" value="/pages/jsp/registerStaff.jsp"/>
     </definition>
-    <definition name="approveMeal" extends="mainTemplate">
-        <put-attribute name="titlePage" value="page.approve_meal"/>
-        <put-attribute name="mainContent" value="/pages/jsp/approveMeal.jsp"/>
-    </definition>
+    <!--<definition name="approveMeal" extends="mainTemplate">-->
+        <!--<put-attribute name="titlePage" value="page.approve_meal"/>-->
+        <!--<put-attribute name="mainContent" value="/pages/jsp/approveMeal.jsp"/>-->
+    <!--</definition>-->
     <definition name="carterAdmin" extends="mainTemplate">
         <put-attribute name="titlePage" value="page.carter_admin"/>
         <put-attribute name="mainContent" value="/pages/jsp/carterAdmin.jsp"/>
@@ -34,5 +38,9 @@
     <definition name="userOrder" extends="mainTemplate">
         <put-attribute name="titlePage" value="page.user_order"/>
         <put-attribute name="mainContent" value="/pages/jsp/userOrder.jsp"/>
+    </definition>
+    <definition name="showDataUser" extends="mainTemplate">
+        <put-attribute name="titlePage" value="page.show_manager"/>
+        <put-attribute name="mainContent" value="/pages/jsp/showDataUser.jsp"/>
     </definition>
 </tiles-definitions>

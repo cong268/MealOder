@@ -60,15 +60,15 @@ myApp.controller('carterAdminCtrl', ['$scope', 'NgTableParams', 'ngTableEventsCh
         }
         return mealName;
     }
-    $scope.getShiftName = function(shiftId){
-        var shiftName = '';
-        for(var i = 0 ; i< $scope.shilfArr.length; i++){
-            if($scope.shilfArr[i].shiftId == shiftId){
-                shiftName =  $scope.shilfArr[i].shiftName;
-            }
-        }
-        return shiftName;
-    }
+    // $scope.getShiftName = function(shiftId){
+    //     var shiftName = '';
+    //     for(var i = 0 ; i< $scope.shilfArr.length; i++){
+    //         if($scope.shilfArr[i].shiftId == shiftId){
+    //             shiftName =  $scope.shilfArr[i].shiftName;
+    //         }
+    //     }
+    //     return shiftName;
+    // }
     $scope.getDepartmentName = function(departmentId){
         var deptNameFind = '';
         for(var i = 0 ; i< $scope.departmentArr.length; i++){

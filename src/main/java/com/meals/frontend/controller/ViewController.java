@@ -14,11 +14,17 @@ public class ViewController {
         return model;
     }
 
-    @RequestMapping("approveMeal")
-    public ModelAndView approveMeal(){
-        ModelAndView model = new ModelAndView("approveMeal");
+    @RequestMapping("showDataManager")
+    public ModelAndView showDataManager(){
+        ModelAndView model = new ModelAndView("showDataManager");
         return model;
     }
+
+//    @RequestMapping("approveMeal")
+//    public ModelAndView approveMeal(){
+//        ModelAndView model = new ModelAndView("approveMeal");
+//        return model;
+//    }
 
     @RequestMapping("userOrder")
     public ModelAndView userOrder(){
@@ -26,6 +32,11 @@ public class ViewController {
         return model;
     }
 
+    @RequestMapping("showDataUser")
+    public ModelAndView showDataUser(){
+        ModelAndView model = new ModelAndView("showDataUser");
+        return model;
+    }
 
     @RequestMapping("carterAdmin")
     public ModelAndView carteredAdmin(){

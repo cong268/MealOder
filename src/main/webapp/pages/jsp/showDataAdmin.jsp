@@ -14,12 +14,12 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Cartering</title>
+    <title>Data Admin</title>
     <link rel="stylesheet" href="<c:url value="/assets/css/showAdminStyle.css"></c:url>">
     <script type="text/javascript" src="<c:url value="/assets/js/showAdmin.js"></c:url>"></script>
     <script type="text/javascript"> var _contextPath = "${pageContext.request.contextPath}"; </script>
 </head>
-<body ng-controller="carteredAdminCtrl" ng-init="initData()">
+<body ng-controller="showAdminCtrl" ng-init="initData()">
 <div class="container wrap-cartered-managerment">
     <div class="row text-center" >
         <div class="col-md-12 col-lg-12 col-xs-12 col-md-12">

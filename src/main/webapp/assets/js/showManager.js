@@ -1,22 +1,24 @@
-myApp.controller('showAdminCtrl', ['$scope', 'NgTableParams', 'ngTableEventsChannel', '$http', function($scope, NgTableParams, ngTableEventsChannel, $http) {
+myApp.controller('carteredAdminCtrl', ['$scope', 'NgTableParams', 'ngTableEventsChannel', '$http', function($scope, NgTableParams, ngTableEventsChannel, $http) {
     $scope.demoCheckbox = 1;
     $scope.dataFiltered = [];
     $scope.locationArr = [];
     $scope.mealTimeArr = [];
     $scope.mealArr = [];
+    // $scope.shilfArr = [];
     $scope.arrData = [];
     $scope.departmentArr = [];
     /*CLONED*/
     $scope.locationArrClone = [];
     $scope.mealTimeArrClone = [];
     $scope.mealArrClone = [];
+    // $scope.shilfArrClone = [];
     $scope.departmentArrClone = [];
     $scope.mealTimeIdFilter='',
-    $scope.mealIdFilter='',
-    $scope.locationIdFilter='',
-    $scope.departmentIdFilter='',
+        $scope.mealIdFilter='',
+        $scope.locationIdFilter='',
+        $scope.departmentIdFilter='',
 
-    moment.locale('en');
+        moment.locale('en');
     $scope.fromDate = moment(new Date()).format('DD/MM/YYYY');
     $scope.toDate = moment(new Date()).format('DD/MM/YYYY');
     $scope.initData = function(){
@@ -33,6 +35,7 @@ myApp.controller('showAdminCtrl', ['$scope', 'NgTableParams', 'ngTableEventsChan
                 $scope.locationArr = dataAllPage.lstLocation;
                 $scope.mealTimeArr = dataAllPage.lstMealTime;
                 $scope.mealArr = dataAllPage.lstMealType;
+                // $scope.shilfArr = dataAllPage.lstShift;
                 $scope.departmentArr = dataAllPage.lstDepartMent;
                 $scope.arrData = angular.copy(dataAllTable);
                 drawTable();
@@ -78,6 +81,15 @@ myApp.controller('showAdminCtrl', ['$scope', 'NgTableParams', 'ngTableEventsChan
         }
         return deptNameFind;
     }
+    // $scope.getShiftName = function(shiftId){
+    //     var shiftName = '';
+    //     for(var i = 0 ; i< $scope.shilfArr.length; i++){
+    //         if($scope.shilfArr[i].shiftId == shiftId){
+    //             shiftName =  $scope.shilfArr[i].shiftName;
+    //         }
+    //     }
+    //     return shiftName;
+    // }
     function drawTable(){
         $scope.tableParams = new NgTableParams({
             page: 1,
@@ -100,6 +112,7 @@ myApp.controller('showAdminCtrl', ['$scope', 'NgTableParams', 'ngTableEventsChan
         $scope.locationArrClone = angular.copy($scope.locationArr);
         $scope.mealTimeArrClone = angular.copy($scope.mealTimeArr);
         $scope.mealArrClone = angular.copy($scope.mealArr);
+        // $scope.shilfArrClone = angular.copy($scope.shilfArr);
         $scope.departmentArrClone = angular.copy($scope.departmentArr);
         $scope.locationArrClone.unshift({
             locationId : '',
@@ -113,6 +126,10 @@ myApp.controller('showAdminCtrl', ['$scope', 'NgTableParams', 'ngTableEventsChan
             mealId : '',
             mealName: 'ALL'
         })
+        // $scope.shilfArrClone.unshift({
+        //     shilfId : '',
+        //     shilfName: 'ALL'
+        // })
         $scope.departmentArrClone.unshift({
             deptId : '',
             deptName: 'ALL'
@@ -156,6 +173,7 @@ myApp.controller('showAdminCtrl', ['$scope', 'NgTableParams', 'ngTableEventsChan
                 $scope.locationArr = dataAllPage.lstLocation;
                 $scope.mealTimeArr = dataAllPage.lstMealTime;
                 $scope.mealArr = dataAllPage.lstMealType;
+                // $scope.shilfArr = dataAllPage.lstShift;
                 $scope.departmentArr = dataAllPage.lstDepartMent;
                 $scope.arrData = angular.copy(dataAllTable);
                 applyCloneArr();
@@ -167,8 +185,8 @@ myApp.controller('showAdminCtrl', ['$scope', 'NgTableParams', 'ngTableEventsChan
     }
 
     $scope.exportData = function(){
-    	var fromdateStr = moment($scope.fromDate, 'DD/MM/YYYY').format('DDMMYYYY');
+        var fromdateStr = moment($scope.fromDate, 'DD/MM/YYYY').format('DDMMYYYY');
         var toDateStr = moment($scope.toDate, 'DD/MM/YYYY').format('DDMMYYYY');
-    	window.location = _contextPath + '/exportData/exportCatering?fromDate=' + fromdateStr + '&toDate=' + toDateStr;
+        window.location = _contextPath + '/exportData/exportCatering?fromDate=' + fromdateStr + '&toDate=' + toDateStr;
     }
 }]);

@@ -53,7 +53,8 @@
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><spring:message code="label.meal_management"/> <span class="caret"></span></a>
                         <ul class="dropdown-menu">
                             <li><a href="mealManagerment"><spring:message code="label.management"/></a></li>
-<!--                             <li><a href="approveMeal">Approve Meal</a></li> -->
+                            <li><a href="showDataManager"><spring:message code="label.show_manager"/></a></li>
+
                         </ul>
                     </li>
                     </c:if>
