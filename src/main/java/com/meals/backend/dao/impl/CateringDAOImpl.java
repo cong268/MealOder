@@ -62,8 +62,8 @@ public class CateringDAOImpl implements CateringDAO {
 	@Override
 	public Catering getByStaffId(String staffId, Date date) {
 		Session session = sessionFactory.getCurrentSession();
-		Query query = session.createQuery(
-				"FROM Catering c WHERE c.id.staffId = :staffId AND c.id.cateringDate = :cateringDate");
+		Query query = session
+				.createQuery("FROM Catering c WHERE c.id.staffId = :staffId AND c.id.cateringDate = :cateringDate");
 		query.setParameter("staffId", staffId);
 		query.setParameter("cateringDate", date);
 		if (query.list() != null && !query.list().isEmpty()) {
@@ -75,13 +75,24 @@ public class CateringDAOImpl implements CateringDAO {
 	@Override
 	public List<Object[]> getLstAndCount(Date fromDate, Date toDate) {
 		Session session = sessionFactory.getCurrentSession();
-		Query query = session.createQuery(
-				"SELECT c.id.cateringDate, c.deptId, c.mealId, c.id.mealTimeId, c.locationId, COUNT(*) "
+		Query query = session
+				.createQuery("SELECT c.id.cateringDate, c.deptId, c.mealId, c.id.mealTimeId, c.locationId, COUNT(*) "
 						+ "FROM Catering c WHERE c.id.cateringDate >= :fromDate AND c.id.cateringDate < :toDate "
 						+ "AND c.catered = 1 GROUP BY c.id.cateringDate, c.deptId, c.mealId, c.id.mealTimeId, c.locationId "
 						+ "ORDER BY c.id.cateringDate ASC");
 		query.setParameter("fromDate", fromDate);
 		query.setParameter("toDate", toDate);
+		return query.list();
+	}
+
+	@Override
+	public List<Catering> getLstExportByManager(Integer deptId, Date fromDate, Date toDate) {
+		Session session = sessionFactory.getCurrentSession();
+		Query query = session.createQuery(
+				"FROM Catering c WHERE c.id.cateringDate >= :fromDate AND c.id.cateringDate < :toDate AND c.deptId = :deptId AND c.ordered = 1 AND c.status = 1 AND c.catered = 0");
+		query.setParameter("fromDate", fromDate);
+		query.setParameter("toDate", toDate);
+		query.setParameter("deptId", deptId);
 		return query.list();
 	}
 }

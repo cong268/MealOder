@@ -21,9 +21,10 @@ public interface MealsService {
 	Boolean saveStaff (StaffBean bean);
 	Boolean saveUser (UserBean bean);
 	List<RoleBean> getAllRole();
-	DataExportBean getDataExport (String fromDate, String toDate);
+//	DataExportBean getDataExport (String fromDate, String toDate);
 	Boolean saveCateringEmployee (List<MealsOrderBean> listMealOder, String fromDate, String toDate);
 	Boolean saveCateringByManager(Integer departId,List<MealsOrderBean> listMealOder, String date);
 	Boolean saveCateringByAdmin(List<MealsOrderBean> listMealOder, String date);
 	List<CanteenExportBean> getLstAndCount(String fromDate, String toDate);
+	List<MealsOrderBean> getDataByManager (Integer deptId, String fromDate, String toDate);
 }
