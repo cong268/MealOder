@@ -22,6 +22,7 @@
     <link rel="stylesheet" href="<c:url value="/assets/css/tooltipster.bundle.min.css"></c:url>">
     <link rel="stylesheet" href="<c:url value="/assets/css/tooltipster-borderless-cuzt.min.css"></c:url>">
     <link rel="stylesheet" href="<c:url value="/assets/lib/css/daterangepicker.css"></c:url>">
+    <link rel="stylesheet" type="text/css" href="<c:url value="/assets/css/flag-icon.min.css"></c:url>">
     <link rel="stylesheet" type="text/css" href="<c:url value="/assets/lib/css/util-css.css"></c:url>">
     <script type="text/javascript" src="<c:url value="/assets/js/jquery-1.11.3.min.js"></c:url>"></script>
     <script type="text/javascript" src="<c:url value="/assets/js/angular.min.js"></c:url>"></script>
@@ -106,19 +107,29 @@
         <tiles:insertAttribute name="mainContent"/>
     </div>
     <div class="popup-successful text-center">
-        <div class="p-t-30 p-b -30 p-l-20 p-r-20">
+        <div class="p-t-30 p-b-30 p-l-20 p-r-20">
             <spring:message code="label.success_upper"/>
         </div>
     </div>
     <div class="popup-Error text-center">
-        <div class="p-t-30 p-b -30 p-l-20 p-r-20">
+        <div class="p-t-30 p-b-30 p-l-20 p-r-20">
             <spring:message code="label.error_upper"/>
         </div>
     </div>
     <footer class="nsrp-page-footer">
-        <div class="container">
-            <span class="pull-left">&copy; Coppyright 2014 NSRP LLC</span>
-            <span class="pull-right">Nghi Son Refinery and PETROCHEMICAL LLC</span>
+        <div class="container wrap-footer-temp">
+            <span class="info-nsrp pull-left">&copy; Coppyright 2014 NSRP LLC</span>
+            <span class="info-nsrp pull-right">Nghi Son Refinery and PETROCHEMICAL LLC</span>
+            <div class="langue-support-wrap">
+                <span><spring:message  code="label.language" /> : </span>
+                <a href="?lang=vi">
+                    <div class="flag-custom flag flag-icon-background flag-icon-vn" tooltip title="<spring:message  code="label.lang_vi_long" />"></div>
+                </a>
+                <span class="m-t-2">|</span>
+                <a href="?lang=en">
+                    <div class="flag-custom flag flag-icon-background flag-icon-gb" tooltip title="<spring:message  code="label.lang_en_long" />"></div>
+                </a>
+            </div>
         </div>
     </footer>
 </body>

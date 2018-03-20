@@ -7,7 +7,7 @@
        url('../fonts/Montserrat-Regular.woff2') format('woff2');
 }
 *{
-  font-family: Montserrat !important;
+  font-family: Montserrat, arial, sans-serif !important;
 }
 
 * {
@@ -18,12 +18,12 @@
 
 body, html {
 	height: 100%;
-	font-family: Montserrat, sans-serif;
+	font-family: Montserrat, arial, sans-serif;
 }
 
 
 a {
-	font-family: Montserrat;
+	font-family: Montserrat, arial, sans-serif;
 	font-size: 14px;
 	line-height: 1.7;
 	color: #666666;
@@ -48,7 +48,7 @@ h1,h2,h3,h4,h5,h6 {
 }
 
 p {
-	font-family: Montserrat;
+	font-family: Montserrat, arial, sans-serif;
 	font-size: 14px;
 	line-height: 1.7;
 	color: #666666;
@@ -172,7 +172,7 @@ button:hover {
 }
 
 .login-nsrp-form-title {
-  font-family: Montserrat;
+  font-family: Montserrat, arial, sans-serif;
   font-size: 28px;
   color: #fff;
   line-height: 1.2;
@@ -194,7 +194,7 @@ button:hover {
 }
 
 .input-nsrp {
-  font-family: Montserrat;
+  font-family: Montserrat, arial, sans-serif;
   font-size: 20px;
   color: #555555;
   line-height: 1.2;
@@ -312,7 +312,7 @@ button:hover {
 }
 
 .login-nsrp-form-btn {
-  font-family: Montserrat;
+  font-family: Montserrat, arial, sans-serif;
   font-size: 18px;
   color: #fff;
   line-height: 1.2;
@@ -397,7 +397,7 @@ button:hover {
   right: 10px;
   pointer-events: none;
 
-  font-family: Montserrat;
+  font-family: Montserrat, arial, sans-serif;
   color: #c80000;
   font-size: 13px;
   line-height: 1.4;

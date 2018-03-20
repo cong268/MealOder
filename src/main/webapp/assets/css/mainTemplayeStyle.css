@@ -88,62 +88,71 @@ body{
 	height: 30px;
 	border-radius: 50%;
 	margin: 10px 15px;
-  border: 1px solid #e7e7e7;
-  box-shadow: 0 0 1px #888888;
+    border: 1px solid #e7e7e7;
+    box-shadow: 0 0 1px #888888;
 }
 .user-text-control{
-  margin-left: 16px;
-  color: #777;
-  display: none;
+    margin-left: 16px;
+    color: #777;
+    display: none;
 }
 .dropdown-user-custom .dropdown-menu:after{
-  position: absolute;
-  top: -12px;
-  right: 22px;
-  display: inline-block;
-  border-right: 7px solid transparent;
-  border-bottom: 13px solid #ffffff;
-  border-left: 7px solid transparent;
-  content: '';
+    position: absolute;
+    top: -12px;
+    right: 22px;
+    display: inline-block;
+    border-right: 7px solid transparent;
+    border-bottom: 13px solid #ffffff;
+    border-left: 7px solid transparent;
+    content: '';
 }
 .dropdown-user-custom .dropdown-menu:before{
-  position: absolute;
-  top: -14px;
-  right: 21px;
-  display: inline-block;
-  border-right: 8px solid transparent;
-  border-bottom: 14px solid #888888;
-  border-left: 8px solid transparent;
-  border-bottom-color: rgba(0, 0, 0, 0.2);
-  content: '';
+    position: absolute;
+    top: -14px;
+    right: 21px;
+    display: inline-block;
+    border-right: 8px solid transparent;
+    border-bottom: 14px solid #888888;
+    border-left: 8px solid transparent;
+    border-bottom-color: rgba(0, 0, 0, 0.2);
+    content: '';
 }
 .nsrp-page-footer {
-  padding: 20px 0px;
-  color: #99979c;
-  text-align: center;
-  background-color: #2a2730;
-  margin-top: 20px;
+    padding: 20px 0px 30px 0px;
+    color: #99979c;
+    text-align: center;
+    background-color: #2a2730;
+    margin-top: 20px;
 }
 .wrapper-nsrp-content{
-  min-height: calc(100vh - 152px);
+    min-height: calc(100vh - 162px);
 }
 @media (max-width: 768px){
-  .dropdown-user-custom .dropdown-menu:before,
-  .dropdown-user-custom .dropdown-menu:after{
-    display: none;
-  }
-  .nsrp-page-footer span{
-    display: block;
-    width: 100%;
-    text-align: center;
-  }
-  .user-text-control{
-    display: inline-block;
-  }
-  .dropdown-user-custom .img-user-nsrp{
-    margin-top: 0;
-    margin-bottom: 0;
-  }
+    .dropdown-user-custom .dropdown-menu:before,
+    .dropdown-user-custom .dropdown-menu:after{
+        display: none;
+    }
+    .nsrp-page-footer .info-nsrp{
+        display: block;
+        width: 100%;
+        text-align: center;
+    }
+    .user-text-control{
+        display: inline-block;
+    }
+    .dropdown-user-custom .img-user-nsrp{
+        margin-top: 0;
+        margin-bottom: 0;
+    }
+    .langue-support-wrap{
+        bottom: -25px;
+        left: 50%;
+        -webkit-transform: translateX(-50%);
+        -moz-transform: translateX(-50%);
+        -ms-transform: translateX(-50%);
+        -o-transform: translateX(-50%);
+        transform: translateX(-50%);
+    }
 }
 /* Let's get this party started */
 ::-webkit-scrollbar {
@@ -166,8 +175,6 @@ body{
 
 /**/
 .popup-successful{
-    width: 150px;
-    height: 90px;
     background: #4cae4c;
     border: 1px solid rgb(217,217,217);
     -webkit-box-shadow: 0 0 2px rgb(217,217,217);
@@ -177,14 +184,13 @@ body{
     right: 10px;
     bottom: 10px;
     font-size: 22px;
+    z-index: 999;
     color: white;
     font-weight: bold;
     border-radius: 5px;
     display: none;
 }
 .popup-error{
-    width: 150px;
-    height: 90px;
     background: #ff2327;
     border: 1px solid rgb(217,217,217);
     -webkit-box-shadow: 0 0 2px rgb(217,217,217);
@@ -194,11 +200,13 @@ body{
     right: 10px;
     bottom: 10px;
     font-size: 22px;
+    z-index: 999;
     font-weight: bold;
     border-radius: 5px;
     color: white;
     display: none;
 }
+
 .daterangepicker tr .weekend{
     background-color: rgba(255,10,10,0.3);
     border: 1px solid #fff;
@@ -214,4 +222,24 @@ body{
 .daterangepicker tr .weekend.off:last-child{
     background-color: rgba(255, 142, 113, 0.5);
     border: 1px solid #fff;
+}
+.wrap-footer-temp{
+    position: relative;
+}
+.langue-support-wrap{
+    display: inline-block;
+    position: absolute;
+    bottom: -25px;
+    right: 10px;
+    min-width: 140px;
+}
+.langue-support-wrap a,.langue-support-wrap span{
+    display: block;
+    line-height: 20px;
+    float: left;
+}
+.flag-custom{
+    width: 23px;
+    height: 17px;
+    margin: 2px 3px;
 }
