@@ -54,6 +54,8 @@
 			<beans:props>
 				<beans:prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect
 				</beans:prop>
+<!-- 				<beans:prop key="hibernate.dialect">org.hibernate.dialect.SQLServerDialect -->
+<!-- 				</beans:prop> -->
 				<beans:prop key="hibernate.show_sql">false</beans:prop>
 				<beans:prop key="hibernate.hbm2ddl.auto">update</beans:prop>
 			</beans:props>
