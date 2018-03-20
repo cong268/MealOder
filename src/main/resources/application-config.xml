@@ -19,10 +19,10 @@
 
 	<beans:bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
 		destroy-method="close">
-		<beans:property name="driverClassName" value="com.mysql.jdbc.Driver" />
+		<beans:property name="driverClassName" value="com.microsoft.sqlserver.jdbc.SQLServerDriver" />
 		<beans:property name="url"
-			value="jdbc:mysql://localhost:3306/TestDB" />
-		<beans:property name="username" value="root" />
+			value="jdbc:sqlserver://localhost:1433;databaseName=nsrp" />
+		<beans:property name="username" value="sa" />
 		<beans:property name="password" value="root" />
 	</beans:bean>
 
@@ -32,14 +32,14 @@
 		<beans:property name="dataSource" ref="dataSource" />
 		<beans:property name="annotatedClasses">
 			<beans:list>
-				<beans:value>com.meals.backend.model.User</beans:value>
-				<beans:value>com.meals.backend.model.Userrole</beans:value>
+				<beans:value>com.meals.backend.model.Users</beans:value>
+				<beans:value>com.meals.backend.model.UserRole</beans:value>
 				<beans:value>com.meals.backend.model.Catering</beans:value>
 				<beans:value>com.meals.backend.model.Department</beans:value>
 				<beans:value>com.meals.backend.model.Location</beans:value>
 				<beans:value>com.meals.backend.model.Staff</beans:value>
 				<beans:value>com.meals.backend.model.Meal</beans:value>
-				<beans:value>com.meals.backend.model.Mealtime</beans:value>
+				<beans:value>com.meals.backend.model.MealTime</beans:value>
 			</beans:list>
 		</beans:property>
 		<beans:property name="hibernateProperties">

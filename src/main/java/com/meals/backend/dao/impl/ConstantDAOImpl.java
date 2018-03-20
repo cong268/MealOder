@@ -13,81 +13,85 @@ import com.meals.backend.dao.ConstantDAO;
 import com.meals.backend.model.Department;
 import com.meals.backend.model.Location;
 import com.meals.backend.model.Meal;
-import com.meals.backend.model.Mealtime;
-import com.meals.backend.model.Userrole;
+import com.meals.backend.model.MealTime;
+import com.meals.backend.model.UserRole;
 
 @Repository("constantDAO")
 @Transactional
 public class ConstantDAOImpl implements ConstantDAO {
-	@Autowired
-	private SessionFactory sessionFactory;
+  @Autowired
+  private SessionFactory sessionFactory;
 
-	public void setSessionFactory(SessionFactory sessionFactory) {
-		this.sessionFactory = sessionFactory;
-	}
+  public void setSessionFactory(SessionFactory sessionFactory) {
+    this.sessionFactory = sessionFactory;
+  }
 
-	public Department getDepartment(Integer id) {
-		Session session = sessionFactory.getCurrentSession();
-		Query query = session.createQuery("FROM Department c WHERE c.deptId = :deptId");
-		query.setParameter("deptId", id);
-		if (query.list() != null && !query.list().isEmpty()) {
-			return (Department) query.list().get(0);
-		}
-		return null;
-	}
+  @Override
+  public Department getDepartment(Integer id) {
+    Session session = sessionFactory.getCurrentSession();
+    Query query = session.createQuery("FROM Department c WHERE c.deptId = :deptId");
+    query.setParameter("deptId", id);
+    if (query.list() != null && !query.list().isEmpty()) {
+      return (Department) query.list().get(0);
+    }
+    return null;
+  }
 
-	public Userrole getRoleById(Integer id) {
-		Session session = sessionFactory.getCurrentSession();
-		Query query = session.createQuery("FROM Userrole c WHERE c.userRoleID = :userRoleID");
-		query.setParameter("userRoleID", id);
-		List<Userrole> list = query.list();
-		if (list != null && !list.isEmpty()) {
-			return list.get(0);
-		}
-		return null;
-	}
+  @Override
+  public UserRole getRoleById(Integer id) {
+    Session session = sessionFactory.getCurrentSession();
+    Query query = session.createQuery("FROM UserRole c WHERE c.userRoleId = :userRoleId");
+    query.setParameter("userRoleId", id);
+    List<UserRole> list = query.list();
+    if (list != null && !list.isEmpty()) {
+      return list.get(0);
+    }
+    return null;
+  }
 
-	public List<Department> getAllDepartment() {
-		Session session = sessionFactory.getCurrentSession();
-		Query query = session.createQuery("FROM Department");
-		return query.list();
-	}
+  @Override
+  public List<Department> getAllDepartment() {
+    Session session = sessionFactory.getCurrentSession();
+    Query query = session.createQuery("FROM Department");
+    return query.list();
+  }
 
-	public List<Location> getAllLocation() {
-		Session session = sessionFactory.getCurrentSession();
-		Query query = session.createQuery("FROM Location");
-		return query.list();
-	}
+  @Override
+  public List<Location> getAllLocation() {
+    Session session = sessionFactory.getCurrentSession();
+    Query query = session.createQuery("FROM Location");
+    return query.list();
+  }
 
-	@Override
-	public List<Userrole> getAllRole() {
-		Session session = sessionFactory.getCurrentSession();
-		Query query = session.createQuery("FROM Userrole");
-		return query.list();
-	}
+  @Override
+  public List<UserRole> getAllRole() {
+    Session session = sessionFactory.getCurrentSession();
+    Query query = session.createQuery("FROM UserRole");
+    return query.list();
+  }
 
-	@Override
-	public Location getLocationById(Integer id) {
-		Session session = sessionFactory.getCurrentSession();
-		Query query = session.createQuery("FROM Location c WHERE c.locationId = :locationId");
-		query.setParameter("locationId", id);
-		if (query.list() != null && !query.list().isEmpty()) {
-			return (Location) query.list().get(0);
-		}
-		return null;
-	}
+  @Override
+  public Location getLocationById(Integer id) {
+    Session session = sessionFactory.getCurrentSession();
+    Query query = session.createQuery("FROM Location c WHERE c.locationId = :locationId");
+    query.setParameter("locationId", id);
+    if (query.list() != null && !query.list().isEmpty()) {
+      return (Location) query.list().get(0);
+    }
+    return null;
+  }
 
-	@Override
-	public List<Meal> getAllMeal() {
-		Session session = sessionFactory.getCurrentSession();
-		Query query = session.createQuery("FROM Meal");
-		return query.list();
-	}
+  @Override
+  public List<Meal> getAllMeal() {
+    Session session = sessionFactory.getCurrentSession();
+    Query query = session.createQuery("FROM Meal");
+    return query.list();
+  }
 
-	@Override
-	public List<Mealtime> getAllMealTime() {
-		Session session = sessionFactory.getCurrentSession();
-		Query query = session.createQuery("FROM Mealtime");
-		return query.list();
-	}
+  @Override
+  public List<MealTime> getAllMealTime() {
+    Session session = sessionFactory.getCurrentSession();
+    Query query = session.createQuery("FROM MealTime");
+    return query.list();
+  }
 }

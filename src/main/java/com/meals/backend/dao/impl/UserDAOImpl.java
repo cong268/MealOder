@@ -10,36 +10,38 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.meals.backend.dao.UserDAO;
-import com.meals.backend.model.User;
+import com.meals.backend.model.Users;
 
 @Repository("userDAO")
 @Transactional
 public class UserDAOImpl implements UserDAO {
-	@Autowired
-	private SessionFactory sessionFactory;
+  @Autowired
+  private SessionFactory sessionFactory;
 
-	public void setSessionFactory(SessionFactory sessionFactory) {
-		this.sessionFactory = sessionFactory;
-	}
+  public void setSessionFactory(SessionFactory sessionFactory) {
+    this.sessionFactory = sessionFactory;
+  }
 
-	public User getUser(String userName, String passWord) {
-		Session session = sessionFactory.getCurrentSession();
-		Query query = session.createQuery("FROM User c WHERE c.userName = :userName AND c.password = :password");
-		query.setParameter("userName", userName);
-		query.setParameter("password", passWord);
-		@SuppressWarnings("unchecked")
-		List<User> list = query.list();
-		if (list != null && !list.isEmpty()) {
-			return list.get(0);
-		}
-		return null;
-	}
+  @Override
+  public Users getUser(String userName, String passWord) {
+    Session session = sessionFactory.getCurrentSession();
+    Query query =
+        session.createQuery("FROM Users c WHERE c.userName = :userName AND c.password = :password");
+    query.setParameter("userName", userName);
+    query.setParameter("password", passWord);
+    @SuppressWarnings("unchecked")
+    List<Users> list = query.list();
+    if (list != null && !list.isEmpty()) {
+      return list.get(0);
+    }
+    return null;
+  }
 
-	@Override
-	public Boolean saveUser(User obj) {
-		Session session = sessionFactory.getCurrentSession();
-		session.saveOrUpdate(obj);
-		return true;
-	}
+  @Override
+  public Boolean saveUser(Users obj) {
+    Session session = sessionFactory.getCurrentSession();
+    session.saveOrUpdate(obj);
+    return true;
+  }
 
 }
