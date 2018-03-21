@@ -88,17 +88,6 @@ public class CateringDAOImpl implements CateringDAO {
 	}
 
 	@Override
-	public List<Catering> getLstExportByManager(Integer deptId, Date fromDate, Date toDate) {
-		Session session = sessionFactory.getCurrentSession();
-		Query query = session.createQuery(
-				"FROM Catering c WHERE c.id.cateringDate >= :fromDate AND c.id.cateringDate < :toDate AND c.deptId = :deptId AND c.ordered = 1 AND c.status = 1 AND c.catered = 0");
-		query.setParameter("fromDate", fromDate);
-		query.setParameter("toDate", toDate);
-		query.setParameter("deptId", deptId);
-		return query.list();
-	}
-
-	@Override
 	public Boolean deleteCateringByStaff(String staffId, Date fromDate, Date toDate, Boolean ordered, Boolean status,
 			Boolean catered) {
 		Session session = sessionFactory.getCurrentSession();

@@ -169,6 +169,6 @@ myApp.controller('showAdminCtrl', ['$scope', 'NgTableParams', 'ngTableEventsChan
     $scope.exportData = function(){
     	var fromdateStr = moment($scope.fromDate, 'DD/MM/YYYY').format('DDMMYYYY');
         var toDateStr = moment($scope.toDate, 'DD/MM/YYYY').format('DDMMYYYY');
-    	window.location = _contextPath + '/exportData/exportCatering?fromDate=' + fromdateStr + '&toDate=' + toDateStr;
+    	window.location = _contextPath + '/exportData/exportManager?fromDate=' + fromdateStr + '&toDate=' + toDateStr;
     }
 }]);

@@ -13,6 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.meals.frontend.bean.CanteenExportBean;
 import com.meals.frontend.service.MealsService;
+import com.meals.frontend.until.ConstanKey;
 
 @Controller
 @RequestMapping("exportData")
@@ -21,29 +22,30 @@ public class ExportContrller {
 	MealsService mealsService;
 
 	@RequestMapping(value = "/exportCanteen", method = RequestMethod.GET)
-	public ModelAndView exportCanteen(HttpSession session,@RequestParam(value = "fromDate") String fromDate,
+	public ModelAndView exportCanteen(HttpSession session, @RequestParam(value = "fromDate") String fromDate,
 			@RequestParam(value = "toDate") String toDate) {
 		ModelAndView model = new ModelAndView("excelView");
 		List<CanteenExportBean> lst = mealsService.getLstAndCount(fromDate, toDate);
-		model.addObject("dataExport", lst);
+		model.addObject("dataCanteen", lst);
 		model.addObject("fromDate", fromDate);
 		model.addObject("toDate", toDate);
 		return model;
 	}
-	
+
 	@RequestMapping(value = "/exportManager", method = RequestMethod.GET)
-	public ModelAndView exportManager(HttpSession session,@RequestParam(value = "fromDate") String fromDate,
-			@RequestParam(value = "toDate") String toDate) {
+	public ModelAndView exportManager(HttpSession session, String staffId,
+			@RequestParam(value = "fromDate") String fromDate, @RequestParam(value = "toDate") String toDate) {
 		ModelAndView model = new ModelAndView("excelView");
+		Integer userId = (Integer) session.getAttribute(ConstanKey.USER_ID);
 		List<CanteenExportBean> lst = mealsService.getLstAndCount(fromDate, toDate);
-		model.addObject("dataExport", lst);
+		model.addObject("dataManager", lst);
 		model.addObject("fromDate", fromDate);
 		model.addObject("toDate", toDate);
 		return model;
 	}
-	
+
 	@RequestMapping(value = "/exportAdmin", method = RequestMethod.GET)
-	public ModelAndView exportAdmin(HttpSession session,@RequestParam(value = "fromDate") String fromDate,
+	public ModelAndView exportAdmin(HttpSession session, @RequestParam(value = "fromDate") String fromDate,
 			@RequestParam(value = "toDate") String toDate) {
 		ModelAndView model = new ModelAndView("excelView");
 		List<CanteenExportBean> lst = mealsService.getLstAndCount(fromDate, toDate);
