@@ -43,13 +43,13 @@
                         </span>
                     </div>
                 </c:if>
-                <div class="wrap-input-nsrp validate-input" data-validate="Enter username">
+                <div class="wrap-input-nsrp validate-input" data-validate="<spring:message  code="label.enter_username" />">
                     <input class="input-nsrp" ng-click="clickHideMessage()" ng-model="nsrpUsername"
                            id="nsrp-username" type="text" name="username"
                            placeholder="<spring:message  code="label.user_name" />">
                     <span class="focus-input-nsrp" data-placeholder="&#xe82a;"></span>
                 </div>
-                <div class="wrap-input-nsrp validate-input" data-validate="Enter password">
+                <div class="wrap-input-nsrp validate-input" data-validate="<spring:message  code="label.enter_password" />">
                     <input class="input-nsrp" ng-click="clickHideMessage()" ng-model="nsrpPassword"
                            id="nsrp-password" type="password" name="password"
                            placeholder="<spring:message  code="label.password" />">

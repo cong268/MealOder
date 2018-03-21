@@ -112,8 +112,8 @@
 </c:if>
 <c:if test = "${sessionScope.userRole != 'Employee' && sessionScope.userRole == 'Admin' && sessionScope.userRole == 'Manager'}">
     <div class="container">
-        <h1>ACCESS DENIED <span class="badge p-t-8 p-b-8 p-l-8 p-r-8">404</span></h1>
-        <h3>You not have permission to access this page !</h3>
+        <h1><spring:message code="label.access_denied"/> <span class="badge p-t-8 p-b-8 p-l-8 p-r-8">404</span></h1>
+        <h3><spring:message code="label.access_denied_info"/></h3>
     </div>
 </c:if>
 </html>

@@ -85,7 +85,7 @@
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><spring:message code="label.user_access"/> <span class="caret"></span></a>
                         <ul class="dropdown-menu">
                             <li><a href="userOrder"><spring:message code="label.order_meal"/></a></li>
-                            <li><a href="showDataUser">History</a></li>
+                            <li><a href="showDataUser"><spring:message code="label.history"/></a></li>
                         </ul>
                     </li>
                 </ul>
@@ -95,7 +95,7 @@
                         <img src="<c:url value="/assets/img/default-user-image.png"></c:url>" class="dropdown-toggle img-user-nsrp" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                         <ul class="dropdown-menu">
                             <li><span class="hello-txt">Hello, <span class="name-sp">${sessionScope.userName}</span></span></li>
-                            <li><a href="#" data-toggle="modal" data-target="#userInfoModal">Setting</a></li>
+                            <li><a href="#" data-toggle="modal" data-target="#userInfoModal"><spring:message code="label.setting"/></a></li>
                             <li role="separator" class="divider"></li>
                             <li><a href="logout"><spring:message code="label.logout"/><span class="glyphicon glyphicon-log-out p-l-10"></span></a></li>
                         </ul>
