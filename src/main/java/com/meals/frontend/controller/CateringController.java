@@ -24,19 +24,19 @@ public class CateringController {
 	@Autowired
 	private MealsService mealsService;
 
-	// Service cho Nhan Vien dang y
+	// Service cho Staff dang ky
 	@RequestMapping(value = "/getMealByStaff", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-	public DataBean getMealByDepartment(HttpSession session) {
+	public DataBean getMealByStaff(HttpSession session) {
 		Integer userId = (Integer) session.getAttribute(ConstanKey.USER_ID);
 		return mealsService.getMealByStaff(userId);
 	}
 
-	// Service cho Manager dang y
-	@RequestMapping(value = "/getMealByDepartment", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-	public DataBean getMealByDepartment(HttpSession session, @RequestParam(value = "date") String date) {
+	// Service cho Manager dang ky moi cho staff
+	@RequestMapping(value = "/getLstNewByDept", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public DataBean getLstNewByDept(HttpSession session) {
 		Integer userId = (Integer) session.getAttribute(ConstanKey.USER_ID);
 		if (userId != null) {
-			return mealsService.getLstOrderByDepart(userId, date);
+			return mealsService.getLstOrderByDepart(userId);
 		}
 		return null;
 	}
@@ -64,10 +64,12 @@ public class CateringController {
 		return mealsService.getLstByDate(fromDate, toDate);
 	}
 
-	@RequestMapping(value = "/saveCateringEmployee", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
-	public Boolean saveCateringEmployee(@RequestBody List<MealsOrderBean> listMealOder,
+	@RequestMapping(value = "/saveCateringByStaff", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+	public Boolean saveCateringEmployee(HttpSession session, @RequestBody List<MealsOrderBean> listMealOder,
 			@RequestParam("fromDate") String fromDate, @RequestParam("toDate") String toDate) {
-		return mealsService.saveCateringEmployee(listMealOder, fromDate, toDate);
+		Integer userId = (Integer) session.getAttribute(ConstanKey.USER_ID);
+		String userRole = (String) session.getAttribute(ConstanKey.USER_ROLE);
+		return mealsService.saveCateringByStaff(userId, userRole, listMealOder, fromDate, toDate);
 	}
 
 	@RequestMapping(value = "/saveCateringByManager", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
@@ -82,9 +84,9 @@ public class CateringController {
 	}
 
 	@RequestMapping(value = "/saveCateringByAdmin", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
-	public Boolean saveCateringByAdmin(@RequestBody List<MealsOrderBean> listMealOder,
-			@RequestParam("date") String date) {
-		return mealsService.saveCateringByAdmin(listMealOder, date);
+	public Boolean saveCateringByAdmin(HttpSession session, @RequestParam("date") String date) {
+		Integer userId = (Integer) session.getAttribute(ConstanKey.USER_ID);
+		return mealsService.updateStatusByAdmin(userId,date);
 	}
 
 }

@@ -8,6 +8,9 @@ public class MealsOrderBean {
 	private Integer mealId;
 	private Integer departmentId;
 	private String dateMeal;
+	private Boolean catered;
+	private Boolean status;
+	private Boolean ordered;
 
 	public String getStaffId() {
 		return staffId;
@@ -63,6 +66,30 @@ public class MealsOrderBean {
 
 	public void setDateMeal(String dateMeal) {
 		this.dateMeal = dateMeal;
+	}
+
+	public Boolean getCatered() {
+		return catered;
+	}
+
+	public void setCatered(Boolean catered) {
+		this.catered = catered;
+	}
+
+	public Boolean getStatus() {
+		return status;
+	}
+
+	public void setStatus(Boolean status) {
+		this.status = status;
+	}
+
+	public Boolean getOrdered() {
+		return ordered;
+	}
+
+	public void setOrdered(Boolean ordered) {
+		this.ordered = ordered;
 	}
 
 }

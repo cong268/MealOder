@@ -1,6 +1,5 @@
 package com.meals.frontend.service.impl;
 
-import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
@@ -8,7 +7,6 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.TreeMap;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,11 +22,10 @@ import com.meals.backend.model.Location;
 import com.meals.backend.model.Meal;
 import com.meals.backend.model.MealTime;
 import com.meals.backend.model.Staff;
-import com.meals.backend.model.Users;
 import com.meals.backend.model.UserRole;
+import com.meals.backend.model.Users;
 import com.meals.frontend.bean.CanteenExportBean;
 import com.meals.frontend.bean.DataBean;
-import com.meals.frontend.bean.DataExportBean;
 import com.meals.frontend.bean.DepartmentBean;
 import com.meals.frontend.bean.LocationBean;
 import com.meals.frontend.bean.MealTimeBean;
@@ -87,21 +84,19 @@ public class MealsServiceImpl implements MealsService {
 	}
 
 	@Override
-	public DataBean getLstOrderByDepart(Integer userId, String date) {
+	public DataBean getLstOrderByDepart(Integer userId) {
 		DataBean bean = new DataBean();
 		List<LocationBean> lstLocation = getLocation();
 		List<DepartmentBean> lstDepartMent = getDepartMent();
 		List<MealTimeBean> lstMealTime = getAllMealTime();
 		List<MealTypeBean> lstMealType = getAllMealType();
-		Date dateTime = FunctionUtils.convertDateByFormatLocal(date, ConstanKey.FORMAT_DATE.DATE_TIME_FORMAT);
 		List<MealsOrderBean> lstOrder = new ArrayList<>();
 		Staff staff = staffDAO.getStaffByUserId(userId);
 		if (staff != null) {
 			List<Staff> lstStaff = staffDAO.getStaffByDepart(staff.getDeptId());
 			if (lstStaff != null && !lstStaff.isEmpty()) {
 				for (Staff obj : lstStaff) {
-					Catering catering = cateringDAO.getByStaffId(obj.getStaffId(), dateTime);
-					if (catering == null || !catering.isOrdered()) {
+					if (!obj.getStaffId().equals(staff.getStaffId())) {
 						MealsOrderBean orderBean = new MealsOrderBean();
 						orderBean.setStaffId(obj.getStaffId());
 						orderBean.setStaffName(obj.getStaffName());
@@ -331,82 +326,58 @@ public class MealsServiceImpl implements MealsService {
 		return lstAll;
 	}
 
-//	@Override
-//	public DataExportBean getDataExport(String fromDate, String toDate) {
-//		DataExportBean bean = new DataExportBean();
-//		Date fromTime = FunctionUtils.convertDateByFormatLocal(fromDate, ConstanKey.FORMAT_DATE.DATE_TIME_FORMAT);
-//		Date toTime = FunctionUtils.convertDateByFormatLocal(toDate, ConstanKey.FORMAT_DATE.DATE_TIME_FORMAT);
-//		Date tomorrow = new Date(toTime.getTime() + (1000 * 60 * 60 * 24));
-//		if (fromTime != null && toTime != null) {
-//			Map<Date, List<MealsOrderBean>> mapDataByDate = new TreeMap<>();
-//			List<Catering> lst = cateringDAO.getLstByDate(fromTime, tomorrow);
-//			if (lst != null && !lst.isEmpty()) {
-//				for (Catering catering : lst) {
-//					MealsOrderBean oderBean = new MealsOrderBean();
-//					Staff obj = staffDAO.getByStaff(catering.getId().getStaffId());
-//					if (obj != null) {
-//						oderBean.setStaffName(obj.getStaffName());
-//					} else {
-//						oderBean.setStaffName("Visitor");
-//					}
-//					List<MealsOrderBean> list = new ArrayList<>();
-//					if (mapDataByDate.containsKey(catering.getId().getCateringDate())) {
-//						list = mapDataByDate.get(catering.getId().getCateringDate());
-//					}
-//					oderBean.setStaffId(catering.getId().getStaffId());
-//					oderBean.setDepartmentId(catering.getDeptId());
-//					oderBean.setLocationId(catering.getLocationId());
-//					oderBean.setMealId(catering.getMealId());
-//					list.add(oderBean);
-//					mapDataByDate.put(catering.getId().getCateringDate(), list);
-//				}
-//			}
-//			String startDate = FunctionUtils.convertDateStringByFormatLocal(fromTime,
-//					ConstanKey.FORMAT_DATE.DATE_SLASH_FORMAT);
-//			String endDate = FunctionUtils.convertDateStringByFormatLocal(toTime,
-//					ConstanKey.FORMAT_DATE.DATE_SLASH_FORMAT);
-//			bean.setFromDate(startDate);
-//			bean.setToDate(endDate);
-//			bean.setLstMealType(getAllMealType());
-//			bean.setLstDepartMent(getDepartMent());
-//			bean.setLstLocation(getLocation());
-//			bean.setLstMealTime(getAllMealTime());
-//			bean.setMapDataByDate(mapDataByDate);
-//		}
-//		return bean;
-//	}
-
 	@Override
-	public Boolean saveCateringEmployee(List<MealsOrderBean> listMealOder, String fromDate, String toDate) {
+	public Boolean saveCateringByStaff(Integer userId, String userRole, List<MealsOrderBean> listMealOder,
+			String fromDate, String toDate) {
 		Date fromTime = FunctionUtils.convertDateByFormatLocal(fromDate, ConstanKey.FORMAT_DATE.DATE_TIME_FORMAT);
 		Date toTime = FunctionUtils.convertDateByFormatLocal(toDate, ConstanKey.FORMAT_DATE.DATE_TIME_FORMAT);
 		Calendar cal = Calendar.getInstance();
 		Date cateringTime = cal.getTime();
 		if (fromTime != null && toTime != null) {
 			if (listMealOder != null && !listMealOder.isEmpty()) {
-				while (fromTime.compareTo(toTime) <= 0) {
-					for (MealsOrderBean obj : listMealOder) {
-						Catering dto = new Catering();
-						CateringId pk = new CateringId();
-						pk.setStaffId(obj.getStaffId());
-						pk.setMealTimeId(obj.getMealTimeId());
-						pk.setCateringDate(fromTime);
-						Staff tsStaff = staffDAO.getByStaff(obj.getStaffId());
-						if (tsStaff != null) {
-							dto.setDeptId(tsStaff.getDeptId());
-						}
-						dto.setId(pk);
-						dto.setLocationId(obj.getLocationId());
-						dto.setCateringTime(cateringTime);
-						dto.setMealId(obj.getMealId());
-						dto.setCatered(false);
-						dto.setStatus(false);
-						dto.setOrdered(true);
-						cateringDAO.saveOrUpdate(dto);
+				Date tomorrow = new Date(toTime.getTime() + (1000 * 60 * 60 * 24));
+				Staff tsStaff = staffDAO.getStaffByUserId(userId);
+				if (tsStaff != null) {
+					if (userRole != null && userRole.equals(ConstanKey.ROLE.ROLE_ADMIN)) {
+						cateringDAO.deleteCateringByStaff(tsStaff.getStaffId(), fromTime, tomorrow, true, true, true);
+					} else if (userRole != null && userRole.equals(ConstanKey.ROLE.ROLE_MANAGER)) {
+						cateringDAO.deleteCateringByStaff(tsStaff.getStaffId(), fromTime, tomorrow, false, true, true);
+					} else {
+						cateringDAO.deleteCateringByStaff(tsStaff.getStaffId(), fromTime, tomorrow, false, false, true);
 					}
-					cal.setTime(fromTime);
-					cal.add(Calendar.DATE, 1);
-					fromTime = cal.getTime();
+					while (fromTime.compareTo(toTime) <= 0) {
+						for (MealsOrderBean obj : listMealOder) {
+							Catering dto = new Catering();
+							CateringId pk = new CateringId();
+							pk.setStaffId(obj.getStaffId());
+							pk.setMealTimeId(obj.getMealTimeId());
+							pk.setCateringDate(fromTime);
+							dto.setId(pk);
+							dto.setDeptId(tsStaff.getDeptId());
+							dto.setLocationId(obj.getLocationId());
+							dto.setCateringTime(cateringTime);
+							dto.setMealId(obj.getMealId());
+							if (userRole != null && userRole.equals(ConstanKey.ROLE.ROLE_ADMIN)) {
+								dto.setCatered(true);
+								dto.setStatus(true);
+								dto.setOrdered(true);
+							} else if (userRole != null && userRole.equals(ConstanKey.ROLE.ROLE_MANAGER)) {
+								dto.setCatered(false);
+								dto.setStatus(true);
+								dto.setOrdered(true);
+							} else {
+								dto.setCatered(false);
+								dto.setStatus(false);
+								dto.setOrdered(true);
+							}
+							if (!cateringDAO.saveOrUpdate(dto)) {
+								return false;
+							}
+						}
+						cal.setTime(fromTime);
+						cal.add(Calendar.DATE, 1);
+						fromTime = cal.getTime();
+					}
 				}
 			}
 		}
@@ -417,7 +388,9 @@ public class MealsServiceImpl implements MealsService {
 	public Boolean saveCateringByManager(Integer departId, List<MealsOrderBean> listMealOder, String date) {
 		Date cateringDate = FunctionUtils.convertDateByFormatLocal(date, ConstanKey.FORMAT_DATE.DATE_TIME_FORMAT);
 		Date cateringTime = new Date();
+		List<Catering> lst = new ArrayList<>();
 		if (listMealOder != null && !listMealOder.isEmpty()) {
+			cateringDAO.deleteCateringByManager(departId, cateringDate);
 			for (MealsOrderBean obj : listMealOder) {
 				Catering dto = new Catering();
 				CateringId pk = new CateringId();
@@ -432,25 +405,23 @@ public class MealsServiceImpl implements MealsService {
 				dto.setCatered(false);
 				dto.setStatus(true);
 				dto.setOrdered(true);
-				cateringDAO.saveOrUpdate(dto);
+				lst.add(dto);
 			}
+			cateringDAO.saveList(lst);
 		}
 		return true;
 	}
 
 	@Override
-	public Boolean saveCateringByAdmin(List<MealsOrderBean> listMealOder, String date) {
+	public Boolean updateStatusByAdmin(Integer userId, String date) {
 		Date cateringDate = FunctionUtils.convertDateByFormatLocal(date, ConstanKey.FORMAT_DATE.DATE_TIME_FORMAT);
-		if (listMealOder != null && !listMealOder.isEmpty()) {
-			for (MealsOrderBean obj : listMealOder) {
-				Catering dto = cateringDAO.getByStaffId(obj.getStaffId(), cateringDate);
-				dto.setCatered(true);
-				dto.setStatus(true);
-				dto.setOrdered(true);
-				cateringDAO.saveOrUpdate(dto);
+		if (cateringDate != null) {
+			Staff staff = staffDAO.getStaffByUserId(userId);
+			if (staff != null) {
+				return cateringDAO.updateByAdmin(staff.getStaffId(), cateringDate);
 			}
 		}
-		return true;
+		return false;
 	}
 
 	@Override
@@ -580,9 +551,9 @@ public class MealsServiceImpl implements MealsService {
 		if (fromTime != null && toTime != null) {
 			Date tomorrow = new Date(toTime.getTime() + (1000 * 60 * 60 * 24));
 			List<Catering> lst = cateringDAO.getLstExportByManager(deptId, fromTime, tomorrow);
-			if (lst != null && !lst.isEmpty()){
+			if (lst != null && !lst.isEmpty()) {
 				MealsOrderBean bean = new MealsOrderBean();
-//				bean.set
+				// bean.set
 			}
 		}
 		return null;

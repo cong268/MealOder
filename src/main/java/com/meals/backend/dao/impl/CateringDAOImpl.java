@@ -25,9 +25,13 @@ public class CateringDAOImpl implements CateringDAO {
 
 	@Override
 	public Boolean saveOrUpdate(Catering obj) {
-		Session session = sessionFactory.getCurrentSession();
-		session.saveOrUpdate(obj);
-		return true;
+		try {
+			Session session = sessionFactory.getCurrentSession();
+			session.saveOrUpdate(obj);
+			return true;
+		} catch (Exception e) {
+			return false;
+		}
 	}
 
 	@Override
@@ -60,16 +64,13 @@ public class CateringDAOImpl implements CateringDAO {
 	}
 
 	@Override
-	public Catering getByStaffId(String staffId, Date date) {
+	public List<Catering> getByStaffAndDate(String staffId, Date date) {
 		Session session = sessionFactory.getCurrentSession();
 		Query query = session
 				.createQuery("FROM Catering c WHERE c.id.staffId = :staffId AND c.id.cateringDate = :cateringDate");
 		query.setParameter("staffId", staffId);
 		query.setParameter("cateringDate", date);
-		if (query.list() != null && !query.list().isEmpty()) {
-			return (Catering) query.list().get(0);
-		}
-		return null;
+		return query.list();
 	}
 
 	@Override
@@ -94,5 +95,88 @@ public class CateringDAOImpl implements CateringDAO {
 		query.setParameter("toDate", toDate);
 		query.setParameter("deptId", deptId);
 		return query.list();
+	}
+
+	@Override
+	public Boolean deleteCateringByStaff(String staffId, Date fromDate, Date toDate, Boolean ordered, Boolean status, Boolean catered) {
+		Session session = sessionFactory.getCurrentSession();
+		Query query = session.createQuery(
+				"DELETE Catering c WHERE c.id.staffId = :staffId AND c.id.cateringDate >= :fromDate AND c.id.cateringDate < :toDate "
+				+ "AND c.catered = :catered AND c.status = :status AND c.catered = :catered");
+		query.setParameter("fromDate", fromDate);
+		query.setParameter("toDate", toDate);
+		query.setParameter("staffId", staffId);
+		query.setParameter("catered", catered);
+		query.setParameter("status", status);
+		query.setParameter("catered", catered);
+		int result = query.executeUpdate();
+		if (result > 0) {
+			return true;
+		}
+		return false;
+	}
+
+	@Override
+	public Boolean deleteCateringByManager(Integer deptId, Date date) {
+		Session session = sessionFactory.getCurrentSession();
+		Query query = session.createQuery(
+				"DELETE Catering c WHERE c.deptId = :deptId AND c.id.cateringDate = :date AND c.status = 1 AND c.catered = 0");
+		query.setParameter("deptId", deptId);
+		query.setParameter("date", date);
+		int result = query.executeUpdate();
+		if (result > 0) {
+			return true;
+		}
+		return false;
+	}
+
+	@Override
+	public Boolean saveList(List<Catering> lst) {
+		if (lst != null && !lst.isEmpty()) {
+			Session session = sessionFactory.getCurrentSession();
+			try {
+				for (int i = 0; i < lst.size(); i++) {
+					Catering obj = lst.get(i);
+					session.save(obj);
+					if (i % 20 == 0) {
+						session.flush();
+						session.clear();
+					}
+				}
+				return true;
+			} catch (Exception e) {
+				return false;
+			}
+		}
+		return false;
+	}
+
+	@Override
+	public Catering getCateringById(String staffId, Date date, Integer mealTimeId) {
+		Session session = sessionFactory.getCurrentSession();
+		Query query = session.createQuery(
+				"FROM Catering c WHERE c.id.staffId = :staffId AND c.id.cateringDate = :date AND c.id.mealTimeId = :mealTimeId");
+		query.setParameter("staffId", staffId);
+		query.setParameter("date", date);
+		query.setParameter("mealTimeId", mealTimeId);
+		List<Catering> lst = query.list();
+		if (lst != null && !lst.isEmpty()) {
+			return lst.get(0);
+		}
+		return null;
+	}
+
+	@Override
+	public Boolean updateByAdmin(String staffId, Date date) {
+		Session session = sessionFactory.getCurrentSession();
+		Query query = session.createQuery(
+				"UPDATE Catering c SET c.catered = 1 WHERE c.id.staffId != :staffId AND c.id.cateringDate = :cateringDate");
+		query.setParameter("staffId", staffId);
+		query.setParameter("cateringDate", date);
+		int result = query.executeUpdate();
+		if (result > 0) {
+			return true;
+		}
+		return false;
 	}
 }
