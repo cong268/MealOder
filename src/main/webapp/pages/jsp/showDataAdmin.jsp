@@ -52,42 +52,22 @@
                 <%--</div>--%>
             </div>
             <div ng-cloak class="row wrap-filter col-md-12 col-lg-12 col-xs-12 col-md-12">
-                <div class="col-sm-3 form-horizontal">
-                    <div class="form-group">
-                        <span class="col-sm-4 m-t-5 m-b-5">Meal time</span>
-                        <div class="input-group col-sm-8 col-xs-12">
-                            <select ng-model="mealTimeIdFilter" class="form-control">
-                                <option value="{{mealTime.mealTimeId}}" ng-repeat="mealTime in mealTimeArrClone">{{mealTime.mealTimeName}}</option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-3 form-horizontal">
-                    <div class="form-group">
-                        <span class="col-sm-4 m-t-5 m-b-5">Meal type</span>
-                        <div class="input-group col-sm-8 col-xs-12">
-                            <select ng-model="mealIdFilter" class="form-control">
-                                <option value="{{meal.mealId}}" ng-repeat="meal in mealArrClone">{{meal.mealName}}</option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-3 form-horizontal">
-                    <div class="form-group">
-                        <span class="col-sm-4 m-t-5 m-b-5">Location</span>
-                        <div class="input-group col-sm-8 col-xs-12">
-                            <select ng-model="locationIdFilter" class="form-control">
-                                <option value="{{location.locationId}}" ng-repeat="location in locationArrClone">{{location.locationName}}</option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-3 form-horizontal">
+                <div class="col-sm-5 form-horizontal">
                     <div class="form-group">
                         <span class="col-sm-6 m-t-5 m-b-5">Department</span>
                         <div class="input-group col-sm-6 col-xs-12">
                             <select ng-model="departmentIdFilter" class="form-control">
                                 <option value="{{department.deptId}}" ng-repeat="department in departmentArrClone">{{department.deptName}}</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-offset-2 col-sm-4 form-horizontal">
+                    <div class="form-group">
+                        <span class="col-sm-6 m-t-5 m-b-5">Employee</span>
+                        <div class="input-group col-sm-6 col-xs-12">
+                            <select ng-model="staffIdFilter" class="form-control">
+                                <option value="{{staffObj.staffId}}" ng-repeat="staffObj in arrStaff">{{staffObj.staffName}}</option>
                             </select>
                         </div>
                     </div>
