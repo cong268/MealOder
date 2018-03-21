@@ -95,7 +95,8 @@
                         <span data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" class="dropdown-toggle user-text-control"><spring:message code="label.user_control"/></span>
                         <img src="<c:url value="/assets/img/default-user-image.png"></c:url>" class="dropdown-toggle img-user-nsrp" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                         <ul class="dropdown-menu">
-                            <li><a href="#" data-toggle="modal" data-target="#userInfoModal">Username: ${sessionScope.userName}</a></li>
+                            <li><span class="hello-txt">Hello, <span class="name-sp">${sessionScope.userName}</span></span></li>
+                            <li><a href="#" data-toggle="modal" data-target="#userInfoModal">Setting</a></li>
                             <li role="separator" class="divider"></li>
                             <li><a href="logout"><spring:message code="label.logout"/><span class="glyphicon glyphicon-log-out p-l-10"></span></a></li>
                         </ul>
@@ -136,20 +137,61 @@
     <%-- POPUP USER --%>
     <div class="wrap-user-info" ng-controller="userInfoCtrl" ng-init="initData()">
         <div class="modal fade" id="userInfoModal" tabindex="-1" role="dialog" aria-labelledby="userInfoModal" aria-hidden="true">
-            <div class="modal-dialog" role="document">
+            <div class="modal-dialog modal-custom" role="document">
                 <div class="modal-content ">
-                    <div class="modal-header">
-                        <h3 class="modal-title float-l" id="userInfoModalLongTitle">User Infomation</h3>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
+                    <div class="modal-header text-center">
+                        <h3 class="modal-title" id="userInfoModalLongTitle">User Infomation</h3>
+                        <button type="button" class="close pos-absolute btn-close-user" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true" class="fs-27">&times;</span>
                         </button>
                     </div>
                     <div class="modal-body">
-                        User Info Here
+                        <div class="wrap-info-image row m-b-30">
+                            <img src="<c:url value="/assets/img/default-user-image.png"></c:url>" class="img-user-info m-l-auto m-r-auto" >
+                        </div>
+                        <div class="form-horizontal" ng-form="formUserInfo">
+                            <div class="form-group">
+                                <label for="input-username" class="col-sm-4 control-label">Username</label>
+                                <div class="col-sm-8">
+                                    <input type="text" autocomplete="off" ng-model="userInfo.userName" ng-minlength="6" class="form-control" id="input-username" required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="input-department" class="col-sm-4 control-label">Department</label>
+                                <div class="col-sm-8">
+                                    <span ng-bind="userInfo.deptId" class="form-control" id="input-department" >
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="input-email" class="col-sm-4 control-label">Email</label>
+                                <div class="col-sm-8">
+                                    <input type="text" autocomplete="off" ng-minlength="6" class="form-control" id="input-email" required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="input-lastlogin" class="col-sm-4 control-label">Last login</label>
+                                <div class="col-sm-8">
+                                    <input type="text" autocomplete="off" ng-minlength="6" class="form-control" id="input-lastlogin" required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="input-oldpass" class="col-sm-4 control-label">Old Password</label>
+                                <div class="col-sm-8">
+                                    <input type="password" autocomplete="off" ng-minlength="6" class="form-control" id="input-oldpass" required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="input-newpass" class="col-sm-4 control-label">New Password</label>
+                                <div class="col-sm-8">
+                                    <input type="password" autocomplete="off" ng-minlength="6" class="form-control" id="input-newpass" required>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <div class="modal-footer">
+                    <div class="modal-footer text-center">
                         <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
-                        <button type="button" class="btn btn-success" ng-click="updateUserInfo()" data-dismiss="modal">Accept</button>
+                        <button type="button" ng-if="formUserInfo.$invalid" class="btn btn-disabled" >Accept</button>
+                        <button type="button" ng-if="formUserInfo.$valid" class="btn btn-success" ng-click="updateUserInfo()">Accept</button>
                     </div>
                 </div>
             </div>
