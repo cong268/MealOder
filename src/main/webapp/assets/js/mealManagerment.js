@@ -38,10 +38,10 @@ myApp.controller('mealManagermentCtrl', ['$scope', 'NgTableParams', 'ngTableEven
                     drawTableOrder();
                 }
             }, function errorCallback(response) {
-                console.log('getMealByDepartment FAIL');
+                console.log('getLstByOder FAIL');
             }),$http({
                 method: 'GET',
-                url: 'cateringController/getMealByDepartment?date=' + dateStr,
+                url: 'cateringController/getLstNewByDept',
                 responseType: 'json'
             }).then(function successCallback(response) {
                 if(response.data){
@@ -55,7 +55,7 @@ myApp.controller('mealManagermentCtrl', ['$scope', 'NgTableParams', 'ngTableEven
                     drawTable();
                 }
             }, function errorCallback(response) {
-                console.log('getMealByDepartment FAIL');
+                console.log('getLstNewByDept FAIL');
             })
         ]).then(function () {
             $scope.showPreload = false;
@@ -161,7 +161,7 @@ myApp.controller('mealManagermentCtrl', ['$scope', 'NgTableParams', 'ngTableEven
                 console.log('getLstByOder FAIL');
             }),$http({
                 method: 'GET',
-                url: 'cateringController/getMealByDepartment?date=' + dateStr,
+                url: 'cateringController/getLstNewByDept',
                 responseType: 'json'
             }).then(function successCallback(response) {
                 if(response.data){

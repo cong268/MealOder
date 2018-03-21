@@ -35,6 +35,10 @@
         <put-attribute name="titlePage" value="page.show_admin"/>
         <put-attribute name="mainContent" value="/pages/jsp/showDataAdmin.jsp"/>
     </definition>
+    <definition name="showDataChef" extends="mainTemplate">
+        <put-attribute name="titlePage" value="page.show_admin"/>
+        <put-attribute name="mainContent" value="/pages/jsp/showDataChef.jsp"/>
+    </definition>
     <definition name="userOrder" extends="mainTemplate">
         <put-attribute name="titlePage" value="page.user_order"/>
         <put-attribute name="mainContent" value="/pages/jsp/userOrder.jsp"/>

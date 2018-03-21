@@ -66,6 +66,9 @@
         margin-right: 30px !important;
     }
 }
+.btn-disabled{
+    background: rgb(217,217,217);
+}
 /*CHECKBOX*/
 .control {
     display: inline-block;

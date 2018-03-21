@@ -67,7 +67,7 @@ public class LoginController {
 					ModelAndView model = new ModelAndView("redirect:mealManagerment");
 					return model;
 				} else if (userRole.equals(ConstanKey.ROLE.ROLE_CHEF)){
-					ModelAndView model = new ModelAndView("redirect:showDataAdmin");
+					ModelAndView model = new ModelAndView("redirect:showDataChef");
 					return model;
 				} else {
 					// Nhan vien

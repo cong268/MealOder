@@ -1,0 +1,52 @@
+.wrap-cartered-managerment .row{
+    overflow-x: auto;
+    white-space: nowrap;
+}
+.wrap-cartered-managerment > .row > .col-* {
+    display: inline-block;
+    float: none;
+}
+.wrap-header-page{
+    margin-bottom: 50px;
+}
+.wrap-meal-table{
+    min-width: 700px;
+}
+.wrap-filter{
+    margin: 0 !important;
+    margin-bottom: 20px !important;
+    padding-left: 0!important;
+    padding-right: 0;
+    overflow: hidden !important;
+}
+.vcenter{
+    line-height: 34px;
+}
+.nomarginbottom{
+    margin-bottom: 0 !important;
+}
+.showNoData{
+    height: 40px;
+    line-height: 40px;
+    width: 100%;
+    background: #e7e7e7;
+}
+.wrap-filter select{
+    border-radius: 4px !important;
+}
+.label-pill{
+    font-size: 16px;
+    padding-right: .6em;
+    padding-left: .6em;
+    border-radius: 10rem;
+}
+.wrap-info{
+
+}
+.highlight {
+    padding: 9px 14px;
+    margin-bottom: 14px;
+    background-color: #f7f7f9;
+    border: 1px solid #e1e1e8;
+    border-radius: 4px;
+}

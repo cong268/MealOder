@@ -50,6 +50,12 @@ public class ViewController {
         return model;
     }
 
+    @RequestMapping("showDataChef")
+    public ModelAndView showDataChef(){
+        ModelAndView model = new ModelAndView("showDataChef");
+        return model;
+    }
+
     @RequestMapping("registerUser")
     public ModelAndView registerUser(){
         ModelAndView model = new ModelAndView("registerUser");

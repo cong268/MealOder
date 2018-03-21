@@ -27,7 +27,7 @@
         <div class="row text-center" ng-cloak>
             <div class="col-md-12 col-lg-12 col-xs-12 col-md-12">
                 <div class="text-left wrap-header-page">
-                    <h3>Meal Management <span class="badge" ng-cloak ng-bind="arrDataOrder.total()"></span></h3>
+                    <h3>Meal Management <span class="badge" ng-cloak ng-bind="arrDataOrder.length"></span></h3>
                 </div>
                 <div ng-cloak class="row wrap-filter col-md-12 col-lg-12 col-xs-12 col-md-12 pull-left">
                     <div class="col-md-2 p-l-0 m-t-10">
@@ -90,7 +90,8 @@
             </div>
         </div>
         <div class="row m-t-10">
-            <div class="btn btn-primary btn-lg pull-right m-r-15" ng-click="submitMealManager()">SUBMIT</div>
+            <div ng-if="arrDataOrder.length > 0" class="btn btn-primary btn-lg pull-right m-r-15" ng-click="submitMealManager()">SUBMIT</div>
+            <div ng-if="arrDataOrder.length == 0" class="btn btn-disabled btn-lg pull-right m-r-15" >SUBMIT</div>
         </div>
     </div>
     <!-- EDIT MEAL -->

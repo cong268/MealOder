@@ -67,7 +67,7 @@
                             <li><a href="showDataAdmin"><spring:message code="label.report_info"/></a></li>
                         </c:if>
                         <c:if test = "${sessionScope.userRole == 'Chef'}">
-                        	<li><a href="showDataAdmin"><spring:message code="label.report_info"/></a></li>
+                        	<li><a href="showDataChef"><spring:message code="label.report_info"/></a></li>
                         </c:if>
                         </ul>
                     </li>
