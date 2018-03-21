@@ -128,7 +128,7 @@ public class CateringDAOImpl implements CateringDAO {
 			try {
 				for (int i = 0; i < lst.size(); i++) {
 					Catering obj = lst.get(i);
-					session.save(obj);
+					session.saveOrUpdate(obj);
 					if (i % 20 == 0) {
 						session.flush();
 						session.clear();
