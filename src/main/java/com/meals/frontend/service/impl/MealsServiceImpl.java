@@ -107,10 +107,10 @@ public class MealsServiceImpl implements MealsService {
 							orderBean.setLocationId(lstLocation.get(0).getLocationId());
 						}
 						if (lstMealTime != null && !lstMealTime.isEmpty()) {
-							orderBean.setLocationId(lstMealTime.get(0).getMealTimeId());
+							orderBean.setMealTimeId(lstMealTime.get(0).getMealTimeId());
 						}
 						if (lstMealType != null && !lstMealType.isEmpty()) {
-							orderBean.setLocationId(lstMealType.get(0).getMealId());
+							orderBean.setMealId(lstMealType.get(0).getMealId());
 						}
 						lstOrder.add(orderBean);
 					}
