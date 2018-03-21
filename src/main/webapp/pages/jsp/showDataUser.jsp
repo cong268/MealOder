@@ -9,17 +9,16 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles" %>
 <html>
-<c:if test = "${sessionScope.userRole == 'Manager'}">
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Cartering</title>
-        <link rel="stylesheet" href="<c:url value="/assets/css/showManagerStyle.css"></c:url>">
-        <script type="text/javascript" src="<c:url value="/assets/js/showManager.js"></c:url>"></script>
-        <script type="text/javascript"> var _contextPath = "${pageContext.request.contextPath}"; </script>
-    </head>
-    <body ng-controller="carteredAdminCtrl" ng-init="initData()">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>History</title>
+    <link rel="stylesheet" href="<c:url value="/assets/css/showUserStyle.css"></c:url>">
+    <script type="text/javascript" src="<c:url value="/assets/js/showUser.js"></c:url>"></script>
+    <script type="text/javascript"> var _contextPath = "${pageContext.request.contextPath}"; </script>
+</head>
+<body ng-controller="carteredAdminCtrl" ng-init="initData()">
     <div class="container wrap-cartered-managerment">
         <div class="row text-center" >
             <div class="col-md-12 col-lg-12 col-xs-12 col-md-12">
@@ -57,49 +56,94 @@
             </div>
         </div>
         <div class="row text-center" >
-            <div class="col-md-12 col-lg-12 col-xs-12 col-md-12 wrap-meal-table">
+            <div class="col-md-12 col-lg-12 col-xs-12 col-md-12 wrap-user-table">
                 <table ng-cloak ng-table="tableParams" class="table table-condensed table-bordered table-striped table-custom"
                        ng-class="{'nomarginbottom': tableParams.total() == 0}">
                     <tr ng-repeat="row in $data">
-                        <td data-title="'EmployeeCode'" sortable="'staffId'">{{row.staffId}}</td>
-                        <td data-title="'Fullname'" sortable="'staffName'">{{row.staffName}}</td>
-                        <td data-title="'Meal Time'" class="text-center">
+                        <td data-title="'Date'" sortable="'dateMeal'" class="text-center">{{row.dateMeal}}</td>
+                        <td data-title="'Meal Time'" sortable="'mealTimeId'" class="text-center">
                             {{getMealTimeName(row.mealTimeId)}}
                         </td>
-                        <td data-title="'Location'" class="text-center">
-                            {{getLocationName(row.locationId)}}
-                        </td>
-                        <td data-title="'Meal Type'" class="text-center">
-                            {{getMealName(row.mealId)}}
-                        </td>
-                        <td data-title="'Department'" class="text-center">
-                            {{getDepartmentName(row.departmentId)}}
-                        </td>
-                        <td data-title="'Date'" class="text-center">
-                            {{row.dateMeal | date}}
+                        <td data-title="'Meal Type'" sortable="'mealId'" class="text-center">{{getMealName(row.mealId)}}</td>
+                        <td width="100" data-title="'Action'" class="text-center" >
+                            <span class="text-success" ng-if="row.status == 1 || row.catered == 1">Done</span>
+                            <div class="btn btn-default btn-custom" tooltip title="Edit"
+                                 ng-if="row.status != 1 && row.catered != 1"
+                                 data-toggle="modal" data-target="#editMealModal" ng-click="editMeal(row)">
+                                <span class="glyphicon glyphicon-pencil"></span>
+                            </div>
+                            <div class="btn btn-danger btn-custom" tooltip title="Delete"
+                                 ng-if="row.status != 1 && row.catered != 1"
+                                 data-toggle="modal" data-target="#deleteModal" ng-click="showDeleteMeal(row)">
+                                <span class="glyphicon glyphicon-trash"></span>
+                            </div>
                         </td>
                     </tr>
                 </table>
                 <div class="showNoData" ng-if="tableParams.total() == 0" ng-cloak>No data available</div>
             </div>
         </div>
-        <div class=" row text-center m-l-0 m-r-0  m-t-10" ng-if="tableParams.total() > 0">
-            <div class="col-md-12  wrap-info highlight text-left">
-                <div ng-repeat="department in departmentArr" ng-if="department.count > 0">
-                    <span>Department <span ng-bind="department.deptName"></span><span class="p-l-10 p-r-10 fs-16">:</span><span ng-bind="department.count"></span></span>
+    </div>
+    <div class="wrap-popup-edit">
+        <div class="modal fade" id="editMealModal" tabindex="-1" role="dialog" aria-labelledby="editMealModalTitle" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h3 class="modal-title float-l" id="editMealModalTitle">EDIT MEAL</h3>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label for="meal-time-popup" class="col-form-label">Date:</label>
+                            <input type="text" class="form-control" ng-model="selectedItemClone.dateMeal" disabled readonly/>
+                        </div>
+                        <div class="form-group">
+                            <label for="meal-time-popup" class="col-form-label">Meal time:</label>
+                            <select id="meal-time-popup" ng-model="selectedItemClone.mealTimeId" class="form-control">
+                                <option ng-selected="selectedItemClone.mealTimeId == mealTimeObj.mealTimeId"
+                                        ng-repeat="mealTimeObj in mealTimeArr"
+                                        ng-value="mealTimeObj.mealTimeId">{{mealTimeObj.mealTimeName}}</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="meal-popup" class="col-form-label">Meal type:</label>
+                            <select id="meal-popup" ng-model="selectedItemClone.mealId" class="form-control">
+                                <option ng-selected="selectedItemClone.mealId == mealObj.mealId"
+                                        ng-repeat="mealObj in mealArr"
+                                        ng-value="mealObj.mealId">{{mealObj.mealName}}</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="saveEditMeal()">Save changes</button>
+                    </div>
                 </div>
             </div>
         </div>
-        <div class="row m-t-10">
-            <div class="btn btn-success btn-lg pull-right m-r-15" ng-click="exportData()">EXPORT DATA<span class="glyphicon glyphicon-download-alt p-l-10"></span></div>
+    </div>
+    <div class="wrap-accept-delete">
+        <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModal" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-sm" role="document">
+                <div class="modal-content ">
+                    <div class="modal-header">
+                        <h3 class="modal-title float-l" id="deleteModalLongTitle">Confirm delete</h3>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        Are you sure to delete this field ?
+                    </div>
+                    <div class="modal-footer text-center">
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                        <button type="button" class="btn btn-success" ng-click="deleteMeal()" data-dismiss="modal">Accept</button>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
-    </body>
-</c:if>
-<c:if test = "${sessionScope.userRole != 'Manager'}">
-    <div class="container">
-        <h1>ACCESS DENIED <span class="badge p-t-8 p-b-8 p-l-8 p-r-8">404</span></h1>
-        <h3>You not have permission to access this page !</h3>
-    </div>
-</c:if>
+</body>
 </html>

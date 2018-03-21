@@ -81,14 +81,13 @@
                         </ul>
                     </li>
                     </c:if>
-                    <c:if test = "${sessionScope.userRole == 'Employee' || sessionScope.userRole == 'Admin' || sessionScope.userRole == 'Manager'}">
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><spring:message code="label.user_access"/> <span class="caret"></span></a>
                         <ul class="dropdown-menu">
                             <li><a href="userOrder"><spring:message code="label.order_meal"/></a></li>
+                            <li><a href="showDataUser">History</a></li>
                         </ul>
                     </li>
-                    </c:if>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     <li class="dropdown dropdown-user-custom">
