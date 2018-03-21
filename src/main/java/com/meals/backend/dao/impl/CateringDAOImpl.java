@@ -64,12 +64,13 @@ public class CateringDAOImpl implements CateringDAO {
 	}
 
 	@Override
-	public List<Catering> getByStaffAndDate(String staffId, Date date) {
+	public List<Catering> getByStaffAndDate(String staffId, Date fromDate, Date toDate) {
 		Session session = sessionFactory.getCurrentSession();
-		Query query = session
-				.createQuery("FROM Catering c WHERE c.id.staffId = :staffId AND c.id.cateringDate = :cateringDate");
+		Query query = session.createQuery(
+				"FROM Catering c WHERE c.id.staffId = :staffId AND c.id.cateringDate >= :fromDate AND c.id.cateringDate < :toDate");
 		query.setParameter("staffId", staffId);
-		query.setParameter("cateringDate", date);
+		query.setParameter("fromDate", fromDate);
+		query.setParameter("toDate", toDate);
 		return query.list();
 	}
 
@@ -98,11 +99,12 @@ public class CateringDAOImpl implements CateringDAO {
 	}
 
 	@Override
-	public Boolean deleteCateringByStaff(String staffId, Date fromDate, Date toDate, Boolean ordered, Boolean status, Boolean catered) {
+	public Boolean deleteCateringByStaff(String staffId, Date fromDate, Date toDate, Boolean ordered, Boolean status,
+			Boolean catered) {
 		Session session = sessionFactory.getCurrentSession();
 		Query query = session.createQuery(
 				"DELETE Catering c WHERE c.id.staffId = :staffId AND c.id.cateringDate >= :fromDate AND c.id.cateringDate < :toDate "
-				+ "AND c.catered = :catered AND c.status = :status AND c.catered = :catered");
+						+ "AND c.catered = :catered AND c.status = :status AND c.catered = :catered");
 		query.setParameter("fromDate", fromDate);
 		query.setParameter("toDate", toDate);
 		query.setParameter("staffId", staffId);

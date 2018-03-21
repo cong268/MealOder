@@ -558,4 +558,40 @@ public class MealsServiceImpl implements MealsService {
 		}
 		return null;
 	}
+
+	@Override
+	public List<MealsOrderBean> getHistoryStaff(Integer userId, String fromDate, String toDate) {
+		List<MealsOrderBean> result = new ArrayList<>();
+		Date fromTime = FunctionUtils.convertDateByFormatLocal(fromDate, ConstanKey.FORMAT_DATE.DATE_TIME_FORMAT);
+		Date toTime = FunctionUtils.convertDateByFormatLocal(toDate, ConstanKey.FORMAT_DATE.DATE_TIME_FORMAT);
+		if (fromTime != null && toTime != null) {
+			Date tomorrow = new Date(toTime.getTime() + (1000 * 60 * 60 * 24));
+			Staff staff = staffDAO.getStaffByUserId(userId);
+			if (staff != null) {
+				List<Catering> lst = cateringDAO.getByStaffAndDate(staff.getStaffId(), fromTime, tomorrow);
+				if (lst != null && !lst.isEmpty()) {
+					for (Catering obj : lst) {
+						MealsOrderBean bean = converFromCatering(obj);
+						result.add(bean);
+					}
+				}
+			}
+
+		}
+		return result;
+	}
+
+	private MealsOrderBean converFromCatering(Catering obj) {
+		MealsOrderBean bean = new MealsOrderBean();
+		bean.setStaffId(obj.getId().getStaffId());
+		bean.setDepartmentId(obj.getDeptId());
+		bean.setCatered(obj.isCatered());
+		bean.setStatus(obj.isStatus());
+		bean.setOrdered(obj.isOrdered());
+		bean.setLocationId(obj.getLocationId());
+		bean.setMealTimeId(obj.getId().getMealTimeId());
+		bean.setDateMeal(FunctionUtils.convertDateStringByFormatLocal(obj.getId().getCateringDate(),
+				ConstanKey.FORMAT_DATE.DATE_SLASH_FORMAT));
+		return bean;
+	}
 }

@@ -89,4 +89,10 @@ public class CateringController {
 		return mealsService.updateStatusByAdmin(userId,date);
 	}
 
+	@RequestMapping(value = "/getHistoryStaff", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public List<MealsOrderBean> getHistoryStaff(HttpSession session, @RequestParam(value = "fromDate") String fromDate,
+			@RequestParam(value = "toDate") String toDate) {
+		Integer userId = (Integer) session.getAttribute(ConstanKey.USER_ID);
+		return mealsService.getHistoryStaff(userId, fromDate, toDate);
+	}
 }

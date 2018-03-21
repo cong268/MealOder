@@ -25,4 +25,5 @@ public interface MealsService {
 	Boolean saveCateringByStaff (Integer userId, String userRole, List<MealsOrderBean> listMealOder, String fromDate, String toDate);
 	Boolean saveCateringByManager(Integer departId,List<MealsOrderBean> listMealOder, String date);
 	Boolean updateStatusByAdmin(Integer userId, String date);
+	List<MealsOrderBean> getHistoryStaff(Integer userId, String fromDate, String toDate);
 }

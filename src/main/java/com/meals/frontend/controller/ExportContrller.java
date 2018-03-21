@@ -20,8 +20,30 @@ public class ExportContrller {
 	@Autowired
 	MealsService mealsService;
 
-	@RequestMapping(value = "/exportCatering", method = RequestMethod.GET)
-	public ModelAndView exportCatering(HttpSession session,@RequestParam(value = "fromDate") String fromDate,
+	@RequestMapping(value = "/exportCanteen", method = RequestMethod.GET)
+	public ModelAndView exportCanteen(HttpSession session,@RequestParam(value = "fromDate") String fromDate,
+			@RequestParam(value = "toDate") String toDate) {
+		ModelAndView model = new ModelAndView("excelView");
+		List<CanteenExportBean> lst = mealsService.getLstAndCount(fromDate, toDate);
+		model.addObject("dataExport", lst);
+		model.addObject("fromDate", fromDate);
+		model.addObject("toDate", toDate);
+		return model;
+	}
+	
+	@RequestMapping(value = "/exportManager", method = RequestMethod.GET)
+	public ModelAndView exportManager(HttpSession session,@RequestParam(value = "fromDate") String fromDate,
+			@RequestParam(value = "toDate") String toDate) {
+		ModelAndView model = new ModelAndView("excelView");
+		List<CanteenExportBean> lst = mealsService.getLstAndCount(fromDate, toDate);
+		model.addObject("dataExport", lst);
+		model.addObject("fromDate", fromDate);
+		model.addObject("toDate", toDate);
+		return model;
+	}
+	
+	@RequestMapping(value = "/exportAdmin", method = RequestMethod.GET)
+	public ModelAndView exportAdmin(HttpSession session,@RequestParam(value = "fromDate") String fromDate,
 			@RequestParam(value = "toDate") String toDate) {
 		ModelAndView model = new ModelAndView("excelView");
 		List<CanteenExportBean> lst = mealsService.getLstAndCount(fromDate, toDate);
