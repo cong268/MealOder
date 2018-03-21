@@ -5,8 +5,9 @@ public class DataCateringExport {
 	private String userName;
 	private String staffId;
 	private String departmentName;
-	private String time;
+	private String mealTime;
 	private String location;
+	private Boolean isManager;
 	private Long quantity;
 
 	public String getDate() {
@@ -41,12 +42,12 @@ public class DataCateringExport {
 		this.departmentName = departmentName;
 	}
 
-	public String getTime() {
-		return time;
+	public String getMealTime() {
+		return mealTime;
 	}
 
-	public void setTime(String time) {
-		this.time = time;
+	public void setMealTime(String mealTime) {
+		this.mealTime = mealTime;
 	}
 
 	public String getLocation() {
@@ -63,6 +64,14 @@ public class DataCateringExport {
 
 	public void setQuantity(Long quantity) {
 		this.quantity = quantity;
+	}
+
+	public Boolean getIsManager() {
+		return isManager;
+	}
+
+	public void setIsManager(Boolean isManager) {
+		this.isManager = isManager;
 	}
 
 }

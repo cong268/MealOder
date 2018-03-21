@@ -438,7 +438,7 @@ public class MealsServiceImpl implements MealsService {
 		}
 		return result;
 	}
-	
+
 	@Override
 	public List<MealsOrderBean> getHistoryStaff(Integer userId, String fromDate, String toDate) {
 		List<MealsOrderBean> result = new ArrayList<>();
@@ -457,6 +457,40 @@ public class MealsServiceImpl implements MealsService {
 				}
 			}
 
+		}
+		return result;
+	}
+
+	@Override
+	public List<DataCateringExport> getDataExportByRole(String userRole,Integer deptId, String staffId,
+			String fromDate, String toDate) {
+		List<DataCateringExport> result = new ArrayList<>();
+		List<Catering> lst = null;
+		Date fromTime = FunctionUtils.convertDateByFormatLocal(fromDate, ConstanKey.FORMAT_DATE.DATE_TIME_FORMAT);
+		Date toTime = FunctionUtils.convertDateByFormatLocal(toDate, ConstanKey.FORMAT_DATE.DATE_TIME_FORMAT);
+		if (fromTime != null && toTime != null) {
+			Date tomorrow = new Date(toTime.getTime() + (1000 * 60 * 60 * 24));
+			if (userRole.equals(ConstanKey.ROLE.ROLE_MANAGER)) {
+				if (staffId != null && !staffId.equals("")) {
+					lst = cateringDAO.getByStaffAndDate(staffId, fromTime, tomorrow);
+				} else {
+					lst = cateringDAO.getByDepartAndDate(deptId, fromTime, tomorrow);
+				}
+			} else if (userRole.equals(ConstanKey.ROLE.ROLE_ADMIN)) {
+				if (staffId != null && !staffId.equals("")) {
+					lst = cateringDAO.getByStaffAndDate(staffId, fromTime, tomorrow);
+				} else if (deptId != null) {
+					lst = cateringDAO.getByDepartAndDate(deptId, fromTime, tomorrow);
+				} else {
+					lst = cateringDAO.getLstByDate(fromTime, tomorrow);
+				}
+			}
+		}
+		if (lst != null && !lst.isEmpty()) {
+			for (Catering obj : lst) {
+				DataCateringExport bean = convertToData(obj);
+				result.add(bean);
+			}
 		}
 		return result;
 	}
@@ -564,9 +598,24 @@ public class MealsServiceImpl implements MealsService {
 		return bean;
 	}
 
-	@Override
-	public List<DataCateringExport> getDataExportByManager(Integer userId, String staffId, String fromDate,
-			String toDate) {
-		return null;
+	private DataCateringExport convertToData(Catering obj) {
+		Map<Integer, String> mapDepart = getMapDepart();
+		Map<Integer, String> mapMealTime = getMapMeaTime();
+		Map<Integer, String> mapLocation = getMapLocation();
+		DataCateringExport bean = new DataCateringExport();
+		bean.setStaffId(obj.getId().getStaffId());
+		Staff staff = staffDAO.getByStaff(obj.getId().getStaffId());
+		if (staff != null) {
+			bean.setUserName(staff.getStaffName());
+		} else {
+			bean.setUserName("Visitor");
+		}
+		bean.setDate(FunctionUtils.convertDateStringByFormatLocal(obj.getId().getCateringDate(),
+				ConstanKey.FORMAT_DATE.DATE_SLASH_FORMAT));
+		bean.setDepartmentName(mapDepart.get(obj.getDeptId()));
+		bean.setLocation(mapLocation.get(obj.getLocationId()));
+		bean.setMealTime(mapMealTime.get(obj.getMealId()));
+		bean.setQuantity(1L);
+		return bean;
 	}
 }

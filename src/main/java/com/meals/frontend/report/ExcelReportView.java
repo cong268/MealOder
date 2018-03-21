@@ -23,6 +23,7 @@ import org.apache.poi.ss.usermodel.VerticalAlignment;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.ss.util.CellRangeAddress;
 import org.apache.poi.util.IOUtils;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.web.servlet.view.document.AbstractExcelView;
 
 import com.meals.frontend.bean.CanteenExportBean;
@@ -85,7 +86,8 @@ public class ExcelReportView extends AbstractExcelView {
 		styleBodyTable.setFont(font);
 
 		// FileInputStream obtains input bytes from the image file
-		InputStream inputStream = new FileInputStream("C:/Users/CONG/Desktop/nsrp.png");
+		ClassPathResource resource = new ClassPathResource("nsrp.PNG");
+		InputStream inputStream = resource.getInputStream();
 		// Get the contents of an InputStream as a byte[].
 		byte[] bytes = IOUtils.toByteArray(inputStream);
 		// Adds a picture to the workbook
@@ -104,7 +106,7 @@ public class ExcelReportView extends AbstractExcelView {
 		// Creates a picture
 		Picture pict = drawing.createPicture(anchor, pictureIdx);
 		// Reset the image to the original size
-		pict.resize();
+		pict.resize(6.0, 1.0);
 
 		if (userRole.equals(ConstanKey.ROLE.ROLE_CHEF)) {
 			@SuppressWarnings("unchecked")
@@ -243,13 +245,13 @@ public class ExcelReportView extends AbstractExcelView {
 			cellInfo.setCellValue(total);
 		} else if (userRole.equals(ConstanKey.ROLE.ROLE_ADMIN)) {
 			@SuppressWarnings("unchecked")
-			List<DataCateringExport> lstData = (List<DataCateringExport>) model.get("dataManager");
+			List<DataCateringExport> lstData = (List<DataCateringExport>) model.get("dataAdmin");
 			sheet.setColumnWidth(0, 5 * 256);
 			sheet.setColumnWidth(1, 10 * 256);
 			sheet.setColumnWidth(2, 5 * 256);
 			sheet.setColumnWidth(3, 19 * 256);
 			sheet.setColumnWidth(4, 14 * 256);
-			sheet.setColumnWidth(5, 15 * 256);
+			sheet.setColumnWidth(5, 21 * 256);
 			sheet.setColumnWidth(6, 15 * 256);
 			sheet.setColumnWidth(7, 15 * 256);
 			sheet.setColumnWidth(8, 15 * 256);
@@ -342,10 +344,10 @@ public class ExcelReportView extends AbstractExcelView {
 			cellInfo.setCellStyle(styleHeadTable);
 			cellInfo = rowInfo.createCell(7);
 			cellInfo.setCellValue("Serving location");
+			cellInfo.setCellStyle(styleHeadTable);
 			cellInfo = rowInfo.createCell(8);
 			cellInfo.setCellValue("Quantity");
 			cellInfo.setCellStyle(styleHeadTable);
-
 			int num = 0;
 			int total = 0;
 			if (lstData != null && !lstData.isEmpty()) {
@@ -371,7 +373,7 @@ public class ExcelReportView extends AbstractExcelView {
 					cellInfo.setCellValue(bean.getDepartmentName());
 					cellInfo.setCellStyle(styleBodyTable);
 					cellInfo = rowInfo.createCell(6);
-					cellInfo.setCellValue(bean.getTime());
+					cellInfo.setCellValue(bean.getMealTime());
 					cellInfo.setCellStyle(styleBodyTable);
 					cellInfo = rowInfo.createCell(7);
 					cellInfo.setCellValue(bean.getLocation());
@@ -395,6 +397,14 @@ public class ExcelReportView extends AbstractExcelView {
 			cellInfo.setCellValue("TOTAL:");
 			cellInfo = rowTotal.createCell(8);
 			cellInfo.setCellValue(total);
+			
+			Row rowConfirm = sheet.createRow(12 + num);
+			rowConfirm.setHeight((short) (rowInfo.getHeight()));
+			sheet.addMergedRegion(new CellRangeAddress(12 + num, 12 + num, 0, 5));
+			cellInfo = rowConfirm.createCell(6);
+			cellInfo.setCellValue("CONFIRMED BY ADMIN");
+			cellInfo.setCellStyle(styleHeadTable);
+			sheet.addMergedRegion(new CellRangeAddress(12 + num, 12 + num, 6, 8));
 		} else if (userRole.equals(ConstanKey.ROLE.ROLE_MANAGER)) {
 			@SuppressWarnings("unchecked")
 			List<DataCateringExport> lstData = (List<DataCateringExport>) model.get("dataManager");
@@ -403,7 +413,7 @@ public class ExcelReportView extends AbstractExcelView {
 			sheet.setColumnWidth(2, 5 * 256);
 			sheet.setColumnWidth(3, 19 * 256);
 			sheet.setColumnWidth(4, 14 * 256);
-			sheet.setColumnWidth(5, 15 * 256);
+			sheet.setColumnWidth(5, 21 * 256);
 			sheet.setColumnWidth(6, 15 * 256);
 			sheet.setColumnWidth(7, 15 * 256);
 			sheet.setColumnWidth(8, 15 * 256);
@@ -496,6 +506,7 @@ public class ExcelReportView extends AbstractExcelView {
 			cellInfo.setCellStyle(styleHeadTable);
 			cellInfo = rowInfo.createCell(7);
 			cellInfo.setCellValue("Serving location");
+			cellInfo.setCellStyle(styleHeadTable);
 			cellInfo = rowInfo.createCell(8);
 			cellInfo.setCellValue("Quantity");
 			cellInfo.setCellStyle(styleHeadTable);
@@ -525,7 +536,7 @@ public class ExcelReportView extends AbstractExcelView {
 					cellInfo.setCellValue(bean.getDepartmentName());
 					cellInfo.setCellStyle(styleBodyTable);
 					cellInfo = rowInfo.createCell(6);
-					cellInfo.setCellValue(bean.getTime());
+					cellInfo.setCellValue(bean.getMealTime());
 					cellInfo.setCellStyle(styleBodyTable);
 					cellInfo = rowInfo.createCell(7);
 					cellInfo.setCellValue(bean.getLocation());
@@ -549,6 +560,14 @@ public class ExcelReportView extends AbstractExcelView {
 			cellInfo.setCellValue("TOTAL:");
 			cellInfo = rowTotal.createCell(8);
 			cellInfo.setCellValue(total);
+			
+			Row rowConfirm = sheet.createRow(12 + num);
+			rowConfirm.setHeight((short) (rowInfo.getHeight()));
+			sheet.addMergedRegion(new CellRangeAddress(12 + num, 12 + num, 0, 5));
+			cellInfo = rowConfirm.createCell(6);
+			cellInfo.setCellValue("CONFIRMED BY FOCAL POINT");
+			cellInfo.setCellStyle(styleHeadTable);
+			sheet.addMergedRegion(new CellRangeAddress(12 + num, 12 + num, 6, 8));
 		}
 	}
 

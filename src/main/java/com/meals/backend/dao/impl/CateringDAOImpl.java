@@ -170,4 +170,15 @@ public class CateringDAOImpl implements CateringDAO {
 		}
 		return false;
 	}
+
+	@Override
+	public List<Catering> getByDepartAndDate(Integer deptId, Date fromDate, Date toDate) {
+		Session session = sessionFactory.getCurrentSession();
+		Query query = session.createQuery(
+				"FROM Catering c WHERE c.deptId = :deptId AND c.id.cateringDate >= :fromDate AND c.id.cateringDate < :toDate");
+		query.setParameter("deptId", deptId);
+		query.setParameter("fromDate", fromDate);
+		query.setParameter("toDate", toDate);
+		return query.list();
+	}
 }
