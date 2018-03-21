@@ -409,31 +409,27 @@ public class MealsServiceImpl implements MealsService {
 	}
 
 	@Override
-	public List<CanteenExportBean> getLstAndCount(String fromDate, String toDate) {
+	public List<CanteenExportBean> getLstAndCount(Date fromDate, Date toDate) {
 		List<CanteenExportBean> result = new ArrayList<>();
-		Date fromTime = FunctionUtils.convertDateByFormatLocal(fromDate, ConstanKey.FORMAT_DATE.DATE_TIME_FORMAT);
-		Date toTime = FunctionUtils.convertDateByFormatLocal(toDate, ConstanKey.FORMAT_DATE.DATE_TIME_FORMAT);
 		Map<Integer, String> mapDepart = getMapDepart();
 		Map<Integer, String> mapMealType = getMapMealType();
 		Map<Integer, String> mapMealTime = getMapMeaTime();
 		Map<Integer, String> mapLocation = getMapLocation();
-		if (fromTime != null && toTime != null) {
-			Date tomorrow = new Date(toTime.getTime() + (1000 * 60 * 60 * 24));
-			List<Object[]> lst = cateringDAO.getLstAndCount(fromTime, tomorrow);
-			if (lst != null && !lst.isEmpty()) {
-				for (int i = 0; i < lst.size(); i++) {
-					Object[] row = (Object[]) lst.get(i);
-					CanteenExportBean bean = new CanteenExportBean();
-					Date date = (Date) row[0];
-					bean.setDate(FunctionUtils.convertDateStringByFormatLocal(date,
-							ConstanKey.FORMAT_DATE.DATE_SLASH_FORMAT));
-					bean.setDepartment(mapDepart.get(row[1]));
-					bean.setMealType(mapMealType.get(row[2]));
-					bean.setMealTime(mapMealTime.get(row[3]));
-					bean.setLocation(mapLocation.get(row[4]));
-					bean.setQuantity((Long) row[5]);
-					result.add(bean);
-				}
+		Date tomorrow = new Date(toDate.getTime() + (1000 * 60 * 60 * 24));
+		List<Object[]> lst = cateringDAO.getLstAndCount(fromDate, tomorrow);
+		if (lst != null && !lst.isEmpty()) {
+			for (int i = 0; i < lst.size(); i++) {
+				Object[] row = (Object[]) lst.get(i);
+				CanteenExportBean bean = new CanteenExportBean();
+				Date date = (Date) row[0];
+				bean.setDate(
+						FunctionUtils.convertDateStringByFormatLocal(date, ConstanKey.FORMAT_DATE.DATE_SLASH_FORMAT));
+				bean.setDepartment(mapDepart.get(row[1]));
+				bean.setMealType(mapMealType.get(row[2]));
+				bean.setMealTime(mapMealTime.get(row[3]));
+				bean.setLocation(mapLocation.get(row[4]));
+				bean.setQuantity((Long) row[5]);
+				result.add(bean);
 			}
 		}
 		return result;
@@ -463,27 +459,23 @@ public class MealsServiceImpl implements MealsService {
 
 	@Override
 	public List<DataCateringExport> getDataExportByRole(String userRole,Integer deptId, String staffId,
-			String fromDate, String toDate) {
+			Date fromTime, Date toTime) {
 		List<DataCateringExport> result = new ArrayList<>();
 		List<Catering> lst = null;
-		Date fromTime = FunctionUtils.convertDateByFormatLocal(fromDate, ConstanKey.FORMAT_DATE.DATE_TIME_FORMAT);
-		Date toTime = FunctionUtils.convertDateByFormatLocal(toDate, ConstanKey.FORMAT_DATE.DATE_TIME_FORMAT);
-		if (fromTime != null && toTime != null) {
-			Date tomorrow = new Date(toTime.getTime() + (1000 * 60 * 60 * 24));
-			if (userRole.equals(ConstanKey.ROLE.ROLE_MANAGER)) {
-				if (staffId != null && !staffId.equals("")) {
-					lst = cateringDAO.getByStaffAndDate(staffId, fromTime, tomorrow);
-				} else {
-					lst = cateringDAO.getByDepartAndDate(deptId, fromTime, tomorrow);
-				}
-			} else if (userRole.equals(ConstanKey.ROLE.ROLE_ADMIN)) {
-				if (staffId != null && !staffId.equals("")) {
-					lst = cateringDAO.getByStaffAndDate(staffId, fromTime, tomorrow);
-				} else if (deptId != null) {
-					lst = cateringDAO.getByDepartAndDate(deptId, fromTime, tomorrow);
-				} else {
-					lst = cateringDAO.getLstByDate(fromTime, tomorrow);
-				}
+		Date tomorrow = new Date(toTime.getTime() + (1000 * 60 * 60 * 24));
+		if (userRole.equals(ConstanKey.ROLE.ROLE_MANAGER)) {
+			if (staffId != null && !staffId.equals("")) {
+				lst = cateringDAO.getByStaffAndDate(staffId, fromTime, tomorrow);
+			} else {
+				lst = cateringDAO.getByDepartAndDate(deptId, fromTime, tomorrow);
+			}
+		} else if (userRole.equals(ConstanKey.ROLE.ROLE_ADMIN)) {
+			if (staffId != null && !staffId.equals("")) {
+				lst = cateringDAO.getByStaffAndDate(staffId, fromTime, tomorrow);
+			} else if (deptId != null) {
+				lst = cateringDAO.getByDepartAndDate(deptId, fromTime, tomorrow);
+			} else {
+				lst = cateringDAO.getLstByDate(fromTime, tomorrow);
 			}
 		}
 		if (lst != null && !lst.isEmpty()) {

@@ -1,5 +1,6 @@
 package com.meals.frontend.service;
 
+import java.util.Date;
 import java.util.List;
 
 import com.meals.frontend.bean.CanteenExportBean;
@@ -21,10 +22,10 @@ public interface MealsService {
 	Boolean saveStaff (StaffBean bean);
 	Boolean saveUser (UserBean bean);
 	List<RoleBean> getAllRole();
-	List<CanteenExportBean> getLstAndCount(String fromDate, String toDate);
+	List<CanteenExportBean> getLstAndCount(Date fromDate, Date toDate);
 	Boolean saveCateringByStaff (Integer userId, String userRole, List<MealsOrderBean> listMealOder, String fromDate, String toDate);
 	Boolean saveCateringByManager(Integer departId,List<MealsOrderBean> listMealOder, String date);
 	Boolean updateStatusByAdmin(Integer userId, String date);
 	List<MealsOrderBean> getHistoryStaff(Integer userId, String fromDate, String toDate);
-	List<DataCateringExport> getDataExportByRole (String userRole,Integer deptId, String staffId, String fromDate, String toDate);
+	List<DataCateringExport> getDataExportByRole (String userRole,Integer deptId, String staffId, Date fromDate, Date toDate);
 }

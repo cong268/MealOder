@@ -1,5 +1,6 @@
 package com.meals.frontend.controller;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -16,6 +17,7 @@ import com.meals.frontend.bean.DataCateringExport;
 import com.meals.frontend.bean.StaffBean;
 import com.meals.frontend.service.MealsService;
 import com.meals.frontend.until.ConstanKey;
+import com.meals.frontend.until.FunctionUtils;
 
 @Controller
 @RequestMapping("exportData")
@@ -27,11 +29,19 @@ public class ExportContrller {
 	public ModelAndView exportCanteen(HttpSession session, @RequestParam(value = "fromDate") String fromDate,
 			@RequestParam(value = "toDate") String toDate) {
 		ModelAndView model = new ModelAndView("excelView");
-		List<CanteenExportBean> lst = mealsService.getLstAndCount(fromDate, toDate);
 		String userRole = (String) session.getAttribute(ConstanKey.USER_ROLE);
-		model.addObject("dataCanteen", lst);
-		model.addObject("fromDate", fromDate);
-		model.addObject("toDate", toDate);
+		Date startDate = FunctionUtils.convertDateByFormatLocal(fromDate, ConstanKey.FORMAT_DATE.DATE_TIME_FORMAT);
+		Date endDate = FunctionUtils.convertDateByFormatLocal(toDate, ConstanKey.FORMAT_DATE.DATE_TIME_FORMAT);
+		if (startDate != null && endDate != null) {
+			List<CanteenExportBean> lst = mealsService.getLstAndCount(startDate, endDate);
+			String fromTime = FunctionUtils.convertDateStringByFormatLocal(startDate,
+					ConstanKey.FORMAT_DATE.DATE_SLASH_FORMAT);
+			String toTime = FunctionUtils.convertDateStringByFormatLocal(endDate,
+					ConstanKey.FORMAT_DATE.DATE_SLASH_FORMAT);
+			model.addObject("dataCanteen", lst);
+			model.addObject("fromDate", fromTime);
+			model.addObject("toDate", toTime);
+		}
 		model.addObject(ConstanKey.USER_ROLE, userRole);
 		return model;
 	}
@@ -42,14 +52,22 @@ public class ExportContrller {
 		ModelAndView model = new ModelAndView("excelView");
 		Integer userId = (Integer) session.getAttribute(ConstanKey.USER_ID);
 		String userRole = (String) session.getAttribute(ConstanKey.USER_ROLE);
-		StaffBean staffBean = mealsService.getStaffByUserId(userId);
 		List<DataCateringExport> lst = null;
-		if (staffBean != null) {
-			lst = mealsService.getDataExportByRole(userRole, staffBean.getDepartId(), staffId, fromDate, toDate);
+		Date startDate = FunctionUtils.convertDateByFormatLocal(fromDate, ConstanKey.FORMAT_DATE.DATE_TIME_FORMAT);
+		Date endDate = FunctionUtils.convertDateByFormatLocal(toDate, ConstanKey.FORMAT_DATE.DATE_TIME_FORMAT);
+		if (startDate != null && endDate != null) {
+			StaffBean staffBean = mealsService.getStaffByUserId(userId);
+			if (staffBean != null) {
+				lst = mealsService.getDataExportByRole(userRole, staffBean.getDepartId(), staffId, startDate, endDate);
+			}
+			String fromTime = FunctionUtils.convertDateStringByFormatLocal(startDate,
+					ConstanKey.FORMAT_DATE.DATE_SLASH_FORMAT);
+			String toTime = FunctionUtils.convertDateStringByFormatLocal(endDate,
+					ConstanKey.FORMAT_DATE.DATE_SLASH_FORMAT);
+			model.addObject("dataCanteen", lst);
+			model.addObject("fromDate", fromTime);
+			model.addObject("toDate", toTime);
 		}
-		model.addObject("dataManager", lst);
-		model.addObject("fromDate", fromDate);
-		model.addObject("toDate", toDate);
 		model.addObject(ConstanKey.USER_ROLE, userRole);
 		return model;
 	}
@@ -57,13 +75,21 @@ public class ExportContrller {
 	@RequestMapping(value = "/exportAdmin", method = RequestMethod.GET)
 	public ModelAndView exportAdmin(HttpSession session, Integer deptId, String staffId,
 			@RequestParam(value = "fromDate") String fromDate, @RequestParam(value = "toDate") String toDate) {
-		Integer userId = (Integer) session.getAttribute(ConstanKey.USER_ID);
 		String userRole = (String) session.getAttribute(ConstanKey.USER_ROLE);
 		ModelAndView model = new ModelAndView("excelView");
-		List<DataCateringExport> lst = mealsService.getDataExportByRole(userRole, deptId, staffId, fromDate, toDate);
-		model.addObject("dataAdmin", lst);
-		model.addObject("fromDate", fromDate);
-		model.addObject("toDate", toDate);
+		Date startDate = FunctionUtils.convertDateByFormatLocal(fromDate, ConstanKey.FORMAT_DATE.DATE_TIME_FORMAT);
+		Date endDate = FunctionUtils.convertDateByFormatLocal(toDate, ConstanKey.FORMAT_DATE.DATE_TIME_FORMAT);
+		if (startDate != null && endDate != null) {
+			List<DataCateringExport> lst = mealsService.getDataExportByRole(userRole, deptId, staffId, startDate,
+					endDate);
+			String fromTime = FunctionUtils.convertDateStringByFormatLocal(startDate,
+					ConstanKey.FORMAT_DATE.DATE_SLASH_FORMAT);
+			String toTime = FunctionUtils.convertDateStringByFormatLocal(endDate,
+					ConstanKey.FORMAT_DATE.DATE_SLASH_FORMAT);
+			model.addObject("dataCanteen", lst);
+			model.addObject("fromDate", fromTime);
+			model.addObject("toDate", toTime);
+		}
 		model.addObject(ConstanKey.USER_ROLE, userRole);
 		return model;
 	}

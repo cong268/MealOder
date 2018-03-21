@@ -1,6 +1,5 @@
 package com.meals.frontend.report;
 
-import java.io.FileInputStream;
 import java.io.InputStream;
 import java.util.List;
 import java.util.Map;
@@ -46,6 +45,7 @@ public class ExcelReportView extends AbstractExcelView {
 		styleTitle.setAlignment(HorizontalAlignment.CENTER);
 		styleTitle.setVerticalAlignment(VerticalAlignment.CENTER);
 		font.setBold(true);
+		font.setFontName("Cambria");
 		font.setFontHeightInPoints((short) 20);
 		styleTitle.setFont(font);
 
@@ -53,6 +53,7 @@ public class ExcelReportView extends AbstractExcelView {
 		font = workbook.createFont();
 		styleHeader.setVerticalAlignment(VerticalAlignment.CENTER);
 		font.setBold(true);
+		font.setFontName("Cambria");
 		font.setFontHeightInPoints((short) 10);
 		// styleHeader.setBorderBottom(BorderStyle.NONE);;
 		// styleHeader.setBorderTop(BorderStyle.NONE);
@@ -64,6 +65,7 @@ public class ExcelReportView extends AbstractExcelView {
 		font = workbook.createFont();
 		styleContentHead.setVerticalAlignment(VerticalAlignment.CENTER);
 		font.setFontHeightInPoints((short) 10);
+		font.setFontName("Cambria");
 		// styleContentHead.setBorderBottom(BorderStyle.DASHED);;
 		// styleContentHead.setBorderTop(BorderStyle.DASHED);
 		// styleContentHead.setBorderRight(BorderStyle.DASHED);
@@ -76,6 +78,7 @@ public class ExcelReportView extends AbstractExcelView {
 		styleHeadTable.setVerticalAlignment(VerticalAlignment.CENTER);
 		font.setFontHeightInPoints((short) 10);
 		font.setBold(true);
+		font.setFontName("Cambria");
 		styleHeadTable.setFont(font);
 
 		CellStyle styleBodyTable = workbook.createCellStyle();
@@ -83,6 +86,7 @@ public class ExcelReportView extends AbstractExcelView {
 		styleBodyTable.setAlignment(HorizontalAlignment.CENTER);
 		styleBodyTable.setVerticalAlignment(VerticalAlignment.CENTER);
 		font.setFontHeightInPoints((short) 10);
+		font.setFontName("Cambria");
 		styleBodyTable.setFont(font);
 
 		// FileInputStream obtains input bytes from the image file
@@ -241,8 +245,10 @@ public class ExcelReportView extends AbstractExcelView {
 			cellInfo = rowTotal.createCell(5);
 			cellInfo = rowTotal.createCell(6);
 			cellInfo.setCellValue("TOTAL:");
+			cellInfo.setCellStyle(styleHeadTable);
 			cellInfo = rowTotal.createCell(7);
 			cellInfo.setCellValue(total);
+			cellInfo.setCellStyle(styleHeadTable);
 		} else if (userRole.equals(ConstanKey.ROLE.ROLE_ADMIN)) {
 			@SuppressWarnings("unchecked")
 			List<DataCateringExport> lstData = (List<DataCateringExport>) model.get("dataAdmin");
@@ -278,7 +284,7 @@ public class ExcelReportView extends AbstractExcelView {
 			sheet.addMergedRegion(new CellRangeAddress(4, 4, 0, 2));
 			sheet.addMergedRegion(new CellRangeAddress(4, 4, 3, 8));
 
-			rowInfo = sheet.createRow(4);
+			rowInfo = sheet.createRow(5);
 			rowInfo.setHeight((short) (rowInfo.getHeight() * 2));
 			cellInfo = rowInfo.createCell(0);
 			cellInfo.setCellValue("From:");
@@ -395,8 +401,10 @@ public class ExcelReportView extends AbstractExcelView {
 			cellInfo = rowTotal.createCell(6);
 			cellInfo = rowTotal.createCell(7);
 			cellInfo.setCellValue("TOTAL:");
+			cellInfo.setCellStyle(styleHeadTable);
 			cellInfo = rowTotal.createCell(8);
 			cellInfo.setCellValue(total);
+			cellInfo.setCellStyle(styleHeadTable);
 			
 			Row rowConfirm = sheet.createRow(12 + num);
 			rowConfirm.setHeight((short) (rowInfo.getHeight()));
@@ -440,7 +448,7 @@ public class ExcelReportView extends AbstractExcelView {
 			sheet.addMergedRegion(new CellRangeAddress(4, 4, 0, 2));
 			sheet.addMergedRegion(new CellRangeAddress(4, 4, 3, 8));
 
-			rowInfo = sheet.createRow(4);
+			rowInfo = sheet.createRow(5);
 			rowInfo.setHeight((short) (rowInfo.getHeight() * 2));
 			cellInfo = rowInfo.createCell(0);
 			cellInfo.setCellValue("From:");
@@ -558,8 +566,10 @@ public class ExcelReportView extends AbstractExcelView {
 			cellInfo = rowTotal.createCell(6);
 			cellInfo = rowTotal.createCell(7);
 			cellInfo.setCellValue("TOTAL:");
+			cellInfo.setCellStyle(styleHeadTable);
 			cellInfo = rowTotal.createCell(8);
 			cellInfo.setCellValue(total);
+			cellInfo.setCellStyle(styleHeadTable);
 			
 			Row rowConfirm = sheet.createRow(12 + num);
 			rowConfirm.setHeight((short) (rowInfo.getHeight()));
