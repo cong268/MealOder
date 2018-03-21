@@ -35,7 +35,7 @@
     <script type="text/javascript" src="<c:url value="/assets/js/app.js"></c:url>"></script>
 </head>
 <body ng-app="NsrpApplication">
-    <nav class="navbar navbar-custom" ng-controller="wrapperMenuCtrl">
+    <nav class="navbar navbar-custom">
         <div class="container">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#nsrp-navber-collapse" aria-expanded="false">
@@ -95,7 +95,7 @@
                         <span data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" class="dropdown-toggle user-text-control"><spring:message code="label.user_control"/></span>
                         <img src="<c:url value="/assets/img/default-user-image.png"></c:url>" class="dropdown-toggle img-user-nsrp" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                         <ul class="dropdown-menu">
-                            <li><a href="#">Username: ${sessionScope.userName}</a></li>
+                            <li><a href="#" data-toggle="modal" data-target="#userInfoModal">Username: ${sessionScope.userName}</a></li>
                             <li role="separator" class="divider"></li>
                             <li><a href="logout"><spring:message code="label.logout"/><span class="glyphicon glyphicon-log-out p-l-10"></span></a></li>
                         </ul>
@@ -133,5 +133,27 @@
             </div>
         </div>
     </footer>
+    <%-- POPUP USER --%>
+    <div class="wrap-user-info" ng-controller="userInfoCtrl" ng-init="initData()">
+        <div class="modal fade" id="userInfoModal" tabindex="-1" role="dialog" aria-labelledby="userInfoModal" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content ">
+                    <div class="modal-header">
+                        <h3 class="modal-title float-l" id="userInfoModalLongTitle">User Infomation</h3>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        User Info Here
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                        <button type="button" class="btn btn-success" ng-click="updateUserInfo()" data-dismiss="modal">Accept</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
 </html>

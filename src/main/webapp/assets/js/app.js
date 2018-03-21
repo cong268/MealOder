@@ -1,7 +1,9 @@
 // DEFINED FOR NSRP APPLICATION
 var myApp = angular.module('NsrpApplication', ['ngTable','tw.directives.clickOutside']);
-myApp.controller('wrapperMenuCtrl', ['$scope', function($scope) {
+myApp.controller('userInfoCtrl', ['$scope', function($scope) {
+    $scope.initData = function(){
 
+    }
 }])
 myApp.directive('dateRangePickerSingle', function() {
     return{
