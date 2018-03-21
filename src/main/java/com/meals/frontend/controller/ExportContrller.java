@@ -64,7 +64,7 @@ public class ExportContrller {
 					ConstanKey.FORMAT_DATE.DATE_SLASH_FORMAT);
 			String toTime = FunctionUtils.convertDateStringByFormatLocal(endDate,
 					ConstanKey.FORMAT_DATE.DATE_SLASH_FORMAT);
-			model.addObject("dataCanteen", lst);
+			model.addObject("dataManager", lst);
 			model.addObject("fromDate", fromTime);
 			model.addObject("toDate", toTime);
 		}
@@ -86,7 +86,7 @@ public class ExportContrller {
 					ConstanKey.FORMAT_DATE.DATE_SLASH_FORMAT);
 			String toTime = FunctionUtils.convertDateStringByFormatLocal(endDate,
 					ConstanKey.FORMAT_DATE.DATE_SLASH_FORMAT);
-			model.addObject("dataCanteen", lst);
+			model.addObject("dataAdmin", lst);
 			model.addObject("fromDate", fromTime);
 			model.addObject("toDate", toTime);
 		}

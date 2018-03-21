@@ -1,5 +1,7 @@
 package com.meals.frontend.controller;
 
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -94,5 +96,16 @@ public class CateringController {
 			@RequestParam(value = "toDate") String toDate) {
 		Integer userId = (Integer) session.getAttribute(ConstanKey.USER_ID);
 		return mealsService.getHistoryStaff(userId, fromDate, toDate);
+	}
+	
+	@RequestMapping(value = "/checkTime", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public Boolean checkTime() {
+		Calendar cal = Calendar.getInstance();
+		int hour = cal.get(Calendar.HOUR_OF_DAY);
+		if(hour < 9){
+			return true;
+		} else {
+			return false;
+		}
 	}
 }
