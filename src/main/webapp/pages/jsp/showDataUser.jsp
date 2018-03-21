@@ -65,6 +65,7 @@
                             {{getMealTimeName(row.mealTimeId)}}
                         </td>
                         <td data-title="'Meal Type'" sortable="'mealId'" class="text-center">{{getMealName(row.mealId)}}</td>
+                        <c:if test = "${sessionScope.userRole == 'Employee'}">
                         <td width="100" data-title="'Action'" class="text-center" >
                             <span class="text-success" ng-if="row.status == 1 || row.catered == 1">Done</span>
                             <div class="btn btn-default btn-custom" tooltip title="Edit"
@@ -78,6 +79,34 @@
                                 <span class="glyphicon glyphicon-trash"></span>
                             </div>
                         </td>
+                        </c:if>
+                        <c:if test = "${sessionScope.userRole == 'Manager'}">
+                            <td width="100" data-title="'Action'" class="text-center" >
+                                <span class="text-success" ng-if="row.catered == 1">Done</span>
+                                <div class="btn btn-default btn-custom" tooltip title="Edit"
+                                     ng-if="row.catered != 1"
+                                     data-toggle="modal" data-target="#editMealModal" ng-click="editMeal(row)">
+                                    <span class="glyphicon glyphicon-pencil"></span>
+                                </div>
+                                <div class="btn btn-danger btn-custom" tooltip title="Delete"
+                                     ng-if="row.catered != 1"
+                                     data-toggle="modal" data-target="#deleteModal" ng-click="showDeleteMeal(row)">
+                                    <span class="glyphicon glyphicon-trash"></span>
+                                </div>
+                            </td>
+                        </c:if>
+                        <c:if test = "${sessionScope.userRole == 'Admin'}">
+                            <td width="100" data-title="'Action'" class="text-center" >
+                                <div class="btn btn-default btn-custom" tooltip title="Edit"
+                                     data-toggle="modal" data-target="#editMealModal" ng-click="editMeal(row)">
+                                    <span class="glyphicon glyphicon-pencil"></span>
+                                </div>
+                                <div class="btn btn-danger btn-custom" tooltip title="Delete"
+                                     data-toggle="modal" data-target="#deleteModal" ng-click="showDeleteMeal(row)">
+                                    <span class="glyphicon glyphicon-trash"></span>
+                                </div>
+                            </td>
+                        </c:if>
                     </tr>
                 </table>
                 <div class="showNoData" ng-if="tableParams.total() == 0" ng-cloak>No data available</div>

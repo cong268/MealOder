@@ -158,7 +158,7 @@
                             <div class="form-group">
                                 <label for="input-department-info" class="col-sm-4 control-label">Department</label>
                                 <div class="col-sm-8">
-                                    <span ng-bind="userInfo.deptId" class="form-control" id="input-department-info" >
+                                    <span ng-bind="userInfo.deptId" class="form-control" id="input-department-info" ></span>
                                 </div>
                             </div>
                             <div class="form-group">
