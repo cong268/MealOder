@@ -1,5 +1,4 @@
-var dataAllPage;
-var dataAllTable;
+var dataAllPage, dataAllTable, dataAllPageOrder, dataAllTableOrder;
 myApp.controller('mealManagermentCtrl', ['$scope', 'NgTableParams', 'ngTableEventsChannel', '$http', '$q', function($scope, NgTableParams, ngTableEventsChannel, $http, $q){
     $scope.demoCheckbox = 1;
     $scope.dataFiltered = [];
@@ -28,13 +27,13 @@ myApp.controller('mealManagermentCtrl', ['$scope', 'NgTableParams', 'ngTableEven
                 responseType: 'json'
             }).then(function successCallback(response) {
                 if(response.data){
-                    dataAllPage = response.data;
-                    dataAllTable = dataAllPage.listMealOder;
-                    $scope.locationArrOrder = dataAllPage.lstLocation;
-                    $scope.mealTimeArrOrder = dataAllPage.lstMealTime;
-                    $scope.mealArrOrder = dataAllPage.lstMealType;
-                    $scope.shilfArrOrder = dataAllPage.lstShift;
-                    $scope.arrDataOrder = angular.copy(dataAllTable);
+                    dataAllPageOrder = response.data;
+                    dataAllTableOrder = dataAllPageOrder.listMealOder;
+                    $scope.locationArrOrder = dataAllPageOrder.lstLocation;
+                    $scope.mealTimeArrOrder = dataAllPageOrder.lstMealTime;
+                    $scope.mealArrOrder = dataAllPageOrder.lstMealType;
+                    $scope.shilfArrOrder = dataAllPageOrder.lstShift;
+                    $scope.arrDataOrder = angular.copy(dataAllTableOrder);
                     drawTableOrder();
                 }
             }, function errorCallback(response) {
@@ -69,7 +68,7 @@ myApp.controller('mealManagermentCtrl', ['$scope', 'NgTableParams', 'ngTableEven
         }, {
             dataset: $scope.arrData,
         });
-        ngTableEventsChannel.onAfterReloadData(function(tableParams, filteredData){
+        ngTableEventsChannel.onAfterDataFiltered(function(eventListener, tableParams, filteredData ){
             $scope.dataFiltered = filteredData || tableParams.data;
             $scope.checkStatus();
         });
@@ -97,8 +96,8 @@ myApp.controller('mealManagermentCtrl', ['$scope', 'NgTableParams', 'ngTableEven
         }, {
             dataset: $scope.arrDataOrder,
         });
-        ngTableEventsChannel.onAfterDataFiltered(function(eventListener, tableParams, filteredData ){
-            $scope.dataFilteredOrder = filteredData || tableParams.data;
+        ngTableEventsChannel.onAfterDataFiltered(function(eventListener, tableParamsOrder, filteredDataOrder ){
+            $scope.dataFilteredOrder = filteredDataOrder || tableParamsOrder.data;
         });
     }
 
@@ -148,13 +147,13 @@ myApp.controller('mealManagermentCtrl', ['$scope', 'NgTableParams', 'ngTableEven
                 responseType: 'json'
             }).then(function successCallback(response) {
                 if(response.data){
-                    dataAllPage = response.data;
-                    dataAllTable = dataAllPage.listMealOder;
-                    $scope.locationArrOrder = dataAllPage.lstLocation;
-                    $scope.mealTimeArrOrder = dataAllPage.lstMealTime;
-                    $scope.mealArrOrder = dataAllPage.lstMealType;
-                    $scope.shilfArrOrder = dataAllPage.lstShift;
-                    $scope.arrDataOrder = angular.copy(dataAllTable);
+                    dataAllPageOrder = response.data;
+                    dataAllTableOrder = dataAllPageOrder.listMealOder;
+                    $scope.locationArrOrder = dataAllPageOrder.lstLocation;
+                    $scope.mealTimeArrOrder = dataAllPageOrder.lstMealTime;
+                    $scope.mealArrOrder = dataAllPageOrder.lstMealType;
+                    $scope.shilfArrOrder = dataAllPageOrder.lstShift;
+                    $scope.arrDataOrder = angular.copy(dataAllTableOrder);
                     drawTableOrder();
                 }
             }, function errorCallback(response) {
@@ -183,7 +182,7 @@ myApp.controller('mealManagermentCtrl', ['$scope', 'NgTableParams', 'ngTableEven
     }
 
     $scope.changeStatus = function (statusMeal) {
-        angular.forEach($scope.dataFilteredOrder, function(item){
+        angular.forEach($scope.arrData, function(item){
             if(statusMeal == true){
                 item.status = 1;
             } else if(statusMeal == false){
@@ -203,19 +202,45 @@ myApp.controller('mealManagermentCtrl', ['$scope', 'NgTableParams', 'ngTableEven
         drawTable();
     }
     $scope.saveEditMeal = function(){
-        $scope.selectedItem = $.extend($scope.selectedItem,$scope.selectedItemClone);
+        var index = $scope.arrDataOrder.indexOf($scope.selectedItem);
+        var isOverWrite = false;
+        for(var i = 0; i < $scope.arrDataOrder.length; i++) {
+            if($scope.arrDataOrder[i].staffId == $scope.selectedItem.staffId
+                && $scope.arrDataOrder[i].mealTimeId == $scope.selectedItem.mealTimeId
+                && index != i){
+                $scope.arrDataOrder[i] = $.extend($scope.arrDataOrder[i], $scope.selectedItem);
+                $scope.arrDataOrder.splice(index,1);
+                isOverWrite = true;
+                break;
+            }
+        }
+        if(isOverWrite == false){
+            $scope.selectedItem = $.extend($scope.selectedItem,$scope.selectedItemClone);
+        }
+        drawTableOrder();
     }
     $scope.saveAddMeal = function(){
         for(var i = 0; i < $scope.arrData.length; i++){
             if($scope.arrData[i]){
                 if($scope.arrData[i].status == 1){
                     var obj = angular.copy($scope.arrData[i]);
-                    $scope.arrDataOrder.push(obj);
-                    $scope.arrData.splice(i,1);
-                    i = -1;
+                    var isAdded = false;
+                    for(var j = 0; j < $scope.arrDataOrder.length; j++) {
+                        if($scope.arrDataOrder[j].staffId == obj.staffId
+                            && $scope.arrDataOrder[j].mealTimeId == obj.mealTimeId){
+                            $scope.arrDataOrder[j] = $.extend($scope.arrDataOrder[j], obj);
+                            isAdded = true;
+                            break;
+                        }
+                    }
+                    if(isAdded == false){
+                        $scope.arrDataOrder.push(obj);
+                        isAdded = true;
+                    }
                 }
             }
         }
+        $scope.arrData = angular.copy(dataAllTable);
         drawTableOrder();
         drawTable();
     }

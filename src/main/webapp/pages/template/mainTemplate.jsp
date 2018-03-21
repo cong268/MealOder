@@ -139,7 +139,7 @@
             <div class="modal-dialog modal-custom" role="document">
                 <div class="modal-content ">
                     <div class="modal-header text-center">
-                        <h3 class="modal-title" id="userInfoModalLongTitle">User Infomation</h3>
+                        <h3 class="modal-title" id="userInfoModalLongTitle">User Information</h3>
                         <button type="button" class="close pos-absolute btn-close-user" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true" class="fs-27">&times;</span>
                         </button>
@@ -150,39 +150,39 @@
                         </div>
                         <div class="form-horizontal" ng-form="formUserInfo">
                             <div class="form-group">
-                                <label for="input-username" class="col-sm-4 control-label">Username</label>
+                                <label for="input-username-info" class="col-sm-4 control-label">Username</label>
                                 <div class="col-sm-8">
-                                    <input type="text" autocomplete="off" ng-model="userInfo.userName" ng-minlength="6" class="form-control" id="input-username" required>
+                                    <input type="text" autocomplete="off" ng-model="userInfo.userName" ng-minlength="6" class="form-control" id="input-username-info" required>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="input-department" class="col-sm-4 control-label">Department</label>
+                                <label for="input-department-info" class="col-sm-4 control-label">Department</label>
                                 <div class="col-sm-8">
-                                    <span ng-bind="userInfo.deptId" class="form-control" id="input-department" >
+                                    <span ng-bind="userInfo.deptId" class="form-control" id="input-department-info" >
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="input-email" class="col-sm-4 control-label">Email</label>
+                                <label for="input-email-info" class="col-sm-4 control-label">Email</label>
                                 <div class="col-sm-8">
-                                    <input type="text" autocomplete="off" ng-minlength="6" class="form-control" id="input-email" required>
+                                    <input type="text" autocomplete="off" ng-minlength="6" class="form-control" id="input-email-info" required>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="input-lastlogin" class="col-sm-4 control-label">Last login</label>
+                                <label for="input-lastlogin-info" class="col-sm-4 control-label">Last login</label>
                                 <div class="col-sm-8">
-                                    <input type="text" autocomplete="off" ng-minlength="6" class="form-control" id="input-lastlogin" required>
+                                    <input type="text" autocomplete="off" ng-minlength="6" class="form-control" id="input-lastlogin-info" required>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="input-oldpass" class="col-sm-4 control-label">Old Password</label>
+                                <label for="input-oldpass-info" class="col-sm-4 control-label">Old Password</label>
                                 <div class="col-sm-8">
-                                    <input type="password" autocomplete="off" ng-minlength="6" class="form-control" id="input-oldpass" required>
+                                    <input type="password" autocomplete="off" ng-minlength="6" class="form-control" id="input-oldpass-info" required>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="input-newpass" class="col-sm-4 control-label">New Password</label>
+                                <label for="input-newpass-info" class="col-sm-4 control-label">New Password</label>
                                 <div class="col-sm-8">
-                                    <input type="password" autocomplete="off" ng-minlength="6" class="form-control" id="input-newpass" required>
+                                    <input type="password" autocomplete="off" ng-minlength="6" class="form-control" id="input-newpass-info" required>
                                 </div>
                             </div>
                         </div>

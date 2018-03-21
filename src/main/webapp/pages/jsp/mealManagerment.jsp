@@ -89,7 +89,7 @@
                 <div class="showNoData" ng-if="tableParamsOrder.total() == 0" ng-cloak>No data available</div>
             </div>
         </div>
-        <div class="row m-t-10">
+        <div class="row m-t-10" ng-cloak>
             <div ng-if="arrDataOrder.length > 0" class="btn btn-primary btn-lg pull-right m-r-15" ng-click="submitMealManager()">SUBMIT</div>
             <div ng-if="arrDataOrder.length == 0" class="btn btn-disabled btn-lg pull-right m-r-15" >SUBMIT</div>
         </div>
