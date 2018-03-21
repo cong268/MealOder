@@ -4,21 +4,10 @@ myApp.controller('carteredAdminCtrl', ['$scope', 'NgTableParams', 'ngTableEvents
     $scope.locationArr = [];
     $scope.mealTimeArr = [];
     $scope.mealArr = [];
-    // $scope.shilfArr = [];
     $scope.arrData = [];
     $scope.departmentArr = [];
-    /*CLONED*/
-    $scope.locationArrClone = [];
-    $scope.mealTimeArrClone = [];
-    $scope.mealArrClone = [];
-    // $scope.shilfArrClone = [];
-    $scope.departmentArrClone = [];
-    $scope.mealTimeIdFilter='',
-        $scope.mealIdFilter='',
-        $scope.locationIdFilter='',
-        $scope.departmentIdFilter='',
-
-        moment.locale('en');
+    $scope.staffIdFilter = '';
+    moment.locale('en');
     $scope.fromDate = moment(new Date()).format('DD/MM/YYYY');
     $scope.toDate = moment(new Date()).format('DD/MM/YYYY');
     $scope.initData = function(){
@@ -35,8 +24,7 @@ myApp.controller('carteredAdminCtrl', ['$scope', 'NgTableParams', 'ngTableEvents
                 $scope.locationArr = dataAllPage.lstLocation;
                 $scope.mealTimeArr = dataAllPage.lstMealTime;
                 $scope.mealArr = dataAllPage.lstMealType;
-                // $scope.shilfArr = dataAllPage.lstShift;
-                $scope.departmentArr = dataAllPage.lstDepartMent;
+                // $scope.departmentArr = dataAllPage.lstDepartMent;
                 $scope.arrData = angular.copy(dataAllTable);
                 drawTable();
                 applyCloneArr();
@@ -72,33 +60,21 @@ myApp.controller('carteredAdminCtrl', ['$scope', 'NgTableParams', 'ngTableEvents
         }
         return mealName;
     }
-    $scope.getDepartmentName = function(departmentId){
-        var deptNameFind = '';
-        for(var i = 0 ; i< $scope.departmentArr.length; i++){
-            if($scope.departmentArr[i].deptId == departmentId){
-                deptNameFind =  $scope.departmentArr[i].deptName;
-            }
-        }
-        return deptNameFind;
-    }
-    // $scope.getShiftName = function(shiftId){
-    //     var shiftName = '';
-    //     for(var i = 0 ; i< $scope.shilfArr.length; i++){
-    //         if($scope.shilfArr[i].shiftId == shiftId){
-    //             shiftName =  $scope.shilfArr[i].shiftName;
+    // $scope.getDepartmentName = function(departmentId){
+    //     var deptNameFind = '';
+    //     for(var i = 0 ; i< $scope.departmentArr.length; i++){
+    //         if($scope.departmentArr[i].deptId == departmentId){
+    //             deptNameFind =  $scope.departmentArr[i].deptName;
     //         }
     //     }
-    //     return shiftName;
+    //     return deptNameFind;
     // }
     function drawTable(){
         $scope.tableParams = new NgTableParams({
             page: 1,
             count: 10,
             filter: {
-                'mealTimeId': $scope.mealTimeIdFilter,
-                'mealId': $scope.mealIdFilter,
-                'locationId': $scope.locationIdFilter,
-                'departmentId':$scope.departmentIdFilter
+                'staffId':$scope.staffIdFilter
             }
         }, {
             counts: [5, 10, 50, 100],
@@ -109,52 +85,31 @@ myApp.controller('carteredAdminCtrl', ['$scope', 'NgTableParams', 'ngTableEvents
         });
     }
     function applyCloneArr(){
-        $scope.locationArrClone = angular.copy($scope.locationArr);
-        $scope.mealTimeArrClone = angular.copy($scope.mealTimeArr);
-        $scope.mealArrClone = angular.copy($scope.mealArr);
-        // $scope.shilfArrClone = angular.copy($scope.shilfArr);
-        $scope.departmentArrClone = angular.copy($scope.departmentArr);
-        $scope.locationArrClone.unshift({
-            locationId : '',
-            locationName: 'ALL'
-        })
-        $scope.mealTimeArrClone.unshift({
-            mealTimeId : '',
-            mealTimeName: 'ALL'
-        })
-        $scope.mealArrClone.unshift({
-            mealId : '',
-            mealName: 'ALL'
-        })
-        // $scope.shilfArrClone.unshift({
-        //     shilfId : '',
-        //     shilfName: 'ALL'
-        // })
-        $scope.departmentArrClone.unshift({
-            deptId : '',
-            deptName: 'ALL'
+        $scope.arrStaff = [{
+            staffId: '',
+            staffName: 'ALL'
+        }];
+        angular.forEach($scope.arrData, function (dataItem) {
+            var isExist = false;
+            for(var i = 0; i< $scope.arrStaff.length;i++){
+                if($scope.arrStaff[i].staffId == dataItem.staffId){
+                    isExist = true;
+                    break;
+                }
+            }
+            if(isExist == false){
+                $scope.arrStaff.push({
+                    staffId: dataItem.staffId,
+                    staffName: dataItem.staffName
+                });
+            }
         })
     }
-    $scope.$watch('dataFiltered', function(){
-        if($scope.dataFiltered){
-            angular.forEach($scope.departmentArr, function(dept){
-                dept['count'] = 0;
-                angular.forEach($scope.dataFiltered, function (data) {
-                    if(data.departmentId == dept.deptId){
-                        dept['count']++;
-                    }
-                })
-            })
-        }
-    })
-    $scope.$watchGroup(['mealTimeIdFilter','mealIdFilter','locationIdFilter','departmentIdFilter'], function(){
+    $scope.$watchGroup(['staffIdFilter'], function(){
         if($scope.tableParams){
             $scope.tableParams.filter(
                 {
-                    'mealTimeId': $scope.mealTimeIdFilter,
-                    'mealId': $scope.mealIdFilter,
-                    'locationId': $scope.locationIdFilter,
-                    'departmentId':$scope.departmentIdFilter
+                    'staffId':$scope.staffIdFilter
                 }
             );
         }
@@ -173,20 +128,19 @@ myApp.controller('carteredAdminCtrl', ['$scope', 'NgTableParams', 'ngTableEvents
                 $scope.locationArr = dataAllPage.lstLocation;
                 $scope.mealTimeArr = dataAllPage.lstMealTime;
                 $scope.mealArr = dataAllPage.lstMealType;
-                // $scope.shilfArr = dataAllPage.lstShift;
-                $scope.departmentArr = dataAllPage.lstDepartMent;
+                // $scope.departmentArr = dataAllPage.lstDepartMent;
                 $scope.arrData = angular.copy(dataAllTable);
                 applyCloneArr();
                 drawTable();
             }
         }, function errorCallback(response) {
-            console.log('getLstByStatus FAIL')
+            console.log('getLstByDate FAIL')
         });
     }
 
     $scope.exportData = function(){
         var fromdateStr = moment($scope.fromDate, 'DD/MM/YYYY').format('DDMMYYYY');
         var toDateStr = moment($scope.toDate, 'DD/MM/YYYY').format('DDMMYYYY');
-        window.location = _contextPath + '/exportData/exportCatering?fromDate=' + fromdateStr + '&toDate=' + toDateStr;
+        window.location = _contextPath + '/exportData/exportManager?staffId='+$scope.staffIdFilter+'&fromDate=' + fromdateStr + '&toDate=' + toDateStr;
     }
 }]);

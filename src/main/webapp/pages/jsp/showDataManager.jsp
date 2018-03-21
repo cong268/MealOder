@@ -48,6 +48,18 @@
                         </div>
                     </div>
                 </div>
+                <div ng-cloak class="row wrap-filter col-md-12 col-lg-12 col-xs-12 col-md-12">
+                    <div class="col-sm-4 form-horizontal">
+                        <div class="form-group">
+                            <span class="col-sm-6 m-t-5 m-b-5">Employee :</span>
+                            <div class="input-group col-sm-6 col-xs-12">
+                                <select ng-model="staffIdFilter" class="form-control">
+                                    <option value="{{staffObj.staffId}}" ng-repeat="staffObj in arrStaff">{{staffObj.staffName}}</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <div ng-cloak class="row m-b-10 col-md-12 col-lg-12 col-xs-12 col-md-12 text-left">
                     <span class="vcenter">Row count: </span><span class="text-danger vcenter fs-18" ng-cloak ng-bind="tableParams.total()"/>
                     <div class="col-sm-3 p-l-0 m-t-10">
@@ -72,9 +84,9 @@
                         <td data-title="'Meal Type'" class="text-center">
                             {{getMealName(row.mealId)}}
                         </td>
-                        <td data-title="'Department'" class="text-center">
-                            {{getDepartmentName(row.departmentId)}}
-                        </td>
+                        <%--<td data-title="'Department'" class="text-center">--%>
+                            <%--{{getDepartmentName(row.departmentId)}}--%>
+                        <%--</td>--%>
                         <td data-title="'Date'" class="text-center">
                             {{row.dateMeal | date}}
                         </td>
@@ -83,13 +95,13 @@
                 <div class="showNoData" ng-if="tableParams.total() == 0" ng-cloak>No data available</div>
             </div>
         </div>
-        <div class=" row text-center m-l-0 m-r-0  m-t-10" ng-if="tableParams.total() > 0">
-            <div class="col-md-12  wrap-info highlight text-left">
-                <div ng-repeat="department in departmentArr" ng-if="department.count > 0">
-                    <span>Department <span ng-bind="department.deptName"></span><span class="p-l-10 p-r-10 fs-16">:</span><span ng-bind="department.count"></span></span>
-                </div>
-            </div>
-        </div>
+        <%--<div class=" row text-center m-l-0 m-r-0  m-t-10" ng-if="tableParams.total() > 0">--%>
+            <%--<div class="col-md-12  wrap-info highlight text-left">--%>
+                <%--<div ng-repeat="department in departmentArr" ng-if="department.count > 0">--%>
+                    <%--<span>Department <span ng-bind="department.deptName"></span><span class="p-l-10 p-r-10 fs-16">:</span><span ng-bind="department.count"></span></span>--%>
+                <%--</div>--%>
+            <%--</div>--%>
+        <%--</div>--%>
         <div class="row m-t-10">
             <div class="btn btn-success btn-lg pull-right m-r-15" ng-click="exportData()">EXPORT DATA<span class="glyphicon glyphicon-download-alt p-l-10"></span></div>
         </div>
