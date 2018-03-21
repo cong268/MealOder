@@ -183,7 +183,7 @@ myApp.controller('mealManagermentCtrl', ['$scope', 'NgTableParams', 'ngTableEven
     }
 
     $scope.changeStatus = function (statusMeal) {
-        angular.forEach($scope.dataFiltered, function(item){
+        angular.forEach($scope.dataFilteredOrder, function(item){
             if(statusMeal == true){
                 item.status = 1;
             } else if(statusMeal == false){
