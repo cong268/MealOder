@@ -66,6 +66,9 @@
                             {{getMealTimeName(row.mealTimeId)}}
                         </td>
                         <td data-title="'Meal Type'" sortable="'mealId'" class="text-center">{{getMealName(row.mealId)}}</td>
+                        <td data-title="'Location'" sortable="'locationId'" class="text-center">
+                            {{getLocationName(row.locationId)}}
+                        </td>
                         <c:if test = "${sessionScope.userRole == 'Employee'}">
                         <td width="100" data-title="'Action'" class="text-center" >
                             <span class="text-success" ng-if="row.status == 1 || row.catered == 1">Done</span>
@@ -126,16 +129,12 @@
                     </div>
                     <div class="modal-body">
                         <div class="form-group">
-                            <label for="meal-time-popup" class="col-form-label">Date:</label>
-                            <input type="text" class="form-control" ng-model="selectedItemClone.dateMeal" disabled readonly/>
+                            <label for="meal-date-popup" class="col-form-label">Date:</label>
+                            <span id="meal-date-popup" class="form-control disabled" ng-bind="selectedItemClone.dateMeal"></span>
                         </div>
                         <div class="form-group">
                             <label for="meal-time-popup" class="col-form-label">Meal time:</label>
-                            <select id="meal-time-popup" ng-model="selectedItemClone.mealTimeId" class="form-control">
-                                <option ng-selected="selectedItemClone.mealTimeId == mealTimeObj.mealTimeId"
-                                        ng-repeat="mealTimeObj in mealTimeArr"
-                                        ng-value="mealTimeObj.mealTimeId">{{mealTimeObj.mealTimeName}}</option>
-                            </select>
+                            <span id="meal-time-popup" class="form-control disabled" ng-bind="getMealTimeName(selectedItemClone.mealTimeId)"></span>
                         </div>
                         <div class="form-group">
                             <label for="meal-popup" class="col-form-label">Meal type:</label>
@@ -143,6 +142,14 @@
                                 <option ng-selected="selectedItemClone.mealId == mealObj.mealId"
                                         ng-repeat="mealObj in mealArr"
                                         ng-value="mealObj.mealId">{{mealObj.mealName}}</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="location-popup" class="col-form-label">Location:</label>
+                            <select id="location-popup" ng-model="selectedItemClone.locationId" class="form-control">
+                                <option ng-selected="selectedItemClone.locationId == location.locationId"
+                                        ng-repeat="location in locationArr"
+                                        ng-value="location.locationId">{{location.locationName}}</option>
                             </select>
                         </div>
                     </div>
