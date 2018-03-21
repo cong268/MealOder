@@ -272,6 +272,10 @@ public class MealsServiceImpl implements MealsService {
 			staff.setGender(bean.getGender());
 			staff.setJobTitle(bean.getJobTitle());
 			staff.setPhoneNum(bean.getPhoneNum());
+			staff.setAge(bean.getAge());
+			staff.setNationality(bean.getNationality());
+			staff.setPosition(bean.getPosition());
+			staff.setProvice(bean.getProvice());
 			return staffDAO.saveStaff(staff);
 		}
 		return null;

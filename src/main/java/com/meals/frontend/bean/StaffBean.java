@@ -4,14 +4,18 @@ public class StaffBean {
 	private String staffId;
 	private String staffName;
 	private String jobTitle;
-	private Integer departId;
-	private String department;
 	private String address;
 	private String phoneNum;
 	private String email;
+	private Integer departId;
 	private String gender;
 	private String cardId;
 	private Boolean disable;
+	private Integer age;
+	private String position;
+	private String provice;
+	private String nationality;
+	private String department;
 
 	public String getStaffId() {
 		return staffId;
@@ -35,22 +39,6 @@ public class StaffBean {
 
 	public void setJobTitle(String jobTitle) {
 		this.jobTitle = jobTitle;
-	}
-
-	public Integer getDepartId() {
-		return departId;
-	}
-
-	public void setDepartId(Integer departId) {
-		this.departId = departId;
-	}
-
-	public String getDepartment() {
-		return department;
-	}
-
-	public void setDepartment(String department) {
-		this.department = department;
 	}
 
 	public String getAddress() {
@@ -77,6 +65,14 @@ public class StaffBean {
 		this.email = email;
 	}
 
+	public Integer getDepartId() {
+		return departId;
+	}
+
+	public void setDepartId(Integer departId) {
+		this.departId = departId;
+	}
+
 	public String getGender() {
 		return gender;
 	}
@@ -99,6 +95,46 @@ public class StaffBean {
 
 	public void setDisable(Boolean disable) {
 		this.disable = disable;
+	}
+
+	public Integer getAge() {
+		return age;
+	}
+
+	public void setAge(Integer age) {
+		this.age = age;
+	}
+
+	public String getPosition() {
+		return position;
+	}
+
+	public void setPosition(String position) {
+		this.position = position;
+	}
+
+	public String getProvice() {
+		return provice;
+	}
+
+	public void setProvice(String provice) {
+		this.provice = provice;
+	}
+
+	public String getNationality() {
+		return nationality;
+	}
+
+	public void setNationality(String nationality) {
+		this.nationality = nationality;
+	}
+
+	public String getDepartment() {
+		return department;
+	}
+
+	public void setDepartment(String department) {
+		this.department = department;
 	}
 
 }
