@@ -15,7 +15,7 @@ myApp.controller('carteredAdminCtrl', ['$scope', 'NgTableParams', 'ngTableEvents
         var toDateStr = moment($scope.toDate, 'DD/MM/YYYY').format('DDMMYYYY');
         $http({
             method: 'GET',
-            url: 'cateringController/getLstByDate?fromDate='+fromdateStr+'&toDate=' + toDateStr,
+            url: 'cateringController/getLstShowManager?fromDate='+fromdateStr+'&toDate=' + toDateStr,
             responseType: 'json'
         }).then(function successCallback(response) {
             if(response.data){
@@ -30,7 +30,7 @@ myApp.controller('carteredAdminCtrl', ['$scope', 'NgTableParams', 'ngTableEvents
                 applyCloneArr();
             }
         }, function errorCallback(response) {
-            $scope.loadingPerformancePatri = false;
+            console.log('getLstShowManager false')
         });
     }
     $scope.getMealTimeName = function(mealTimeId){
@@ -119,7 +119,7 @@ myApp.controller('carteredAdminCtrl', ['$scope', 'NgTableParams', 'ngTableEvents
         var toDateStr = moment($scope.toDate, 'DD/MM/YYYY').format('DDMMYYYY');
         $http({
             method: 'GET',
-            url: 'cateringController/getLstByDate?fromDate='+fromdateStr+'&toDate=' + toDateStr,
+            url: 'cateringController/getLstShowManager?fromDate='+fromdateStr+'&toDate=' + toDateStr,
             responseType: 'json'
         }).then(function successCallback(response) {
             if(response.data){
@@ -134,7 +134,7 @@ myApp.controller('carteredAdminCtrl', ['$scope', 'NgTableParams', 'ngTableEvents
                 drawTable();
             }
         }, function errorCallback(response) {
-            console.log('getLstByDate FAIL')
+            console.log('getLstShowManager FAIL')
         });
     }
 

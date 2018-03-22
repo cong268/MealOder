@@ -71,14 +71,14 @@
                         </td>
                         <c:if test = "${sessionScope.userRole == 'Employee'}">
                         <td width="100" data-title="'Action'" class="text-center" >
-                            <span class="text-success" ng-if="row.status == 1 || row.catered == 1">Done</span>
+                            <span class="text-success" ng-if="row.status == 1 || row.catered == 1 || row.disable == 1">Done</span>
                             <div class="btn btn-default btn-custom" tooltip title="Edit"
-                                 ng-if="row.status != 1 && row.catered != 1"
+                                 ng-if="row.status != 1 && row.catered != 1 && row.disable != 1"
                                  data-toggle="modal" data-target="#editMealModal" ng-click="editMeal(row)">
                                 <span class="glyphicon glyphicon-pencil"></span>
                             </div>
                             <div class="btn btn-danger btn-custom" tooltip title="Delete"
-                                 ng-if="row.status != 1 && row.catered != 1"
+                                 ng-if="row.status != 1 && row.catered != 1 && row.disable != 1"
                                  data-toggle="modal" data-target="#deleteModal" ng-click="showDeleteMealUser(row)">
                                 <span class="glyphicon glyphicon-trash"></span>
                             </div>
@@ -86,14 +86,14 @@
                         </c:if>
                         <c:if test = "${sessionScope.userRole == 'Manager'}">
                             <td width="100" data-title="'Action'" class="text-center" >
-                                <span class="text-success" ng-if="row.catered == 1">Done</span>
+                                <span class="text-success" ng-if="row.catered == 1 || row.disable == 1">Done</span>
                                 <div class="btn btn-default btn-custom" tooltip title="Edit"
-                                     ng-if="row.catered != 1"
+                                     ng-if="row.catered != 1 && row.disable != 1"
                                      data-toggle="modal" data-target="#editMealModal" ng-click="editMeal(row)">
                                     <span class="glyphicon glyphicon-pencil"></span>
                                 </div>
                                 <div class="btn btn-danger btn-custom" tooltip title="Delete"
-                                     ng-if="row.catered != 1"
+                                     ng-if="row.catered != 1 && row.disable != 1"
                                      data-toggle="modal" data-target="#deleteModal" ng-click="showDeleteMealUser(row)">
                                     <span class="glyphicon glyphicon-trash"></span>
                                 </div>
@@ -101,11 +101,14 @@
                         </c:if>
                         <c:if test = "${sessionScope.userRole == 'Admin'}">
                             <td width="100" data-title="'Action'" class="text-center" >
+                                <span class="text-success" ng-if="row.disable == 1">Done</span>
                                 <div class="btn btn-default btn-custom" tooltip title="Edit"
+                                     ng-if="row.disable != 1"
                                      data-toggle="modal" data-target="#editMealModal" ng-click="editMeal(row)">
                                     <span class="glyphicon glyphicon-pencil"></span>
                                 </div>
                                 <div class="btn btn-danger btn-custom" tooltip title="Delete"
+                                     ng-if="row.disable != 1"
                                      data-toggle="modal" data-target="#deleteModal" ng-click="showDeleteMealUser(row)">
                                     <span class="glyphicon glyphicon-trash"></span>
                                 </div>
