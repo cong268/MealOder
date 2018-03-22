@@ -311,19 +311,25 @@ public class MealsServiceImpl implements MealsService {
 	}
 
 	@Override
-	public Boolean saveUser(UserBean bean) {
+	public String saveUser(UserBean bean) {
 		if (bean != null) {
-			Users user = new Users();
-			user.setStaffId(bean.getStaffId());
-			user.setDisable(false);
-			user.setPassword(bean.getPassword());
-			user.setStaffId(bean.getStaffId());
-			if (bean.getUserId() != null) {
+			if (userDAO.checkExitsUser(bean.getUserName())) {
+				return "UserName already exist";
+			} else {
+				Users user = new Users();
+				user.setStaffId(bean.getStaffId());
+				user.setDisable(false);
+				user.setPassword(bean.getPassword());
+				user.setStaffId(bean.getStaffId());
 				user.setUserId(bean.getUserId());
+				user.setUserName(bean.getUserName());
+				user.setUserRoleId(bean.getUserRoleId());
+				if (userDAO.saveUser(user)) {
+					return "SUCCESS";
+				} else {
+					return "ERROR";
+				}
 			}
-			user.setUserName(bean.getUserName());
-			user.setUserRoleId(bean.getUserRoleId());
-			return userDAO.saveUser(user);
 		}
 		return null;
 	}

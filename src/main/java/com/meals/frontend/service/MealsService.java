@@ -21,7 +21,7 @@ public interface MealsService {
 	DataBean getLstByStatus (String date);
 	DataBean getLstByDate (String fromDate,String toDate);
 	String saveStaff (StaffBean bean, Boolean isNew);
-	Boolean saveUser (UserBean bean);
+	String saveUser (UserBean bean);
 	List<RoleBean> getAllRole();
 	List<DepartmentBean> getAllDepart();
 	List<CanteenExportBean> getLstAndCount(Date fromDate, Date toDate);

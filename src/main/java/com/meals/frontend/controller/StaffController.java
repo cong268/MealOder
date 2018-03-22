@@ -44,7 +44,7 @@ public class StaffController {
 	}
 
 	@RequestMapping(value = "/saveUser", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
-	public Boolean saveUser(HttpSession session, @RequestBody UserBean bean) {
+	public String saveUser(HttpSession session, @RequestBody UserBean bean) {
 		String userRole = (String) session.getAttribute(ConstanKey.USER_ROLE);
 		List<RoleBean> lst = mealsService.getAllRole();
 		if (userRole.equals(ConstanKey.ROLE.ROLE_MANAGER)) {
