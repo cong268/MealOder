@@ -268,6 +268,7 @@ public class MealsServiceImpl implements MealsService {
 					return ConstanKey.EXITS;
 				} else {
 					Staff staff = new Staff();
+					staff.setStaffId(bean.getStaffId());
 					staff.setStaffName(bean.getStaffName());
 					staff.setAddress(bean.getAddress());
 					staff.setCardId(bean.getCardId());
