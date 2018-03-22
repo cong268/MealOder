@@ -784,4 +784,13 @@ public class MealsServiceImpl implements MealsService {
 		bean.setListMealOder(lstOder);
 		return bean;
 	}
+
+	@Override
+	public String getDepartNameById(Integer departId) {
+		Map<Integer, String> mapDepart = getMapDepart();
+		if (mapDepart != null && !mapDepart.isEmpty()) {
+			return mapDepart.get(departId);
+		}
+		return null;
+	}
 }

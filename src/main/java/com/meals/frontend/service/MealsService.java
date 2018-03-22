@@ -36,4 +36,5 @@ public interface MealsService {
 	Boolean deleteCatering(MealsOrderBean bean);
 	Boolean updateCatering (MealsOrderBean bean);
 	Boolean checkStaffId(String staffId);
+	String getDepartNameById (Integer departId);
 }

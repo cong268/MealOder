@@ -14,6 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.meals.frontend.bean.CanteenExportBean;
 import com.meals.frontend.bean.DataCateringExport;
+import com.meals.frontend.bean.DepartmentBean;
 import com.meals.frontend.bean.StaffBean;
 import com.meals.frontend.service.MealsService;
 import com.meals.frontend.until.ConstanKey;
@@ -52,6 +53,7 @@ public class ExportContrller {
 		ModelAndView model = new ModelAndView("excelView");
 		Integer userId = (Integer) session.getAttribute(ConstanKey.USER_ID);
 		String userRole = (String) session.getAttribute(ConstanKey.USER_ROLE);
+		String userName = (String) session.getAttribute(ConstanKey.USER_NAME);
 		List<DataCateringExport> lst = null;
 		Date startDate = FunctionUtils.convertDateByFormatLocal(fromDate, ConstanKey.FORMAT_DATE.DATE_TIME_FORMAT);
 		Date endDate = FunctionUtils.convertDateByFormatLocal(toDate, ConstanKey.FORMAT_DATE.DATE_TIME_FORMAT);
@@ -60,6 +62,7 @@ public class ExportContrller {
 			if (staffBean != null) {
 				lst = mealsService.getDataExportByRole(userRole, staffBean.getDepartId(), staffId, startDate, endDate);
 			}
+			String departName = mealsService.getDepartNameById(staffBean.getDepartId());
 			String fromTime = FunctionUtils.convertDateStringByFormatLocal(startDate,
 					ConstanKey.FORMAT_DATE.DATE_SLASH_FORMAT);
 			String toTime = FunctionUtils.convertDateStringByFormatLocal(endDate,
@@ -67,6 +70,8 @@ public class ExportContrller {
 			model.addObject("dataManager", lst);
 			model.addObject("fromDate", fromTime);
 			model.addObject("toDate", toTime);
+			model.addObject("userName", userName);
+			model.addObject("departName", departName);
 		}
 		model.addObject(ConstanKey.USER_ROLE, userRole);
 		return model;
@@ -75,7 +80,9 @@ public class ExportContrller {
 	@RequestMapping(value = "/exportAdmin", method = RequestMethod.GET)
 	public ModelAndView exportAdmin(HttpSession session, Integer deptId, String staffId,
 			@RequestParam(value = "fromDate") String fromDate, @RequestParam(value = "toDate") String toDate) {
+		Integer userId = (Integer) session.getAttribute(ConstanKey.USER_ID);
 		String userRole = (String) session.getAttribute(ConstanKey.USER_ROLE);
+		String userName = (String) session.getAttribute(ConstanKey.USER_NAME);
 		ModelAndView model = new ModelAndView("excelView");
 		Date startDate = FunctionUtils.convertDateByFormatLocal(fromDate, ConstanKey.FORMAT_DATE.DATE_TIME_FORMAT);
 		Date endDate = FunctionUtils.convertDateByFormatLocal(toDate, ConstanKey.FORMAT_DATE.DATE_TIME_FORMAT);
@@ -86,9 +93,13 @@ public class ExportContrller {
 					ConstanKey.FORMAT_DATE.DATE_SLASH_FORMAT);
 			String toTime = FunctionUtils.convertDateStringByFormatLocal(endDate,
 					ConstanKey.FORMAT_DATE.DATE_SLASH_FORMAT);
+			StaffBean staffBean = mealsService.getStaffByUserId(userId);
+			String departName = mealsService.getDepartNameById(staffBean.getDepartId());
 			model.addObject("dataAdmin", lst);
 			model.addObject("fromDate", fromTime);
 			model.addObject("toDate", toTime);
+			model.addObject("userName", userName);
+			model.addObject("departName", departName);
 		}
 		model.addObject(ConstanKey.USER_ROLE, userRole);
 		return model;

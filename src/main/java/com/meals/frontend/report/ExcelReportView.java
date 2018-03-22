@@ -34,7 +34,6 @@ public class ExcelReportView extends AbstractExcelView {
 	@Override
 	protected void buildExcelDocument(Map<String, Object> model, HSSFWorkbook workbook, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
-		response.setHeader("Content-Disposition", "attachment; filename=\"DataReport.xls\"");
 		String fromDate = (String) model.get("fromDate");
 		String toDate = (String) model.get("toDate");
 		String userRole = (String) model.get(ConstanKey.USER_ROLE);
@@ -113,6 +112,7 @@ public class ExcelReportView extends AbstractExcelView {
 		pict.resize(6.0, 1.0);
 
 		if (userRole.equals(ConstanKey.ROLE.ROLE_CHEF)) {
+			response.setHeader("Content-Disposition", "attachment; filename=\"CANTEEN.xls\"");
 			@SuppressWarnings("unchecked")
 			List<CanteenExportBean> lstData = (List<CanteenExportBean>) model.get("dataCanteen");
 			sheet.setColumnWidth(0, 5 * 256);
@@ -250,8 +250,11 @@ public class ExcelReportView extends AbstractExcelView {
 			cellInfo.setCellValue(total);
 			cellInfo.setCellStyle(styleHeadTable);
 		} else if (userRole.equals(ConstanKey.ROLE.ROLE_ADMIN)) {
+			response.setHeader("Content-Disposition", "attachment; filename=\"ADMIN.xls\"");
 			@SuppressWarnings("unchecked")
 			List<DataCateringExport> lstData = (List<DataCateringExport>) model.get("dataAdmin");
+			String username = (String) model.get("userName");
+			String departName = (String) model.get("departName");
 			sheet.setColumnWidth(0, 5 * 256);
 			sheet.setColumnWidth(1, 10 * 256);
 			sheet.setColumnWidth(2, 5 * 256);
@@ -279,7 +282,7 @@ public class ExcelReportView extends AbstractExcelView {
 			cellInfo.setCellValue("Received by:");
 			cellInfo.setCellStyle(styleHeader);
 			cellInfo = rowInfo.createCell(3);
-			cellInfo.setCellValue("Admin1");
+			cellInfo.setCellValue(username);
 			cellInfo.setCellStyle(styleContentHead);
 			sheet.addMergedRegion(new CellRangeAddress(4, 4, 0, 2));
 			sheet.addMergedRegion(new CellRangeAddress(4, 4, 3, 8));
@@ -290,7 +293,7 @@ public class ExcelReportView extends AbstractExcelView {
 			cellInfo.setCellValue("From:");
 			cellInfo.setCellStyle(styleHeader);
 			cellInfo = rowInfo.createCell(3);
-			cellInfo.setCellValue("GA");
+			cellInfo.setCellValue(departName);
 			cellInfo.setCellStyle(styleContentHead);
 			sheet.addMergedRegion(new CellRangeAddress(5, 5, 0, 2));
 			sheet.addMergedRegion(new CellRangeAddress(5, 5, 3, 8));
@@ -414,8 +417,11 @@ public class ExcelReportView extends AbstractExcelView {
 			cellInfo.setCellStyle(styleHeadTable);
 			sheet.addMergedRegion(new CellRangeAddress(12 + num, 12 + num, 6, 8));
 		} else if (userRole.equals(ConstanKey.ROLE.ROLE_MANAGER)) {
+			response.setHeader("Content-Disposition", "attachment; filename=\"FOCAL POINT.xls\"");
 			@SuppressWarnings("unchecked")
 			List<DataCateringExport> lstData = (List<DataCateringExport>) model.get("dataManager");
+			String username = (String) model.get("userName");
+			String departName = (String) model.get("departName");
 			sheet.setColumnWidth(0, 5 * 256);
 			sheet.setColumnWidth(1, 10 * 256);
 			sheet.setColumnWidth(2, 5 * 256);
@@ -433,7 +439,7 @@ public class ExcelReportView extends AbstractExcelView {
 			Row rowTitle = sheet.createRow(2);
 			rowTitle.setHeight((short) (rowTitle.getHeight() * 2));
 			Cell cellTitle = rowTitle.createCell(0);
-			cellTitle.setCellValue(" FOCAL POINT REPORT");
+			cellTitle.setCellValue("FOCAL POINT REPORT");
 			cellTitle.setCellStyle(styleTitle);
 			sheet.addMergedRegion(new CellRangeAddress(2, 2, 0, 8));
 
@@ -443,7 +449,7 @@ public class ExcelReportView extends AbstractExcelView {
 			cellInfo.setCellValue("Received by:");
 			cellInfo.setCellStyle(styleHeader);
 			cellInfo = rowInfo.createCell(3);
-			cellInfo.setCellValue("Admin1");
+			cellInfo.setCellValue(username);
 			cellInfo.setCellStyle(styleContentHead);
 			sheet.addMergedRegion(new CellRangeAddress(4, 4, 0, 2));
 			sheet.addMergedRegion(new CellRangeAddress(4, 4, 3, 8));
@@ -454,7 +460,7 @@ public class ExcelReportView extends AbstractExcelView {
 			cellInfo.setCellValue("From:");
 			cellInfo.setCellStyle(styleHeader);
 			cellInfo = rowInfo.createCell(3);
-			cellInfo.setCellValue("GA");
+			cellInfo.setCellValue(departName);
 			cellInfo.setCellStyle(styleContentHead);
 			sheet.addMergedRegion(new CellRangeAddress(5, 5, 0, 2));
 			sheet.addMergedRegion(new CellRangeAddress(5, 5, 3, 8));
