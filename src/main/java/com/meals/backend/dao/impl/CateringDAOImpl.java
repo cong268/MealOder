@@ -87,25 +87,25 @@ public class CateringDAOImpl implements CateringDAO {
 		return query.list();
 	}
 
-	@Override
-	public Boolean deleteCateringByStaff(String staffId, Date fromDate, Date toDate, Boolean ordered, Boolean status,
-			Boolean catered) {
-		Session session = sessionFactory.getCurrentSession();
-		Query query = session.createQuery(
-				"DELETE Catering c WHERE c.id.staffId = :staffId AND c.id.cateringDate >= :fromDate AND c.id.cateringDate < :toDate "
-						+ "AND c.catered = :catered AND c.status = :status AND c.catered = :catered");
-		query.setParameter("fromDate", fromDate);
-		query.setParameter("toDate", toDate);
-		query.setParameter("staffId", staffId);
-		query.setParameter("catered", catered);
-		query.setParameter("status", status);
-		query.setParameter("catered", catered);
-		int result = query.executeUpdate();
-		if (result > 0) {
-			return true;
-		}
-		return false;
-	}
+//	@Override
+//	public Boolean deleteCateringByStaff(String staffId, Date fromDate, Date toDate, Boolean ordered, Boolean status,
+//			Boolean catered) {
+//		Session session = sessionFactory.getCurrentSession();
+//		Query query = session.createQuery(
+//				"DELETE Catering c WHERE c.id.staffId = :staffId AND c.id.cateringDate >= :fromDate AND c.id.cateringDate < :toDate "
+//						+ "AND c.catered = :catered AND c.status = :status AND c.catered = :catered");
+//		query.setParameter("fromDate", fromDate);
+//		query.setParameter("toDate", toDate);
+//		query.setParameter("staffId", staffId);
+//		query.setParameter("catered", catered);
+//		query.setParameter("status", status);
+//		query.setParameter("catered", catered);
+//		int result = query.executeUpdate();
+//		if (result > 0) {
+//			return true;
+//		}
+//		return false;
+//	}
 
 	@Override
 	public Boolean deleteCateringByManager(Integer deptId, Date date) {

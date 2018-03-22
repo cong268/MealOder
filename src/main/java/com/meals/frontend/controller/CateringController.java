@@ -86,9 +86,9 @@ public class CateringController {
 	}
 
 	@RequestMapping(value = "/saveCateringByAdmin", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
-	public Boolean saveCateringByAdmin(HttpSession session, @RequestParam("date") String date) {
+	public Boolean saveCateringByAdmin(HttpSession session,@RequestBody List<MealsOrderBean> listMealOder, @RequestParam("date") String date) {
 		Integer userId = (Integer) session.getAttribute(ConstanKey.USER_ID);
-		return mealsService.updateStatusByAdmin(userId, date);
+		return mealsService.saveCateringByAdmin(userId, date, listMealOder);
 	}
 
 	@RequestMapping(value = "/getHistoryStaff", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)

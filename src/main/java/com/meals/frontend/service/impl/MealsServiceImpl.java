@@ -10,6 +10,7 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import com.meals.backend.dao.CateringDAO;
 import com.meals.backend.dao.ConstantDAO;
@@ -323,18 +324,11 @@ public class MealsServiceImpl implements MealsService {
 		Date cateringTime = cal.getTime();
 		if (fromTime != null && toTime != null) {
 			if (listMealOder != null && !listMealOder.isEmpty()) {
-				Date tomorrow = new Date(toTime.getTime() + (1000 * 60 * 60 * 24));
 				Staff tsStaff = staffDAO.getStaffByUserId(userId);
 				if (tsStaff != null) {
-					if (userRole != null && userRole.equals(ConstanKey.ROLE.ROLE_ADMIN)) {
-						cateringDAO.deleteCateringByStaff(tsStaff.getStaffId(), fromTime, tomorrow, true, true, true);
-					} else if (userRole != null && userRole.equals(ConstanKey.ROLE.ROLE_MANAGER)) {
-						cateringDAO.deleteCateringByStaff(tsStaff.getStaffId(), fromTime, tomorrow, false, true, true);
-					} else {
-						cateringDAO.deleteCateringByStaff(tsStaff.getStaffId(), fromTime, tomorrow, false, false, true);
-					}
 					while (fromTime.compareTo(toTime) <= 0) {
 						for (MealsOrderBean obj : listMealOder) {
+							Catering catering = cateringDAO.getCateringById(obj.getStaffId(), fromTime, obj.getMealTimeId());
 							Catering dto = new Catering();
 							CateringId pk = new CateringId();
 							pk.setStaffId(obj.getStaffId());
@@ -349,17 +343,21 @@ public class MealsServiceImpl implements MealsService {
 								dto.setCatered(true);
 								dto.setStatus(true);
 								dto.setOrdered(true);
+								cateringDAO.saveOrUpdate(dto);
 							} else if (userRole != null && userRole.equals(ConstanKey.ROLE.ROLE_MANAGER)) {
-								dto.setCatered(false);
-								dto.setStatus(true);
-								dto.setOrdered(true);
+								if (catering == null || !catering.isCatered()){
+									dto.setCatered(false);
+									dto.setStatus(true);
+									dto.setOrdered(true);
+									cateringDAO.saveOrUpdate(dto);
+								}
 							} else {
-								dto.setCatered(false);
-								dto.setStatus(false);
-								dto.setOrdered(true);
-							}
-							if (!cateringDAO.saveOrUpdate(dto)) {
-								return false;
+								if (catering == null || !catering.isStatus()){
+									dto.setCatered(false);
+									dto.setStatus(false);
+									dto.setOrdered(true);
+									cateringDAO.saveOrUpdate(dto);
+								}
 							}
 						}
 						cal.setTime(fromTime);
@@ -401,7 +399,7 @@ public class MealsServiceImpl implements MealsService {
 	}
 
 	@Override
-	public Boolean updateStatusByAdmin(Integer userId, String date) {
+	public Boolean saveCateringByAdmin(Integer userId, String date,List<MealsOrderBean> listMealOder) {
 		Date cateringDate = FunctionUtils.convertDateByFormatLocal(date, ConstanKey.FORMAT_DATE.DATE_TIME_FORMAT);
 		if (cateringDate != null) {
 			Staff staff = staffDAO.getStaffByUserId(userId);
