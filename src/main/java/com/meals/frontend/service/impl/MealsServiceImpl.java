@@ -509,12 +509,8 @@ public class MealsServiceImpl implements MealsService {
 		List<MealsOrderBean> result = new ArrayList<>();
 		Date fromTime = FunctionUtils.convertDateByFormatLocal(fromDate, ConstanKey.FORMAT_DATE.DATE_TIME_FORMAT);
 		Date toTime = FunctionUtils.convertDateByFormatLocal(toDate, ConstanKey.FORMAT_DATE.DATE_TIME_FORMAT);
-//		Calendar calendar = Calendar.getInstance();
-//		calendar.set(Calendar.HOUR, 0);
-//		calendar.set(Calendar.MINUTE, 0);
-//		calendar.set(Calendar.SECOND, 0);
-//		calendar.set(Calendar.HOUR_OF_DAY, 0);
 		Date currentDate = Calendar.getInstance().getTime();
+		String timeStr = FunctionUtils.convertDateStringByFormatLocal(currentDate, ConstanKey.FORMAT_DATE.DATE_SLASH_FORMAT);
 		if (fromTime != null && toTime != null) {
 			Date tomorrow = new Date(toTime.getTime() + (1000 * 60 * 60 * 24));
 			Staff staff = staffDAO.getStaffByUserId(userId);
@@ -523,7 +519,6 @@ public class MealsServiceImpl implements MealsService {
 				if (lst != null && !lst.isEmpty()) {
 					for (Catering obj : lst) {
 						MealsOrderBean bean = converFromCatering(obj);
-						String timeStr = FunctionUtils.convertDateStringByFormatLocal(currentDate, ConstanKey.FORMAT_DATE.DATE_SLASH_FORMAT);
 						String timeCateringStr = FunctionUtils.convertDateStringByFormatLocal(obj.getId().getCateringDate(), ConstanKey.FORMAT_DATE.DATE_SLASH_FORMAT);
 						if(timeStr.trim().equals(timeCateringStr.trim())){
 							bean.setDisable(false);
