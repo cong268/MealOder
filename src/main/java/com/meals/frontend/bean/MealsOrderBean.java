@@ -11,6 +11,7 @@ public class MealsOrderBean {
 	private Boolean catered;
 	private Boolean status;
 	private Boolean ordered;
+	private Boolean disable;
 
 	public String getStaffId() {
 		return staffId;
@@ -90,6 +91,14 @@ public class MealsOrderBean {
 
 	public void setOrdered(Boolean ordered) {
 		this.ordered = ordered;
+	}
+
+	public Boolean getDisable() {
+		return disable;
+	}
+
+	public void setDisable(Boolean disable) {
+		this.disable = disable;
 	}
 
 }

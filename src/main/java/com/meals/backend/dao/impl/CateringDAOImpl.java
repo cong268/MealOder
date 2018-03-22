@@ -38,7 +38,7 @@ public class CateringDAOImpl implements CateringDAO {
 	public List<Catering> getLstByOder(Integer departId, Date date) {
 		Session session = sessionFactory.getCurrentSession();
 		Query query = session.createQuery(
-				"FROM Catering c WHERE c.deptId = :deptId AND c.id.cateringDate = :cateringDate AND c.ordered = 1 AND c.status = 0 AND c.catered = 0");
+				"FROM Catering c WHERE c.deptId = :deptId AND c.id.cateringDate = :cateringDate AND c.ordered = 1 AND c.status = 0 AND c.catered = 0 AND c.disable = 0");
 		query.setParameter("deptId", departId);
 		query.setParameter("cateringDate", date);
 		return query.list();
@@ -48,7 +48,7 @@ public class CateringDAOImpl implements CateringDAO {
 	public List<Catering> getLstByStatus(Date cateringDate) {
 		Session session = sessionFactory.getCurrentSession();
 		Query query = session.createQuery(
-				"FROM Catering c WHERE c.id.cateringDate = :cateringDate AND c.ordered = 1 AND c.status = 1 AND c.catered = 0");
+				"FROM Catering c WHERE c.id.cateringDate = :cateringDate AND c.ordered = 1 AND c.status = 1 AND c.catered = 0 AND c.disable = 0");
 		query.setParameter("cateringDate", cateringDate);
 		return query.list();
 	}
@@ -57,18 +57,7 @@ public class CateringDAOImpl implements CateringDAO {
 	public List<Catering> getLstByDate(Date fromDate, Date toDate) {
 		Session session = sessionFactory.getCurrentSession();
 		Query query = session.createQuery(
-				"FROM Catering c WHERE c.id.cateringDate >= :fromDate AND c.id.cateringDate < :toDate AND c.catered = 1");
-		query.setParameter("fromDate", fromDate);
-		query.setParameter("toDate", toDate);
-		return query.list();
-	}
-
-	@Override
-	public List<Catering> getByStaffAndDate(String staffId, Date fromDate, Date toDate) {
-		Session session = sessionFactory.getCurrentSession();
-		Query query = session.createQuery(
-				"FROM Catering c WHERE c.id.staffId = :staffId AND c.id.cateringDate >= :fromDate AND c.id.cateringDate < :toDate");
-		query.setParameter("staffId", staffId);
+				"FROM Catering c WHERE c.id.cateringDate >= :fromDate AND c.id.cateringDate < :toDate AND c.catered = 1 AND c.ordered = 1 AND c.status = 1 AND c.disable = 0");
 		query.setParameter("fromDate", fromDate);
 		query.setParameter("toDate", toDate);
 		return query.list();
@@ -80,45 +69,11 @@ public class CateringDAOImpl implements CateringDAO {
 		Query query = session
 				.createQuery("SELECT c.id.cateringDate, c.deptId, c.mealId, c.id.mealTimeId, c.locationId, COUNT(*) "
 						+ "FROM Catering c WHERE c.id.cateringDate >= :fromDate AND c.id.cateringDate < :toDate "
-						+ "AND c.catered = 1 GROUP BY c.id.cateringDate, c.deptId, c.mealId, c.id.mealTimeId, c.locationId "
+						+ "AND c.catered = 1 AND c.disable = 0 GROUP BY c.id.cateringDate, c.deptId, c.mealId, c.id.mealTimeId, c.locationId "
 						+ "ORDER BY c.id.cateringDate ASC");
 		query.setParameter("fromDate", fromDate);
 		query.setParameter("toDate", toDate);
 		return query.list();
-	}
-
-//	@Override
-//	public Boolean deleteCateringByStaff(String staffId, Date fromDate, Date toDate, Boolean ordered, Boolean status,
-//			Boolean catered) {
-//		Session session = sessionFactory.getCurrentSession();
-//		Query query = session.createQuery(
-//				"DELETE Catering c WHERE c.id.staffId = :staffId AND c.id.cateringDate >= :fromDate AND c.id.cateringDate < :toDate "
-//						+ "AND c.catered = :catered AND c.status = :status AND c.catered = :catered");
-//		query.setParameter("fromDate", fromDate);
-//		query.setParameter("toDate", toDate);
-//		query.setParameter("staffId", staffId);
-//		query.setParameter("catered", catered);
-//		query.setParameter("status", status);
-//		query.setParameter("catered", catered);
-//		int result = query.executeUpdate();
-//		if (result > 0) {
-//			return true;
-//		}
-//		return false;
-//	}
-
-	@Override
-	public Boolean deleteCateringByManager(Integer deptId, Date date) {
-		Session session = sessionFactory.getCurrentSession();
-		Query query = session.createQuery(
-				"DELETE Catering c WHERE c.deptId = :deptId AND c.id.cateringDate = :date AND c.status = 1 AND c.catered = 0");
-		query.setParameter("deptId", deptId);
-		query.setParameter("date", date);
-		int result = query.executeUpdate();
-		if (result > 0) {
-			return true;
-		}
-		return false;
 	}
 
 	@Override
@@ -157,30 +112,19 @@ public class CateringDAOImpl implements CateringDAO {
 		return null;
 	}
 
-	@Override
-	public Boolean updateByAdmin(String staffId, Date date) {
-		Session session = sessionFactory.getCurrentSession();
-		Query query = session.createQuery(
-				"UPDATE Catering c SET c.catered = 1 WHERE c.id.staffId != :staffId AND c.id.cateringDate = :cateringDate");
-		query.setParameter("staffId", staffId);
-		query.setParameter("cateringDate", date);
-		int result = query.executeUpdate();
-		if (result > 0) {
-			return true;
-		}
-		return false;
-	}
-
-	@Override
-	public List<Catering> getByDepartAndDate(Integer deptId, Date fromDate, Date toDate) {
-		Session session = sessionFactory.getCurrentSession();
-		Query query = session.createQuery(
-				"FROM Catering c WHERE c.deptId = :deptId AND c.id.cateringDate >= :fromDate AND c.id.cateringDate < :toDate");
-		query.setParameter("deptId", deptId);
-		query.setParameter("fromDate", fromDate);
-		query.setParameter("toDate", toDate);
-		return query.list();
-	}
+	// @Override
+	// public List<Catering> getByDepartAndDate(Integer deptId, Date fromDate,
+	// Date toDate, boolean ordered,
+	// boolean status, boolean catered, boolean disable) {
+	// Session session = sessionFactory.getCurrentSession();
+	// Query query = session.createQuery(
+	// "FROM Catering c WHERE c.deptId = :deptId AND c.id.cateringDate >=
+	// :fromDate AND c.id.cateringDate < :toDate");
+	// query.setParameter("deptId", deptId);
+	// query.setParameter("fromDate", fromDate);
+	// query.setParameter("toDate", toDate);
+	// return query.list();
+	// }
 
 	@Override
 	public Boolean deleteById(String staffId, Integer mealTimeId, Date cateringDate) {
@@ -189,6 +133,92 @@ public class CateringDAOImpl implements CateringDAO {
 				"DELETE Catering c WHERE c.id.staffId = :staffId AND c.id.cateringDate = :date AND c.id.mealTimeId = :mealTimeId");
 		query.setParameter("staffId", staffId);
 		query.setParameter("date", cateringDate);
+		query.setParameter("mealTimeId", mealTimeId);
+		int result = query.executeUpdate();
+		if (result > 0) {
+			return true;
+		}
+		return false;
+	}
+
+	@Override
+	public List<Catering> getHistoryStaff(String staffId, Date fromDate, Date toDate) {
+		Session session = sessionFactory.getCurrentSession();
+		Query query = session
+				.createQuery("FROM Catering c WHERE c.id.staffId = :staffId AND c.id.cateringDate >= :fromDate "
+						+ "AND c.id.cateringDate < :toDate AND c.disable = 0");
+		query.setParameter("staffId", staffId);
+		query.setParameter("fromDate", fromDate);
+		query.setParameter("toDate", toDate);
+		return query.list();
+	}
+
+	@Override
+	public List<Catering> getExportStaffByManager(String staffId, Date fromDate, Date toDate) {
+		Session session = sessionFactory.getCurrentSession();
+		Query query = session
+				.createQuery("FROM Catering c WHERE c.id.staffId = :staffId AND c.id.cateringDate >= :fromDate "
+						+ "AND c.id.cateringDate < :toDate AND c.status = 1 AND c.ordered = 1 AND c.disable = 0");
+		query.setParameter("staffId", staffId);
+		query.setParameter("fromDate", fromDate);
+		query.setParameter("toDate", toDate);
+		return query.list();
+	}
+
+	@Override
+	public List<Catering> getExportStaffByAdmin(String staffId, Date fromDate, Date toDate) {
+		Session session = sessionFactory.getCurrentSession();
+		Query query = session
+				.createQuery("FROM Catering c WHERE c.id.staffId = :staffId AND c.id.cateringDate >= :fromDate "
+						+ "AND c.id.cateringDate < :toDate AND c.catered = 1 AND c.status = 1 AND c.ordered = 1 AND c.disable = 0");
+		query.setParameter("staffId", staffId);
+		query.setParameter("fromDate", fromDate);
+		query.setParameter("toDate", toDate);
+		return query.list();
+	}
+
+	@Override
+	public List<Catering> getExportDepartByManager(Integer deptId, Date fromDate, Date toDate) {
+		Session session = sessionFactory.getCurrentSession();
+		Query query = session.createQuery("FROM Catering c WHERE c.deptId = :deptId AND c.id.cateringDate >= :fromDate "
+				+ "AND c.id.cateringDate < :toDate AND c.status = 1 AND c.ordered = 1 AND c.disable = 0");
+		query.setParameter("deptId", deptId);
+		query.setParameter("fromDate", fromDate);
+		query.setParameter("toDate", toDate);
+		return query.list();
+	}
+
+	@Override
+	public List<Catering> getExportDepartByAdmin(Integer deptId, Date fromDate, Date toDate) {
+		Session session = sessionFactory.getCurrentSession();
+		Query query = session.createQuery("FROM Catering c WHERE c.deptId = :deptId AND c.id.cateringDate >= :fromDate "
+				+ "AND c.id.cateringDate < :toDate AND c.catered = 1 AND c.status = 1 AND c.ordered = 1 AND c.disable = 0");
+		query.setParameter("deptId", deptId);
+		query.setParameter("fromDate", fromDate);
+		query.setParameter("toDate", toDate);
+		return query.list();
+	}
+
+	@Override
+	public Boolean updateReject(String staffId, Date date, Integer mealTimeId) {
+		Session session = sessionFactory.getCurrentSession();
+		Query query = session.createQuery("UPDATE Catering c SET c.disable = 1 WHERE c.id.staffId = :staffId AND c.id.cateringDate = :date AND c.id.mealTimeId = :mealTimeId");
+		query.setParameter("staffId", staffId);
+		query.setParameter("date", date);
+		query.setParameter("mealTimeId", mealTimeId);
+		int result = query.executeUpdate();
+		if (result > 0) {
+			return true;
+		}
+		return false;
+	}
+
+	@Override
+	public Boolean updateCatered(String staffId, Date date, Integer mealTimeId) {
+		Session session = sessionFactory.getCurrentSession();
+		Query query = session.createQuery("UPDATE Catering c SET c.catered = 1 WHERE c.id.staffId = :staffId AND c.id.cateringDate = :date AND c.id.mealTimeId = :mealTimeId");
+		query.setParameter("staffId", staffId);
+		query.setParameter("date", date);
 		query.setParameter("mealTimeId", mealTimeId);
 		int result = query.executeUpdate();
 		if (result > 0) {

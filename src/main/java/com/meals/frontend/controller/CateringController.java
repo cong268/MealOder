@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.meals.frontend.bean.DataBean;
+import com.meals.frontend.bean.ListObjectBean;
 import com.meals.frontend.bean.MealsOrderBean;
 import com.meals.frontend.bean.StaffBean;
 import com.meals.frontend.service.MealsService;
@@ -74,20 +75,19 @@ public class CateringController {
 	}
 
 	@RequestMapping(value = "/saveCateringByManager", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
-	public Boolean saveCateringByManager(HttpSession session, @RequestBody List<MealsOrderBean> listMealOder,
+	public Boolean saveCateringByManager(HttpSession session, @RequestBody ListObjectBean bean,
 			@RequestParam("date") String date) {
 		Integer userId = (Integer) session.getAttribute(ConstanKey.USER_ID);
-		StaffBean bean = mealsService.getStaffByUserId(userId);
-		if (bean != null) {
-			return mealsService.saveCateringByManager(bean.getDepartId(), listMealOder, date);
+		StaffBean staff = mealsService.getStaffByUserId(userId);
+		if (staff != null) {
+			return mealsService.saveCateringByManager(bean, date, staff.getDepartId());
 		}
 		return false;
 	}
 
 	@RequestMapping(value = "/saveCateringByAdmin", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
-	public Boolean saveCateringByAdmin(HttpSession session,@RequestBody List<MealsOrderBean> listMealOder, @RequestParam("date") String date) {
-		Integer userId = (Integer) session.getAttribute(ConstanKey.USER_ID);
-		return mealsService.saveCateringByAdmin(userId, date, listMealOder);
+	public Boolean saveCateringByAdmin(@RequestBody ListObjectBean bean, @RequestParam("date") String date) {
+		return mealsService.saveCateringByAdmin(date, bean);
 	}
 
 	@RequestMapping(value = "/getHistoryStaff", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
@@ -117,7 +117,7 @@ public class CateringController {
 			return false;
 		}
 	}
-	
+
 	@RequestMapping(value = "/getTime", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public Map<String, String> getTime() {
 		Calendar cal = Calendar.getInstance();

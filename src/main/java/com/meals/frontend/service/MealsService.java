@@ -7,6 +7,7 @@ import com.meals.frontend.bean.CanteenExportBean;
 import com.meals.frontend.bean.DataBean;
 import com.meals.frontend.bean.DataCateringExport;
 import com.meals.frontend.bean.DepartmentBean;
+import com.meals.frontend.bean.ListObjectBean;
 import com.meals.frontend.bean.MealsOrderBean;
 import com.meals.frontend.bean.RoleBean;
 import com.meals.frontend.bean.StaffBean;
@@ -27,8 +28,8 @@ public interface MealsService {
 	List<DepartmentBean> getAllDepart();
 	List<CanteenExportBean> getLstAndCount(Date fromDate, Date toDate);
 	Boolean saveCateringByStaff (Integer userId, String userRole, List<MealsOrderBean> listMealOder, String fromDate, String toDate);
-	Boolean saveCateringByManager(Integer departId,List<MealsOrderBean> listMealOder, String date);
-	Boolean saveCateringByAdmin(Integer userId, String date, List<MealsOrderBean> listMealOder);
+	Boolean saveCateringByManager(ListObjectBean bean, String date, Integer departId);
+	Boolean saveCateringByAdmin(String date, ListObjectBean bean);
 	List<MealsOrderBean> getHistoryStaff(Integer userId, String fromDate, String toDate);
 	List<DataCateringExport> getDataExportByRole (String userRole,Integer deptId, String staffId, Date fromDate, Date toDate);
 	Boolean deleteCatering(MealsOrderBean bean);
