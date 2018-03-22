@@ -264,7 +264,7 @@ public class MealsServiceImpl implements MealsService {
 			if (isNew) {
 				Staff obj = staffDAO.getByStaff(bean.getStaffId());
 				if (obj != null) {
-					return "StaffId already exist";
+					return ConstanKey.EXITS;
 				} else {
 					Staff staff = new Staff();
 					staff.setStaffName(bean.getStaffName());
@@ -281,9 +281,9 @@ public class MealsServiceImpl implements MealsService {
 					staff.setPosition(bean.getPosition());
 					staff.setProvice(bean.getProvice());
 					if (staffDAO.saveStaff(staff)) {
-						return "SUCCESS";
+						return ConstanKey.SUCCESS;
 					} else {
-						return "ERROR";
+						return ConstanKey.ERROR;
 					}
 				}
 			} else {
@@ -301,9 +301,9 @@ public class MealsServiceImpl implements MealsService {
 				staff.setPosition(bean.getPosition());
 				staff.setProvice(bean.getProvice());
 				if (staffDAO.saveStaff(staff)) {
-					return "SUCCESS";
+					return ConstanKey.SUCCESS;
 				} else {
-					return "ERROR";
+					return ConstanKey.ERROR;
 				}
 			}
 		}
@@ -314,7 +314,7 @@ public class MealsServiceImpl implements MealsService {
 	public String saveUser(UserBean bean) {
 		if (bean != null) {
 			if (userDAO.checkExitsUser(bean.getUserName())) {
-				return "UserName already exist";
+				return ConstanKey.EXITS;
 			} else {
 				Users user = new Users();
 				user.setStaffId(bean.getStaffId());
@@ -325,9 +325,9 @@ public class MealsServiceImpl implements MealsService {
 				user.setUserName(bean.getUserName());
 				user.setUserRoleId(bean.getUserRoleId());
 				if (userDAO.saveUser(user)) {
-					return "SUCCESS";
+					return ConstanKey.SUCCESS;
 				} else {
-					return "ERROR";
+					return ConstanKey.ERROR;
 				}
 			}
 		}

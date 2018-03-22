@@ -1,8 +1,8 @@
 package com.meals.frontend.controller;
 
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
-import java.util.TimeZone;
 
 import javax.servlet.http.HttpSession;
 
@@ -19,6 +19,7 @@ import com.meals.frontend.bean.MealsOrderBean;
 import com.meals.frontend.bean.StaffBean;
 import com.meals.frontend.service.MealsService;
 import com.meals.frontend.until.ConstanKey;
+import com.meals.frontend.until.FunctionUtils;
 
 @RestController
 @RequestMapping("cateringController")
@@ -110,12 +111,19 @@ public class CateringController {
 
 	@RequestMapping(value = "/checkTime", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public Boolean checkTime() {
-		Calendar cal = Calendar.getInstance(TimeZone.getTimeZone("Asia/Ho_Chi_Minh"));
+		Calendar cal = Calendar.getInstance();
 		int hour = cal.get(Calendar.HOUR_OF_DAY);
 		if (hour < 9) {
 			return true;
 		} else {
 			return false;
 		}
+	}
+	
+	@RequestMapping(value = "/getTime", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public String getTime() {
+		Calendar cal = Calendar.getInstance();
+		Date date = cal.getTime();
+		return FunctionUtils.convertDateStringByFormatLocal(date, ConstanKey.FORMAT_DATE.DATE_DATA_FORMAT);
 	}
 }

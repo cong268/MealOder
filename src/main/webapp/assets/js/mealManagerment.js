@@ -76,7 +76,7 @@ myApp.controller('mealManagermentCtrl', ['$scope', 'NgTableParams', 'ngTableEven
     $scope.checkStatus = function(){
         var countStatus = 0, countNumber = 0;
         angular.forEach($scope.dataFiltered, function(item){
-            if(item.status == 1){
+            if(item.checked == 1){
                 countStatus++;
             }
             countNumber++;
@@ -184,9 +184,9 @@ myApp.controller('mealManagermentCtrl', ['$scope', 'NgTableParams', 'ngTableEven
     $scope.changeStatus = function (statusMeal) {
         angular.forEach($scope.arrData, function(item){
             if(statusMeal == true){
-                item.status = 1;
+                item.checked = 1;
             } else if(statusMeal == false){
-                item.status = 0;
+                item.checked = 0;
             }
         });
     };
@@ -222,8 +222,9 @@ myApp.controller('mealManagermentCtrl', ['$scope', 'NgTableParams', 'ngTableEven
     $scope.saveAddMeal = function(){
         for(var i = 0; i < $scope.arrData.length; i++){
             if($scope.arrData[i]){
-                if($scope.arrData[i].status == 1){
+                if($scope.arrData[i].checked == 1){
                     var obj = angular.copy($scope.arrData[i]);
+                    delete obj['checked'];
                     var isAdded = false;
                     for(var j = 0; j < $scope.arrDataOrder.length; j++) {
                         if($scope.arrDataOrder[j].staffId == obj.staffId
@@ -262,7 +263,7 @@ myApp.controller('mealManagermentCtrl', ['$scope', 'NgTableParams', 'ngTableEven
         var dateStr = moment(dateInput, 'DD/MM/YYYY').format('DDMMYYYY');
         var dataObj = angular.copy($scope.arrDataOrder);
         angular.forEach(dataObj, function (item) {
-            delete item['status'];
+            delete item['checked'];
         })
         $http({
             method: 'POST',

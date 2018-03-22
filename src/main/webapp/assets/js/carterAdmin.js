@@ -9,6 +9,8 @@ myApp.controller('carterAdminCtrl', ['$scope', 'NgTableParams', 'ngTableEventsCh
     $scope.shilfArr = [];
     $scope.arrData = [];
     $scope.departmentArr = [];
+    $scope.departmentArrClone = [];
+    $scope.departmentIdFilter='';
     moment.locale('en');
     $scope.dateFilter = moment(new Date()).format('DD/MM/YYYY');
     $scope.initData = function(){
@@ -27,7 +29,11 @@ myApp.controller('carterAdminCtrl', ['$scope', 'NgTableParams', 'ngTableEventsCh
                 $scope.shilfArr = dataAllPage.lstShift;
                 $scope.departmentArr = dataAllPage.lstDepartMent;
                 $scope.arrData = angular.copy(dataAllTable);
+                angular.forEach($scope.arrData, function(item){
+                    item.checked = 1;
+                });
                 drawTable();
+                applyCloneArr();
             }
         }, function errorCallback(response) {
             console.log('getLstByStatus FAIL');
@@ -60,15 +66,6 @@ myApp.controller('carterAdminCtrl', ['$scope', 'NgTableParams', 'ngTableEventsCh
         }
         return mealName;
     }
-    // $scope.getShiftName = function(shiftId){
-    //     var shiftName = '';
-    //     for(var i = 0 ; i< $scope.shilfArr.length; i++){
-    //         if($scope.shilfArr[i].shiftId == shiftId){
-    //             shiftName =  $scope.shilfArr[i].shiftName;
-    //         }
-    //     }
-    //     return shiftName;
-    // }
     $scope.getDepartmentName = function(departmentId){
         var deptNameFind = '';
         for(var i = 0 ; i< $scope.departmentArr.length; i++){
@@ -81,16 +78,35 @@ myApp.controller('carterAdminCtrl', ['$scope', 'NgTableParams', 'ngTableEventsCh
     function drawTable(){
         $scope.tableParams = new NgTableParams({
             page: 1,
-            count: 10
+            count: 10,
+            filter: {
+                'departmentId':$scope.departmentIdFilter,
+            }
         }, {
             dataset: $scope.arrData,
         });
 
         ngTableEventsChannel.onAfterDataFiltered(function(eventListener, tableParams, filteredData ){
             $scope.dataFiltered = filteredData || tableParams.data;
+            $scope.checkStatus();
         });
     }
-
+    function applyCloneArr(){
+        $scope.departmentArrClone = angular.copy($scope.departmentArr);
+        $scope.departmentArrClone.unshift({
+            deptId : '',
+            deptName: 'ALL'
+        })
+    }
+    $scope.$watchGroup(['departmentIdFilter'], function(){
+        if($scope.tableParams){
+            $scope.tableParams.filter(
+                {
+                    'departmentId':$scope.departmentIdFilter
+                }
+            );
+        }
+    })
     $scope.filterAccept = function(){
         var dateInput = angular.element(document.getElementById("date-filter-input")).val();
         var dateStr = moment(dateInput, 'DD/MM/YYYY').format('DDMMYYYY')
@@ -108,17 +124,51 @@ myApp.controller('carterAdminCtrl', ['$scope', 'NgTableParams', 'ngTableEventsCh
                 $scope.shilfArr = dataAllPage.lstShift;
                 $scope.departmentArr = dataAllPage.lstDepartMent;
                 $scope.arrData = angular.copy(dataAllTable);
+                angular.forEach($scope.arrData, function(item){
+                    item.checked = 1;
+                });
                 drawTable();
             }
         }, function errorCallback(response) {
             console.log('getLstByStatus FAIL');
         });
     }
-
-
+    $scope.changeStatus = function (statusMeal) {
+        angular.forEach($scope.dataFiltered, function(item){
+            if(statusMeal == true){
+                item.checked = 1;
+            } else if(statusMeal == false){
+                item.checked = 0;
+            }
+        });
+    };
+    $scope.checkStatus = function(){
+        var countStatus = 0, countNumber = 0;
+        angular.forEach($scope.dataFiltered, function(item){
+            if(item.checked == 1){
+                countStatus++;
+            }
+            countNumber++;
+        });
+        if(countNumber === countStatus && countNumber !== 0){
+            $scope.statusMeal = true;
+            $('#select_all').prop('checked',true);
+        } else {
+            $scope.statusMeal = false;
+            $('#select_all').prop('checked',false);
+        }
+    }
     $scope.submitCarter = function(){
         var dateInput = angular.element(document.getElementById("date-filter-input")).val();
         var dateStr = moment(dateInput, 'DD/MM/YYYY').format('DDMMYYYY');
+        var lstDataSave = [];
+        angular.forEach($scope.arrData, function(item){
+            if(item.checked == 1){
+                var objClone = angular.copy(item);
+                delete objClone['checked'];
+                lstDataSave.push(objClone);
+            }
+        });
         $http({
             method: 'POST',
             url: 'cateringController/saveCateringByAdmin?date='+dateStr,
@@ -127,7 +177,7 @@ myApp.controller('carterAdminCtrl', ['$scope', 'NgTableParams', 'ngTableEventsCh
                 contentType: "application/json; charset=utf-8",
                 dataType: 'JSON'
             },
-            data: $scope.arrData
+            data: lstDataSave
         }).then(function successCallback(response) {
             showSuccessAlert();
             $scope.initData();
