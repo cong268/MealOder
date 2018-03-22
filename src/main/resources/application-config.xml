@@ -22,8 +22,8 @@
 		<beans:property name="driverClassName" value="com.microsoft.sqlserver.jdbc.SQLServerDriver" />
 		<beans:property name="url"
 			value="jdbc:sqlserver://localhost:1433;databaseName=nsrp" />
-		<beans:property name="username" value="nsrp" />
-		<beans:property name="password" value="nsrp" />
+		<beans:property name="username" value="sa" />
+		<beans:property name="password" value="root" />
 	</beans:bean>
 <!-- 	<beans:bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" -->
 <!-- 		destroy-method="close"> -->
