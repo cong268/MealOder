@@ -39,6 +39,14 @@
                 </div>
             </div>
             <div class="form-group">
+                <label for="input-depart" class="col-sm-4 control-label">Department</label>
+                <div class="col-sm-8">
+                    <select ng-model="staffObj.departId" class="form-control" id="input-depart" required>
+                        <option value="{{department.deptId}}" ng-repeat="department in departmentArr">{{department.deptName}}</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
                 <label for="input-gender" class="col-sm-4 control-label">Gender</label>
                 <div class="col-sm-8">
                     <select id="input-gender" ng-cloak ng-model="staffObj.gender" class="form-control col-sm-6" required>
@@ -47,35 +55,34 @@
                     </select>
                 </div>
             </div>
-
             <div class="form-group">
                 <label for="input-job" class="col-sm-4 control-label">Job Title</label>
                 <div class="col-sm-8">
-                    <input type="text" autocomplete="off" ng-model="staffObj.jobTitle" ng-minlength="6" class="form-control" id="input-job" required>
+                    <input type="text" autocomplete="off" ng-model="staffObj.jobTitle" class="form-control" id="input-job">
                 </div>
             </div>
             <div class="form-group">
                 <label for="input-address" class="col-sm-4 control-label">Address</label>
                 <div class="col-sm-8">
-                    <input type="text" autocomplete="off" ng-model="staffObj.address" ng-minlength="6" class="form-control" id="input-address" required>
-                </div>
-            </div>
-            <div class="form-group">
-                <label for="input-phoneNum" class="col-sm-4 control-label">Phone</label>
-                <div class="col-sm-8">
-                    <input type="text" autocomplete="off" ng-model="staffObj.phoneNum" ng-minlength="6" class="form-control" id="input-phoneNum" required>
-                </div>
-            </div>
-            <div class="form-group">
-                <label for="input-email" class="col-sm-4 control-label">Email</label>
-                <div class="col-sm-8">
-                    <input type="email" autocomplete="off" ng-model="staffObj.email" ng-minlength="6" class="form-control" id="input-email" required>
+                    <input type="text" autocomplete="off" ng-model="staffObj.address" class="form-control" id="input-address" >
                 </div>
             </div>
             <div class="form-group">
                 <label for="input-cardid" class="col-sm-4 control-label">Card Id</label>
                 <div class="col-sm-8">
-                    <input type="text" autocomplete="off" ng-model="staffObj.cardId" ng-minlength="6" class="form-control" id="input-cardid" required>
+                    <input type="text" autocomplete="off" ng-model="staffObj.cardId" ng-minlength="6" ng-maxlength="12" class="form-control" id="input-cardid" required>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="input-phoneNum" class="col-sm-4 control-label">Phone</label>
+                <div class="col-sm-8">
+                    <input type="text" autocomplete="off" ng-model="staffObj.phoneNum" class="form-control" id="input-phoneNum" >
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="input-email" class="col-sm-4 control-label">Email</label>
+                <div class="col-sm-8">
+                    <input type="email" autocomplete="off" ng-model="staffObj.email" class="form-control" id="input-email">
                 </div>
             </div>
             <div class="form-group">
