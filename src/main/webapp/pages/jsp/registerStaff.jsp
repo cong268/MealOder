@@ -25,6 +25,10 @@
         <div class="text-center wrap-header-page">
             <h3>REGISTER NEW STAFF</h3>
         </div>
+        <div class="wrap-error-message text-center">
+            <span ng-if="errorNotExistStaff">Staff Id is not available!</span>
+            <span ng-if="errorExistedUser">Username is already exist!</span>
+        </div>
         <div class="form-horizontal form-register-staff" ng-form="formRegisterStaff">
             <div class="form-group">
                 <label for="input-id" class="col-sm-4 control-label">Staff Id</label>

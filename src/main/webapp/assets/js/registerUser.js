@@ -18,20 +18,45 @@ myApp.controller('registerUserCtrl', ['$scope', '$http' , function($scope, $http
     $scope.submitRegister = function(isValid){
         if(isValid){
             $http({
-                method: 'POST',
-                url: 'staffController/saveUser',
-                responseType: 'json',
-                headers: {
-                    contentType: "application/json; charset=utf-8",
-                    dataType: 'JSON'
-                },
-                data: $scope.userObj
+                method: 'GET',
+                url: 'staffController/checkStaffId?staffId='+$scope.userObj.staffId,
+                responseType: 'json'
             }).then(function successCallback(response) {
+                if(response.data == false){
+                    $scope.errorNotExistStaff = true;
+                    showErrorAlert();
+                } else if(response.data == true){
+                    $scope.errorNotExistStaff = false;
+                    sendRequest();
+                }
+            }, function errorCallback(response) {
+                console.log('getAllRole FAIL');
+            });
+        }
+    }
+    function sendRequest(){
+        $http({
+            method: 'POST',
+            url: 'staffController/saveUser',
+            responseType: 'json',
+            headers: {
+                contentType: "application/json; charset=utf-8",
+                dataType: 'JSON'
+            },
+            data: $scope.userObj
+        }).then(function successCallback(response) {
+            if(response.data == 'EXITS'){
+                $scope.errorExistedUser = true;
+                showErrorAlert();
+            } else if(response.data == 'SUCCESS'){
+                $scope.errorExistedUser = false;
                 showSuccessAlert();
                 $scope.userObj = undefined;
-            }, function errorCallback(response) {
+            } else{
                 showErrorAlert();
-            })
-        }
+            }
+        }, function errorCallback(response) {
+            showErrorAlert();
+        })
     }
 }])

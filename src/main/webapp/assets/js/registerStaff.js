@@ -24,8 +24,14 @@ myApp.controller('registerStaffCtrl', ['$scope', '$http' , function($scope, $htt
                 },
                 data: $scope.staffObj
             }).then(function successCallback(response) {
-                showSuccessAlert();
-                $scope.staffObj = undefined;
+                if(response.data == 'SUCCESS'){
+                    showSuccessAlert();
+                    $scope.staffObj = undefined;
+                } else if(response.data == 'EXITS'){
+                    $scope.errorExists = true;
+                } else {
+                    showErrorAlert();
+                }
             }, function errorCallback(response) {
                 showErrorAlert();
             })

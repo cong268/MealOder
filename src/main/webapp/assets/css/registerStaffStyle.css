@@ -14,3 +14,18 @@
     border: 1px solid red;
     box-shadow: 0 0 1px red;
 }
+.wrap-error-message{
+    height: 30px;
+    line-height: 30px;
+    width: 100%;
+    font-size: 16px;
+    margin-bottom: 15px;
+    color: red;
+}
+.wrap-error-message span{
+    display: inline-block;
+    padding: 0px 10px;
+    background: rgba(255,0,0,0.1);
+    width: auto;
+    border-radius: 10px;
+}

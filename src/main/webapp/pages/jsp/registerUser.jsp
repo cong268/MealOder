@@ -24,6 +24,10 @@
             <div class="text-center wrap-header-page">
                 <h3>REGISTER NEW USER</h3>
             </div>
+            <div class="wrap-error-message text-center">
+                <span ng-if="errorNotExistStaff">Staff Id is not available!</span>
+                <span ng-if="errorExistedUser">Username is already exist!</span>
+            </div>
             <div class="form-horizontal form-register" ng-form="formRegister">
                 <div class="form-group">
                     <label for="input-username" class="col-sm-4 control-label">Username</label>
@@ -57,7 +61,8 @@
                 </div>
                 <div class="form-group">
                     <div class="col-sm-offset-5 col-sm-7">
-                        <div ng-click="submitRegister(formRegister.$valid)" class="btn btn-lg btn-primary">REGISTER</div>
+                        <div ng-if="formRegister.$invalid" class="btn btn-lg btn-disabled">REGISTER</div>
+                        <div ng-if="formRegister.$valid" ng-click="submitRegister(formRegister.$valid)" class="btn btn-lg btn-primary">REGISTER</div>
                     </div>
                 </div>
             </div>

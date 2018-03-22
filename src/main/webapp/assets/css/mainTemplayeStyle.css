@@ -277,6 +277,9 @@ body{
     font-style: italic;
     font-weight: 700;
 }
+.btn-disabled{
+    background: rgb(217,217,217);
+}
 @media (max-width: 767px){
     .hello-txt {
         padding: 5px 15px 5px 25px;

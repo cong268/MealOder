@@ -31,26 +31,20 @@
                     <h3>Meal Management <span class="badge" ng-cloak ng-bind="arrDataOrder.length"></span></h3>
                 </div>
                 <div ng-cloak class="row wrap-filter col-md-12 col-lg-12 col-xs-12 col-md-12 pull-left">
-                    <div class="col-md-2 p-l-0 m-t-10">
-                        <select ng-model="filterType" ng-init="filterType = 'date'" class="form-control">
-                            <option value="code">Code</option>
-                            <option value="name">Name</option>
-                            <option value="date">Date</option>
-                        </select>
+                    <div class="col-md-1 p-l-0 m-t-10 p-t-5">
+                        Date
                     </div>
                     <div class="col-md-3 p-l-0 m-t-10">
-                        <input type="text" ng-if="filterType == 'code'" id="codeFilter" class="form-control" ng-model="tableParamsOrder.filter()['staffId']">
-                        <input type="text" ng-if="filterType == 'name'" id="nameFilter" class="form-control" ng-model="tableParamsOrder.filter()['staffName']">
-                        <div class="input-group" ng-if="filterType == 'date'">
-                            <input type="text" ng-if="filterType == 'date'" id="date-filter-input" date-range-picker-single
+                        <div class="input-group">
+                            <input type="text" id="date-filter-input" date-range-picker-single-min
                                    ng-model="dateFilter" class="form-control">
                             <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
                         </div>
                     </div>
-                    <div class="col-md-1 p-l-0 m-t-10" ng-if="filterType == 'date'">
+                    <div class="col-md-1 p-l-0 m-t-10">
                         <div class="btn btn-primary btn-default" ng-click="filterAccept()">Search<span class="glyphicon glyphicon-search m-l-10"></span></div>
                     </div>
-                    <div class="col-md-offset-4 col-md-2  m-t-10 p-r-0">
+                    <div class="col-md-offset-5 col-md-2  m-t-10 p-r-0">
                         <div class="btn btn-success btn-default pull-right btn-add-vis" ng-click="clearVisitorObject()" data-toggle="modal" data-target="#visitorModal">
                             <span class="glyphicon glyphicon-plus p-r-10"></span>Add Visitor
                         </div>
@@ -91,8 +85,8 @@
             </div>
         </div>
         <div class="row m-t-10" ng-cloak>
-            <div ng-if="arrDataOrder.length > 0" class="btn btn-primary btn-lg pull-right m-r-15" ng-click="submitMealManager()">SUBMIT</div>
-            <div ng-if="arrDataOrder.length == 0" class="btn btn-disabled btn-lg pull-right m-r-15" >SUBMIT</div>
+            <div ng-if="arrDataOrder.length > 0 || lstDelMeal.length  > 0" class="btn btn-primary btn-lg pull-right m-r-15" ng-click="submitMealManager()">SUBMIT</div>
+            <div ng-if="arrDataOrder.length == 0 && lstDelMeal.length ==0" class="btn btn-disabled btn-lg pull-right m-r-15" >SUBMIT</div>
         </div>
     </div>
     <!-- EDIT MEAL -->

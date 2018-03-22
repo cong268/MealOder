@@ -16,6 +16,7 @@ myApp.controller('mealManagermentCtrl', ['$scope', 'NgTableParams', 'ngTableEven
     $scope.mealArrOrder = [];
     $scope.shilfArrOrder = [];
     $scope.arrDataOrder = [];
+    $scope.lstDelMeal = [];
     moment.locale('en');
     $scope.dateFilter = moment(new Date()).format('DD/MM/YYYY');
     $scope.initData = function(){
@@ -196,10 +197,9 @@ myApp.controller('mealManagermentCtrl', ['$scope', 'NgTableParams', 'ngTableEven
     $scope.deleteMeal = function(){
         var index = $scope.arrDataOrder.indexOf($scope.mealOrderToDelete);
         var cloneObj = angular.copy($scope.mealOrderToDelete);
+        $scope.lstDelMeal.push(cloneObj);
         $scope.arrDataOrder.splice(index,1);
         drawTableOrder();
-        $scope.arrData.push(cloneObj);
-        drawTable();
     }
     $scope.saveEditMeal = function(){
         var index = $scope.arrDataOrder.indexOf($scope.selectedItem);
@@ -262,9 +262,17 @@ myApp.controller('mealManagermentCtrl', ['$scope', 'NgTableParams', 'ngTableEven
         var dateInput = angular.element(document.getElementById("date-filter-input")).val();
         var dateStr = moment(dateInput, 'DD/MM/YYYY').format('DDMMYYYY');
         var dataObj = angular.copy($scope.arrDataOrder);
+        var dataDelObj = angular.copy($scope.lstDelMeal);
         angular.forEach(dataObj, function (item) {
             delete item['checked'];
         })
+        angular.forEach(dataDelObj, function (item) {
+            delete item['checked'];
+        })
+        var dataBean = {
+            lstCateringSave: dataObj,
+            lstCateringReject: dataDelObj
+        };
         $http({
             method: 'POST',
             url: 'cateringController/saveCateringByManager?date=' + dateStr,
@@ -273,7 +281,7 @@ myApp.controller('mealManagermentCtrl', ['$scope', 'NgTableParams', 'ngTableEven
                 contentType: "application/json; charset=utf-8",
                 dataType: 'JSON'
             },
-            data: dataObj
+            data: dataBean
         }).then(function successCallback(response) {
             showSuccessAlert();
             $scope.initData();
