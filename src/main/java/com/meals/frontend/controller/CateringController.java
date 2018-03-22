@@ -65,6 +65,14 @@ public class CateringController {
 			@RequestParam(value = "toDate") String toDate) {
 		return mealsService.getLstByDate(fromDate, toDate);
 	}
+	
+	// Service show By Manager
+	@RequestMapping(value = "/getLstShowManager", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public DataBean getLstShowManager(HttpSession session,@RequestParam(value = "fromDate") String fromDate,
+			@RequestParam(value = "toDate") String toDate) {
+		Integer userId = (Integer) session.getAttribute(ConstanKey.USER_ID);
+		return mealsService.getLstShowManager(userId, fromDate, toDate);
+	}
 
 	@RequestMapping(value = "/saveCateringByStaff", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
 	public Boolean saveCateringEmployee(HttpSession session, @RequestBody List<MealsOrderBean> listMealOder,
