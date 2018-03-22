@@ -23,6 +23,6 @@ public class FunctionUtils {
 			return null;
 		}
 		SimpleDateFormat sdf = new SimpleDateFormat(format);
-		return sdf.format(date);
+		return sdf.format(date).toString();
 	}
 }

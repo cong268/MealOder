@@ -1,8 +1,6 @@
 package com.meals.frontend.controller;
 
-import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 import javax.servlet.http.HttpSession;
 
@@ -121,9 +119,11 @@ public class CateringController {
 	}
 	
 	@RequestMapping(value = "/getTime", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-	public String getTime() {
+	public Map<String, String> getTime() {
 		Calendar cal = Calendar.getInstance();
 		Date date = cal.getTime();
-		return FunctionUtils.convertDateStringByFormatLocal(date, ConstanKey.FORMAT_DATE.DATE_DATA_FORMAT);
+		Map<String, String> mapTime = new HashMap<>();
+		mapTime.put("timeServer", FunctionUtils.convertDateStringByFormatLocal(date, ConstanKey.FORMAT_DATE.DATE_DATA_FORMAT));
+		return mapTime;
 	}
 }

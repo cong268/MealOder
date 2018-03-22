@@ -62,7 +62,7 @@
                     </div>
                 </div>
                 <div ng-cloak class="row m-b-10 col-md-12 col-lg-12 col-xs-12 col-md-12 text-left">
-                    <span class="vcenter">Row count: </span><span class="text-danger vcenter fs-18" ng-cloak ng-bind="tableParams.total()"/>
+                    <span class="vcenter">Total: </span><span class="text-danger vcenter fs-18" ng-cloak ng-bind="tableParams.total()"/>
                     <div class="col-sm-3 p-l-0 m-t-10">
                         <div class="btn btn-success btn-default" ng-click="filterAccept()">Catering Date<span class="glyphicon glyphicon-search p-l-10"></span></div>
                     </div>
