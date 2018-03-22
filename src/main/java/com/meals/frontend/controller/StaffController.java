@@ -68,4 +68,8 @@ public class StaffController {
 	public List<DepartmentBean> getAllDepartment() {
 		return mealsService.getAllDepart();
 	}
+	@RequestMapping(value = "/changePassword", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+	public String changePassword(@RequestParam String userName, @RequestParam String passWord, @RequestParam String newPassWord ) {
+		return mealsService.changePassword(userName, passWord, newPassWord);
+	}
 }

@@ -22,6 +22,7 @@ public interface MealsService {
 	DataBean getLstByDate (String fromDate,String toDate);
 	String saveStaff (StaffBean bean, Boolean isNew);
 	String saveUser (UserBean bean);
+	public String changePassword(String userName, String passWord, String newPassword);
 	List<RoleBean> getAllRole();
 	List<DepartmentBean> getAllDepart();
 	List<CanteenExportBean> getLstAndCount(Date fromDate, Date toDate);

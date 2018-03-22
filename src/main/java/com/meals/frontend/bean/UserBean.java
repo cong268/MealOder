@@ -7,12 +7,21 @@ public class UserBean {
 	private Boolean disable;
 	private String userName;
 	private String password;
+	private String newPassword;
+	public String getNewPassword() {
+		return newPassword;
+	}
+
+	public void setNewPassword(String newPassword) {
+		this.newPassword = newPassword;
+	}
+
 	private Integer userRoleId;
 
 	public Integer getUserId() {
 		return userId;
 	}
-
+	
 	public void setUserId(Integer userId) {
 		this.userId = userId;
 	}

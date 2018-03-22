@@ -679,4 +679,18 @@ public class MealsServiceImpl implements MealsService {
 		bean.setQuantity(1L);
 		return bean;
 	}
+
+	@Override
+	public String changePassword(String userName, String passWord, String newPassword) {
+		if (userDAO.getUser(userName, passWord) != null) {
+			Users user = userDAO.getUser(userName, passWord);
+			user.setPassword(newPassword);
+			if (userDAO.saveUser(user)) {
+				return "SUCCESS";
+			} else {
+				return "ERROR";
+			}
+		}
+		return "EXIST";
+	}
 }
