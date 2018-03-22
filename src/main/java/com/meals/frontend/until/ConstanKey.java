@@ -23,4 +23,7 @@ public class ConstanKey {
 		public static final String MEAL_TIME = "01";
 		public static final String MEAL_TYPE = "02";
 	}
+	public static final String ERROR = "ERROR";
+	public static final String SUCCESS = "SUCCESS";
+	public static final String EXITS = "EXITS";
 }
