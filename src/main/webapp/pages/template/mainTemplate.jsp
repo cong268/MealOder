@@ -152,37 +152,37 @@
                             <div class="form-group">
                                 <label for="input-username-info" class="col-sm-4 control-label">Username</label>
                                 <div class="col-sm-8">
-                                    <input type="text" autocomplete="off" ng-model="userInfo.userName" ng-minlength="6" class="form-control" id="input-username-info" required>
+                                    <span ng-bind="userInfo.staffName"  class="form-control disabled" id="input-username-info"></span>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="input-department-info" class="col-sm-4 control-label">Department</label>
                                 <div class="col-sm-8">
-                                    <span ng-bind="userInfo.deptId" class="form-control" id="input-department-info" ></span>
+                                    <span ng-bind="userInfo.department" class="form-control disabled" id="input-department-info" ></span>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="input-email-info" class="col-sm-4 control-label">Email</label>
                                 <div class="col-sm-8">
-                                    <input type="text" autocomplete="off" ng-minlength="6" class="form-control" id="input-email-info" required>
+                                    <span ng-bind="userInfo.email" class="form-control disabled" id="input-email-info" ></span>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label for="input-lastlogin-info" class="col-sm-4 control-label">Last login</label>
+                                <label for="input-address" class="col-sm-4 control-label">Address</label>
                                 <div class="col-sm-8">
-                                    <input type="text" autocomplete="off" ng-minlength="6" class="form-control" id="input-lastlogin-info" required>
+                                    <span ng-bind="userInfo.address" class="form-control disabled" id="input-address"></span>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="input-oldpass-info" class="col-sm-4 control-label">Old Password</label>
                                 <div class="col-sm-8">
-                                    <input type="password" autocomplete="off" ng-minlength="6" class="form-control" id="input-oldpass-info" required>
+                                    <input type="password" ng-model="oldPassword" autocomplete="off" class="form-control" id="input-oldpass-info" required>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="input-newpass-info" class="col-sm-4 control-label">New Password</label>
                                 <div class="col-sm-8">
-                                    <input type="password" autocomplete="off" ng-minlength="6" class="form-control" id="input-newpass-info" required>
+                                    <input type="password" ng-model="newPassword" autocomplete="off" ng-minlength="6" class="form-control" id="input-newpass-info" required>
                                 </div>
                             </div>
                         </div>
@@ -190,7 +190,7 @@
                     <div class="modal-footer text-center">
                         <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
                         <button type="button" ng-if="formUserInfo.$invalid" class="btn btn-disabled" >Accept</button>
-                        <button type="button" ng-if="formUserInfo.$valid" class="btn btn-success" ng-click="updateUserInfo()">Accept</button>
+                        <button type="button" ng-if="formUserInfo.$valid" class="btn btn-success" ng-click="updateUserInfo(formUserInfo.$valid)">Accept</button>
                     </div>
                 </div>
             </div>

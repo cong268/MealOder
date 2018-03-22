@@ -1,9 +1,12 @@
 package com.meals.frontend.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
+import com.meals.frontend.bean.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -12,10 +15,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.meals.frontend.bean.DepartmentBean;
-import com.meals.frontend.bean.RoleBean;
-import com.meals.frontend.bean.StaffBean;
-import com.meals.frontend.bean.UserBean;
 import com.meals.frontend.service.MealsService;
 import com.meals.frontend.until.ConstanKey;
 
@@ -70,9 +69,14 @@ public class StaffController {
 	}
 
 	@RequestMapping(value = "/changePassword", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
-	public String changePassword(@RequestParam String userName, @RequestParam String passWord,
-			@RequestParam String newPassWord) {
-		return mealsService.changePassword(userName, passWord, newPassWord);
+	public Map<String, String> changePassword(@RequestBody UserBO userBO, HttpSession session) {
+		String userName = (String) session.getAttribute(ConstanKey.USER_NAME);
+		String passWord = userBO.getOldPassword();
+		String newPassWord = userBO.getNewPassword();
+        Map<String, String> mapReturn = new HashMap<>();
+        String codeReturn = mealsService.changePassword(userName, passWord, newPassWord);
+        mapReturn.put("code", codeReturn);
+		return mapReturn;
 	}
 
 	@RequestMapping(value = "/checkStaffId", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)

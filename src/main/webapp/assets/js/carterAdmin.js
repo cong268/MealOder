@@ -161,14 +161,23 @@ myApp.controller('carterAdminCtrl', ['$scope', 'NgTableParams', 'ngTableEventsCh
     $scope.submitCarter = function(){
         var dateInput = angular.element(document.getElementById("date-filter-input")).val();
         var dateStr = moment(dateInput, 'DD/MM/YYYY').format('DDMMYYYY');
-        var lstDataSave = [];
+        var dataObj = [];
+        var dataDelObj = [];
         angular.forEach($scope.arrData, function(item){
             if(item.checked == 1){
                 var objClone = angular.copy(item);
                 delete objClone['checked'];
-                lstDataSave.push(objClone);
+                dataObj.push(objClone);
+            } else {
+                var objClone = angular.copy(item);
+                delete objClone['checked'];
+                dataDelObj.push(objClone);
             }
         });
+        var dataBean = {
+            lstCateringSave: dataObj,
+            lstCateringReject: dataDelObj
+        };
         $http({
             method: 'POST',
             url: 'cateringController/saveCateringByAdmin?date='+dateStr,
@@ -177,7 +186,7 @@ myApp.controller('carterAdminCtrl', ['$scope', 'NgTableParams', 'ngTableEventsCh
                 contentType: "application/json; charset=utf-8",
                 dataType: 'JSON'
             },
-            data: lstDataSave
+            data: dataBean
         }).then(function successCallback(response) {
             showSuccessAlert();
             $scope.initData();

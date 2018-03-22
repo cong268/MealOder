@@ -1,9 +1,47 @@
 // DEFINED FOR NSRP APPLICATION
 "use strict";
 var myApp = angular.module('NsrpApplication', ['ngTable','tw.directives.clickOutside']);
-myApp.controller('userInfoCtrl', ['$scope', function($scope) {
+myApp.controller('userInfoCtrl', ['$scope','$http', function($scope, $http) {
     $scope.initData = function(){
-
+        $http({
+            method: 'GET',
+            url: "staffController/getStaffById",
+            responseType: 'json',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+        }).then(function successCallback(response) {
+            console.log(response.data);
+            $scope.userInfo = response.data;
+        }, function errorCallback(response) {
+            console.log('GET TIME ERROR');
+        })
+    }
+    $scope.updateUserInfo = function(valid){
+        if(valid){
+            $http({
+                method: 'POST',
+                url: 'staffController/changePassword',
+                responseType: 'json',
+                headers: {
+                    contentType: "application/json; charset=utf-8",
+                    dataType: 'JSON'
+                },
+                data: {
+                    'oldPassword': $scope.oldPassword,
+                    'newPassword': $scope.newPassword
+                }
+            }).then(function successCallback(response) {
+                if(response.data.code == 'SUCCESS'){
+                    showSuccessAlert();
+                    $('#userInfoModal').modal('toggle');
+                } else if(response.data.code == 'ERROR'){
+                    showErrorAlert();
+                }
+            }, function errorCallback(response) {
+                showErrorAlert();
+            })
+        }
     }
 }])
 myApp.directive('dateRangePickerSingle', function() {
