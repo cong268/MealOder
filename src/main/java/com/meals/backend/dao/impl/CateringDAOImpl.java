@@ -226,4 +226,14 @@ public class CateringDAOImpl implements CateringDAO {
 		}
 		return false;
 	}
+
+	@Override
+	public List<Catering> getLstApproOfStaff(String staffId, Date cateringDate) {
+		Session session = sessionFactory.getCurrentSession();
+		Query query = session.createQuery(
+				"FROM Catering c WHERE c.id.cateringDate = :cateringDate AND c.id.staffId = :staffId AND c.status = 1 AND c.ordered = 1 AND c.disable = 0");
+		query.setParameter("cateringDate", cateringDate);
+		query.setParameter("staffId", staffId);
+		return query.list();
+	}
 }

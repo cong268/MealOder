@@ -9,6 +9,7 @@ public interface CateringDAO {
 	List<Catering> getLstByOder (Integer departId, Date cateringDate);
 	List<Catering> getLstByStatus (Date cateringDate);
 	List<Catering> getLstByDate (Date  fromDate, Date toDate);
+	List<Catering> getLstApproOfStaff (String staffId,Date cateringDate);
 	List<Catering> getHistoryStaff (String staffId, Date fromDate, Date toDate);
 	List<Catering> getExportStaffByManager (String staffId, Date fromDate, Date toDate);
 	List<Catering> getExportStaffByAdmin (String staffId, Date fromDate, Date toDate);

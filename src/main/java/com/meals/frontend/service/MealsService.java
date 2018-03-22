@@ -22,6 +22,7 @@ public interface MealsService {
 	DataBean getLstByStatus (String date);
 	DataBean getLstByDate (String fromDate,String toDate);
 	DataBean getLstShowManager(Integer userId,String fromDate, String toDate);
+	DataBean getLstApproOfStaff (String staffId, String date);
 	String saveStaff (StaffBean bean, Boolean isNew);
 	String saveUser (UserBean bean);
 	public String changePassword(String userName, String passWord, String newPassword);
