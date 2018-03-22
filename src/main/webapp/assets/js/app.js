@@ -32,10 +32,10 @@ myApp.controller('userInfoCtrl', ['$scope','$http', function($scope, $http) {
                     'newPassword': $scope.newPassword
                 }
             }).then(function successCallback(response) {
-                if(response.data.code == 1){
+                if(response.data == 1){
                     showSuccessAlert();
                     $('#userInfoModal').modal('toggle');
-                } else if(response.data.code == 0){
+                } else if(response.data == 0){
                     showErrorAlert();
                 }
             }, function errorCallback(response) {
