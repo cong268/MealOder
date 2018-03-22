@@ -88,7 +88,7 @@ myApp.controller('approveMealCtrl', ['$scope', 'NgTableParams', 'ngTableEventsCh
     $scope.checkStatus = function(){
         var countStatus = 0, countNumber = 0;
         angular.forEach($scope.dataFiltered, function(item){
-            if(item.status == 1){
+            if(item.checked == 1){
                 countStatus++;
             }
             countNumber++;
@@ -128,9 +128,9 @@ myApp.controller('approveMealCtrl', ['$scope', 'NgTableParams', 'ngTableEventsCh
     $scope.changeStatus = function (statusMeal) {
         angular.forEach($scope.dataFiltered, function(item){
             if(statusMeal == true){
-                item.status = 1;
+                item.checked = 1;
             } else if(statusMeal == false){
-                item.status = 0;
+                item.checked = 0;
             }
         });
     };
@@ -142,7 +142,7 @@ myApp.controller('approveMealCtrl', ['$scope', 'NgTableParams', 'ngTableEventsCh
         angular.forEach($scope.arrData, function(item){
             if(item.status == 1){
                 var obj = angular.copy(item);
-                delete obj['status'];
+                delete obj['checked'];
                 listMealSave.push(obj);
             }
         })

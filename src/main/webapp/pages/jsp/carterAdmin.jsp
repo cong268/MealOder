@@ -26,19 +26,31 @@
                 <div class="text-left wrap-header-page">
                     <h3>Cartering Employees <span class="badge" ng-cloak ng-bind="tableParams.total()"/></h3>
                 </div>
-                <div ng-cloak class="row wrap-filter col-md-5 col-lg-5 col-xs-12 col-md-12 pull-left">
-                    <div class="col-sm-3 p-l-0 m-t-10 p-t-5">
-                        Date
-                    </div>
-                    <div class="col-sm-5 p-l-0 m-t-10">
-                        <div class="input-group">
-                            <input type="text" ng-model="dateFilter" id="date-filter-input" date-range-picker-single
-                                   ng-model="dateFilter" class="form-control">
-                            <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                <div ng-cloak class="row wrap-filter ">
+                    <div class="col-md-5 col-lg-5 col-xs-12 col-md-12 pull-left form-horizontal">
+                        <div class="col-sm-3 p-l-0 m-t-10 p-t-5">
+                            Date
+                        </div>
+                        <div class="col-sm-5 p-l-0 m-t-10">
+                            <div class="input-group">
+                                <input type="text" ng-model="dateFilter" id="date-filter-input" date-range-picker-single
+                                       ng-model="dateFilter" class="form-control">
+                                <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                            </div>
+                        </div>
+                        <div class="col-sm-4 p-l-0 m-t-10">
+                            <div class="btn btn-success btn-default" ng-click="filterAccept()">Catering Date<span class="glyphicon glyphicon-search p-l-10"></span></div>
                         </div>
                     </div>
-                    <div class="col-sm-4 p-l-0 m-t-10">
-                        <div class="btn btn-success btn-default" ng-click="filterAccept()">Catering Date<span class="glyphicon glyphicon-search p-l-10"></span></div>
+                    <div class=" col-sm-offset-2 col-md-5 col-lg-5 col-xs-12 col-md-12 pull-left form-horizontal">
+                        <div class="col-sm-3 p-l-0 m-t-10 p-t-5">
+                            Department
+                        </div>
+                        <div class="col-sm-5 p-l-0 m-t-10">
+                            <select ng-model="departmentIdFilter" class="form-control">
+                                <option value="{{department.deptId}}" ng-repeat="department in departmentArrClone">{{department.deptName}}</option>
+                            </select>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -65,6 +77,17 @@
                         <td data-title="'Department'" class="text-center">
                             {{getDepartmentName(row.departmentId)}}
                         </td>
+                        <td width="10" class="text-center" data-header="'checkbox.html'">
+                            <label class="control control-checkbox">
+                                <input type="checkbox"
+                                       ng-model="row.checked"
+                                       ng-true-value="1"
+                                       ng-false-value="0"
+                                       ng-change="checkStatus()"
+                                       ng-checked="row.checked == 1">
+                                <div class="control-indicator"></div>
+                            </label>
+                        </td>
                     </tr>
                 </table>
                 <div class="showNoData" ng-if="tableParams.total() == 0" ng-cloak>No data available</div>
@@ -74,6 +97,16 @@
             <div class="btn btn-primary btn-lg pull-right m-r-15" ng-click="submitCarter()">CARTER</div>
         </div>
     </div>
+    <script type="text/ng-template" id="checkbox.html">
+        <label  class="control control-checkbox">
+            <input type="checkbox" ng-model="statusMeal" ng-true-value="true"
+                   ng-false-value="false"
+                   id="select_all"
+                   ng-checked="statusMeal === true"
+                   ng-model-options="{getterSetter: true}" ng-click="changeStatus(statusMeal)">
+            <div class="control-indicator"></div>
+        </label>
+    </script>
 </body>
 </c:if>
 <c:if test = "${sessionScope.userRole != 'Admin'}">

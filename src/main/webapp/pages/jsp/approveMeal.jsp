@@ -61,11 +61,11 @@
                         <td width="10" style="text-align: center" data-header="'checkbox.html'">
                             <label class="control control-checkbox">
                                 <input type="checkbox"
-                                       ng-model="row.status"
+                                       ng-model="row.checked"
                                        ng-true-value="1"
                                        ng-false-value="0"
                                        ng-change="checkStatus()"
-                                       ng-checked="row.status == 1">
+                                       ng-checked="row.checked == 1">
                                 <div class="control-indicator"></div>
                             </label>
                         </td>

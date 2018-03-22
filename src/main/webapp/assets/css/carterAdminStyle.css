@@ -31,3 +31,104 @@
     width: 100%;
     background: #e7e7e7;
 }
+/*CHECKBOX*/
+.control {
+    display: inline-block;
+    position: relative;
+    padding-left: 15px;
+    height: 20px;
+    /* line-height: 22px; */
+    margin-bottom: 10px;
+    /* width: 100%; */
+    font-weight: 500;
+    font-size: 13px;
+}
+.control span{
+    display: inline-block;
+    width: 100%;
+    line-height: 30px;
+    padding: 0px 5px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+.control.selected{
+    color: #007CA4;
+}
+.control .border-site-single{
+    display: none;
+    position: absolute;
+    width: calc(100% + 20px);
+    border-top: 1px solid #007CA4;
+    border-bottom: 1px solid #007CA4;
+    height: 100%;
+    padding: 15px;
+    top: -1px;
+    right: -20px;
+    z-index: -1;
+}
+.control.selected .border-site-single{
+    display: block;
+}
+.control.selected span:hover, .control span:hover{
+    background: #CCEFFC;
+    cursor: pointer;
+}
+.control input {
+    position: absolute;
+    z-index: -1;
+    opacity: 0;
+    left: 0;
+}
+.control-indicator {
+    position: absolute;
+    cursor: pointer;
+    top: 7px;
+    left: 0;
+    height: 15px;
+    width: 15px;
+    background: #fff;
+    border: 1px solid #d9d9d9;
+}
+.control:hover input ~ .control-indicator,
+.control input:focus ~ .control-indicator {
+    background: #fff;
+}
+.control input:checked ~ .control-indicator {
+    background: #fff;
+}
+.control:hover input:not([disabled]):checked ~ .control-indicator,
+.control input:checked:focus ~ .control-indicator {
+    background: #fff;
+}
+.control input:disabled ~ .control-indicator {
+    background: #e6e6e6;
+    opacity: 0.6;
+    pointer-events: none;
+}
+.control-indicator:after {
+    content: '';
+    position: absolute;
+    display: none;
+}
+.control input:checked ~ .control-indicator:after {
+    display: block;
+}
+.control-checkbox .control-indicator:after {
+    left: 4px;
+    top: -2px;
+    width: 7px;
+    height: 14px;
+    border: solid rgb(11, 164, 224);
+    border-width: 0px 3px 3px 0;
+    transform: rotate(45deg)
+}
+.control-checkbox input:disabled ~ .control-indicator:after {
+    border-color: #7b7b7b;
+}
