@@ -1,8 +1,8 @@
 package com.meals.frontend.controller;
 
 import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
+import java.util.TimeZone;
 
 import javax.servlet.http.HttpSession;
 
@@ -88,7 +88,7 @@ public class CateringController {
 	@RequestMapping(value = "/saveCateringByAdmin", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
 	public Boolean saveCateringByAdmin(HttpSession session, @RequestParam("date") String date) {
 		Integer userId = (Integer) session.getAttribute(ConstanKey.USER_ID);
-		return mealsService.updateStatusByAdmin(userId,date);
+		return mealsService.updateStatusByAdmin(userId, date);
 	}
 
 	@RequestMapping(value = "/getHistoryStaff", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
@@ -97,12 +97,22 @@ public class CateringController {
 		Integer userId = (Integer) session.getAttribute(ConstanKey.USER_ID);
 		return mealsService.getHistoryStaff(userId, fromDate, toDate);
 	}
-	
+
+	@RequestMapping(value = "/deleteCatering", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+	public Boolean deleteCatering(@RequestBody MealsOrderBean bean) {
+		return mealsService.deleteCatering(bean);
+	}
+
+	@RequestMapping(value = "/updateCatering", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+	public Boolean updateCatering(@RequestBody MealsOrderBean bean) {
+		return mealsService.updateCatering(bean);
+	}
+
 	@RequestMapping(value = "/checkTime", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public Boolean checkTime() {
-		Calendar cal = Calendar.getInstance();
+		Calendar cal = Calendar.getInstance(TimeZone.getTimeZone("Asia/Ho_Chi_Minh"));
 		int hour = cal.get(Calendar.HOUR_OF_DAY);
-		if(hour < 9){
+		if (hour < 9) {
 			return true;
 		} else {
 			return false;

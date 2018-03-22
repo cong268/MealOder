@@ -462,8 +462,8 @@ public class MealsServiceImpl implements MealsService {
 	}
 
 	@Override
-	public List<DataCateringExport> getDataExportByRole(String userRole,Integer deptId, String staffId,
-			Date fromTime, Date toTime) {
+	public List<DataCateringExport> getDataExportByRole(String userRole, Integer deptId, String staffId, Date fromTime,
+			Date toTime) {
 		List<DataCateringExport> result = new ArrayList<>();
 		List<Catering> lst = null;
 		Date tomorrow = new Date(toTime.getTime() + (1000 * 60 * 60 * 24));
@@ -489,6 +489,33 @@ public class MealsServiceImpl implements MealsService {
 			}
 		}
 		return result;
+	}
+
+	@Override
+	public Boolean deleteCatering(MealsOrderBean bean) {
+		if (bean != null) {
+			Date date = FunctionUtils.convertDateByFormatLocal(bean.getDateMeal(),
+					ConstanKey.FORMAT_DATE.DATE_SLASH_FORMAT);
+			if (date != null) {
+				return cateringDAO.deleteById(bean.getStaffId(), bean.getMealTimeId(), date);
+			}
+		}
+		return false;
+	}
+
+	@Override
+	public Boolean updateCatering(MealsOrderBean bean) {
+		Date date = FunctionUtils.convertDateByFormatLocal(bean.getDateMeal(),
+				ConstanKey.FORMAT_DATE.DATE_SLASH_FORMAT);
+		if (date != null) {
+			Catering catering = cateringDAO.getCateringById(bean.getStaffId(), date, bean.getMealTimeId());
+			if (catering != null) {
+				catering.setMealId(bean.getMealId());
+				catering.setLocationId(bean.getLocationId());
+				return cateringDAO.saveOrUpdate(catering);
+			}
+		}
+		return false;
 	}
 
 	private Map<Integer, String> getMapDepart() {

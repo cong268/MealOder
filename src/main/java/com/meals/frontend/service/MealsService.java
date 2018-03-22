@@ -28,4 +28,6 @@ public interface MealsService {
 	Boolean updateStatusByAdmin(Integer userId, String date);
 	List<MealsOrderBean> getHistoryStaff(Integer userId, String fromDate, String toDate);
 	List<DataCateringExport> getDataExportByRole (String userRole,Integer deptId, String staffId, Date fromDate, Date toDate);
+	Boolean deleteCatering(MealsOrderBean bean);
+	Boolean updateCatering (MealsOrderBean bean);
 }

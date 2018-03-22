@@ -18,4 +18,5 @@ public interface CateringDAO {
 	Boolean deleteCateringByStaff (String staffId,Date fromDate, Date toDate , Boolean ordered, Boolean status, Boolean catered);
 	Boolean deleteCateringByManager (Integer deptId, Date date);
 	Boolean updateByAdmin (String staffId, Date date);
+	Boolean deleteById (String staffId,Integer mealTimeId, Date cateringDate);
 }

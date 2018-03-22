@@ -181,4 +181,19 @@ public class CateringDAOImpl implements CateringDAO {
 		query.setParameter("toDate", toDate);
 		return query.list();
 	}
+
+	@Override
+	public Boolean deleteById(String staffId, Integer mealTimeId, Date cateringDate) {
+		Session session = sessionFactory.getCurrentSession();
+		Query query = session.createQuery(
+				"DELETE Catering c WHERE c.id.staffId = :staffId AND c.id.cateringDate = :date AND c.id.mealTimeId = :mealTimeId");
+		query.setParameter("staffId", staffId);
+		query.setParameter("date", cateringDate);
+		query.setParameter("mealTimeId", mealTimeId);
+		int result = query.executeUpdate();
+		if (result > 0) {
+			return true;
+		}
+		return false;
+	}
 }
