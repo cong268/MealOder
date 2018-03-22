@@ -79,7 +79,7 @@
                             </div>
                             <div class="btn btn-danger btn-custom" tooltip title="Delete"
                                  ng-if="row.status != 1 && row.catered != 1"
-                                 data-toggle="modal" data-target="#deleteModal" ng-click="showDeleteMeal(row)">
+                                 data-toggle="modal" data-target="#deleteModal" ng-click="showDeleteMealUser(row)">
                                 <span class="glyphicon glyphicon-trash"></span>
                             </div>
                         </td>
@@ -94,7 +94,7 @@
                                 </div>
                                 <div class="btn btn-danger btn-custom" tooltip title="Delete"
                                      ng-if="row.catered != 1"
-                                     data-toggle="modal" data-target="#deleteModal" ng-click="showDeleteMeal(row)">
+                                     data-toggle="modal" data-target="#deleteModal" ng-click="showDeleteMealUser(row)">
                                     <span class="glyphicon glyphicon-trash"></span>
                                 </div>
                             </td>
@@ -106,7 +106,7 @@
                                     <span class="glyphicon glyphicon-pencil"></span>
                                 </div>
                                 <div class="btn btn-danger btn-custom" tooltip title="Delete"
-                                     data-toggle="modal" data-target="#deleteModal" ng-click="showDeleteMeal(row)">
+                                     data-toggle="modal" data-target="#deleteModal" ng-click="showDeleteMealUser(row)">
                                     <span class="glyphicon glyphicon-trash"></span>
                                 </div>
                             </td>
@@ -155,7 +155,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="saveEditMeal()">Save changes</button>
+                        <button type="button" class="btn btn-primary" ng-click="saveEditMeal()">Save changes</button>
                     </div>
                 </div>
             </div>
@@ -176,7 +176,7 @@
                     </div>
                     <div class="modal-footer text-center">
                         <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
-                        <button type="button" class="btn btn-success" ng-click="deleteMeal()" data-dismiss="modal">Accept</button>
+                        <button type="button" class="btn btn-success" ng-click="deleteMealUser()" data-dismiss="modal">Accept</button>
                     </div>
                 </div>
             </div>

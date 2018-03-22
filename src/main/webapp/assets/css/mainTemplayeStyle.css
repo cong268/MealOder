@@ -184,7 +184,7 @@ body{
     right: 10px;
     bottom: 10px;
     font-size: 22px;
-    z-index: 999;
+    z-index: 9999;
     color: white;
     font-weight: bold;
     border-radius: 5px;
@@ -200,7 +200,7 @@ body{
     right: 10px;
     bottom: 10px;
     font-size: 22px;
-    z-index: 999;
+    z-index: 9999;
     font-weight: bold;
     border-radius: 5px;
     color: white;

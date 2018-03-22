@@ -98,7 +98,51 @@ myApp.controller('carteredAdminCtrl', ['$scope', 'NgTableParams', 'ngTableEvents
         $scope.selectedItemClone = angular.copy($scope.selectedItem);
     }
     $scope.saveEditMeal = function(){
-        $scope.selectedItem = $.extend($scope.selectedItem,$scope.selectedItemClone);
+        var objClone = angular.copy($scope.selectedItemClone);
+        $http({
+            method: 'POST',
+            url: 'cateringController/updateCatering',
+            responseType: 'json',
+            headers: {
+                contentType: "application/json; charset=utf-8",
+                dataType: 'JSON'
+            },
+            data: objClone
+        }).then(function successCallback(response) {
+            showSuccessAlert();
+            $scope.selectedItem = $.extend($scope.selectedItem,$scope.selectedItemClone);
+            $('#editMealModal').modal('toggle');
+        }, function errorCallback(response) {
+            showErrorAlert();
+        })
+
+    }
+    $scope.showDeleteMealUser = function(row){
+        $scope.deleteObjMeal = row;
+    }
+    $scope.deleteMealUser = function(){
+        var objClone = angular.copy($scope.deleteObjMeal);
+        $http({
+            method: 'POST',
+            url: 'cateringController/deleteCatering',
+            responseType: 'json',
+            headers: {
+                contentType: "application/json; charset=utf-8",
+                dataType: 'JSON'
+            },
+            data: objClone
+        }).then(function successCallback(response) {
+            showSuccessAlert();
+            var index = $scope.arrData.indexOf($scope.deleteObjMeal);
+            if(index > -1){
+                $scope.arrData.splice(index, 1);
+                drawTable();
+            } else {
+                $scope.initData();
+            }
+        }, function errorCallback(response) {
+            showErrorAlert();
+        })
     }
     $scope.dateChange = function(){
         var fromdateStr = moment($scope.fromDate, 'DD/MM/YYYY').format('DDMMYYYY');
