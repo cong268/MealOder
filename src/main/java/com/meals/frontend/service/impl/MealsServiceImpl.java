@@ -62,6 +62,16 @@ public class MealsServiceImpl implements MealsService {
 			Department depart = constantDAO.getDepartment(staff.getDeptId());
 			bean.setDepartId(depart.getDeptId());
 			bean.setDepartment(depart.getDeptName());
+			bean.setAddress(staff.getAddress());
+			bean.setCardId(staff.getCardId());
+			bean.setDisable(false);
+			bean.setEmail(staff.getEmail());
+			bean.setGender(staff.getGender());
+			bean.setPhoneNum(staff.getPhoneNum());
+			bean.setAge(staff.getAge());
+			bean.setNationality(staff.getNationality());
+			bean.setPosition(staff.getPosition());
+			bean.setProvice(staff.getProvice());
 		}
 		return bean;
 	}
