@@ -103,18 +103,22 @@
                     <div class="modal-body">
                         <div class="form-group">
                             <label for="employee-code-popup" class="col-form-label">Employee code:</label>
-                            <input type="text" class="form-control" ng-model="selectedItemClone.staffId" id="employee-code-popup" disabled>
+                            <span  id="employee-code-popup" class="form-control disabled" ng-bind="selectedItemClone.staffId"></span>
                         </div>
                         <div class="form-group">
                             <label for="employee-name-popup" class="col-form-label">Employee name:</label>
-                            <input type="text" class="form-control" ng-model="selectedItemClone.staffName" id="employee-name-popup" disabled>
+                            <span  id="employee-name-popup" class="form-control disabled" ng-bind="selectedItemClone.staffName"></span>
                         </div>
                         <div class="form-group">
                             <label for="meal-time-popup" class="col-form-label">Meal time:</label>
-                            <select id="meal-time-popup" ng-model="selectedItemClone.mealTimeId" class="form-control">
-                                <option ng-selected="selectedItemClone.mealTimeId == mealTimeObj.mealTimeId"
-                                        ng-repeat="mealTimeObj in mealTimeArr"
-                                        ng-value="mealTimeObj.mealTimeId">{{mealTimeObj.mealTimeName}}</option>
+                            <span  id="meal-time-popup" class="form-control disabled" ng-bind="getMealTimeName(selectedItemClone.mealTimeId)"></span>
+                        </div>
+                        <div class="form-group">
+                            <label for="meal-popup" class="col-form-label">Meal type:</label>
+                            <select id="meal-popup" ng-model="selectedItemClone.mealId" class="form-control">
+                                <option ng-selected="selectedItemClone.mealId == mealObj.mealId"
+                                        ng-repeat="mealObj in mealArr"
+                                        ng-value="mealObj.mealId">{{mealObj.mealName}}</option>
                             </select>
                         </div>
                         <div class="form-group">
@@ -125,22 +129,6 @@
                                         ng-value="locationObj.locationId">{{locationObj.locationName}}</option>
                             </select>
                         </div>
-                        <div class="form-group">
-                            <label for="meal-popup" class="col-form-label">Meal type:</label>
-                            <select id="meal-popup" ng-model="selectedItemClone.mealId" class="form-control">
-                                <option ng-selected="selectedItemClone.mealId == mealObj.mealId"
-                                        ng-repeat="mealObj in mealArr"
-                                        ng-value="mealObj.mealId">{{mealObj.mealName}}</option>
-                            </select>
-                        </div>
-                        <%--<div class="form-group">--%>
-                            <%--<label for="shift-popup" class="col-form-label">Shift:</label>--%>
-                            <%--<select id="shift-popup" ng-model="selectedItemClone.shiftId" class="form-control">--%>
-                                <%--<option ng-selected="selectedItemClone.shiftId == shilfObj.shiftId"--%>
-                                        <%--ng-repeat="shilfObj in shilfArr"--%>
-                                        <%--ng-value="shilfObj.shiftId">{{shilfObj.shiftName}}</option>--%>
-                            <%--</select>--%>
-                        <%--</div>--%>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
