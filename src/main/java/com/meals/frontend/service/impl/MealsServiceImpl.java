@@ -10,7 +10,6 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestBody;
 
 import com.meals.backend.dao.CateringDAO;
 import com.meals.backend.dao.ConstantDAO;
@@ -260,24 +259,53 @@ public class MealsServiceImpl implements MealsService {
 	}
 
 	@Override
-	public Boolean saveStaff(StaffBean bean) {
+	public String saveStaff(StaffBean bean, Boolean isNew) {
 		if (bean != null) {
-			Staff staff = new Staff();
-			staff.setStaffId(bean.getStaffId());
-			staff.setStaffName(bean.getStaffName());
-			staff.setAddress(bean.getAddress());
-			staff.setCardId(bean.getCardId());
-			staff.setDeptId(bean.getDepartId());
-			staff.setDisable(false);
-			staff.setEmail(bean.getEmail());
-			staff.setGender(bean.getGender());
-			staff.setJobTitle(bean.getJobTitle());
-			staff.setPhoneNum(bean.getPhoneNum());
-			staff.setAge(bean.getAge());
-			staff.setNationality(bean.getNationality());
-			staff.setPosition(bean.getPosition());
-			staff.setProvice(bean.getProvice());
-			return staffDAO.saveStaff(staff);
+			if (isNew) {
+				Staff obj = staffDAO.getByStaff(bean.getStaffId());
+				if (obj != null) {
+					return "StaffId already exist";
+				} else {
+					Staff staff = new Staff();
+					staff.setStaffName(bean.getStaffName());
+					staff.setAddress(bean.getAddress());
+					staff.setCardId(bean.getCardId());
+					staff.setDeptId(bean.getDepartId());
+					staff.setDisable(false);
+					staff.setEmail(bean.getEmail());
+					staff.setGender(bean.getGender());
+					staff.setJobTitle(bean.getJobTitle());
+					staff.setPhoneNum(bean.getPhoneNum());
+					staff.setAge(bean.getAge());
+					staff.setNationality(bean.getNationality());
+					staff.setPosition(bean.getPosition());
+					staff.setProvice(bean.getProvice());
+					if (staffDAO.saveStaff(staff)) {
+						return "SUCCESS";
+					} else {
+						return "ERROR";
+					}
+				}
+			} else {
+				Staff staff = staffDAO.getByStaff(bean.getStaffId());
+				staff.setStaffName(bean.getStaffName());
+				staff.setAddress(bean.getAddress());
+				staff.setCardId(bean.getCardId());
+				staff.setDeptId(bean.getDepartId());
+				staff.setEmail(bean.getEmail());
+				staff.setGender(bean.getGender());
+				staff.setJobTitle(bean.getJobTitle());
+				staff.setPhoneNum(bean.getPhoneNum());
+				staff.setAge(bean.getAge());
+				staff.setNationality(bean.getNationality());
+				staff.setPosition(bean.getPosition());
+				staff.setProvice(bean.getProvice());
+				if (staffDAO.saveStaff(staff)) {
+					return "SUCCESS";
+				} else {
+					return "ERROR";
+				}
+			}
 		}
 		return null;
 	}
@@ -328,7 +356,8 @@ public class MealsServiceImpl implements MealsService {
 				if (tsStaff != null) {
 					while (fromTime.compareTo(toTime) <= 0) {
 						for (MealsOrderBean obj : listMealOder) {
-							Catering catering = cateringDAO.getCateringById(obj.getStaffId(), fromTime, obj.getMealTimeId());
+							Catering catering = cateringDAO.getCateringById(obj.getStaffId(), fromTime,
+									obj.getMealTimeId());
 							Catering dto = new Catering();
 							CateringId pk = new CateringId();
 							pk.setStaffId(obj.getStaffId());
@@ -345,14 +374,14 @@ public class MealsServiceImpl implements MealsService {
 								dto.setOrdered(true);
 								cateringDAO.saveOrUpdate(dto);
 							} else if (userRole != null && userRole.equals(ConstanKey.ROLE.ROLE_MANAGER)) {
-								if (catering == null || !catering.isCatered()){
+								if (catering == null || !catering.isCatered()) {
 									dto.setCatered(false);
 									dto.setStatus(true);
 									dto.setOrdered(true);
 									cateringDAO.saveOrUpdate(dto);
 								}
 							} else {
-								if (catering == null || !catering.isStatus()){
+								if (catering == null || !catering.isStatus()) {
 									dto.setCatered(false);
 									dto.setStatus(false);
 									dto.setOrdered(true);
@@ -399,7 +428,7 @@ public class MealsServiceImpl implements MealsService {
 	}
 
 	@Override
-	public Boolean saveCateringByAdmin(Integer userId, String date,List<MealsOrderBean> listMealOder) {
+	public Boolean saveCateringByAdmin(Integer userId, String date, List<MealsOrderBean> listMealOder) {
 		Date cateringDate = FunctionUtils.convertDateByFormatLocal(date, ConstanKey.FORMAT_DATE.DATE_TIME_FORMAT);
 		if (cateringDate != null) {
 			Staff staff = staffDAO.getStaffByUserId(userId);
@@ -514,6 +543,11 @@ public class MealsServiceImpl implements MealsService {
 			}
 		}
 		return false;
+	}
+
+	@Override
+	public List<DepartmentBean> getAllDepart() {
+		return getDepartMent();
 	}
 
 	private Map<Integer, String> getMapDepart() {
