@@ -100,7 +100,7 @@ public class Users implements java.io.Serializable {
 		this.lastLogin = lastLogin;
 	}
 
-	@Column(name = "Password")
+	@Column(name = "Password", nullable = false)
 	public String getPassword() {
 		return this.password;
 	}
