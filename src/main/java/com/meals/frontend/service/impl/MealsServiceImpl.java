@@ -413,11 +413,11 @@ public class MealsServiceImpl implements MealsService {
 	public Boolean saveCateringByManager(ListObjectBean bean, String date, Integer departId) {
 		Date cateringDate = FunctionUtils.convertDateByFormatLocal(date, ConstanKey.FORMAT_DATE.DATE_TIME_FORMAT);
 		Date cateringTime = new Date();
-		if (bean != null){
+		if (bean != null) {
 			List<MealsOrderBean> lstSave = bean.getLstCateringSave();
 			List<MealsOrderBean> lstReject = bean.getLstCateringReject();
-			if (lstReject != null && !lstReject.isEmpty()){
-				for (MealsOrderBean obj : lstReject){
+			if (lstReject != null && !lstReject.isEmpty()) {
+				for (MealsOrderBean obj : lstReject) {
 					cateringDAO.updateReject(obj.getStaffId(), cateringDate, obj.getMealTimeId());
 				}
 			}
@@ -452,8 +452,8 @@ public class MealsServiceImpl implements MealsService {
 		if (cateringDate != null) {
 			List<MealsOrderBean> lstSave = bean.getLstCateringSave();
 			List<MealsOrderBean> lstReject = bean.getLstCateringReject();
-			if (lstReject != null && !lstReject.isEmpty()){
-				for (MealsOrderBean obj : lstReject){
+			if (lstReject != null && !lstReject.isEmpty()) {
+				for (MealsOrderBean obj : lstReject) {
 					cateringDAO.updateReject(obj.getStaffId(), cateringDate, obj.getMealTimeId());
 				}
 			}
@@ -512,7 +512,7 @@ public class MealsServiceImpl implements MealsService {
 				if (lst != null && !lst.isEmpty()) {
 					for (Catering obj : lst) {
 						MealsOrderBean bean = converFromCatering(obj);
-						if (obj.getId().getCateringDate().compareTo(currentDate) < 0){
+						if (obj.getId().getCateringDate().compareTo(currentDate) < 0) {
 							bean.setDisable(true);
 						} else {
 							bean.setDisable(false);
@@ -724,5 +724,15 @@ public class MealsServiceImpl implements MealsService {
 			}
 		}
 		return ConstanKey.ERROR;
+	}
+
+	@Override
+	public Boolean checkStaffId(String staffId) {
+		Staff staff = staffDAO.getByStaff(staffId);
+		if (staff == null) {
+			return false;
+		} else {
+			return true;
+		}
 	}
 }

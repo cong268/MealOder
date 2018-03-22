@@ -34,4 +34,5 @@ public interface MealsService {
 	List<DataCateringExport> getDataExportByRole (String userRole,Integer deptId, String staffId, Date fromDate, Date toDate);
 	Boolean deleteCatering(MealsOrderBean bean);
 	Boolean updateCatering (MealsOrderBean bean);
+	Boolean checkStaffId(String staffId);
 }
