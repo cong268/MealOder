@@ -17,22 +17,22 @@
 	<!-- Handles HTTP GET requests for /resources/** by efficiently serving 
 		up static resources in the ${webappRoot}/resources directory -->
 
-<!-- 	<beans:bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" -->
-<!-- 		destroy-method="close"> -->
-<!-- 		<beans:property name="driverClassName" value="com.microsoft.sqlserver.jdbc.SQLServerDriver" /> -->
-<!-- 		<beans:property name="url" -->
-<!-- 			value="jdbc:sqlserver://localhost:1433;databaseName=nsrp" /> -->
-<!-- 		<beans:property name="username" value="sa" /> -->
-<!-- 		<beans:property name="password" value="root" /> -->
-<!-- 	</beans:bean> -->
 	<beans:bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
 		destroy-method="close">
-		<beans:property name="driverClassName" value="com.mysql.jdbc.Driver" />
+		<beans:property name="driverClassName" value="com.microsoft.sqlserver.jdbc.SQLServerDriver" />
 		<beans:property name="url"
-			value="jdbc:mysql://localhost:3306/nsrp" />
-		<beans:property name="username" value="root" />
-		<beans:property name="password" value="root" />
+			value="jdbc:sqlserver://localhost:1433;databaseName=nsrp" />
+		<beans:property name="username" value="nsrp" />
+		<beans:property name="password" value="nsrp" />
 	</beans:bean>
+<!-- 	<beans:bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" -->
+<!-- 		destroy-method="close"> -->
+<!-- 		<beans:property name="driverClassName" value="com.mysql.jdbc.Driver" /> -->
+<!-- 		<beans:property name="url" -->
+<!-- 			value="jdbc:mysql://localhost:3306/nsrp" /> -->
+<!-- 		<beans:property name="username" value="root" /> -->
+<!-- 		<beans:property name="password" value="root" /> -->
+<!-- 	</beans:bean> -->
 
 	<!-- Hibernate 4 SessionFactory Bean definition -->
 	<beans:bean id="hibernate4AnnotatedSessionFactory"
@@ -52,10 +52,10 @@
 		</beans:property>
 		<beans:property name="hibernateProperties">
 			<beans:props>
-				<beans:prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect
-				</beans:prop>
-<!-- 				<beans:prop key="hibernate.dialect">org.hibernate.dialect.SQLServerDialect -->
+<!-- 				<beans:prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect -->
 <!-- 				</beans:prop> -->
+				<beans:prop key="hibernate.dialect">org.hibernate.dialect.SQLServerDialect
+				</beans:prop>
 				<beans:prop key="hibernate.show_sql">false</beans:prop>
 				<beans:prop key="hibernate.hbm2ddl.auto">update</beans:prop>
 			</beans:props>
