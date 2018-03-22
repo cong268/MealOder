@@ -45,10 +45,10 @@ myApp.controller('registerUserCtrl', ['$scope', '$http' , function($scope, $http
             },
             data: $scope.userObj
         }).then(function successCallback(response) {
-            if(response.data == 'EXITS'){
+            if(response.data == 2){
                 $scope.errorExistedUser = true;
                 showErrorAlert();
-            } else if(response.data == 'SUCCESS'){
+            } else if(response.data == 1){
                 $scope.errorExistedUser = false;
                 showSuccessAlert();
                 $scope.userObj = undefined;

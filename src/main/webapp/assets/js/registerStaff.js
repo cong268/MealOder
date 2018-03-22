@@ -24,10 +24,10 @@ myApp.controller('registerStaffCtrl', ['$scope', '$http' , function($scope, $htt
                 },
                 data: $scope.staffObj
             }).then(function successCallback(response) {
-                if(response.data == 'SUCCESS'){
+                if(response.data == 1){
                     showSuccessAlert();
                     $scope.staffObj = undefined;
-                } else if(response.data == 'EXITS'){
+                } else if(response.data == 2){
                     $scope.errorExists = true;
                 } else {
                     showErrorAlert();

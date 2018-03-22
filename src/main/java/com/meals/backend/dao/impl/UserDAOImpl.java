@@ -47,22 +47,9 @@ public class UserDAOImpl implements UserDAO {
 	@Override
 	public Boolean checkExitsUser(String userName) {
 		Session session = sessionFactory.getCurrentSession();
-		Query query = session.createQuery("SELECT EXISTS (FROM Users c WHERE c.userName = :userName limit 1)");
+		Query query = session.createQuery("SELECT COUNT(*) FROM Users c WHERE c.userName = :userName)");
 		query.setParameter("userName", userName);
 		return (Long) query.uniqueResult() > 0;
 	}
 
-	@Override
-	public Boolean checkInvalidPassword(String userName, String password) {
-		
-		return null;
-	}
-
-	@Override
-	public Integer getUserId(String userName) {
-		Session session = sessionFactory.getCurrentSession();
-		Query query = session.createQuery("SELECT userId FROM Users WHERE userName = :userName");
-		query.setParameter("userName", userName);
-		return (Integer)query.uniqueResult();
-	}
 }

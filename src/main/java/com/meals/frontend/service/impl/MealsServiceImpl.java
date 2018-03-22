@@ -270,7 +270,7 @@ public class MealsServiceImpl implements MealsService {
 	}
 
 	@Override
-	public String saveStaff(StaffBean bean, Boolean isNew) {
+	public Integer saveStaff(StaffBean bean, Boolean isNew) {
 		if (bean != null) {
 			if (isNew) {
 				Staff obj = staffDAO.getByStaff(bean.getStaffId());
@@ -323,7 +323,7 @@ public class MealsServiceImpl implements MealsService {
 	}
 
 	@Override
-	public String saveUser(UserBean bean) {
+	public Integer saveUser(UserBean bean) {
 		if (bean != null) {
 			if (userDAO.checkExitsUser(bean.getUserName())) {
 				return ConstanKey.EXITS;
@@ -333,7 +333,6 @@ public class MealsServiceImpl implements MealsService {
 				user.setDisable(false);
 				user.setPassword(bean.getPassword());
 				user.setStaffId(bean.getStaffId());
-				user.setUserId(bean.getUserId());
 				user.setUserName(bean.getUserName());
 				user.setUserRoleId(bean.getUserRoleId());
 				if (userDAO.saveUser(user)) {
@@ -725,7 +724,7 @@ public class MealsServiceImpl implements MealsService {
 	}
 
 	@Override
-	public String changePassword(String userName, String passWord, String newPassword) {
+	public Integer changePassword(String userName, String passWord, String newPassword) {
 		Users user = userDAO.getUser(userName, passWord);
 		if (user != null) {
 			user.setPassword(newPassword);
