@@ -11,6 +11,10 @@
    	 	<put-attribute name="titlePage" value="page.meal_management"/>
         <put-attribute name="mainContent" value="/pages/jsp/mealManagerment.jsp"/>
     </definition>
+    <definition name="editStaffOrder" extends="mainTemplate">
+        <put-attribute name="titlePage" value="page.meal_management"/>
+        <put-attribute name="mainContent" value="/pages/jsp/editStaffOrder.jsp"/>
+    </definition>
     <definition name="showDataManager" extends="mainTemplate">
         <put-attribute name="titlePage" value="page.show_manager"/>
         <put-attribute name="mainContent" value="/pages/jsp/showDataManager.jsp"/>

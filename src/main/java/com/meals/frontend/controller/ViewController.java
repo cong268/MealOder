@@ -20,6 +20,12 @@ public class ViewController {
         return model;
     }
 
+    @RequestMapping("editStaffOrder")
+    public ModelAndView editStaffOrder(){
+        ModelAndView model = new ModelAndView("editStaffOrder");
+        return model;
+    }
+
 //    @RequestMapping("approveMeal")
 //    public ModelAndView approveMeal(){
 //        ModelAndView model = new ModelAndView("approveMeal");

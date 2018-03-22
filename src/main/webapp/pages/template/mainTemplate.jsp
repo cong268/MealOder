@@ -54,7 +54,7 @@
                         <ul class="dropdown-menu">
                             <li><a href="mealManagerment"><spring:message code="label.management"/></a></li>
                             <li><a href="showDataManager"><spring:message code="label.show_manager"/></a></li>
-
+                            <li><a href="editStaffOrder">Edit Staff's Order</a></li>
                         </ul>
                     </li>
                     </c:if>
